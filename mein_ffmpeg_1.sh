@@ -161,4 +161,4 @@ ssh username@host
 # audiodevice
 arecord -L
 
-ssh username@host ffmpeg  -f alsa -ac 2 -i plughw:CARD=VF0770,DEV=0 -f v4l2  -i /dev/video0 -c:v h264_nvenc -preset fast -b:v 300k  -tune zerolatency -r 10 -c:a libfdk_aac -b:a 128k  -ar 48000  -af aresample=async=1:min_hard_comp=0.100000:first_pts=0  -y -threads 4  -f matroska - | ffplay -vcodec h264_cuvid -fflags nobuffer -
+ffmpeg  -f alsa -ac 2 -i plughw:CARD=PCH,DEV=0 -f v4l2  -i /dev/video0 -c:v h264_nvenc   -preset fast -b:v 300k   -r 10 -c:a libfdk_aac -b:a 128k  -ar 48000  -af aresample=async=1:min_hard_comp=0.100000:first_pts=0  -y -threads 4  -f matroska - | ffplay -vcodec h264_cuvid  -
