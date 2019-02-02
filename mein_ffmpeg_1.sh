@@ -1,12 +1,19 @@
-#!/bin/sh
 
+# Install Nvidia +cuda for gforce 1080
 
- ./NVIDIA-Linux-x86_64-410.93.run
-./cuda_10.0.130_410.48_linux.run --verbose --silent --toolkit --override
+wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux && \
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/410.93/NVIDIA-Linux-x86_64-410.93.run && \
+ ./cuda_10.0.130_410.48_linux.run --verbose --silent --toolkit --override && \
+./cuda_10.0.130_410.48_linux.run  --silent --driver 
+
 
 nano /etc/ld.so.conf
 
 /usr/local/cuda-10.0/lib64/
+
+ldconfig
+
+mkdir ~/ffmpeg_sources
 
 cd ~/ffmpeg_sources && \
 git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git  && \
@@ -17,21 +24,17 @@ sudo install -m 0644 include/ffnvcodec/*.h '/usr/local/include/ffnvcodec'  && \
 sudo install -m 0755 -d '/usr/local/lib/pkgconfig'  && \
 sudo install -m 0644 ffnvcodec.pc '/usr/local/lib/pkgconfig'  
 
-
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.0.130-1_amd64.deb && \
-sudo dpkg -i cuda-repo-ubuntu1804_10.0.130-1_amd64.deb  && \
-sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub  && \
-sudo apt-get update  && \
-sudo apt-get install cuda  && \
 cd ~/ffmpeg_sources && \
 git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git  && \
 cd nv-codec-headers  && \
-sed 's#@@PREFIX@@#/usr/local#' ffnvcodec.pc.in > ffnvcodec.pc  && \
-install -m 0755 -d '/home/tom/ffmpeg_build/include/ffnvcodec'  && \
-install -m 0644 include/ffnvcodec/*.h '/home/tom/ffmpeg_build/include/ffnvcodec'  && \
-install -m 0755 -d '/home/tom/ffmpeg_build/lib/pkgconfig/'  && \
-install -m 0644 ffnvcodec.pc '/home/tom/ffmpeg_build/lib/pkgconfig/' && \
-sudo apt-get update -qq && sudo apt-get -y install \
+sed 's#@@PREFIX@@#$HOME/ffmpeg_build/include#' ffnvcodec.pc.in > ffnvcodec.pc 
+install -m 0755 -d '$HOME/ffmpeg_build/include/ffnvcodec'  && \
+install -m 0644 include/ffnvcodec/*.h '$HOME/ffmpeg_build/include/ffnvcodec'  && \
+install -m 0755 -d '$HOME/ffmpeg_build/lib/pkgconfig/'  && \
+install -m 0644 ffnvcodec.pc '$HOME/ffmpeg_build/lib/pkgconfig/' 
+
+
+sudo apt-get update -qq && apt build-dep ffmpeg -y && sudo apt-get -y install \
   autoconf \
   automake \
   build-essential \
@@ -49,7 +52,7 @@ sudo apt-get update -qq && sudo apt-get -y install \
   libpulse-dev \
   libssh-dev \
   libxcb-xfixes0-dev \
-  pkg-config \
+  pkg-config  libfdk-aac-dev libfdk-aac1 \
   texinfo \
   wget \
   zlib1g-dev && \
@@ -93,7 +96,7 @@ cd fdk-aac && \
 autoreconf -fiv && \
 ./configure --prefix="$HOME/ffmpeg_build" --disable-shared && \
 make -j4 && \
-make instal && \
+make install && \
 cd ~/ffmpeg_sources && \
 wget -O lame-3.100.tar.gz https://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz && \
 tar xzvf lame-3.100.tar.gz && \
@@ -122,19 +125,17 @@ cd ffmpeg && \
 PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
   --prefix="$HOME/ffmpeg_build" \
   --pkg-config-flags="--static" \
-  --extra-cflags="-I$HOME/ffmpeg_build/include" \
-  --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
+  --extra-cflags="-I$HOME/ffmpeg_build/include -I/usr/local/cuda/include" \
+  --extra-ldflags="-L$HOME/ffmpeg_build/lib -L/usr/local/cuda/lib64" \
   --extra-libs="-lpthread -lm" \
   --bindir="$HOME/bin" \
   --enable-gpl \
   --enable-libaom \
-  --enable-libass \
   --enable-libfdk-aac \
   --enable-libfreetype \
   --enable-libmp3lame \
   --enable-libopus \
   --enable-libvorbis \
-  --enable-libvpx \
   --enable-libx264 \
   --enable-libx265 \
   --enable-nonfree \
@@ -142,26 +143,15 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./conf
   --enable-libvpx \
   --enable-x86asm \
   --enable-libpulse \
-  --enable-libssh \
+  --enable-libssh --enable-libxvid \
+  --enable-libass  --enable-avisynth  --enable-libspeex \
   --enable-opengl \
+  --enable-omx  --disable-doc --disable-podpages  \
   --enable-cuda --enable-cuvid --enable-nvenc --enable-nonfree --enable-libnpp  \
-  --enable-runtime-cpudetect && \
-PATH="$HOME/bin:$PATH" make -j 10 && \
+  --enable-runtime-cpudetect \
+  --enable-x86asm && \
+PATH="$HOME/bin:$PATH" make -j10  && \
 make install && \
-hash -r &&  source ~/.profile && \
+hash -r
 
 
-
---enable-vaapi --enable-cuda --enable-cuvid --enable-nvenc \
---enable-omx --enable-omx-rpi --enable-mmal 
-
---enable-ffserver \
-
-##############  RASPIAN COMPILE
-git -C aom pull 2> /dev/null || git clone --depth 1 https://aomedia.googlesource.com/aom && \
-mkdir aom_build && \
-cd aom_build && \
-PATH="$HOME/bin:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build"  -DAOM_TARGET_CPU=generic -DENABLE_SHARED=off -DENABLE_NASM=on ../aom && \
-PATH="$HOME/bin:$PATH" make && \
-make install
-#################
