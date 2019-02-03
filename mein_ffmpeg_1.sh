@@ -4,8 +4,8 @@
 wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux && \
 wget http://us.download.nvidia.com/XFree86/Linux-x86_64/410.93/NVIDIA-Linux-x86_64-410.93.run && \
  ./cuda_10.0.130_410.48_linux.run --verbose --silent --toolkit --override && \
-./cuda_10.0.130_410.48_linux.run  --silent --driver 
-
+./cuda_10.0.130_410.48_linux.run  --silent --driver && \ 
+./NVIDIA-Linux-x86_64-410.93.run
 
 nano /etc/ld.so.conf
 
