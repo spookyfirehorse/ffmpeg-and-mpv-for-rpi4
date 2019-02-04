@@ -166,6 +166,12 @@ arecord -L
 
 choos your device and replace plughw:CARD=PCH,DEV=0  with your device and also ac 2 for stereo or 1 for mono
 
+
+ssh user@hrspian ffmpeg  -f alsa -ac 2 -i plughw:CARD=PCH,DEV=0  -c:a libfdk_aac -b:a 128k  -ar 48000  -f matroska - | ffplay -nodisp -
+ffmpeg  -f alsa -ac 2 -i plughw:CARD=PCH,DEV=0 -c:a libfdk_aac -b:a 128k  -ar 48000   -y -threads 4  -f matroska - | ssh user@raspian ffplay -vcodec h264_rpi  -
+
+
+
 ssh user@host ffmpeg  -f alsa -ac 2 -i plughw:CARD=PCH,DEV=0 -f v4l2  -i /dev/video0 -c:v h264_nvenc   -preset fast -b:v 300k   -r 10 -c:a libfdk_aac -b:a 128k  -ar 48000  -af aresample=async=1:min_hard_comp=0.100000:first_pts=0  -y -threads 4  -f matroska - | ffplay -vcodec h264_cuvid  -
 
 ffmpeg  -f alsa -ac 2 -i plughw:CARD=PCH,DEV=0 -f v4l2  -i /dev/video0 -c:v h264_nvenc   -preset fast -b:v 300k   -r 10 -c:a libfdk_aac -b:a 128k  -ar 48000  -af aresample=async=1:min_hard_comp=0.100000:first_pts=0  -y -threads 4  -f matroska - | ssh user@host ffplay -vcodec h264_cuvid  -
