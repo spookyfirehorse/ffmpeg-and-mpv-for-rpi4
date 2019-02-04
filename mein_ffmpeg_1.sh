@@ -156,9 +156,161 @@ PATH="$HOME/bin:$PATH" make -j10  && \
 make install && \
 hash -r
 
+cp $HOME/bin/ff* /usr/local/bin
+
 ssh username@host 
 
 # audiodevice
 arecord -L
 
-ffmpeg  -f alsa -ac 2 -i plughw:CARD=PCH,DEV=0 -f v4l2  -i /dev/video0 -c:v h264_nvenc   -preset fast -b:v 300k   -r 10 -c:a libfdk_aac -b:a 128k  -ar 48000  -af aresample=async=1:min_hard_comp=0.100000:first_pts=0  -y -threads 4  -f matroska - | ffplay -vcodec h264_cuvid  -
+
+choos your device and replace plughw:CARD=PCH,DEV=0  with your device and also ac 2 for stereo or 1 for mono
+
+ssh user@host ffmpeg  -f alsa -ac 2 -i plughw:CARD=PCH,DEV=0 -f v4l2  -i /dev/video0 -c:v h264_nvenc   -preset fast -b:v 300k   -r 10 -c:a libfdk_aac -b:a 128k  -ar 48000  -af aresample=async=1:min_hard_comp=0.100000:first_pts=0  -y -threads 4  -f matroska - | ffplay -vcodec h264_cuvid  -
+
+ffmpeg  -f alsa -ac 2 -i plughw:CARD=PCH,DEV=0 -f v4l2  -i /dev/video0 -c:v h264_nvenc   -preset fast -b:v 300k   -r 10 -c:a libfdk_aac -b:a 128k  -ar 48000  -af aresample=async=1:min_hard_comp=0.100000:first_pts=0  -y -threads 4  -f matroska - | ssh user@host ffplay -vcodec h264_cuvid  -
+
+#######################################################################################################################
+###  RASPIAN b + and b
+###############  RASPIAN COMPILE set your gpu mem to 0 and compile over ssh if compile stopping at ffprobe onle make another time      PATH="$HOME/bin:$PATH" make j4 && make install
+
+
+
+
+cd ~/ffmpeg_sources && \
+git -C aom pull 2> /dev/null || git clone --depth 1 https://aomedia.googlesource.com/aom && \
+mkdir aom_build && \
+cd aom_build && \
+PATH="$HOME/bin:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build"  -DAOM_TARGET_CPU=generic -DENABLE_SHARED=off -DENABLE_NASM=on ../aom && \
+PATH="$HOME/bin:$PATH" make  && \
+make install
+
+
+cd ~/ffmpeg_sources && \
+git -C x264 pull 2> /dev/null || git clone --depth 1 https://git.videolan.org/git/x264 && \
+cd x264 && \
+PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure --enable-static --enable-pic --disable-asm --extra-cflags="-march=armv6 -mfloat-abi=hard -mfpu=vfp" --extra-ldflags="-march=armv6 -mfloat-abi=hard -mfpu=vfp"  --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin"  && \
+PATH="$HOME/bin:$PATH" make  && \
+make install
+
+cd ~/ffmpeg_sources && \
+git -C fdk-aac pull 2> /dev/null || git clone --depth 1 https://github.com/mstorsjo/fdk-aac && \
+cd fdk-aac && \
+autoreconf -fiv && \
+./configure --prefix="$HOME/ffmpeg_build" --disable-shared && \
+make -j4 && \
+make install 
+
+
+cd ~/ffmpeg_sources && \
+wget https://www.nasm.us/pub/nasm/releasebuilds/2.14/nasm-2.14.tar.bz2 && \
+tar xjvf nasm-2.14.tar.bz2 && \
+cd nasm-2.14 && \
+./autogen.sh && \
+PATH="$HOME/bin:$PATH" ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" && \
+make -j4 && \
+make install && \
+cd ~/ffmpeg_sources && \
+wget -O yasm-1.3.0.tar.gz https://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz && \
+tar xzvf yasm-1.3.0.tar.gz && \
+cd yasm-1.3.0 && \
+./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" && \
+make -j4 && \
+make install 
+
+
+cd ~/ffmpeg_sources && \
+git -C libvpx pull 2> /dev/null || git clone --depth 1 https://chromium.googlesource.com/webm/libvpx.git && \
+cd libvpx && \
+PATH="$HOME/bin:$PATH" ./configure --prefix="$HOME/ffmpeg_build" --disable-examples --disable-unit-tests --enable-vp9-highbitdepth --as=yasm && \
+PATH="$HOME/bin:$PATH" make -j4 && \
+make install
+
+#################
+
+cd ~/ffmpeg_sources && \
+wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
+tar xjvf ffmpeg-snapshot.tar.bz2 && \
+cd ffmpeg && \
+PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
+  --prefix="$HOME/ffmpeg_build" \
+  --pkg-config-flags="--static" \
+  --extra-cflags="-I$HOME/ffmpeg_build/include  \
+  --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
+  --extra-libs="-lpthread -lm" \
+  --bindir="$HOME/bin" \
+  --enable-gpl \
+  --enable-libaom \
+  --enable-libass \
+  --enable-libfdk-aac \
+  --enable-libfreetype \
+  --enable-libmp3lame \
+  --enable-libopus \
+  --enable-libvorbis \
+  --enable-libvpx \
+  --enable-libx264 \
+  --enable-libx265 \
+  --enable-nonfree \
+  --enable-libsoxr \
+  --enable-libvpx \
+  --enable-libpulse \
+  --enable-libssh \
+  --enable-opengl \
+  --enable-omx --enable-omx-rpi --enable-mmal \
+  --enable-runtime-cpudetect \
+  --enable-x86asm && \
+PATH="$HOME/bin:$PATH" make j4  && \
+make install && \
+hash -r
+
+cp $HOME/bin/ff* /usr/local/bin
+
+ldconfig
+
+ssh user@hrspian ffmpeg  -f alsa -ac 2 -i plughw:CARD=PCH,DEV=0 -f v4l2  -i /dev/video0 -c:v h264_omx   -preset fast -b:v 300k   -r 10 -c:a libfdk_aac -b:a 128k  -ar 48000  -af aresample=async=1:min_hard_comp=0.100000:first_pts=0  -y -threads 4  -f matroska - | ffplay -vcodec h264_cuvid  -
+
+ffmpeg  -f alsa -ac 2 -i plughw:CARD=PCH,DEV=0 -f v4l2  -i /dev/video0 -c:v h264_nvenc   -preset fast -b:v 300k   -r 10 -c:a libfdk_aac -b:a 128k  -ar 48000  -af aresample=async=1:min_hard_comp=0.100000:first_pts=0  -y -threads 4  -f matroska - | ssh user@raspian ffplay -vcodec h264_rpi  -
+#####################
+
+Compile RPI ZERO
+
+cd ~/ffmpeg_sources && \
+wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
+tar xjvf ffmpeg-snapshot.tar.bz2 && \
+cd ffmpeg && \
+PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
+  --prefix="$HOME/ffmpeg_build" \
+  --pkg-config-flags="--static" \
+  --extra-cflags="-I$HOME/ffmpeg_build/include -mcpu=arm1176jzf-s -mfpu=vfp" \
+  --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
+  --extra-libs="-lpthread -lm" \
+  --bindir="$HOME/bin" \
+  --enable-gpl \
+  --enable-libass \
+  --enable-libfdk-aac \
+  --enable-libfreetype \
+  --enable-libmp3lame \
+  --enable-libopus \
+  --enable-libvorbis \
+  --enable-libvpx \
+  --enable-libx264 \
+  --enable-libx265 \
+  --enable-nonfree \
+  --enable-libsoxr \
+  --enable-libvpx \
+  --enable-x86asm \
+  --enable-libpulse \
+  --enable-libssh \
+  --enable-opengl \
+  --enable-vaapi \
+  --enable-omx --enable-omx-rpi --enable-mmal \
+  --enable-runtime-cpudetect \
+  --enable-x86asm && \
+PATH="$HOME/bin:$PATH" make -j4  && \
+make -j1  install && \
+hash -r
+
+
+cp $HOME/bin/ff* /usr/local/bin
+
+ldconfig
