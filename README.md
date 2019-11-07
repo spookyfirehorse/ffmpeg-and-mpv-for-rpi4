@@ -1,1 +1,1 @@
-realtime streaming raspian 10 v% cpu very stable
+new way realtime streaming audio and video raspian  very stable
