@@ -57,10 +57,16 @@ PATH="$HOME/bin:$PATH" make -j 4  && \
 make install && \
 hash -r	
 
+cp bin/ffmpeg /usr/local/bin
+cp bin/ffplay /usr/local/bin
+
+apt purge ffmpeg
 
 ssh pi@raspi
 
 arecord -L   ## give you the device name for audio here is hw:Card bla nla
+
+-ac 1 or ac 2 are 1 channel mic oe 2 
 
 /opt/vc/bin/raspivid -md 5  -vf -hf   -ex auto -o - -t 0 --ISO 300  -w 640 -h 360 -fps 15 |  ffmpeg -i - -f h264_omx  -c:v rawvideo -pix_fmt yuv420p  -f v4l2 /dev/video1
 
