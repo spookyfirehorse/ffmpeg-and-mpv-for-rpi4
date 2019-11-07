@@ -1,2 +1,1 @@
-# ffmpeg-ssh
-realtime phone over ssh compile ffmpeg for raspian and compile ffmpeg for nvidia
+realtime streaming raspian 10 v% cpu very stable
