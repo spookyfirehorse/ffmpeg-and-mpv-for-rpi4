@@ -19,7 +19,7 @@ sudo apt-get -y install \
   libxcb-xfixes0-dev libvpx-dev libfdk-aac-dev libmp3lame-dev \
   pkg-config \
   texinfo libpulse-dev \
-  wget zlib1g-dev nasm yasm libx264-dev libx265-dev libnuma-dev  libssl-dev
+  wget zlib1g-dev nasm yasm libx264-dev libx265-dev libnuma-dev  libssl-dev libaom*
 
 apt build-deb ffmpeg
 
@@ -59,6 +59,8 @@ hash -r
 
 
 ssh pi@raspi
+
+arecord -L   ## give you the device name for audio here is hw:Card bla nla
 
 /opt/vc/bin/raspivid -md 5  -vf -hf   -ex auto -o - -t 0 --ISO 300  -w 640 -h 360 -fps 15 |  ffmpeg -i - -f h264_omx  -c:v rawvideo -pix_fmt yuv420p  -f v4l2 /dev/video1
 
