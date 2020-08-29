@@ -96,8 +96,11 @@ sudo apt purge libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev 
 nano .bashrc
 
 export CPATH=/home/spook/ffmpeg_build/include
+
 export LD_LIBRARY_PATH=/home/spook/ffmpeg_build/lib
+
 export PKG_CONFIG_PATH=/home/spook/ffmpeg_build/lib/pkgconfig
+
 export PKG_CONFIG_PATH="/opt/vc/lib/pkgconfig
 
 cd ffmpeg_sources
@@ -115,7 +118,11 @@ sudo ./waf install
 nano .config/mpv/mpv.config
 
 gpu-context=rpi
+
 gpu-api=opengl
+
 vo=rpi
+
 hwdec=h264_mmal-mmal-copy
+
 hwdec-codecs=all
