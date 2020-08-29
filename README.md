@@ -55,8 +55,10 @@ apt build-dep ffmpeg
   
 git clone https://github.com/FFmpeg/FFmpeg.git
 
-
-cd ~/ffmpeg_sources/ffmpeg
+mkdir ffmpeg_sources
+cd ffmpeg_sources
+git clone https://github.com/FFmpeg/FFmpeg.git
+cd ffmpeg
 
 PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
   --prefix="$HOME/ffmpeg_build" \
@@ -103,8 +105,12 @@ export PKG_CONFIG_PATH=/home/spook/ffmpeg_build/lib/pkgconfig
 export PKG_CONFIG_PATH="/opt/vc/lib/pkgconfig
 
 
+cd ffmpeg_sources
 
 git clone https://github.com/mpv-player/mpv.git
+
+cd mpv
+./bootstrap
 
 ./waf configure   --prefix=/usr/local  --enable-rpi --enable-rpi-mmal --disable-vaapi --enable-egl-drm  --enable-egl-x11  --disable-wayland --disable-wayland-protocols  --disable-wayland-scanner --disable-gl-wayland --disable-android  --disable-vdpau
 
