@@ -95,9 +95,10 @@ sudo apt purge libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev 
 nano .bashrc
 
 export CPATH=/home/spook/ffmpeg_build/include
-export LD_LIBRARY_PATH=/home/spook/ffmpeg_build/lib
-export PKG_CONFIG_PATH=/home/spook/ffmpeg_build/lib/pkgconfig:/opt/vc/lib/pkgconfig
 
+export LD_LIBRARY_PATH=/home/spook/ffmpeg_build/lib
+
+export PKG_CONFIG_PATH=/home/spook/ffmpeg_build/lib/pkgconfig
 
 export PKG_CONFIG_PATH="/opt/vc/lib/pkgconfig
 
