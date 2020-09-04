@@ -4,13 +4,14 @@ cp bashrc ~/.bashrc &&  mkdir -p ~/.config/mpv && cp mpv.conf ~/.config/mpv/ && 
 sudo apt -y  install autoconf automake build-essential pkg-config cmake doxygen git graphviz imagemagick libasound2-dev libass-dev libfreetype6-dev \
 libgmp-dev  libopus-dev librtmp-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev \
 libsnappy-dev libsoxr-dev libssl-dev  libv4l-dev libva-dev libvorbis-dev libx264-dev libxcb-shape0-dev \
-libxcb-shm0-dev libxcb-xfixes0-dev libxcb1-dev libxml2-dev lzma-dev nasm python3*-dev python3-pip texinfo wget yasm zlib1g-dev youtube-dl \
+libxcb-shm0-dev libxcb-xfixes0-dev libxcb1-dev libxml2-dev lzma-dev nasm python3-dev python3-pip texinfo wget yasm zlib1g-dev youtube-dl \
 libgtk2.0-dev  python3-numpy python-dev libtiff5-dev libjasper-dev libdc1394-22-dev libv4l-dev libtbb-dev libmp3lame-dev \
 libopencore-amrnb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils mousepad git-core libass-dev \
 libfreetype6-dev libsdl2-dev libtool libvdpau-dev libvorbis-dev libxcb1-dev libvpx-dev libpulse-dev  libwebp-dev libxvidcore-dev \
 libzvbi-dev libxcb-shm0-dev  libv4l-dev libxcb-xfixes0-dev libvpx-dev texinfo libpulse-dev libomxil-bellagio-dev libssh-gcrypt-dev \
 libssl-dev wget zlib1g-dev nasm yasm libx264-dev   libnuma-dev libgles2-mesa-dev git devscripts equivs meson spirv-tools libplacebo* \
-libxcb-shm0-dev libxcb-xv0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-composite0-dev libx11-xcb-dev libqt5*-dev qt5*-dev libgstreamer-plugins-base1.0-dev
+libxcb-shm0-dev libxcb-xv0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-composite0-dev libx11-xcb-dev libqt5*-dev qt5*-dev \
+libgstreamer-plugins-base1.0-dev && sudo apt -y purge mpv 
 
 
 mkdir -p ~/ffmpeg_sources && \
@@ -35,7 +36,8 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" \
 
 
 PATH="$HOME/bin:$PATH" make -j 4 && make install && cd ~/bin && sudo cp ff* /usr/local/bin/ && sudo apt -y build-dep mpv && \
-sudo apt -y purge libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev && \ 
+sudo apt -y purge libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev mpv 
+&& \ 
 sudo apt-mark manual opencv* && sudo apt-mark manual lib* && sudo apt-mark manual *-dev && exit
 
 
@@ -84,7 +86,7 @@ VLC
 sudo apt-get install libxcb-shm0-dev libxcb-xv0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-composite0-dev libx11-xcb-dev \
 libqt5*-dev qt5*-dev libplacebo* xcb-xkb*-dev && \
 sudo apt build-dep vlc && \
-apt purge libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev && \
+apt purge libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev mpv && \
 sudo apt-mark manual opencv* && sudo apt-mark manual lib* && sudo apt-mark manual *-dev && \
 apt-mark hold libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev && \
 cd ~/ffmpeg_sources && git clone https://github.com/videolan/vlc.git && \
