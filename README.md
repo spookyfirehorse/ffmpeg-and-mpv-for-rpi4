@@ -9,7 +9,7 @@ autoreconf -fiv && \
 ./configure  --disable-shared && \
 make && \
 sudo make install
-Code
+
 sudo ldconfig
 
 
