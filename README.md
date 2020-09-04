@@ -1,4 +1,4 @@
-sudo apt -y  install autoconf automake build-essential cmake doxygen git graphviz imagemagick libasound2-dev libass-dev libfreetype6-dev libgmp-dev  libmp3lame-dev libopus-dev librtmp-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev libsnappy-dev libsoxr-dev libssh-gcrypt-dev libssl-dev libtool libv4l-dev libva-dev libvorbis-dev libwebp-dev libx264-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-xfixes0-dev libxcb1-dev libxml2-dev lzma-dev meson nasm pkg-config python3-dev python3-pip texinfo wget yasm zlib1g-dev youtube-dl libgtk2.0-dev pkg-config python-numpy python-dev libtiff5-dev libjasper-dev libopencv-dev checkinstall pkg-config yasm libjasper-dev  libdc1394-22-dev libxine2 libgstreamer0.10-dev  libv4l-dev libgstreamer-plugins-base0.10-dev python-dev python-numpy libtbb-dev libqt4-dev libgtk2.0-dev libmp3lame-dev libopencore-amrnb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils  autoconf automake build-essential cmake git-core libass-dev libfreetype6-dev libsdl2-dev libtool libvdpau-dev libvorbis-dev libxcb1-dev libvpx-dev libpulse-dev libsoxr-dev  libopus-dev  libwebp-dev libxvidcore-dev libzvbi-dev libxcb-shm0-dev  libv4l-dev libxcb-xfixes0-dev libvpx-dev  libmp3lame-dev  pkg-config texinfo libpulse-dev libomxil-bellagio-dev libssh-gcrypt-dev libssl-dev wget zlib1g-dev nasm yasm libx264-dev   libnuma-dev libgles2-mesa-dev git devscripts equivs meson
+sudo apt -y  install autoconf automake build-essential cmake doxygen git graphviz imagemagick libasound2-dev libass-dev libfreetype6-dev libgmp-dev  libmp3lame-dev libopus-dev librtmp-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev libsnappy-dev libsoxr-dev libssh-gcrypt-dev libssl-dev libtool libv4l-dev libva-dev libvorbis-dev libwebp-dev libx264-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-xfixes0-dev libxcb1-dev libxml2-dev lzma-dev meson nasm pkg-config python3-dev python3-pip texinfo wget yasm zlib1g-dev youtube-dl libgtk2.0-dev pkg-config python-numpy python-dev libtiff5-dev libjasper-dev libopencv-dev checkinstall pkg-config yasm libjasper-dev  libdc1394-22-dev libxine2 libgstreamer0.10-dev  libv4l-dev libgstreamer-plugins-base0.10-dev python-dev python-numpy libtbb-dev libqt4-dev libgtk2.0-dev libmp3lame-dev libopencore-amrnb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils  autoconf automake build-essential cmake git-core libass-dev libfreetype6-dev libsdl2-dev libtool libvdpau-dev libvorbis-dev libxcb1-dev libvpx-dev libpulse-dev libsoxr-dev  libopus-dev  libwebp-dev libxvidcore-dev libzvbi-dev libxcb-shm0-dev  libv4l-dev libxcb-xfixes0-dev libvpx-dev  libmp3lame-dev  pkg-config texinfo libpulse-dev libomxil-bellagio-dev libssh-gcrypt-dev libssl-dev wget zlib1g-dev nasm yasm libx264-dev   libnuma-dev libgles2-mesa-dev git devscripts equivs meson glslang* spirv-tool libplacebo*
 
 
 mkdir ~/ffmpeg_sources && \
@@ -14,21 +14,14 @@ sudo ldconfig
 
 
 
-sudo apt install glslang* spirv-tool libplacebo*
-Code
+
 sudo apt build-dep ffmpeg
-Code
+
 mkdir ~/bin
-Code
+
 cd ~/ffmpeg_sources && wget https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2 && tar xjvf ffmpeg-4.3.1.tar.bz2 && cd ffmpeg-4.3.1
 
-
-
-
-
 PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure --prefix="$HOME/ffmpeg_build" --pkg-config-flags="--static" --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib" --extra-libs="-lpthread -lm" --bindir="$HOME/bin" --enable-gpl --enable-libaom --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libv4l2 --enable-libxvid --enable-sdl2 --enable-libx264 --enable-pthreads --enable-openssl --enable-nonfree --disable-debug --enable-libsoxr --enable-version3 --enable-libvpx --disable-doc --disable-htmlpages --enable-libpulse --enable-libssh --disable-manpages --disable-podpages --enable-opengl --enable-libzvbi --enable-avfilter --enable-filters --enable-mmal --enable-omx --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal --enable-encoder=h264_omx --enable-runtime-cpudetect --enable-libwebp --disable-avresample --enable-swresample --enable-x86asm --enable-libjack --enable-shared --disable-static --enable-librubberband --disable-vdpau --disable-vaapi --enable-gmp --enable-hardcoded-tables --disable-stripping
-
-
 
 PATH="$HOME/bin:$PATH" make -j 4
 
@@ -36,13 +29,11 @@ make install && cd ~/bin && sudo cp ff* /usr/local/bin/
 
 sudo apt build-dep mpv
 
-
-
 sudo apt purge libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev 
 
 sudo apt-mark manual opencv* && sudo apt-mark manual lib* && sudo apt-mark manual *-dev
 
-wget https://forum-raspberrypi.de/attachment/27238-bashrc/ -O ~/.bashrc
+
 
 
 konsole schliessen und neue konsole üffnen
@@ -240,7 +231,7 @@ git clone https://github.com/videolan/vlc.git
 
 
 cd vlc && ./bootstrap
-Code
+
 ./configure  --enable-mmal --enable-omxil --enable-rpi-omxil --disable-libva --enable-fdkaac --enable-gles2 --disable-qt --disable-vdpau --disable-wayland --disable-wayland-protocols  --disable-wayland-scanner --disable-gl-wayland  --disable-qt
 
 
