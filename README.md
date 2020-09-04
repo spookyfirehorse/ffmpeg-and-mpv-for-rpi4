@@ -82,6 +82,10 @@ mkdir ~/.config/mpv
 
 nano .config/mpv/mpv.conf
 
+put this in and store
+
+
+##########################################
 
 gpu-context=rpi
 
@@ -106,9 +110,7 @@ ytdl-format=bestvideo[ext=mp4][width<=1920][height<=1080]+bestaudio[ext=m4a]/bes
 fullscreen=yes
 
 audio-display=no
-
 cache=yes
-
 no-border
 hls-bitrate=max
 
@@ -135,12 +137,9 @@ oacopts-add = b=128k
 [vpx]
 profile-desc = "VP9 (libvpx)"
 ovc = libvpx-vp9
-
+##########################################################
 
 sudo nano /boot/config.txt
-text einfügen
-
-
 
 ###########
 
@@ -152,23 +151,14 @@ gpu_mem=128
 
 ###############
 
-wenn v3d nicht diabled wird
-
-sagt mpv already in use
-
-
-
-speichern
-
-
+disable al vd3 and gpu mem 128 
 
 
 sudo reboot
+
+
+
 mpv example.mp4
-
-
-
-konsolen output
 
 
 
@@ -188,7 +178,7 @@ AV: 00:01:05 / 02:09:24 (1%) A-V: 0.000 Dropped: 1 Cache: 706s/150MB
 
 
 
-run cpu 15 %
+runtime cpu 15 %
 
 
 
@@ -213,10 +203,6 @@ VLC
 
 
 jetzt noch der vlc-git 4.0
-
-
-
-läuft durch nur vollbild
 
 
 
@@ -258,29 +244,10 @@ Code
 make -j4
 
 
-
 sudo make install 
-vlcrc herunterladen und nach ./config/vlc/ copieren
-
-
-
-vlcrc ist die config von vlc die auf mmal steht keine gui zum einstellen !!!!
-
-
-
-
-cd $HOME
-
-
-
-mkdir .config/vlc && wget https://forum-raspberrypi.de/attachment/27226-vlcrc/ -O ~/.config/vlc/vlcrc
-
 
 
 sudo ldconfig
-
-
-
 
 
 cvlc   example.mp4
