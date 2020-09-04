@@ -38,9 +38,13 @@ nano .bashrc
 on the beginn of this file copy and past
 
 ###########################
+
 export CPATH=~/ffmpeg_build/include
+
 export LD_LIBRARY_PATH=~/ffmpeg_build/lib
+
 export PKG_CONFIG_PATH=~/ffmpeg_build/lib/pkgconfig:/opt/vc/lib/pkgconfig
+
 ###########################################################################
 
 close the terminal and open a new one 
