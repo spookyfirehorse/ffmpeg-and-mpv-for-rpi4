@@ -84,24 +84,42 @@ nano .config/mpv/mpv.conf
 
 
 gpu-context=rpi
+
 gpu-api=opengl
+
 vo=rpi
+
 ao=pulse
+
 #ovc=h264_mmal
+
 #oac=libfdk_aac
+
 volume=20
+
 hwdec=h264_mmal-mmal-copy
+
 hwdec-codecs=all
+
 ytdl-format=bestvideo[ext=mp4][width<=1920][height<=1080]+bestaudio[ext=m4a]/best[ext=mp4]/best
+
 fullscreen=yes
+
 audio-display=no
+
 cache=yes
+
 no-border
 hls-bitrate=max
+
 audio-samplerate=48000
+
 af=lavfi-crystalizer=1,lavfi-bass=gain=1
+
 #video-sync=display-resample
+
 volume-max=100
+
 audio-channels=stereo
 
 
