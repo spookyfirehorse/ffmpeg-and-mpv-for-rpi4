@@ -110,8 +110,11 @@ ytdl-format=bestvideo[ext=mp4][width<=1920][height<=1080]+bestaudio[ext=m4a]/bes
 fullscreen=yes
 
 audio-display=no
+
 cache=yes
+
 no-border
+
 hls-bitrate=max
 
 audio-samplerate=48000
@@ -137,6 +140,7 @@ oacopts-add = b=128k
 [vpx]
 profile-desc = "VP9 (libvpx)"
 ovc = libvpx-vp9
+
 ##########################################################
 
 sudo nano /boot/config.txt
