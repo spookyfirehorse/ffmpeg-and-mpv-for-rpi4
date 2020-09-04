@@ -1,7 +1,4 @@
-apt-mark hold libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev
-
-
-sudo apt -y  install autoconf automake build-essential cmake doxygen git graphviz imagemagick libasound2-dev libass-dev libfreetype6-dev libgmp-dev  libmp3lame-dev libopus-dev librtmp-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev libsnappy-dev libsoxr-dev libssh-gcrypt-dev libssl-dev libtool libv4l-dev libva-dev libvorbis-dev libwebp-dev libx264-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-xfixes0-dev libxcb1-dev libxml2-dev lzma-dev meson nasm pkg-config python3-dev python3-pip texinfo wget yasm zlib1g-dev youtube-dl libgtk2.0-dev pkg-config python-numpy python-dev libtiff5-dev libjasper-dev libopencv-dev checkinstall pkg-config yasm libjasper-dev libswscale-dev libdc1394-22-dev libxine2 libgstreamer0.10-dev  libv4l-dev libgstreamer-plugins-base0.10-dev python-dev python-numpy libtbb-dev libqt4-dev libgtk2.0-dev libmp3lame-dev libopencore-amrnb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils  autoconf automake build-essential cmake git-core libass-dev libfreetype6-dev libsdl2-dev libtool libvdpau-dev libvorbis-dev libxcb1-dev libvpx-dev libpulse-dev libsoxr-dev  libopus-dev  libwebp-dev libxvidcore-dev libzvbi-dev libxcb-shm0-dev  libv4l-dev libxcb-xfixes0-dev libvpx-dev  libmp3lame-dev  pkg-config texinfo libpulse-dev libomxil-bellagio-dev libssh-gcrypt-dev libssl-dev wget zlib1g-dev nasm yasm libx264-dev  libnuma-dev libnuma-dev libgles2-mesa-dev git devscripts equivs meson
+sudo apt -y  install autoconf automake build-essential cmake doxygen git graphviz imagemagick libasound2-dev libass-dev libfreetype6-dev libgmp-dev  libmp3lame-dev libopus-dev librtmp-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev libsnappy-dev libsoxr-dev libssh-gcrypt-dev libssl-dev libtool libv4l-dev libva-dev libvorbis-dev libwebp-dev libx264-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-xfixes0-dev libxcb1-dev libxml2-dev lzma-dev meson nasm pkg-config python3-dev python3-pip texinfo wget yasm zlib1g-dev youtube-dl libgtk2.0-dev pkg-config python-numpy python-dev libtiff5-dev libjasper-dev libopencv-dev checkinstall pkg-config yasm libjasper-dev  libdc1394-22-dev libxine2 libgstreamer0.10-dev  libv4l-dev libgstreamer-plugins-base0.10-dev python-dev python-numpy libtbb-dev libqt4-dev libgtk2.0-dev libmp3lame-dev libopencore-amrnb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils  autoconf automake build-essential cmake git-core libass-dev libfreetype6-dev libsdl2-dev libtool libvdpau-dev libvorbis-dev libxcb1-dev libvpx-dev libpulse-dev libsoxr-dev  libopus-dev  libwebp-dev libxvidcore-dev libzvbi-dev libxcb-shm0-dev  libv4l-dev libxcb-xfixes0-dev libvpx-dev  libmp3lame-dev  pkg-config texinfo libpulse-dev libomxil-bellagio-dev libssh-gcrypt-dev libssl-dev wget zlib1g-dev nasm yasm libx264-dev   libnuma-dev libgles2-mesa-dev git devscripts equivs meson
 
 
 mkdir ~/ffmpeg_sources && \
@@ -83,10 +80,45 @@ sudo ./waf install
 
 mkdir ~/.config/mpv 
 
+nano .config/mpv/mpv.conf
 
 
-wget https://forum-raspberrypi.de/attachment/27240-mpv-conf/ -O ~/.config/mpv/mpv.conf
-Code
+gpu-context=rpi
+gpu-api=opengl
+vo=rpi
+ao=pulse
+#ovc=h264_mmal
+#oac=libfdk_aac
+volume=20
+hwdec=h264_mmal-mmal-copy
+hwdec-codecs=all
+ytdl-format=bestvideo[ext=mp4][width<=1920][height<=1080]+bestaudio[ext=m4a]/best[ext=mp4]/best
+fullscreen=yes
+audio-display=no
+cache=yes
+no-border
+hls-bitrate=max
+audio-samplerate=48000
+af=lavfi-crystalizer=1,lavfi-bass=gain=1
+#video-sync=display-resample
+volume-max=100
+audio-channels=stereo
+
+
+
+
+[omx]
+ovc = h264_omx
+oacopts-add = b=1700k
+oac = libfdk_aac
+oacopts-add = b=128k
+
+
+[vpx]
+profile-desc = "VP9 (libvpx)"
+ovc = libvpx-vp9
+
+
 sudo nano /boot/config.txt
 text einfügen
 
@@ -192,7 +224,7 @@ sudo apt-mark manual opencv* && sudo apt-mark manual lib* && sudo apt-mark manua
 
 
 
-
+apt-mark hold libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev
 
 
 git clone https://github.com/videolan/vlc.git
