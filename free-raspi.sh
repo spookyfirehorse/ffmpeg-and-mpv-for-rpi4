@@ -11,8 +11,10 @@ libfreetype6-dev libsdl2-dev libtool libvdpau-dev  libxcb1-dev libvpx-dev libpul
 libzvbi-dev libxcb-shm0-dev  libv4l-dev libxcb-xfixes0-dev libvpx-dev texinfo libpulse-dev libomxil-bellagio-dev libssh-gcrypt-dev \
 libssl-dev wget zlib1g-dev nasm yasm libx264-dev   libnuma-dev libgles2-mesa-dev equivs meson spirv-tools libplacebo* \
 libxcb-shm0-dev libxcb-xv0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-composite0-dev libx11-xcb-dev libqt5*-dev qt5*-dev \
- libgstreamer-plugins-base1.0-dev clang clang-format clang-tidy ocl-icd-opencl-dev ocl-icd-dev libqt5quickshapes5 qtdeclarative5-dev qtdeclarative5-dev-tools && sudo apt -y purge mpv 
-
+   libgstreamer-plugins-base1.0-dev ocl-icd-opencl-dev ocl-icd-dev qtquickcontrols2-5-dev qtmultimedia5-dev&& sudo apt -y purge mpv 
+ 
+ 
+libfdkaac-dev
 
 mkdir -p ~/ffmpeg_sources && \
 cd ~/ffmpeg_sources && \
