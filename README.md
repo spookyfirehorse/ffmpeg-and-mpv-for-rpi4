@@ -32,8 +32,20 @@ usw.
 
 
 sudo raspi-config
+or
+sudo nano /boot/config.txt
 
 and disable all v3d
+and add gpu_mem
+
+gpu_mem=128
+
+#dtoverlay=vc4-kms-v3d
+
+#dtoverlay=vc4-fkms-v3d
+
+
+
 
 
 #####################################
