@@ -34,10 +34,7 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" \
 --enable-libvpx --disable-doc --disable-htmlpages --enable-libpulse --enable-libssh --disable-manpages --disable-podpages --enable-opengl --enable-libzvbi \
 --enable-avfilter --enable-filters --enable-mmal --enable-omx --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal --enable-encoder=h264_omx  \
 --enable-runtime-cpudetect --enable-libwebp --disable-avresample --enable-swresample --enable-x86asm --enable-libjack --enable-shared --disable-static \
---enable-librubberband --disable-vdpau --disable-vaapi --enable-gmp --enable-hardcoded-tables --disable-stripping
-
-
-
+--enable-librubberband --disable-vdpau --disable-vaapi --enable-gmp --enable-hardcoded-tables --disable-stripping  && \
 PATH="$HOME/bin:$PATH" make -j 4 && make install && cd ~/bin && sudo cp ff* /usr/local/bin/ && sudo apt -y build-dep mpv && \
 sudo apt -y purge libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev mpv 
 && sudo apt-mark manual opencv* && sudo apt-mark manual lib* && sudo apt-mark manual *-dev && exit
@@ -47,8 +44,8 @@ cd ~/ffmpeg_sources && \
 git clone https://github.com/mpv-player/mpv.git && \
 cd mpv && \
 ./bootstrap.py && \
-./waf configure --prefix=/usr/local --enable-rpi --enable-rpi-mmal --disable-vaapi --enable-egl-drm --enable-egl-x11 --disable-wayland --disable-wayland-protocols --disable-wayland-scanner --disable-gl-wayland --disable-android --disable-vdpau --disable-vulkan
-
+./waf configure --prefix=/usr/local --enable-rpi --enable-rpi-mmal --disable-vaapi --enable-egl-drm --enable-egl-x11  \
+--disable-wayland --disable-wayland-protocols --disable-wayland-scanner --disable-gl-wayland --disable-android --disable-vdpau --disable-vulkan && \
 ./waf -j4 && \
 sudo ./waf install
 
