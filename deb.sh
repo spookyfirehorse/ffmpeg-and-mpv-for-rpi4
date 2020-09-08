@@ -1,4 +1,4 @@
-apt install autoconf automake build-essential pkg-config devscripts cmake doxygen git graphviz imagemagick libasound2-dev libass-dev libfreetype6-dev \
+apt install -y autoconf automake build-essential pkg-config devscripts cmake doxygen git graphviz imagemagick libasound2-dev libass-dev libfreetype6-dev \
 libgmp-dev  libopus-dev librtmp-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev \
 libsnappy-dev libsoxr-dev libssl-dev  libv4l-dev libva-dev libvorbis-dev libx264-dev libxcb-shape0-dev \
 libxcb-shm0-dev libxcb-xfixes0-dev libxcb1-dev libxml2-dev lzma-dev nasm python3-dev python3-pip texinfo wget yasm zlib1g-dev youtube-dl \
