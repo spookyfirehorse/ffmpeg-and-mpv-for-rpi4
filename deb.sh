@@ -1,3 +1,4 @@
+apt purge vlc-bin vlc vlc-data && \
 apt install -y autoconf automake build-essential pkg-config devscripts cmake doxygen git graphviz imagemagick libasound2-dev libass-dev libfreetype6-dev \
 libgmp-dev  libopus-dev librtmp-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev \
 libsnappy-dev libsoxr-dev libssl-dev  libv4l-dev libva-dev libvorbis-dev libx264-dev libxcb-shape0-dev \
@@ -8,5 +9,5 @@ libfreetype6-dev libsdl2-dev libtool libvdpau-dev  libxcb1-dev libvpx-dev libpul
 libzvbi-dev libxcb-shm0-dev  libv4l-dev libxcb-xfixes0-dev libvpx-dev texinfo libpulse-dev libomxil-bellagio-dev libssh-gcrypt-dev \
 libssl-dev wget zlib1g-dev nasm yasm libx264-dev   libnuma-dev libgles2-mesa-dev equivs meson spirv-tools libplacebo* \
 libxcb-shm0-dev libxcb-xv0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-composite0-dev libx11-xcb-dev libqt5*-dev qt5*-dev && \ 
-apt install --no-install-recommends vlc-data qml-module-qtquick-layouts qml-module-org-kde-newstuff  vlc-plugin-base  \
+apt install --no-install-recommends  qml-module-qtquick-layouts qml-module-org-kde-newstuff  vlc-plugin-base  \
 vlc-plugin-video-output libvlc5 libvlccore9 qml-module-qtquick-layouts
