@@ -47,7 +47,7 @@ gpu_mem=128
 #####################################
 
 
-git clone --depth 1 https://github.com/mstorsjo/fdk-aac
+git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git
 
 cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-/
 
