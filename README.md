@@ -64,7 +64,7 @@ gpu_mem=128
 
 #dtoverlay=vc4-fkms-v3d
 
-#####################################  INSTALL  ###############################################################################################
+#####################################  INSTALL  #################################################
 
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git
@@ -74,7 +74,8 @@ cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && sudo chmod 777 *.sh
 install in order
 
 
-#############################################################################################################
+#########################################################################################################
+
 
 ./config_files.sh         ## install conf files for mpv and  vlc and ffmpeg
 
