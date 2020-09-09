@@ -73,18 +73,23 @@ cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && sudo chmod 777 *.sh
 
 install in order
 
-./config_files.sh  ## install conf files for mpv and  vlc and ffmpeg
 
-./deb.sh   ### install depend files
+#############################################################################################################
 
-./fdk-aac.sh   ## install libfdk_aac
+./config_files.sh         ## install conf files for mpv and  vlc and ffmpeg
 
-./ffmpeg.sh      ### install ffmpeg
+./deb.sh                 ### install depend files
 
-./mpv.sh        ### install mpv
+./fdk-aac.sh             ## install libfdk_aac
 
-./vlc.sh       ### installvlc
+./ffmpeg.sh              ### install ffmpeg
 
+./mpv.sh                ### install mpv
+
+./vlc.sh                ### installvlc
+
+
+#######################################################################################################################
 
 mpv example.mp4
 
