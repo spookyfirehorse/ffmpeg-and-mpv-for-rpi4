@@ -26,7 +26,7 @@ convert movies and music in other formats
 
 x11grab for recording desktop
 
-ffmpeg -y -re -threads 4 -hide_banner -f pulse -ac 2 -i default -f x11grab -framerate 25 -video_size 1920x1080 -i :0.0+0,0 -c:v hevc_nvenc  -pix_fmt yuv420p -qp 0 -preset fast -b:v 1200k -c:a libfdk_aac -b:a 128k  -ar 48000  -af aresample=async=1:min_hard_comp=0.100000:first_pts=0  testvideo.mkv
+ffmpeg  -hide_banner -f pulse -ac 2 -i default -f x11grab -framerate 25 -video_size 1920x1080 -i :0.0+0,0 -c:v h264_omx  -pix_fmt yuv420p  -b:v 1200k -c:a libfdk_aac -b:a 128k  -ar 48000   testvideo.mp4
 
 download a movie 
 
@@ -35,17 +35,9 @@ ffmpeg -i http://url -c:v copy -c:a copy output.mp4
 you can install pulseeffects also
 but dont use to look a movie to much cpu 
 
-normal start 
-
-flatpak run com.github.wwmm.pulseeffects
-
-start command in background
-
-flatpak run com.github.wwmm.pulseeffects --gapplication-service &
-
 usw.
 
-all codecs installed no need to buy the keys
+all codecs installed no need to buy the keys cpu usage 15 % ca 
 
 spooky !!!!!
 
@@ -105,6 +97,22 @@ close mpv with q
 close cvlc strg + q
 mpv volume 0 9
 cvlc volume strg arrow up and down
+
+
+you can install pulseeffects also
+but dont use to look a movie to much cpu 
+
+
+./pulseeffects-install.sh
+
+normal start 
+
+flatpak run com.github.wwmm.pulseeffects
+
+start command in background
+
+flatpak run com.github.wwmm.pulseeffects --gapplication-service &
+
 
 less cpu install pulseaudio-equalizer-git
 
