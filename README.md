@@ -71,7 +71,7 @@ git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs
 
 cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && sudo chmod 777 *.sh
 
-config-files
+install in order
 
 ./config_files.sh
 
@@ -105,6 +105,22 @@ close mpv with q
 close cvlc strg + q
 mpv volume 0 9
 cvlc volume strg arrow up and down
+
+less cpu install pulseaudio-equalizer-git
+
+./install-equalizer.sh
+
+start coomand 
+
+pulseaudio-equalizer enable
+
+or with gui
+pulseaudio-equalizer-gtk
+
+to set up
+
+
+
 
 
 done
