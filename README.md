@@ -58,7 +58,7 @@ gpu_mem=128
 
 #dtoverlay=vc4-fkms-v3d
 
-#####################################
+#####################################  INSTALL  ###############################################################################################
 
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git
@@ -67,28 +67,19 @@ cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && sudo chmod 777 *.sh
 
 install in order
 
-./config_files.sh
+only sudo not root
 
-deb files
+sudo ./config_files.sh
 
-./deb.sh
+sudo ./deb.sh
 
-libfdkaac
+sudo ./libfdkaac.sh
 
-./libfdkaac.sh
+sudo ./ffmpeg.sh
 
-ffmpeg
+sudo ./mpv.sh
 
-./ffmpeg.sh
-
-mpv
-
-./mpv.sh
-
-
-vlc
-
-./vlc.sh
+sudo ./vlc.sh
 
 
 mpv example.mp4
@@ -105,7 +96,7 @@ you can install pulseeffects also
 but dont use to look a movie to much cpu 
 
 
-./pulseeffects-install.sh
+sudo ./pulseeffects-install.sh
 
 normal start 
 
@@ -118,7 +109,7 @@ flatpak run com.github.wwmm.pulseeffects --gapplication-service &
 
 less cpu install pulseaudio-equalizer-git
 
-./install-equalizer.sh
+sudo ./install-equalizer.sh
 
 start coomand 
 
