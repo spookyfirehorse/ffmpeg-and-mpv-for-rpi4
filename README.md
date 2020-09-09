@@ -77,7 +77,7 @@ install in order
 
 ./deb.sh   ### install depend files
 
-./libfdkaac.sh   ## install libfdk_aac
+./fdk-aac.sh   ## install libfdk_aac
 
 ./ffmpeg.sh      ### install ffmpeg
 
