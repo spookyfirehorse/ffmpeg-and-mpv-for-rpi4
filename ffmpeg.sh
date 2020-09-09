@@ -9,7 +9,7 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" \
 --enable-avfilter --enable-filters --enable-mmal --enable-omx --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal --enable-encoder=h264_omx  \
 --enable-runtime-cpudetect --enable-libwebp --disable-avresample --enable-swresample --enable-x86asm --enable-libjack --enable-shared --disable-static \
 --enable-librubberband --disable-vdpau --disable-vaapi --enable-gmp --enable-hardcoded-tables --disable-stripping && \
-make -j 4 && sudo make install && cd ~/bin && sudo cp ff* /usr/local/bin/  && cd ~/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-
+make -j 4 && sudo make install && cd ~/bin && sudo cp ff* /usr/local/bin/ && \
 sudo apt build-dep mpv && \
-apt purge libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev  ffmpeg mpv 
+sudo apt purge libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev  ffmpeg mpv 
 
