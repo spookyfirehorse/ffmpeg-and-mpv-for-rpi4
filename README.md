@@ -77,17 +77,17 @@ install in order
 #########################################################################################################
 
 
-./config_files.sh         ## install conf files for mpv and  vlc and ffmpeg
+./config_files.sh                         ## install conf files for mpv and  vlc and ffmpeg
 
-./deb.sh                 ### install depend files
+./deb.sh                                    ### install depend files
 
-./fdk-aac.sh             ## install libfdk_aac
+./fdk-aac.sh                               ## install libfdk_aac
 
-./ffmpeg.sh              ### install ffmpeg
+./ffmpeg.sh                               ### install ffmpeg
 
-./mpv.sh                ### install mpv
+./mpv.sh                                  ### install mpv
 
-./vlc.sh                ### installvlc
+./vlc.sh                                   ### installvlc
 
 
 #######################################################################################################################
