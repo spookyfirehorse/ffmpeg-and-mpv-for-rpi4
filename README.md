@@ -20,7 +20,7 @@ CPU runtime 15 %
 
 you can stream cammera output and audio over ssh
 
-only automatic login ssh 
+ssh only automatic login work
 
 ssh user@host ffmpeg -fflags nobuffer  -hide_banner -y   -f alsa  -ac 1 -i hw:CARD=Device,DEV=0      -f v4l2  -re -i /dev/video0    -c:v h264_omx -profile:v high  -level 4  -pix_fmt yuv420p -g 45 -bf 2 -trellis 2 -cmp 2 -subcmp 2  -b:v 1200k  -c:a libfdk_aac  -profile:a aac_he -vbr 2 -movflags +faststart    -f  mpegts  - | mpv --profile=low-latency   -
 
@@ -68,7 +68,7 @@ gpu_mem=128
 
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && \
-cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && sudo chmod 777 *.sh
+cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && chmod 777 *.sh
 
 
 ########################################   INSTALL  #################################################################
