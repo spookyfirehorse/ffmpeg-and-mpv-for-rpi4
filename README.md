@@ -32,6 +32,17 @@ download a movie
 
 ffmpeg -i http://url -c:v copy -c:a copy output.mp4
 
+you can install pulseeffects also
+but dont use to look a movie to much cpu 
+
+normal start 
+
+flatpak run com.github.wwmm.pulseeffects
+
+start command in background
+
+flatpak run com.github.wwmm.pulseeffects --gapplication-service &
+
 usw.
 
 all codecs installed no need to buy the keys
