@@ -4,7 +4,7 @@ sorry for my bad english
 
 compilations guide for:
 
-ffmpeg mpv and vlc for raspberry pi 3b, zero, 3b+
+ffmpeg-4.3.1 mpv-32-git and vlc-4.0-git for raspberry pi 3b, zero, 3b+
 
 I think for all rpi modells but this 3 was tested
 
