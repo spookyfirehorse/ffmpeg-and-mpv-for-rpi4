@@ -49,7 +49,7 @@ all codecs installed no need to buy the keys cpu usage 15 % ca
 
 spooky !!!!!
 
-###############################################################################################
+####################################### BOOT  ########################################################
 
 sudo raspi-config
 or
@@ -59,22 +59,17 @@ and disable all v3d
 and add gpu_mem
 
 gpu_mem=128
-
 #dtoverlay=vc4-kms-v3d
-
 #dtoverlay=vc4-fkms-v3d
 
-#####################################  INSTALL  #################################################
+#####################################  DOWNLOAD  #################################################
 
 
-git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git
-
+git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && \
 cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && sudo chmod 777 *.sh
 
-install in order
 
-
-#########################################################################################################
+########################################   INSTALL  #################################################################
 
 
 ./config_files.sh                         ## install conf files for mpv and  vlc and ffmpeg
