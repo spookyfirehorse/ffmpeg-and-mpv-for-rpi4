@@ -86,5 +86,15 @@ vlc
 ./vlc.sh
 
 
+mpv example.mp4
+
+or you set in pcmanfm /usr/local/bin/cvlc as standard
+and klick on the movie
+close mpv with q
+close cvlc strg + q
+mpv volume 0 9
+cvlc volume strg arrow up and down
+
+
 done
 
