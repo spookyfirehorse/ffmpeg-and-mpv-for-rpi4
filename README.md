@@ -8,6 +8,10 @@ ffmpeg mpv and vlc for raspberry pi 3b, zero, 3b+
 
 I think for all rpi modells but this 3 was tested
 
+this tutorial is for stable io s raspian
+
+testing is very similar
+
 its very easy !!!
 
 you can play movies without overheating
@@ -35,7 +39,9 @@ download a movie
 ffmpeg -i http://url -c:v copy -c:a copy output.mp4
 
 you can install pulseeffects also
-but dont use to look a movie to much cpu 
+but dont use to look a movie to much cpu mpv
+
+pulseaudio-equalizer has less cpu
 
 usw.
 
@@ -67,19 +73,17 @@ cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && sudo chmod 777 *.sh
 
 install in order
 
-only sudo not root
+./config_files.sh  ## install conf files for mpv and  vlc and ffmpeg
 
-sudo ./config_files.sh
+./deb.sh   ### install depend files
 
-sudo ./deb.sh
+./libfdkaac.sh   ## install libfdk_aac
 
-sudo ./libfdkaac.sh
+./ffmpeg.sh      ### install ffmpeg
 
-sudo ./ffmpeg.sh
+./mpv.sh        ### install mpv
 
-sudo ./mpv.sh
-
-sudo ./vlc.sh
+./vlc.sh       ### installvlc
 
 
 mpv example.mp4
