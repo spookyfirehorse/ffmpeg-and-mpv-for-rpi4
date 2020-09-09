@@ -67,8 +67,8 @@ gpu_mem=128
 #####################################  DOWNLOAD  #################################################
 
 
-git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && \
-cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && chmod 777 *.sh
+git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && chmod 777 *.sh
+
 
 
 ########################################   INSTALL  #################################################################
