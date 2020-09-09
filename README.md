@@ -49,7 +49,7 @@ gpu_mem=128
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git
 
-cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-/
+cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && sudo chmod 777 *.sh
 
 config-files
 
