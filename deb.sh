@@ -13,4 +13,4 @@ libx11-xcb-dev libqt5*-dev qt5*-dev libqt5quick* qtquickcontrols2-5-dev && \
 sudo apt install -y python3-pip bc swh-plugins meson && sudo pip3 install ninja && \
 sudo apt build-dep -y mpv && sudo apt build-dep -y vlc && \
 sudo apt install -y --no-install-recommends  qml-module-qtquick-layouts qml-module-org-kde-newstuff \
-vlc-plugin-video-output libvlc5 libvlccore9 qml-module-qtquick-layouts libvlc-bin  vlc-plugin-base vlc-plugin-qt vlc-plugin-skins2 
+vlc-plugin-video-output libvlc5 libvlccore9  libvlc-bin  vlc-data phonon4qt5-backend-vlc
