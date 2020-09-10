@@ -1,4 +1,4 @@
-sudo apt build-dep vlc  && \
+sudo apt build-dep -y vlc  && \
 cd ~/ffmpeg_sources  && git clone https://github.com/videolan/vlc.git
 cd vlc && ./bootstrap && \
 ./configure \
