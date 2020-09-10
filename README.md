@@ -7,7 +7,14 @@ simply run
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && chmod 777 *.sh     cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && ./install.sh
 
-##########################################################################################################################################################################
+######################################################################################################################################################
+
+it takes 2h time
+
+
+
+here a step by step guide
+
 hi everybody !!!
 
 sorry for my bad english
@@ -75,10 +82,6 @@ gpu_mem=128
 #dtoverlay=vc4-kms-v3d
 
 #dtoverlay=vc4-fkms-v3d
-####################################   BOOT  ##################################################
-simply 
-
-./boot.sh
 
 
 #####################################  DOWNLOAD  #################################################
@@ -86,6 +89,10 @@ simply
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && chmod 777 *.sh
 
+####################################   BOOT  ##################################################
+simply 
+
+./boot.sh
 
 
 ########################################   INSTALL  #################################################################
