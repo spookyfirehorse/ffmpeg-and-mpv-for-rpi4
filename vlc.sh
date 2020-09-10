@@ -9,6 +9,5 @@ sudo apt purge -y libavcodec-dev libavdevice-dev libswresample-dev libpostproc-d
 sudo apt purge -y  vlc vlc-bin ffmpeg mpv  && \
 cd ~/ && sudo apt-mark manual opencv* && sudo apt-mark manual lib* && sudo apt-mark manual *-dev  &&  sudo apt-mark manual qml-module* && \
 sudo apt-mark hold libavcodec-dev libavdevice-dev libswresample-dev libpostproc-dev libswscale-dev libavformat-dev  && \
-sudo apt install -y --no-install-recommends  qml-module-qtquick-layouts qml-module-org-kde-newstuff  vlc-plugin-base  \
-vlc-plugin-video-output libvlc5 libvlccore9  vlc-data && sudo ldconfig && \
-sudo apt install --no-install-recommends vlc-plugin-qt
+sudo apt install -y --no-install-recommends  qml-module-qtquick-layouts qml-module-org-kde-newstuff libvlc-bin  vlc-plugin-base vlc-plugin-qt vlc-plugin-skins2 \
+vlc-plugin-video-output libvlc5 libvlccore9 vlc-plugin-base vlc-data && sudo ldconfig 
