@@ -113,7 +113,7 @@ simply
 
 ./mpv.sh                                  ### install mpv
 
-./vlc.sh                                   ### installvlc
+./vlc.sh   ### install vlc   there is no qui for vlc usage cvlc example.mp4
 
 ./pulseeffects-install.sh     #### flatpak run com.github.wwmm.pulseeffects
 
