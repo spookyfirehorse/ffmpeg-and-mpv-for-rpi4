@@ -1,3 +1,13 @@
+if you like to install all of this
+
+simply run     
+
+
+##########################################################################
+
+git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && chmod 777 *.sh     cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && ./install.sh
+
+##########################################################################################################################################################################
 hi everybody !!!
 
 sorry for my bad english
