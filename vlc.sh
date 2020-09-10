@@ -1,4 +1,5 @@
-cd ~/ffmpeg_sources  && git clone https://github.com/videolan/vlc.git && \
+sudo apt build-dep vlc  && \
+cd ~/ffmpeg_sources  && git clone https://github.com/videolan/vlc.git
 cd vlc && ./bootstrap && \
 ./configure \
 --enable-mmal --enable-omxil --enable-rpi-omxil  \
