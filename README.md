@@ -51,7 +51,7 @@ if you like to install all of this
 
 simply run     
 
-##########################################################################
+#########################################  INSTALL-ALL VLC - FFMPEG - MPV + EQUALIZER + PULSEEFFECTS #################################
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd ~/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && \
 chmod 777 *.sh   && ./boot.sh && ./config_files.sh && ./deb.sh && ./fdk-aac.sh &&  ./ffmpeg.sh && ./mpv.sh && ./vlc.sh && ./install-equalizer.sh && ./pulseeffects-install.sh &&  reboot
@@ -127,9 +127,7 @@ you can install pulseeffects also
 but dont use to look a movie to much cpu 
 
 
-sudo ./pulseeffects-install.sh
-
-normal start 
+normal start pulseeffects
 
 flatpak run com.github.wwmm.pulseeffects
 
@@ -138,11 +136,8 @@ start command in background
 flatpak run com.github.wwmm.pulseeffects --gapplication-service &
 
 
-less cpu install pulseaudio-equalizer-git
 
-sudo ./install-equalizer.sh
-
-start coomand 
+start coomand equalizer
 
 pulseaudio-equalizer enable
 
