@@ -6,11 +6,8 @@ simply run
 ##########################################################################
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd ~/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && \
-chmod 777 *.sh   && ./install-all.sh  
-
-
-reboot
-
+chmod 777 *.sh   && ./boot.sh && ./config_files.sh && ./deb.sh && ./fdk-aac.sh &&  ./ffmpeg.sh && ./mpv.sh ./vlc.sh && ./install-equalizer.sh && ./pulseeffects-install.sh &&  reboot
+  
 
 ######################################################################################################################################################
 
