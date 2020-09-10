@@ -5,8 +5,8 @@ simply run
 
 ##########################################################################
 
-git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && \
-chmod 777 *.sh  &&   cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && ./install.sh  
+git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd ~/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && \
+chmod 777 *.sh   && ./install.sh  
 
 
 reboot
@@ -97,10 +97,10 @@ git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs
 ####################################   BOOT  ##################################################
 simply 
 
-./boot.sh
+./boot.sh   copy config.txt to boot
 
 
-########################################   INSTALL  #################################################################
+########################################   INSTALL  STEP BY STEP #################################################################
 
 
 ./config_files.sh                         ## install conf files for mpv and  vlc and ffmpeg
@@ -115,7 +115,11 @@ simply
 
 ./vlc.sh                                   ### installvlc
 
+./pulseeffects-install.sh     #### flatpak run com.github.wwmm.pulseeffects
 
+./install-equalizer.sh   #####   pulseaudio-equalizer-gtk
+
+reboot
 #######################################################################################################################
 
 mpv example.mp4
