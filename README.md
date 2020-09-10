@@ -6,7 +6,7 @@ simply run
 ##########################################################################
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd ~/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && \
-chmod 777 *.sh   && ./install.sh  
+chmod 777 *.sh   && ./install-all.sh  
 
 
 reboot
