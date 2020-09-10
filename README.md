@@ -43,29 +43,24 @@ but dont use to look a movie to much cpu mpv
 
 pulseaudio-equalizer has less cpu
 
+set in pcmanfm /usr/local/bin/cvlc as standard
+
 usw.
 
 if you like to install all of this
 
 simply run     
 
-
 ##########################################################################
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd ~/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && \
 chmod 777 *.sh   && ./boot.sh && ./config_files.sh && ./deb.sh && ./fdk-aac.sh &&  ./ffmpeg.sh && ./mpv.sh && ./vlc.sh && ./install-equalizer.sh && ./pulseeffects-install.sh &&  reboot
   
-
-######################################################################################################################################################
-
-
-
 all codecs installed no need to buy the keys cpu usage 15 % ca 
 
 spooky !!!!!
-
-
 done
+
 ###################################################################################
 
 
@@ -75,14 +70,12 @@ STEP BY STEP
 
 ####################################### BOOT  ########################################################
 
-sudo raspi-config
+disable all v3d
+and add gpu_mem
 
-or
+
 
 sudo nano /boot/config.txt
-
-and disable all v3d
-and add gpu_mem
 
 gpu_mem=128
 
@@ -96,10 +89,6 @@ gpu_mem=128
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && chmod 777 *.sh
 
-####################################   BOOT  ##################################################
-simply 
-
-./boot.sh   copy config.txt to boot
 
 
 ########################################   INSTALL  STEP BY STEP #################################################################
