@@ -47,45 +47,6 @@ set in pcmanfm /usr/local/bin/cvlc as standard
 
 usw.
 
-if you like to install all of this
-
-simply run     
-
-#########################################  INSTALL-ALL VLC - FFMPEG - MPV + EQUALIZER + PULSEEFFECTS #################################
-
-git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd ~/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && \
-chmod 777 *.sh   && ./boot.sh && ./config_files.sh && ./deb.sh && ./fdk-aac.sh &&  ./ffmpeg.sh && ./mpv.sh && ./vlc.sh && ./install-equalizer.sh && ./pulseeffects-install.sh &&  reboot
-  
-all codecs installed no need to buy the keys cpu usage 15 % ca 
-
-spooky !!!!!
-done
-
-###################################################################################
-
-
-STEP BY STEP
-
-
-
-####################################### BOOT  ########################################################
-
-disable all v3d
-and add gpu_mem
-
-
-
-sudo nano /boot/config.txt
-
-gpu_mem=128
-
-#dtoverlay=vc4-kms-v3d
-
-#dtoverlay=vc4-fkms-v3d
-
-
-#####################################  DOWNLOAD  #################################################
-
 
 git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && chmod 777 *.sh
 
