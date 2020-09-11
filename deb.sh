@@ -10,7 +10,7 @@ libzvbi-dev libxcb-shm0-dev  libv4l-dev libxcb-xfixes0-dev libvpx-dev texinfo li
 libssl-dev wget zlib1g-dev nasm yasm libx264-dev   libnuma-dev libgles2-mesa-dev equivs meson spirv-tools libplacebo* flatpak \
 libxcb-shm0-dev libxcb-xv0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-composite0-dev \
 libx11-xcb-dev libqt5*-dev qt5*-dev libqt5quick* qtquickcontrols2-5-dev && \
-sudo apt install -y python3-pip bc swh-plugins meson && sudo pip3 install ninja && \
+ sudo apt install -y python3-pip bc swh-plugins meson && sudo pip3 install ninja libunistring-dev && \
 sudo apt build-dep -y mpv && sudo apt build-dep -y vlc && \
 sudo apt install -y --no-install-recommends  qml-module-qtquick-layouts qml-module-org-kde-newstuff \
 vlc-plugin-video-output libvlc5 libvlccore9  libvlc-bin  vlc-data phonon4qt5-backend-vlc
