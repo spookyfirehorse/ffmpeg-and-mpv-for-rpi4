@@ -1,6 +1,6 @@
 mkdir -p ~/bin &&  \
-mkdir -p ~/bin &&  \
-cd ~/ffmpeg_sources && wget https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2 && tar xjvf ffmpeg-4.3.1.tar.bz2 && cd ffmpeg-4.3.1 && \
+mkdir -p ~/ffmpeg_sources &&  \
+cd ~/ffmpeg_sources && apt source ffmpeg && cd ffmpeg-4.1.6 && \
 PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" \
 ./configure --prefix="$HOME/ffmpeg_build" --pkg-config-flags="--static" --extra-cflags="-I$HOME/ffmpeg_build/include" \
 --extra-ldflags="-L$HOME/ffmpeg_build/lib" --extra-libs="-lpthread -lm" --bindir="$HOME/bin" \
