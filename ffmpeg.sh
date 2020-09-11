@@ -1,4 +1,5 @@
 mkdir -p ~/bin &&  \
+mkdir -p ~/bin &&  \
 cd ~/ffmpeg_sources && wget https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2 && tar xjvf ffmpeg-4.3.1.tar.bz2 && cd ffmpeg-4.3.1 && \
 PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" \
 ./configure --prefix="$HOME/ffmpeg_build" --pkg-config-flags="--static" --extra-cflags="-I$HOME/ffmpeg_build/include" \
@@ -10,8 +11,9 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" \
  --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid \
  --enable-libzmq --disable-doc --disable-htmlpages --disable-manpages  --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2\
  --enable-mmal --enable-omx --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal --enable-encoder=h264_omx  --enable-neon  --enable-libdc1394 --enable-libdrm --enable-libiec61883 \
- --enable-chromaprint --enable-frei0r --enable-libx264 --enable-static --libdir=/usr/lib/arm-linux-gnueabihf --cpu=arm1176jzf-s --arch=arm   && \
+ --enable-chromaprint --enable-frei0r --enable-libx264 --enable-static --incdir=~/ffmpeg_build/include/arm-linux-gnueabihf  --libdir=~/ffmpeg_build/lib/arm-linux-gnueabihf --cpu=arm1176jzf-s --arch=arm   && \
 PATH="$HOME/bin:$PATH" make -j 4 && make install
+
 #export CPATH=~/ffmpeg_build/include && \
 #export LD_LIBRARY_PATH=~/ffmpeg_build/lib && \
 ##export PKG_CONFIG_PATH=~/ffmpeg_build/lib/pkgconfig:/opt/vc/lib/pkgconfig 
