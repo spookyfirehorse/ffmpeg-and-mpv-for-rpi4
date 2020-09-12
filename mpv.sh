@@ -1,6 +1,5 @@
-export CPATH=~/ffmpeg_build/include && \
-export LD_LIBRARY_PATH=~/ffmpeg_build/lib && \
-export PKG_CONFIG_PATH=~/ffmpeg_build/lib/pkgconfig:/opt/vc/lib/pkgconfig   && \
+
+export PKG_CONFIG_PATH=/opt/vc/lib/pkgconfig   && \
 cd ~/ffmpeg_sources  && \
 git clone https://github.com/mpv-player/mpv.git && \
 cd mpv && \
