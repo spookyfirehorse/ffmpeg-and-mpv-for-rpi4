@@ -1,5 +1,5 @@
 #sudo pip3 install ninja && \
-git clone https://github.com/hoene/libmysofa.git && \
+cd ~/ffmpeg_sources && git clone https://github.com/hoene/libmysofa.git && \
 apt install zlib1g-dev libcunit1-dev libcunit1-dev && \
 cd build  && \
 cmake -DCMAKE_BUILD_TYPE=Debug ..  && \
