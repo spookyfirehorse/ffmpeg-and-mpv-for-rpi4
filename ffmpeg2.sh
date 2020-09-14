@@ -1,6 +1,6 @@
 mkdir -p ~/bin &&  \
 mkdir -p ~/ffmpeg_sources &&  \
-cd ~/ffmpeg_sources && apt source ffmpeg && cd ffmpeg-4.1.6 && \
+cd ~/ffmpeg_sources && git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && \
 PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" \
 ./configure --prefix="$HOME/ffmpeg_build" --pkg-config-flags="--static" --extra-cflags="-I$HOME/ffmpeg_build/include" \
 --extra-ldflags="-L$HOME/ffmpeg_build/lib" --extra-libs="-lpthread -lm" --bindir="$HOME/bin" \
@@ -11,7 +11,7 @@ PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" \
  --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid \
  --enable-libzmq --disable-doc --disable-htmlpages --disable-manpages  --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2\
  --enable-mmal --enable-omx --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal --enable-encoder=h264_omx  --enable-neon  --enable-libdc1394 --enable-libdrm --enable-libiec61883 \
- --enable-chromaprint --enable-frei0r --enable-libx264 --enable-avisynth  --enable-static --incdir=$HOME/ffmpeg_build//arm-linux-gnueabihf  --libdir=$HOME/ffmpeg_build/lib/arm-linux-gnueabihf --cpu=arm1176jzf-s --arch=arm   && \
+ --enable-chromaprint --enable-frei0r --enable-libx264 --enable-avisynth --enable-libsrt --enable-shared  && \
 PATH="$HOME/bin:$PATH" make -j 4 && make install
 
 #export CPATH=~/ffmpeg_build/include && \
