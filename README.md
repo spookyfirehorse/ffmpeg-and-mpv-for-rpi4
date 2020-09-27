@@ -38,55 +38,11 @@ download a movie
 
 ffmpeg -i http://url -c:v copy -c:a copy output.mp4
 
-you can install pulseeffects also
-but dont use to look a movie to much cpu mpv
-
-pulseaudio-equalizer has less cpu
-
-set in pcmanfm /usr/local/bin/cvlc as standard
-
-usw.
-
-
-git clone https://github.com/spookyfirehorse/raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi-.git && cd raspberry-pi-with-ffmpeg-all-codecs-mpv-rpi- && chmod 777 *.sh
-
-
-
 ########################################   INSTALL  STEP BY STEP #################################################################
 
 
-./config_files.sh                         ## install conf files for mpv and  vlc and ffmpeg
 
-./deb.sh                                    ### install depend files
-
-./fdk-aac.sh                               ## install libfdk_aac
-
-./ffmpeg.sh                               ### install ffmpeg
-
-./mpv.sh                                  ### install mpv
-
-./vlc.sh   ### install vlc   there is no qui for vlc usage cvlc example.mp4
-
-./pulseeffects-install.sh     #### flatpak run com.github.wwmm.pulseeffects
-
-./install-equalizer.sh   #####   pulseaudio-equalizer-gtk
-
-reboot
 #######################################################################################################################
-
-mpv example.mp4
-
-or you set in pcmanfm /usr/local/bin/cvlc as standard
-and klick on the movie
-close mpv with q
-close cvlc strg + q
-mpv volume 0 9
-cvlc volume strg arrow up and down
-
-
-you can install pulseeffects also
-but dont use to look a movie to much cpu 
-
 
 normal start pulseeffects
 
