@@ -66,8 +66,28 @@ mkdir avisynth-build && cd avisynth-build && \
 cmake ../ -DHEADERS_ONLY:bool=on  && \
 sudo make install  && sudo ldconfig
 
-#################################################################
+##################################################
+SHADERC
 
+git clone https://github.com/google/shaderc build
+cd build
+./utils/git-sync-deps && cmake -GNinja -DCMAKE_BUILD_TYPE=Release
+
+sudo ninja install
+##############################################
+
+LIBPLACEBO
+
+sudo apt install  gslang-dev spirv-tools && \
+cd ~/ffmpeg_sources && \ 
+git clone https://github.com/haasn/libplacebo.git && \
+cd ~/ffmpeg_sources/libplacebo && /cd v	
+DIR=./build && \
+meson $DIR  && \
+meson configure $DIR   -Dvulkan=enabled -Dshaderc=enabled
+ninja -C$DIR  && \
+sudo ninja -Cbuild install
+######################################################
 SRT
 
 git clone --depth 1 https://github.com/Haivision/srt.git && \
@@ -127,4 +147,33 @@ cd mplayer-/
 ./configure   --enable-faad 
 #################################################################################
 done
+#############################################################
+PULSEEFFECTS &lsp-plugins
+
+apt install -y libfftw3-bin libfftw3-dev  && \
+git clone https://github.com/swh/ladspa.git  && \
+autoreconf -i && \
+./configure && \
+make -j4 && \
+sudo make install
+
+
+apt build-dep pulseeffects
+
+git clone https://github.com/wwmm/pulseeffects.git
+cd pulseeffects
+git checkout v4.8.0
+meson _build --prefix=/usr
+sudo ninja -C _build install
+##############################################
+
+sudo apt install python3-pip bc swh-plugins meson && sudo pip3 install ninja && \
+cd ~/ffmpeg_sources && git clone https://github.com/pulseaudio-equalizer-ladspa/equalizer.git &&\
+cd equalizer && \
+meson build && \
+cd build && \
+ninja && \
+sudo ninja install
+###########################################
+
 
