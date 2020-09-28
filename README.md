@@ -71,9 +71,8 @@ SHADERC
 
 git clone https://github.com/google/shaderc build
 cd build
-./utils/git-sync-deps && cmake -GNinja -DCMAKE_BUILD_TYPE=Release
+./utils/git-sync-deps && cmake -GNinja -DCMAKE_BUILD_TYPE=Release && sudo ninja install
 
-sudo ninja install
 ##############################################
 
 LIBPLACEBO
@@ -87,6 +86,9 @@ meson $DIR  && \
 meson configure $DIR   -Dvulkan=enabled -Dshaderc=enabled
 ninja -C$DIR  && \
 sudo ninja -Cbuild install
+
+
+
 ######################################################
 SRT
 
@@ -94,6 +96,9 @@ git clone --depth 1 https://github.com/Haivision/srt.git && \
 ./configure && \
 make -j4 && \
 sudo make -j 4 install  && sudo ldconfig
+
+
+
 ###################################################
 
 #####################################################################################
@@ -128,6 +133,7 @@ export PKG_CONFIG_PATH=/opt/vc/lib/pkgconfig && ./waf configure --enable-rpi --e
 ./waf -j4 && sudo  ./waf install && sudo ldconfig
 
 ############################################################################
+
 cd ~/ffmpeg_sources  && git clone https://github.com/videolan/vlc.git
 cd vlc && ./bootstrap && \
 ./configure \
@@ -145,6 +151,8 @@ wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-export-snapshot.tar.bz2
 tar xf mplayer-export-snapshot.tar.bz2
 cd mplayer-/
 ./configure   --enable-faad 
+make -j4
+sudo make install
 #################################################################################
 done
 #############################################################
