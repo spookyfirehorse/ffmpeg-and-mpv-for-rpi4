@@ -1,6 +1,7 @@
-sudo apt update && sudo apt install flatpak && \
-git clone https://github.com/flathub/com.github.wwmm.pulseeffects.git && \
-cd com.github.wwmm.pulseeffects/ && \
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && \
-sudo flatpak install flathub com.github.wwmm.pulseeffects
+sudo apt build-dep pulseeffects && \
+cd ~/ffmpeg_sources &&  git clone https://github.com/wwmm/pulseeffects.git && cd ~/ffmpeg_sources/pulseeffects && git checkout v4.7.0 && meson _build --prefix=/usr/local && sudo ninja -C _build install
+cd ~/ffmpeg_sources/pulseeffects &&\
+git checkout v4.8.5 && \
+meson _build --prefix=/usr/local &&\ 
+ninja -C _build install
 
