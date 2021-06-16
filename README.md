@@ -90,25 +90,8 @@ lavdopts=threads=4
 
 mpv.conf
 
-#drm-connector=HDMI-A-1
-#gpu-context=drm
-#vo=drm
-
-#gpu-context=displayvk
-#gpu-api=vulkan
-#vulkan-async-compute=yes
-#vulkan-async-transfer=yes
-#vulkan-queue-count=1
-
-#profile=enc-a-aac
-
-
-
 gpu-context=x11egl
 gpu-api=opengl
-
-#user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0"
-user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Safari/605.1.15"
 #vo=x11
 vo=sdl
 #vo=gpu
@@ -154,17 +137,4 @@ ovc=h264_v4l2m2m
 ovcopts-add = b=2M
 oac = libfdk_aac
 oacopts-add = b=128k
-user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Safari/605.1.15"
-ytdl-format=bestvideo[ext=mp4][width<=1920][height<=1080]+bestaudio[ext=m4a]/best[ext=mp4]/best
-audio-samplerate=44100
-hls-bitrate=max
-cache=yes
-framedrop=decoder+vo
-demuxer-max-bytes=2000MiB
-demuxer-readahead-secs=300
-
-
-
-
-
 
