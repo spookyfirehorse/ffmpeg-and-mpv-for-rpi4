@@ -64,26 +64,47 @@ nano /home/pi/.mplayer/conf
 ##########################################
 
 Write your default config options here!
+
 ao = alsa
+
 vo = gl
+
 volume = 30
+
 idx = yes
-format = s24le
+
+#format = s24le
+
 user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Safari/605.1.15"
-af=lavcresample=44100
+
+#af=lavcresample=44100
+
 lirc=no
+
 stop-xscreensaver=yes
+
 cache-min=60
+
 cache=4096
+
 #cache-seek-min=30
+
 framedrop=yes
+
 autoq=100
-vf=hqdn3d,pp=de
+
+#vf=hqdn3d,pp=de
+
 #forceidx=yes
+
 zoom=yes
-channels=4
+
+#channels=4
+
 #srate=44100
+
 volstep=2
+
 lavdopts=threads=4
 
 
