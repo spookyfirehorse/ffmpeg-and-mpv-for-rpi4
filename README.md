@@ -19,7 +19,7 @@ you can install ffmpeg with all codecs mpv all codecs laspa equalizer and pulsee
 
 all is running with hwaccel  and the cpu is cool
 
-
+#########################
 
 sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && \
 ./configure --prefix=/usr/ --enable-gpl --enable-nonfree --extra-libs="-lpthread -lm -latomic" --toolchain=hardened --enable-libvpx  \
@@ -36,7 +36,7 @@ sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  git
 --enable-libsnappy --enable-mmal --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal --enable-encoder=h264_omx \
 && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
 
-
+###########################
 
 
 cd ~/ffmpeg_sources  && \
@@ -46,7 +46,7 @@ cd ~/ffmpeg_sources/mpv && \
 export PKG_CONFIG_PATH=/opt/vc/lib/pkgconfig && ./waf configure --enable-rpi --enable-rpi-mmal  --enable-egl-drm --enable-gl-x11 \
 --enable-egl --enable-sdl2 --enable-ffmpeg-strict-abi --disable-libavdevice  --enable-xv --enable-zimg --enable-egl-x11 --enable-libmpv-shared --enable-libplacebo --enable-vulkan && 
 ./waf -j4 && sudo  ./waf install 
-
+##########################
 
 MPLAYER with gl on rpi no service in use like mpv --vo=gpu
 
@@ -56,7 +56,7 @@ tar xf mplayer-export-snapshot.tar.bz2
 cd ~/ffmpeg_sources/mplayer-export-2016-10-02/
 ./configure   --enable-faad  --disable-ffmpeg_a && make -j4 && sudo make install
 
-
+###########################################
 nano /home/pi/.mplayer/conf
 
 ##########################################
