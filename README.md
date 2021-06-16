@@ -45,7 +45,8 @@ cd ~/ffmpeg_sources/mpv && \
 ./bootstrap.py && \
 export PKG_CONFIG_PATH=/opt/vc/lib/pkgconfig && ./waf configure --enable-rpi --enable-rpi-mmal  --enable-egl-drm --enable-gl-x11 \
 --enable-egl --enable-sdl2 --enable-ffmpeg-strict-abi --disable-libavdevice  --enable-xv --enable-zimg --enable-egl-x11 --enable-libmpv-shared --enable-libplacebo --enable-vulkan && 
-./waf -j4 && sudo  ./waf install 
+./waf -j4 && sudo  ./waf install
+
 ##########################
 
 MPLAYER with gl on rpi no service in use like mpv --vo=gpu
@@ -57,10 +58,12 @@ cd ~/ffmpeg_sources/mplayer-export-2016-10-02/
 ./configure   --enable-faad  --disable-ffmpeg_a && make -j4 && sudo make install
 
 ###########################################
+
 nano /home/pi/.mplayer/conf
 
 ##########################################
- Write your default config options here!
+
+Write your default config options here!
 ao = alsa
 vo = gl
 volume = 30
@@ -89,7 +92,9 @@ lavdopts=threads=4
 
 
 mpv.conf
+
 #######################################
+
 #drm-connector=HDMI-A-1
 
 #gpu-context=drm
