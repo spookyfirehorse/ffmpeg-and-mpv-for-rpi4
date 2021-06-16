@@ -20,6 +20,8 @@ you can install ffmpeg with all codecs mpv all codecs laspa equalizer and pulsee
 all is running with hwaccel  and the cpu is cool
 
 #########################
+Compile FFmpeg
+
 
 sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && \
 ./configure --prefix=/usr/ --enable-gpl --enable-nonfree --extra-libs="-lpthread -lm -latomic" --toolchain=hardened --enable-libvpx  \
@@ -38,6 +40,7 @@ sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  git
 
 ###########################
 
+Compile MPV
 
 cd ~/ffmpeg_sources  && \
 git clone https://github.com/mpv-player/mpv.git && \
