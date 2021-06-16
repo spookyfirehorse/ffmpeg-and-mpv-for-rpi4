@@ -57,9 +57,9 @@ cd ~/ffmpeg_sources/mplayer-export-2016-10-02/
 ./configure   --enable-faad  --disable-ffmpeg_a && make -j4 && sudo make install
 
 
-mplayer conf
+nano /home/pi/.mplayer/conf
 
-
+##########################################
  Write your default config options here!
 ao = alsa
 vo = gl
@@ -89,8 +89,8 @@ lavdopts=threads=4
 
 
 mpv.conf
-
-rm-connector=HDMI-A-1
+#######################################
+#drm-connector=HDMI-A-1
 
 #gpu-context=drm
 
@@ -219,3 +219,9 @@ framedrop=decoder+vo
 demuxer-max-bytes=2000MiB
 
 demuxer-readahead-secs=300
+
+###########################################
+record any stream or file
+
+mpv  file or stream  --o=test.mp4 --profile=omx
+
