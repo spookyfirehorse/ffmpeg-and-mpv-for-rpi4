@@ -1,6 +1,5 @@
 
-cd ~/ffmpeg_sources  && sudo rm -r mpv && \
-git clone https://github.com/mpv-player/mpv.git && \
+cd ~/ffmpeg_sources && git clone https://github.com/mpv-player/mpv.git && \
 cd ~/ffmpeg_sources/mpv && \
 ./bootstrap.py && \
 export PKG_CONFIG_PATH=/opt/vc/lib/pkgconfig && ./waf configure --enable-rpi --enable-rpi-mmal  --enable-egl-drm --enable-gl-x11 \
