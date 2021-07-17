@@ -24,8 +24,8 @@ Compile FFmpeg
 
 
 sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && \
-./configure --prefix=/usr/ --enable-gpl --enable-nonfree --extra-libs="-lpthread -lm -latomic" --toolchain=hardened --enable-libvpx  \
---enable-vaapi --disable-stripping --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+./configure --prefix=/usr/local --enable-gpl --enable-nonfree --extra-libs="-lpthread -lm -latomic" --toolchain=hardened --enable-libvpx  \
+--enable-vaapi --disable-stripping --libdir=/usr/local/lib/arm-linux-gnueabihf --incdir=/usr/local/include/arm-linux-gnueabihf \
 --enable-libsoxr --enable-libpulse --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio \
 --enable-libcodec2 --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack \
 --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libssh --enable-librsvg  --enable-libshine \
@@ -47,18 +47,15 @@ git clone https://github.com/mpv-player/mpv.git && \
 cd ~/ffmpeg_sources/mpv && \
 ./bootstrap.py && \
 export PKG_CONFIG_PATH=/opt/vc/lib/pkgconfig && ./waf configure --enable-rpi --enable-rpi-mmal  --enable-egl-drm --enable-gl-x11 \
---enable-egl --enable-sdl2 --enable-ffmpeg-strict-abi --disable-libavdevice  --enable-xv --enable-zimg --enable-egl-x11 --enable-libmpv-shared --enable-libplacebo --enable-vulkan && 
+--enable-egl --enable-sdl2 --enable-ffmpeg-strict-abi   --enable-xv --enable-zimg --enable-egl-x11 --enable-libmpv-shared --enable-libplacebo --enable-vulkan && 
 ./waf -j4 && sudo  ./waf install
 
 ##########################
 
-MPLAYER with gl on rpi no service in use like mpv --vo=gpu
+MPLAYER with gl 
 
-
-cd ~/ffmpeg_sources  && wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-export-snapshot.tar.bz2 && tar xf mplayer-export-snapshot.tar.bz2 && tar xf mplayer-export-snapshot.tar.bz2
-tar xf mplayer-export-snapshot.tar.bz2
-cd ~/ffmpeg_sources/mplayer-export-2016-10-02/
-./configure   --enable-faad  --disable-ffmpeg_a && make -j4 && sudo make install
+cd ~/ffmpeg_sources/ && svn checkout svn://svn.mplayerhq.hu/mplayer/trunk mplayer && cd mplayer && \
+./configure  --enable-faad --enable-gui   --disable-ffmpeg_a  --enable-ffmpeg_so  && make -j4 && sudo make install
 
 ###########################################
 
