@@ -11,5 +11,5 @@ git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && \
 --libdir=/usr/local/lib/x86_64-linux-gnu --incdir=/usr/local/include/x86_64-linux-gnu \
 --enable-liblensfun --enable-libdav1d --enable-lv2 --enable-libwebp --enable-libvpx --enable-libv4l2 --enable-libspeex   \
 --enable-vapoursynth  --enable-librubberband --enable-libaom --enable-libmfx --enable-libsvtav1 --enable-libdav1d  --enable-libkvazaar --enable-pthreads \
---enable-libsnappy --enable-shared --enable-libnpp  --enable-v4l2-m2m--extra-cflags=-I/usr/local/cuda/include/ --extra-ldflags=-L/usr/local/cuda/lib64/  \
+--enable-libsnappy --enable-shared --enable-libnpp  --enable-v4l2-m2m --extra-cflags=-I/usr/local/cuda/include/ --extra-ldflags=-L/usr/local/cuda/lib64/  \
   && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
