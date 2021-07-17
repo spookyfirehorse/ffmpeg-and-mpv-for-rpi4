@@ -10,5 +10,5 @@ apt source ffmpeg && cd ffmpeg && \
 --enable-libsrt --enable-libfdk-aac  --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-version3 \
  --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu \
 --enable-liblensfun --enable-libdav1d --enable-lv2 --enable-libwebp --enable-libvpx --enable-libv4l2 --enable-libspeex   \
---enable-vapoursynth  --enable-librubberband --enable-libaom --enable-libmfx --enable-libsvtav1 --enable-libdav1d  --enable-libkvazaar --enable-pthreads \
---enable-libsnappy --enable-shared && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
+--enable-vapoursynth  --enable-librubberband --enable-libaom --enable-libmfx  --enable-libdav1d  --enable-libkvazaar --enable-pthreads \
+--enable-libsnappy --enable-shared  --enable-v4l2-m2m --extra-cflags=-I/usr/local/cuda/include/ --extra-ldflags=-L/usr/local/cuda/lib64/ && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
