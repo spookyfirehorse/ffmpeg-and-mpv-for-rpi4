@@ -1,7 +1,7 @@
 
 sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && \
 ./configure --prefix=/usr/local --enable-gpl --enable-nonfree --extra-libs="-lpthread -lm -latomic" --toolchain=hardened --enable-libvpx  \
---enable-vaapi --disable-stripping --libdir=/usr/lib/local/arm-linux-gnueabihf --incdir=/usr/local/include/arm-linux-gnueabihf \
+--disable-vaapi --disable-stripping --libdir=/usr/lib/local/arm-linux-gnueabihf --incdir=/usr/local/include/arm-linux-gnueabihf \
 --enable-libsoxr --enable-libpulse --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio \
 --enable-libcodec2 --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack \
 --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libssh --enable-librsvg  --enable-libshine \
@@ -11,5 +11,5 @@ sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  git
 --enable-libsrt --enable-shared --enable-libfdk-aac  --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-version3  \
  --enable-libdav1d --enable-libsvtav1 --enable-lv2 --enable-libwebp --enable-libvpx --enable-libv4l2 --enable-libspeex   \
 --enable-librubberband --enable-libaom   --enable-libkvazaar --enable-pthreads --enable-v4l2-m2m --arch=armhf \
---enable-libsnappy --enable-mmal --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal --enable-v4l2-m2m --enable-encoder=h264_omx \
+--enable-libsnappy --enable-mmal --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal  --enable-encoder=h264_omx \
 && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
