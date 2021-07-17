@@ -2,39 +2,79 @@
 
 Sorry for my bad english
 
-in some cases you must remove sudo in scripts
+compile all libfdk ffmpeg and mpv on raspian with cammera usb or intern 
+and from another computer you put thisin a konsole
+ssh must run with key identification
+maybe you must change audio input
 
-sudo ninja install dont work on debian 10, on ubuntu and buster no problem
-ninja install - open a window with passwot on debian bullseye
-sudo make install works fine on all distros
+arecord -L gives you the name
 
-in ffmpeg.sh or mpv.sh you can change the options and remove or add some
+ssh moon ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads 4 -strict -2  \
+ -f alsa   -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
+ -f v4l2 -r 5  -i /dev/video0  -c:v h264_omx   -profile:v high -level 4   -pix_fmt yuv420p   -b:v 1M  -bf 0 -trellis 0  -g 60 \
+ -c:a libfdk_aac -profile:a aac_he  -b:a 32k -movflags +faststart \
+ -f  mpegts  - |  mpv --cache=no  --profile=low-latency --volume=50  -
 
-apt build-dep ffmpeg mpv do not install all you must compile something you need or delete the option
+
+or with libopus
+
+libopus is sometimes better
+
+
+ssh moon ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads 4 -strict -2  \
+ -f alsa   -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
+ -f v4l2 -r 5  -i /dev/video0  -c:v h264_omx   -profile:v high -level 4   -pix_fmt yuv420p   -b:v 1M  -bf 0 -trellis 0  -g 60 \
+ -c:a libopus  -b:a 32k -movflags +faststart \
+ -f  mpegts  - |  mpv --cache=no  --profile=low-latency --volume=50  -
+
 
 
 This scripts are multimedia scripts for rpi 4 3b+
 
 you can install ffmpeg with all codecs mpv all codecs laspa equalizer and pulseeffects
 
-all is running with hwaccel  and the cpu is cool
+all is running with hwaccel  and the cpu is cool 
 
+
+
+
+
+
+
+                                          THE SIMPLE WAY 
+                                          
 #########################
+
+
+
+mkdir -p ~/ffmpeg_sources && \
+cd ~/ffmpeg_sources && \
+git -C fdk-aac pull 2> /dev/null || git clone --depth 1 https://github.com/mstorsjo/fdk-aac && \
+cd fdk-aac && \
+autoreconf -fiv && \
+./configure  --disable-shared && \
+make -j4 && \
+sudo make install && sudo ldconfig
+
+
+
+
+
 Compile FFmpeg
 
 
-sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && \
+sudo apt build-dep ffmpeg && mkdir -p ffmpeg_sources && cd ~/ffmpeg_sources &&  git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && \
 ./configure --prefix=/usr/local --enable-gpl --enable-nonfree --extra-libs="-lpthread -lm -latomic" --toolchain=hardened --enable-libvpx  \
 --enable-vaapi --disable-stripping --libdir=/usr/local/lib/arm-linux-gnueabihf --incdir=/usr/local/include/arm-linux-gnueabihf \
---enable-libsoxr --enable-libpulse --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio \
+--enable-libsoxr --enable-libpulse --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b  --enable-libcdio \
 --enable-libcodec2 --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack \
 --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libssh --enable-librsvg  --enable-libshine \
 --enable-libsnappy --enable-libspeex --enable-libopus  --enable-libtheora --enable-libtwolame --enable-libvorbis  --enable-libwebp \
 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --disable-doc --disable-htmlpages --disable-manpages --enable-libzvbi --enable-lv2 \
---enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-omx --enable-libdc1394 --enable-libdrm --enable-frei0r --enable-libx264  --enable-avisynth \
+--enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-omx --enable-libdc1394 --enable-libdrm --enable-frei0r --enable-libx264   \
 --enable-libsrt --enable-shared --enable-libfdk-aac  --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-version3  \
- --enable-libdav1d --enable-libsvtav1 --enable-lv2 --enable-libwebp --enable-libvpx --enable-libv4l2 --enable-libspeex   \
---enable-librubberband --enable-libaom   --enable-libkvazaar --enable-pthreads --enable-v4l2-m2m --arch=armhf  \
+ --enable-lv2 --enable-libwebp --enable-libvpx --enable-libv4l2 --enable-libspeex   \
+--enable-librubberband --enable-libaom  --enable-pthreads --enable-v4l2-m2m --arch=armhf  \
 --enable-libsnappy --enable-mmal --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal --enable-encoder=h264_omx \
 && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
 
@@ -47,7 +87,7 @@ git clone https://github.com/mpv-player/mpv.git && \
 cd ~/ffmpeg_sources/mpv && \
 ./bootstrap.py && \
 export PKG_CONFIG_PATH=/opt/vc/lib/pkgconfig && ./waf configure --enable-rpi --enable-rpi-mmal  --enable-egl-drm --enable-gl-x11 \
---enable-egl --enable-sdl2 --enable-ffmpeg-strict-abi   --enable-xv --enable-zimg --enable-egl-x11 --enable-libmpv-shared --enable-libplacebo --enable-vulkan && 
+--enable-egl --enable-sdl2 --enable-ffmpeg-strict-abi  --enable-xv --enable-zimg --enable-egl-x11 --enable-libplacebo --enable-vulkan && 
 ./waf -j4 && sudo  ./waf install
 
 ##########################
@@ -250,4 +290,6 @@ demuxer-readahead-secs=300
 record any stream or file
 
 mpv  file or stream  --o=test.mp4 --profile=omx
+
+
 
