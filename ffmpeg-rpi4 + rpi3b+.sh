@@ -1,7 +1,7 @@
 
 sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && \
 ./configure --prefix=/usr/local --enable-gpl --enable-nonfree --extra-libs="-lpthread -lm -latomic" --toolchain=hardened --enable-libvpx  \
---disable-vaapi --disable-stripping --libdir=/usr/local/lib/local/arm-linux-gnueabihf --incdir=/usr/local/include/arm-linux-gnueabihf \
+--disable-vaapi --disable-stripping --libdir=/usr/local/lib/arm-linux-gnueabihf --incdir=/usr/local/include/arm-linux-gnueabihf \
 --enable-libsoxr --enable-libpulse --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio \
 --enable-libcodec2 --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack \
 --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libssh --enable-librsvg  --enable-libshine \
