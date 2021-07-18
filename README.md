@@ -11,7 +11,7 @@ arecord -L gives you the name for audio unout an -ac maybe 2 channels
 
 ssh user@pc ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads 4 -strict -2  \
  -f alsa   -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
- -f v4l2 -r 5  -i /dev/video0  -c:v h264_omx   -profile:v high -level 4   -pix_fmt yuv420p   -b:v 1M  -bf 0 -trellis 0  -g 60 \
+ -f v4l2 -r 5  -i /dev/video0  -c:v h264_omx   -profile:v high -level 4   -pix_fmt yuv420p   -b:v 1M   \
  -c:a libfdk_aac -profile:a aac_he  -b:a 32k -movflags +faststart \
  -f  mpegts  - |  mpv --cache=no  --profile=low-latency --volume=50  -
 
@@ -23,7 +23,7 @@ libopus is sometimes better
 
 ssh user@pc ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads 4 -strict -2  \
  -f alsa   -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
- -f v4l2 -r 5  -i /dev/video0  -c:v h264_omx   -profile:v high -level 4   -pix_fmt yuv420p   -b:v 1M  -bf 0 -trellis 0  -g 60 \
+ -f v4l2 -r 5  -i /dev/video0  -c:v h264_omx   -profile:v high -level 4   -pix_fmt yuv420p   -b:v 1M   \
  -c:a libopus  -b:a 32k -movflags +faststart \
  -f  mpegts  - |  mpv --cache=no  --profile=low-latency --volume=50  -
 
