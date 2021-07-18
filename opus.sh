@@ -4,4 +4,4 @@ cd opus && \
 ./autogen.sh && \
 ./configure --prefix=/usr/local --disable-shared && \
 make -j4 && \
-make -j4 install
+sudo make -j4 install
