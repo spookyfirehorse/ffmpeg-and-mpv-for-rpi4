@@ -12,4 +12,4 @@ sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  git
  --enable-libdav1d --enable-libsvtav1 --enable-lv2 --enable-libwebp --enable-libvpx --enable-libv4l2 --enable-libspeex   \
 --enable-librubberband --enable-libaom   --enable-libkvazaar --enable-pthreads --enable-v4l2-m2m --arch=armhf \
 --enable-libsnappy --enable-mmal --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal  --enable-encoder=h264_omx \
-&& make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
+&& make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/local/bin/ && sudo ldconfig
