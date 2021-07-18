@@ -37,7 +37,7 @@ all is running with hwaccel  and the cpu is cool
 
 
 
-
+git clone https://github.com/spookyfirehorse/raspberry-camera-streaming-ffmpeg.git
 
 
                                           THE SIMPLE WAY 
