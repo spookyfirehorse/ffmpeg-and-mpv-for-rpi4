@@ -1,6 +1,6 @@
 
 sudo apt build-dep ffmpeg && apt source ffmpeg && cd ffmpeg && \
-./configure --prefix=/usr/ --enable-gpl --enable-nonfree --extra-version=0+deb11u2 --toolchain=hardened --enable-libvpx  \
+./configure --prefix=/usr/ --enable-gpl --enable-nonfree --extra-version=0+deb11u2 --enable-avresample --disable-filter=resample --toolchain=hardened --enable-libvpx  \
 --disable-vaapi --disable-stripping --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
 --enable-libsoxr --enable-libpulse --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio \
 --enable-libcodec2 --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack \
