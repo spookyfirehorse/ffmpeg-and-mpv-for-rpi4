@@ -7,6 +7,7 @@ change bullsey to testing
 
 sudo apt update && sudo apt full-upgrade -y && sudo apt --purge autoremove
 
+########################################################
 
 install fdkaac
 
