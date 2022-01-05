@@ -77,17 +77,30 @@ cd ~/ffmpeg_sources && apt source mpv && cd ~/ffmpeg_sources/mpv-0.34.0 && chmod
 
 nano .config/mpv/mpv.conf
 
+and put this in:
+
+
+#####################################
+
 opengl-glfinish=yes
+
 framedrop=decoder+vo
+
 gpu-context=x11egl
+
 gpu-api=opengl
+
 vo=gpu
+
 hwdec=hevc_v4l2m2m-v4l2m2m-copy
+
 #h264_v4l2m2m-v4l2m2m
+
 hwdec-image-format=yuv420p
 
 ##better-sound
 af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
+##################################################################
 
 
 streaming example
