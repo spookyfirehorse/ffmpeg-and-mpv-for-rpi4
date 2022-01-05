@@ -46,7 +46,9 @@ apt source mpv && cd ~/ffmpeg_sources/mpv-0.34.0 && chmod 777 waf && ./waf confi
 
 
 
-mpv.conf
+mkdir .config/mpv
+
+nano .config/mpv/mpv.conf
 
 opengl-glfinish=yes
 framedrop=decoder+vo
