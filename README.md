@@ -101,3 +101,8 @@ ssh spooky@moon ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads auto -s
  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v  h264_v4l2m2m   -pix_fmt yuv420p   -b:v 1M  ->
  -c:a libopus -application lowdelay -b:a 32k  \
  -f  mpegts  - |  mpv --cache=no   --profile=low-latency --volume=50  -
+ 
+ mpv output webcam +audio mic
+
+mpv av://v4l2:/dev/video0 --audio-file=av://alsa:hw:0 --profile=low-latency --untimed
+
