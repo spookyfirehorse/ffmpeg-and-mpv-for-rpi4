@@ -1,69 +1,87 @@
-Only 3 3b+ and 4 cortexa8
+
+sudo nano /etc/apt/sources.list
+
+change bullsey to testing
+
+sudo apt update && sudo apt full-upgrade -y && sudo apt --purge autoremove
 
 
+install fdkaac
 
 
-mkdir -p ~/ffmpeg_sources && \
-cd ~/ffmpeg_sources && \
-git -C fdk-aac pull 2> /dev/null || git clone --depth 1 https://github.com/mstorsjo/fdk-aac && \
-cd fdk-aac && \
-autoreconf -fiv && \
-./configure  --disable-shared && \
-make -j4 && \
+mkdir -p ~/ffmpeg_sources &&
+cd ~/ffmpeg_sources &&
+git -C fdk-aac pull 2> /dev/null || git clone --depth 1 https://github.com/mstorsjo/fdk-aac &&
+cd fdk-aac &&
+autoreconf -fiv &&
+./configure --enable-shared &&
+make -j4 &&
 sudo make install && sudo ldconfig
 
 
+install kvazaar (hevc)
 
+cd ffmpeg_sources && git clone https://github.com/ultravideo/kvazaar.git && cd ffmpeg_sources/kvazaar && \
+./autogen.sh && \
+./configure && \
+make -j4 && \
+sudo make install
 
+install aomcodec
 
-Compile FFmpeg
+cd ~/ffmpeg_sources && \
+git -C SVT-AV1 pull 2> /dev/null || git clone https://gitlab.com/AOMediaCodec/SVT-AV1.git && \
+mkdir -p SVT-AV1/build && \
+cd SVT-AV1/build && \
+ cmake -G "Unix Makefiles"  -DCMAKE_BUILD_TYPE=Release -DBUILD_DEC=OFF -DBUILD_SHARED_LIBS=OFF .. && \
+make -j4 && \
+sudo make install
 
+install ffmpeg 
 
-sudo apt build-dep ffmpeg && sudo apt install libv4l-dev && mkdir -p ffmpeg_sources && \
-cd ~/ffmpeg_sources &&  git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && \
-./configure --prefix=/usr/local --enable-gpl --enable-nonfree --extra-libs="-lpthread -lm -latomic" --toolchain=hardened --enable-libvpx  \
---enable-vaapi --disable-stripping --libdir=/usr/local/lib/arm-linux-gnueabihf --incdir=/usr/local/include/arm-linux-gnueabihf \
---enable-libsoxr --enable-libpulse --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b  --enable-libcdio \
---enable-libcodec2 --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack \
---enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libssh --enable-librsvg  --enable-libshine \
---enable-libsnappy --enable-libspeex --enable-libopus  --enable-libtheora --enable-libtwolame --enable-libvorbis  --enable-libwebp \ 
---enable-libxml2 --enable-libxvid --enable-libzmq --disable-doc --disable-htmlpages --disable-manpages --enable-libzvbi --enable-lv2 \
---enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-omx --enable-libdc1394 --enable-libdrm --enable-frei0r --enable-libx264   \
---enable-libsrt --enable-shared --enable-libfdk-aac --cpu=cortex-a8  --enable-libx265 --enable-libx264 \
- --enable-lv2 --enable-libwebp --enable-libvpx --enable-libv4l2 --enable-libspeex   \
---enable-librubberband --enable-libaom  --enable-pthreads --enable-v4l2-m2m --arch=arm \
---enable-libsnappy --enable-mmal --enable-omx-rpi --enable-decoder=h264_mmal --enable-decoder=mpeg2_mmal --enable-encoder=h264_omx \
+sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  apt source ffmpeg && cd ~/ffmpeg_sources/ffmpeg-4.4.1 && \
+./configure --prefix=/usr --extra-version=2+rpi1+b1 --toolchain=hardened --libdir=/usr/lib/arm-linux-gnueabihf \
+--incdir=/usr/include/arm-linux-gnueabihf --arch=arm --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa \
+--enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 \
+--enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm \
+--enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse \
+--enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt \
+--enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp \
+--enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx \
+--enable-openal --enable-opencl --enable-opengl --enable-sdl2 --extra-libs=-latomic --enable-pocketsphinx --enable-librsvg \
+--enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared \
+--enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac \
+--enable-libkvazaar --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
+--enable-vulkan  --disable-vdpau --disable-vaapi --enable-libsvtav1  \
 && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
 
-###########################
 
-MPV
-cd ~/ffmpeg_sources && git clone https://github.com/mpv-player/mpv.git && \
-cd ~/ffmpeg_sources/mpv && \
-./bootstrap.py && \
-export PKG_CONFIG_PATH=/opt/vc/lib/pkgconfig && ./waf configure --enable-rpi --enable-rpi-mmal  --enable-egl-drm --enable-gl-x11 \
---enable-egl --enable-sdl2 --enable-ffmpeg-strict-abi  --enable-egl-x11  && 
-./waf -j4 && sudo  ./waf install 
-
-examples for streaming
-
-ssh only key identification
-
-video + audio
-
-ssh user@host  ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads 4 -strict -2  \
- -f alsa -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
- -f v4l2 -r 5 -i /dev/video0 -c:v h264_omx -profile:v high -level 4 -pix_fmt yuv420p -b:v 1M  \
- -c:a libfdk_aac -profile:a aac_he  -b:a 64k   -movflags +faststart \
- -f  matroska  - |  mpv --cache=no   --profile=low-latency --volume=70  -
-
-only -video
+sudo apt build-dep mpv && \ cd ffmpeg_sources &&  
+cd ~/ffmpeg_sources && apt source mpv && cd ~/ffmpeg_sources/mpv-0.34.0 && chmod 777 waf && ./waf configure   --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2    --enable-xv  --enable-egl-x11 --enable-libplacebo --enable-vulkan  --enable-zimg  --enable-libmpv-shared --enable-lua  && \
+./waf -j4 && sudo  ./waf install
 
 
-ssh user@host  ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads 4 -strict -2  \
- -f v4l2 -r 5 -i /dev/video0 -c:v h264_omx -profile:v high -level 4 -pix_fmt yuv420p -b:v 1M \
- -f  matroska  - |  mpv --cache=no   --profile=low-latency --volume=70  -
 
--r framerate
--ac audio channels
-arecord -L for audio card 
+nano .config/mpv/mpv.conf
+
+opengl-glfinish=yes
+framedrop=decoder+vo
+gpu-context=x11egl
+gpu-api=opengl
+vo=gpu
+hwdec=hevc_v4l2m2m-v4l2m2m-copy
+#h264_v4l2m2m-v4l2m2m
+hwdec-image-format=yuv420p
+
+##better-sound
+af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
+
+
+streaming exaple
+
+
+ssh moon ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads auto -strict experimental  \
+ -f alsa -thread_queue_size 1024  -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
+ -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v  h264_v4l2m2m   -pix_fmt yuv420p   -b:v 1M  ->
+ -c:a libopus -application lowdelay -b:a 32k  \
+ -f  mpegts  - |  mpv --cache=no   --profile=low-latency --volume=50  -
