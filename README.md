@@ -1,4 +1,6 @@
 
+Video out gpu support for pi4
+
 sudo nano /etc/apt/sources.list
 
 change bullsey to testing
@@ -85,10 +87,16 @@ hwdec-image-format=yuv420p
 af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
 
 
-streaming exaple
+streaming example
 
 
-ssh moon ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads auto -strict experimental  \
+arecord -L   show the alsa device 
+
+in my case hw:CARD=Device,DEV=0 -ac 2 stand for stereo mic , -ac 1 mono 1 audio channel 
+
+/dev/video0 the camera
+
+ssh spooky@moon ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads auto -strict experimental  \
  -f alsa -thread_queue_size 1024  -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v  h264_v4l2m2m   -pix_fmt yuv420p   -b:v 1M  ->
  -c:a libopus -application lowdelay -b:a 32k  \
