@@ -18,6 +18,8 @@ autoreconf -fiv &&
 make -j4 &&
 sudo make install && sudo ldconfig
 
+#########################
+
 
 install kvazaar (hevc)
 
@@ -37,6 +39,8 @@ cd SVT-AV1/build && \
 make -j4 && \
 sudo make install
 
+#############################################################
+
 install ffmpeg 
 
 sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  apt source ffmpeg && cd ~/ffmpeg_sources/ffmpeg-4.4.1 && \
@@ -55,12 +59,16 @@ sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  apt
 --enable-vulkan  --disable-vdpau --disable-vaapi --enable-libsvtav1  \
 && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
 
+#############################################################
+
+install mpv
+
 
 sudo apt build-dep mpv && \ cd ffmpeg_sources &&  
 cd ~/ffmpeg_sources && apt source mpv && cd ~/ffmpeg_sources/mpv-0.34.0 && chmod 777 waf && ./waf configure   --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2    --enable-xv  --enable-egl-x11 --enable-libplacebo --enable-vulkan  --enable-zimg  --enable-libmpv-shared --enable-lua  && \
 ./waf -j4 && sudo  ./waf install
 
-
+################################################
 
 nano .config/mpv/mpv.conf
 
