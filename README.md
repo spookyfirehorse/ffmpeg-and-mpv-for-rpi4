@@ -7,6 +7,16 @@ change bullsey to testing
 
 sudo apt update && sudo apt full-upgrade -y && sudo apt --purge autoremove
 
+chromium-browser run perfect
+
+allmost working no problems to upgrade
+
+mesa 21
+
+mpv 34
+
+ffmpeg 4.4
+
 ########################################################
 
 install fdkaac
