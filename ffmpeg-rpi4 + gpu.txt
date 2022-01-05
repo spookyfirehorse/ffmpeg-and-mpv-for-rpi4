@@ -13,6 +13,8 @@ cd ffmpeg_sources && git clone https://github.com/ultravideo/kvazaar.git && cd f
 make -j4 && \
 sudo make install
 
+###################################
+
 cd ~/ffmpeg_sources && \
 git -C SVT-AV1 pull 2> /dev/null || git clone https://gitlab.com/AOMediaCodec/SVT-AV1.git && \
 mkdir -p SVT-AV1/build && \
@@ -21,7 +23,7 @@ cd SVT-AV1/build && \
 make -j4 && \
 sudo make install
 
-
+#####################################
 
 sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  apt source ffmpeg && cd ~/ffmpeg_sources/ffmpeg-4.4.1 && \
 ./configure --prefix=/usr --extra-version=2+rpi1+b1 --toolchain=hardened --libdir=/usr/lib/arm-linux-gnueabihf \
@@ -39,12 +41,14 @@ sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  apt
 --enable-vulkan  --disable-vdpau --disable-vaapi --enable-libsvtav1  \
 && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
 
+######################################
+
 
 sudo apt build-dep mpv && \ cd ffmpeg_sources &&  
 apt source mpv && cd ~/ffmpeg_sources/mpv-0.34.0 && chmod 777 waf && ./waf configure   --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2    --enable-xv  --enable-egl-x11 --enable-libplacebo --enable-vulkan  --enable-zimg  --enable-libmpv-shared --enable-lua  && \
 ./waf -j4 && sudo  ./waf install
 
-
+#########################################################
 
 mkdir .config/mpv
 
@@ -60,7 +64,11 @@ hwdec-image-format=yuv420p
 
 ##better-sound
 af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
+######################################
 
+
+
+streaming guide
 
 arecord -L show the alsa output
 
@@ -73,5 +81,12 @@ ssh moon ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads 4 -strict -2  
  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m   -pix_fmt yuv420p   -b:v 1M  ->
  -c:a libopus -application lowdelay -b:a 32k  \
  -f  mpegts  - |  mpv --cache=no   --profile=low-latency --volume=50  -
+
+
+mpv output webcam +audio mic
+
+mpv av://v4l2:/dev/video0 --audio-file=av://alsa:hw:0 --profile=low-latency --untimed
+
+
 
 
