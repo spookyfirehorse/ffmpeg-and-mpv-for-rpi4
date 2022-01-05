@@ -62,7 +62,16 @@ hwdec-image-format=yuv420p
 af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
 
 
+arecord -L show the alsa output
 
+zb in my case  CARD=Device,DEV=0 
 
+audio channels -ac 1 mono -ac2 stereo
+
+ssh moon ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads 4 -strict -2  \
+ -f alsa -thread_queue_size 1024  -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
+ -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m   -pix_fmt yuv420p   -b:v 1M  ->
+ -c:a libopus -application lowdelay -b:a 32k  \
+ -f  mpegts  - |  mpv --cache=no   --profile=low-latency --volume=50  -
 
 
