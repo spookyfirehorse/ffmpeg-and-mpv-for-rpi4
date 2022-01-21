@@ -3,19 +3,11 @@ Video out gpu support for pi4
 
 sudo nano /etc/apt/sources.list
 
-change bullsey to testing
+change deb-src from bullseye to testing
 
-sudo apt update && sudo apt full-upgrade -y && sudo apt --purge autoremove
+deb-src http://raspbian.raspberrypi.org/raspbian/ testing main contrib non-free rpi
 
-chromium-browser run perfect
-
-allmost working no problems to upgrade
-
-mesa 21
-
-mpv 34
-
-ffmpeg 4.4
+sudo apt update  
 
 ########################################################
 
@@ -32,21 +24,11 @@ make -j4 &&
 sudo make install && sudo ldconfig
 
 #########################
-install openh264
+install openh264 optional
 
 
 git clone https://github.com/cisco/openh264.git && cd openh264 && make -j4  OS=linux ARCH=x86_64 && sudo make -j4 install 
 
-
-##########################################
-
-install kvazaar (hevc)
-
-cd ffmpeg_sources && git clone https://github.com/ultravideo/kvazaar.git && cd ffmpeg_sources/kvazaar && \
-./autogen.sh && \
-./configure && \
-make -j4 && \
-sudo make install
 
 #########################
 
@@ -77,7 +59,7 @@ sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  apt
 --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared \
 --enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac \
 --enable-libkvazaar --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
---enable-vulkan  --disable-vdpau --disable-vaapi --enable-libsvtav1  \
+--enable-vulkan  --disable-vdpau --disable-vaapi --enable-libsvtav1 --enable-mmal \
 && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
 
 #############################################################
@@ -108,7 +90,7 @@ gpu-api=opengl
 
 vo=gpu
 
-hwdec=hevc_v4l2m2m-v4l2m2m-copy
+hwdec=h264_mmal-mmal-copy
 
 #h264_v4l2m2m-v4l2m2m
 
@@ -119,20 +101,27 @@ af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
 ##################################################################
 
 
-streaming example
+streaming over ssh example
 
+ssh user@host from desktop computer
 
-arecord -L   show the alsa device 
+arecord -L   show the alsa device on the rpi
+
+than on the desktop pc open a terminal change the alsa device
+
+ssh pi@rpi ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads auto -strict experimental  \
+ -f alsa -thread_queue_size 1024  -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
+ -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v  h264_v4l2m2m   -pix_fmt yuv420p   -b:v 1M  ->
+ -c:a libopus -application lowdelay -b:a 32k  \
+ -f  mpegts  - |  mpv --cache=no   --profile=low-latency --volume=50  -
+ 
+ 
 
 in my case hw:CARD=Device,DEV=0 -ac 2 stand for stereo mic , -ac 1 mono 1 audio channel 
 
 /dev/video0 the camera
 
-ssh spooky@moon ffmpeg -vsync 0  -fflags nobuffer  -hide_banner -threads auto -strict experimental  \
- -f alsa -thread_queue_size 1024  -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
- -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v  h264_v4l2m2m   -pix_fmt yuv420p   -b:v 1M  ->
- -c:a libopus -application lowdelay -b:a 32k  \
- -f  mpegts  - |  mpv --cache=no   --profile=low-latency --volume=50  -
+
  
  mpv output webcam +audio mic
 
