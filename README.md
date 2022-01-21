@@ -34,13 +34,8 @@ git clone https://github.com/cisco/openh264.git && cd openh264 && make -j4  OS=l
 
 install aomcodec
 
-cd ~/ffmpeg_sources && \
-git -C SVT-AV1 pull 2> /dev/null || git clone https://gitlab.com/AOMediaCodec/SVT-AV1.git && \
-mkdir -p SVT-AV1/build && \
-cd SVT-AV1/build && \
- cmake -G "Unix Makefiles"  -DCMAKE_BUILD_TYPE=Release -DBUILD_DEC=OFF -DBUILD_SHARED_LIBS=OFF .. && \
-make -j4 && \
-sudo make install
+cd ~/ffmpeg_sources && git -C SVT-AV1 pull 2> /dev/null || git clone https://gitlab.com/AOMediaCodec/SVT-AV1.git && \
+mkdir -p SVT-AV1/build && cd SVT-AV1/build && cmake -G "Unix Makefiles"  -DCMAKE_BUILD_TYPE=Release -DBUILD_DEC=OFF -DBUILD_SHARED_LIBS=OFF .. && make -j4 && sudo make install
 
 #############################################################
 
