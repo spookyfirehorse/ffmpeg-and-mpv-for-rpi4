@@ -42,7 +42,7 @@ sudo make install && sudo ldconfig
 install openh264 optional
 
 
-git clone https://github.com/cisco/openh264.git && cd openh264 && make -j4  OS=linux ARCH=x86_64 && sudo make -j4 install 
+git clone https://github.com/cisco/openh264.git && cd openh264 && make -j4   && sudo make -j4 install 
 
 
 #########################
