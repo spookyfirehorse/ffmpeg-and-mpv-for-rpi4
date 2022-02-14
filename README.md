@@ -122,7 +122,7 @@ git checkout -b v4l2-request-hwaccel-rpi
 
 make -j4
 
-make -j4 install
+sudo make -j4 install
 
 ###################
 
@@ -133,8 +133,9 @@ sudo apt build-dep mpv && \ cd ffmpeg_sources  && apt source mpv && cd ~/ffmpeg_
 ./waf -j4 && sudo  ./waf install
 
 CELLULOID
-apt source celluloid && cd celluloid* 
 
+
+apt source celluloid && cd celluloid* 
 meson build && cd build && ninja -j4 && sudo ninja install
 
 
@@ -159,7 +160,9 @@ gpu-context=x11egl
 gpu-api=opengl
 
 vo=gpu
+
 #hwdec=hevc-drm-copy
+
 hwdec=h264_mmal-mmal-copy
 
 #h264_v4l2m2m-v4l2m2m
@@ -167,6 +170,7 @@ hwdec=h264_mmal-mmal-copy
 hwdec-image-format=yuv420p
 
 ##better-sound
+
 af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
 ##################################################################
 
