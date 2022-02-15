@@ -62,7 +62,7 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release ../shaderc && ninja install
 
 PLACEBO
 
-cd ~/ffmpeg_sources/ && git clone https://github.com/haasn/libplacebo.git && \
+cd ~/ffmpeg_sources/ && git clone -b v2.72.2  https://github.com/haasn/libplacebo.git && \
 cd ~/ffmpeg_sources/libplacebo && \ 
 DIR=./build && DIR=./build && meson $DIR  && \
 meson configure $DIR   -Dvulkan=enabled -Dshaderc=enabled  && \
