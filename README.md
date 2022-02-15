@@ -173,9 +173,9 @@ hwdec-image-format=yuv420p
 ##better-sound
 
 af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
+
+
 ##################################################################
-
-
 
 install aomcodec
 
@@ -199,7 +199,7 @@ sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  apt
 --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared \
 --enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac \
 --enable-libkvazaar --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
---enable-vulkan  --disable-vdpau --disable-vaapi --enable-libsvtav1 --enable-mmal  \
+--enable-vulkan  --disable-vdpau --enable-libsvtav1 --enable-mmal  \
 && make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
 
 optional --enable-libopenh264
@@ -229,7 +229,7 @@ in my case hw:CARD=Device,DEV=0 -ac 2 stand for stereo mic , -ac 1 mono 1 audio 
 
 /dev/video0 the camera
 
-
+############################
  
  mpv output webcam +audio mic
 
