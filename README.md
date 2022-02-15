@@ -188,7 +188,7 @@ mkdir -p SVT-AV1/build && cd SVT-AV1/build && cmake -G "Unix Makefiles"  -DCMAKE
 
 #############################################################
 
-install ffmpeg 4.4.1
+install ffmpeg 4.4.1  only if you dont want  the drm ffmpeg
 
 sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  apt source ffmpeg && cd ~/ffmpeg_sources/ffmpeg-4.4.1 && \
 ./configure --prefix=/usr  --toolchain=hardened --libdir=/usr/lib/arm-linux-gnueabihf \
