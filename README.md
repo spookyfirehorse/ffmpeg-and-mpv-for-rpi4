@@ -218,7 +218,7 @@ than on the desktop pc open a terminal change the alsa device and run
 
 ssh pi@rpi ffmpeg -async 1  -fflags nobuffer  -hide_banner -threads auto -strict experimental  \
  -f alsa -thread_queue_size 1024  -ar 48000 -ac 1  -i hw:CARD=Device,DEV=0 \
- -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v  h264_v4l2m2m   -pix_fmt yuv420p   -b:v 1M  ->
+ -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v  h264_v4l2m2m   -pix_fmt yuv420p   -b:v 1M \
  -c:a libopus -application lowdelay -b:a 32k  \
  -f  mpegts  - |  mpv --cache=no   --profile=low-latency --volume=30  -
  
