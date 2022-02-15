@@ -33,10 +33,11 @@ sudo pip3 install mako
 
 git clone -b 21.3 https://gitlab.freedesktop.org/mesa/mesa.git
 cd mesa
+
 CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" \
 meson --prefix /usr -D platforms=x11 -D vulkan-drivers=broadcom -D dri-drivers= -D gallium-drivers=kmsro,v3d,vc4 -D buildtype=release build
-ninja -C build -j4
-sudo ninja -C build install
+
+ninja -C build -j4 && sudo ninja -C build install
 
 
 SPIRV
