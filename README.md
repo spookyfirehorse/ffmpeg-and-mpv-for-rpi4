@@ -136,8 +136,7 @@ sudo apt build-dep mpv && \ cd ffmpeg_sources  && apt source mpv && cd ~/ffmpeg_
 CELLULOID
 
 
-apt source celluloid && cd celluloid* 
-meson build && cd build && ninja -j4 && sudo ninja install
+apt source celluloid && cd celluloid* && meson build && cd build && ninja -j4 && sudo ninja install
 
 
 
