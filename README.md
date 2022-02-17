@@ -201,20 +201,35 @@ hwdec-image-format=yuv420p
 af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
 
 [omx]
+
 hwdec=h264-drm-copy
+
 ovc=h264_v4l2m2m
+
 hwdec-image-format=yuv420p
+
 ovcopts-add=b=2M
+
 oac=libfdk_aac
+
 oacopts-add=b=128k
+
 #audio-samplerate=44100
+
 hls-bitrate=max
+
 cache=yes
+
 framedrop=decoder+vo
+
 #demuxer-max-bytes=2000MiB
+
 #demuxer-readahead-secs=300
+
 #no-correct-pts
+
 #fps=25
+
 ##########################
 #########################################################
 
