@@ -190,6 +190,8 @@ vo=gpu
 
 hwdec=hevc-drm-copy
 
+gpu-hwdec-interop=drmprime-drm
+
 #hwdec=h264_mmal-mmal-copy
 
 #h264_v4l2m2m-v4l2m2m
