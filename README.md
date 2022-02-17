@@ -1,4 +1,4 @@
-
+mkdir ffmpeg_sources
 
 install dev files for mesa ffmpeg usw.
 
@@ -151,11 +151,13 @@ make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfi
 
 ###################
 
-install mpv from debian testing or use git clone https://github.com/mpv-player/mpv.git && \
+install mpv from debian testing or use git clone https://github.com/mpv-player/mpv.git 
 
 
 
-sudo apt build-dep mpv && \ cd ffmpeg_sources  && apt source mpv && cd ~/ffmpeg_sources/mpv-0.34.0 && chmod 777 waf && ./waf configure   --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2    --enable-xv  --enable-egl-x11 --enable-libplacebo --enable-vulkan  --enable-zimg  --enable-libmpv-shared --enable-lua  && \
+sudo apt build-dep mpv && \ cd ffmpeg_sources  && apt source mpv && cd ~/ffmpeg_sources/mpv*
+
+chmod 777 waf && ./waf configure   --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2  --enable-zimg  --enable-libmpv-shared   && \
 ./waf -j4 && sudo  ./waf install
 
 CELLULOID
