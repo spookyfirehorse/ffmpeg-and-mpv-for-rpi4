@@ -23,8 +23,6 @@ sudo apt-get install libdrm-dev libxshmfence-dev libxxf86vm-dev libunwind-dev li
 sudo apt-get install git build-essential bison flex ninja-build
 
 
-
-#
 sudo apt purge meson -y
 
 sudo pip3 install meson
@@ -35,8 +33,12 @@ sudo pip3 install cmake
 
 sudo pip3 install mako
 
+###########################
+
+MESA  optional or by apt install mesa-utils
 
 git clone -b 21.3 https://gitlab.freedesktop.org/mesa/mesa.git
+
 cd mesa
 
 CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" \
@@ -45,7 +47,7 @@ meson --prefix /usr -D platforms=x11 -D vulkan-drivers=broadcom -D dri-drivers= 
 ninja -C build -j4 && sudo ninja -C build install
 
 
-SPIRV
+SPIRV optional
 
 cd ~/ffmpeg_sources/ && git clone https://github.com/KhronosGroup/SPIRV-Cross.git  && \
 cd SPIRV-Cross   && \
@@ -57,7 +59,7 @@ cmake -j4 -DSPIRV_CROSS_SHARED=ON -DSPIRV_CROSS_STATIC=ON  -DSPIRV_CROSS_CLI=ON 
 make -j4  && \
 sudo make install
 
-SHADERC
+SHADERC optional
 
 cd ~/ffmpeg_sources/ && git clone https://github.com/google/shaderc  && \
 mkdir -p shaderc_build && cd shaderc && ./utils/git-sync-deps && cd ~/ffmpeg_sources/shaderc_build && \
@@ -65,7 +67,7 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release ../shaderc && ninja install
 
 
 
-PLACEBO
+PLACEBO for mpv optional
 
 cd ~/ffmpeg_sources/ && git clone -b v2.72.2  https://github.com/haasn/libplacebo.git && \
 cd ~/ffmpeg_sources/libplacebo && \ 
@@ -89,7 +91,7 @@ make -j4 &&
 sudo make install && sudo ldconfig
 
 
-KVAZAAR
+KVAZAAR optional
 
 git clone https://github.com/ultravideo/kvazaar.git &&  cd kvazaar && \
 ./autogen.sh && \
@@ -97,6 +99,15 @@ git clone https://github.com/ultravideo/kvazaar.git &&  cd kvazaar && \
 make -j4 &&\
 sudo make install
 
+
+##################################################################
+
+install aomcodec optional
+
+cd ~/ffmpeg_sources && git -C SVT-AV1 pull 2> /dev/null || git clone https://gitlab.com/AOMediaCodec/SVT-AV1.git && \
+mkdir -p SVT-AV1/build && cd SVT-AV1/build && cmake -G "Unix Makefiles"  -DCMAKE_BUILD_TYPE=Release -DBUILD_DEC=OFF -DBUILD_SHARED_LIBS=OFF .. && make -j4 && sudo make install
+
+#############################################################
 
 
 
@@ -111,11 +122,11 @@ git clone https://github.com/cisco/openh264.git && cd openh264 && make -j4   && 
 
 #########################
 
-ZIMG
+ZIMG optional
 
 cd ~/ffmpeg_sources/ && git clone https://github.com/sekrit-twc/zimg.git &&  cd zimg  && ./autogen.sh  && ./configure --enable-x86simd  && make -j4  && sudo make install
 
-
+#########################################
 
 Video out hevc-drm-copy gpu support for pi4
 
@@ -140,7 +151,8 @@ make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfi
 
 ###################
 
-install mpv
+install mpv from debian testing or use git clone https://github.com/mpv-player/mpv.git && \
+
 
 
 sudo apt build-dep mpv && \ cd ffmpeg_sources  && apt source mpv && cd ~/ffmpeg_sources/mpv-0.34.0 && chmod 777 waf && ./waf configure   --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2    --enable-xv  --enable-egl-x11 --enable-libplacebo --enable-vulkan  --enable-zimg  --enable-libmpv-shared --enable-lua  && \
@@ -188,37 +200,6 @@ af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
 
 
 ##################################################################
-
-install aomcodec
-
-cd ~/ffmpeg_sources && git -C SVT-AV1 pull 2> /dev/null || git clone https://gitlab.com/AOMediaCodec/SVT-AV1.git && \
-mkdir -p SVT-AV1/build && cd SVT-AV1/build && cmake -G "Unix Makefiles"  -DCMAKE_BUILD_TYPE=Release -DBUILD_DEC=OFF -DBUILD_SHARED_LIBS=OFF .. && make -j4 && sudo make install
-
-#############################################################
-
-install ffmpeg 4.4.1  only if you dont want  the drm ffmpeg
-
-sudo apt build-dep ffmpeg && mkdir ffmpeg_sources && cd ~/ffmpeg_sources &&  apt source ffmpeg && cd ~/ffmpeg_sources/ffmpeg-4.4.1 && \
-./configure --prefix=/usr  --toolchain=hardened --libdir=/usr/lib/arm-linux-gnueabihf \
---incdir=/usr/include/arm-linux-gnueabihf --arch=arm --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa \
---enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 \
---enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm \
---enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse \
---enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt \
---enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp \
---enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx \
---enable-openal --enable-opencl --enable-opengl --enable-sdl2 --extra-libs=-latomic --enable-pocketsphinx --enable-librsvg \
---enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared \
---enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac \
---enable-libkvazaar --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
---enable-vulkan  --disable-vdpau --enable-libsvtav1 --enable-mmal --extra-libs="-lpthread -lm -latomic" \
-&& make -j4 && sudo make install && make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
-
-optional --enable-libopenh264
-
-#############################################################
-
-
 
 
 streaming over ssh example
