@@ -186,9 +186,9 @@ gpu-api=opengl
 
 vo=gpu
 
-#hwdec=hevc-drm-copy
+hwdec=hevc-drm-copy
 
-hwdec=h264_mmal-mmal-copy
+#hwdec=h264_mmal-mmal-copy
 
 #h264_v4l2m2m-v4l2m2m
 
@@ -197,6 +197,27 @@ hwdec-image-format=yuv420p
 ##better-sound
 
 af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
+
+[omx]
+hwdec=h264-drm-copy
+ovc=h264_v4l2m2m
+hwdec-image-format=yuv420p
+ovcopts-add=b=2M
+oac=libfdk_aac
+oacopts-add=b=128k
+#audio-samplerate=44100
+hls-bitrate=max
+cache=yes
+framedrop=decoder+vo
+#demuxer-max-bytes=2000MiB
+#demuxer-readahead-secs=300
+#no-correct-pts
+#fps=25
+##########################
+#########################################################
+
+###  exampe convert movie
+#  mpv test.avi --profile=omx --o=test.mp4
 
 
 ##################################################################
@@ -230,4 +251,9 @@ mpv av://v4l2:/dev/video0 --audio-file=av://alsa:hw:0 --profile=low-latency --un
 
 
  convert avi to mp4
+ 
+ 
 ffmpeg -hwaccel drm -i /media/moon/Filme/test.avi   -c:v h264_v4l2m2m -b:v 2M   -pix_fmt yuv420p   -f mp4  test.mp4
+
+
+
