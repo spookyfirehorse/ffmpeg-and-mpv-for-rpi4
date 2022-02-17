@@ -3,6 +3,12 @@ mkdir ffmpeg_sources
 install dev files for mesa ffmpeg usw.
 
 
+
+
+
+FFMPEG RPI 
+
+
 sudo apt build-dep ffmpeg mpv mplayer mesa vlc libplacebo
 
 
@@ -35,7 +41,7 @@ sudo pip3 install mako
 
 ###########################
 
-MESA  optional or by apt install mesa-utils
+MESA  
 
 git clone -b 21.3 https://gitlab.freedesktop.org/mesa/mesa.git
 
@@ -67,7 +73,7 @@ cmake -GNinja -DCMAKE_BUILD_TYPE=Release ../shaderc && ninja install
 
 
 
-PLACEBO for mpv optional
+PLACEBO for mpv 
 
 cd ~/ffmpeg_sources/ && git clone -b v2.72.2  https://github.com/haasn/libplacebo.git && \
 cd ~/ffmpeg_sources/libplacebo && \ 
