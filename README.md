@@ -150,15 +150,17 @@ make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfi
 
 
 ###################
+MPV
 
-install mpv from debian testing or use git clone https://github.com/mpv-player/mpv.git 
+sudo ln -s /usr/bin/python3.9 /usr/bin/python
+
+git clone https://github.com/mpv-player/mpv.git && cd mpv && git checkout v0.34.1 && ./bootstrap.py && \
+./waf configure   --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2   --enable-libmpv-shared && sudo  ./waf -j4 && ./waf -j4 install
 
 
 
-sudo apt build-dep mpv && \ cd ffmpeg_sources  && apt source mpv && cd ~/ffmpeg_sources/mpv*
 
-chmod 777 waf && ./waf configure   --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2  --enable-zimg  --enable-libmpv-shared   && \
-./waf -j4 && sudo  ./waf install
+
 
 CELLULOID
 
