@@ -3,13 +3,10 @@ mkdir ffmpeg_sources
 install dev files for mesa ffmpeg usw.
 
 
-
-
-
 FFMPEG RPI 
 
 
-sudo apt build-dep ffmpeg mpv mplayer mesa vlc libplacebo
+sudo apt build-dep ffmpeg mpv mplayer mesa vlc libplacebo pulseeffects 
 
 
 sudo apt-get install libx11-xcb-dev libxext-dev libxdamage-dev libxfixes-dev
@@ -26,20 +23,24 @@ sudo apt-get install libva-dev x11proto-randr-dev x11proto-present-dev libclc-de
 
 sudo apt-get install libdrm-dev libxshmfence-dev libxxf86vm-dev libunwind-dev libwayland-dev wayland-protocols libwayland-egl-backend-dev valgrind libzstd-dev vulkan-tools
 
-sudo apt-get install git build-essential bison flex ninja-build
+sudo apt-get install git build-essential bison flex ninja-build meson cmake cmake-data
 
-
-sudo apt purge meson -y
-
-sudo pip3 install meson
-
-sudo apt purge cmake -y
-
-sudo pip3 install cmake
-
-sudo pip3 install mako
+sudo pip3 install ninja
 
 ###########################
+Original FFmpeg 4.3 rpi libreelec
+
+
+git clone -b  4.3-libreelec-rpi  https://github.com/LibreELEC/FFmpeg.git &&  cd FFmpeg && ./configure --prefix=/usr --toolchain=hardened --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --arch=arm --extra-libs='-lpthread -lm -latomic' --extra-cflags=-I/usr/include/libdrm --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vulkan --disable-vdpau --disable-vaapi  --enable-mmal --enable-avresample --disable-filter=resample --enable-libwavpack --enable-libkvazaar --enable-libv4l2 --enable-libsrt --enable-sand --enable-vout-drm --enable-vout-egl  --enable-v4l2-request --enable-libudev  --enable-rpi && make -j4 && sudo make -j4 install 
+
+only mpv 0.33 original rpi
+
+apt source mpv
+
+./waf configure --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2 --enable-libmpv-shared --enable-libplacebo --enable-vulkan  --disable-vaapi --disable-vdpau  && ./waf -j4 && sudo  ./waf -j4 install
+
+
+############################################################
 
 MESA  
 
@@ -47,7 +48,7 @@ git clone -b 21.3 https://gitlab.freedesktop.org/mesa/mesa.git
 
 cd mesa
 
-CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" \
+CFLAGS="-mcpu=cortex-a72-mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" \
 meson --prefix /usr -D platforms=x11 -D vulkan-drivers=broadcom -D dri-drivers= -D gallium-drivers=kmsro,v3d,vc4 -D buildtype=release build
 
 ninja -C build -j4 && sudo ninja -C build install
@@ -154,8 +155,8 @@ sudo make -j4 install
 
 make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
 
+only running mpv 0.34 
 
-###################
 MPV
 
 sudo ln -s /usr/bin/python3.9 /usr/bin/python
@@ -168,6 +169,7 @@ CELLULOID
 
 apt source celluloid && cd celluloid* && meson build && cd build && ninja -j4 && sudo ninja install
 
+############################
 
 
 
@@ -236,10 +238,13 @@ framedrop=decoder+vo
 #fps=25
 
 ##########################
+EXAMPLES
+
 #########################################################
 
 ###  exampe convert movie
-#  mpv test.avi --profile=omx --o=test.mp4
+
+mpv test.avi --profile=omx --o=test.mp4
 
 
 ##################################################################
