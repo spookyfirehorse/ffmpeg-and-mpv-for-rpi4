@@ -28,8 +28,10 @@ sudo apt-get install git build-essential bison flex ninja-build meson cmake cmak
 sudo pip3 install ninja
 
 ###########################
+
 Original FFmpeg 4.3 rpi libreelec
 
+sudo ln -s /usr/include/libdrm /usr/include/drm
 
 git clone -b  4.3-libreelec-rpi  https://github.com/LibreELEC/FFmpeg.git &&  cd FFmpeg && ./configure --prefix=/usr --toolchain=hardened --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --arch=arm --extra-libs='-lpthread -lm -latomic' --extra-cflags=-I/usr/include/libdrm --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vulkan --disable-vdpau --disable-vaapi  --enable-mmal --enable-avresample --disable-filter=resample --enable-libwavpack --enable-libkvazaar --enable-libv4l2 --enable-libsrt --enable-sand --enable-vout-drm --enable-vout-egl  --enable-v4l2-request --enable-libudev  --enable-rpi && make -j4 && sudo make -j4 install 
 
@@ -44,15 +46,18 @@ apt source mpv
 
 MESA  
 
-git clone -b 21.3 https://gitlab.freedesktop.org/mesa/mesa.git
+wget http://deb.debian.org/debian/pool/main/m/mesa/mesa_21.3.5.orig.tar.gz
 
-cd mesa
+tar -xf mesa_21.3.5.orig.tar.gz
+
+cd mesa*
 
 CFLAGS="-mcpu=cortex-a72-mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" \
-meson --prefix /usr -D platforms=x11 -D vulkan-drivers=broadcom -D dri-drivers= -D gallium-drivers=kmsro,v3d,vc4 -D buildtype=release build
+meson --prefix /usr -D platforms=x11 -D vulkan-drivers=broadcom -D dri-drivers= -D gallium-drivers=kmsro,v3d,vc4  build
 
 ninja -C build -j4 && sudo ninja -C build install
 
+#####################################
 
 SPIRV optional
 
