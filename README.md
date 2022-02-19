@@ -6,7 +6,7 @@ install dev files for mesa ffmpeg usw.
 FFMPEG RPI 
 
 
-sudo apt build-dep ffmpeg mpv mplayer mesa vlc libplacebo pulseeffects 
+sudo apt build-dep ffmpeg mpv mplayer mesa vlc libplacebo pulseeffects pulseaudio libdrm
 
 
 sudo apt-get install libx11-xcb-dev libxext-dev libxdamage-dev libxfixes-dev
