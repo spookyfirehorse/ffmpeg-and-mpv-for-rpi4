@@ -23,7 +23,7 @@ sudo apt-get install libva-dev x11proto-randr-dev x11proto-present-dev libclc-de
 
 sudo apt-get install libdrm-dev libxshmfence-dev libxxf86vm-dev libunwind-dev libwayland-dev wayland-protocols libwayland-egl-backend-dev valgrind libzstd-dev vulkan-tools
 
-sudo apt-get install git build-essential bison flex ninja-build meson cmake cmake-data
+sudo apt-get install git build-essential bison flex  meson cmake cmake-data
 
 sudo pip3 install ninja
 
