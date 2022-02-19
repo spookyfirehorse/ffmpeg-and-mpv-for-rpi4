@@ -35,6 +35,9 @@ sudo ln -s /usr/include/libdrm /usr/include/drm
 
 git clone -b  4.3-libreelec-rpi  https://github.com/LibreELEC/FFmpeg.git &&  cd FFmpeg && ./configure --prefix=/usr --toolchain=hardened --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --arch=arm --extra-libs='-lpthread -lm -latomic' --extra-cflags=-I/usr/include/libdrm --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vulkan --disable-vdpau --disable-vaapi  --enable-mmal --enable-avresample --disable-filter=resample --enable-libwavpack --enable-libkvazaar --enable-libv4l2 --enable-libsrt --enable-sand --enable-vout-drm --enable-vout-egl  --enable-v4l2-request --enable-libudev  --enable-rpi && make -j4 && sudo make -j4 install 
 
+##  srt error change --enable-libsrt to --disable-libsrt
+
+
 only mpv 0.33 original rpi
 
 apt source mpv
@@ -139,6 +142,11 @@ ZIMG optional
 cd ~/ffmpeg_sources/ && git clone https://github.com/sekrit-twc/zimg.git &&  cd zimg  && ./autogen.sh  && ./configure --enable-x86simd  && make -j4  && sudo make install
 
 #########################################
+
+## this is the second FFmpeg take libreelec or Kwiboo
+## with this version you can compile mpv-0.34 
+## i prefer this version because i need to enable scaletempo2 in mpv.conf which makes better sound if you dond"t need take libreelec from above and install apt source mpv 
+
 
 Video out hevc-drm-copy gpu support for pi4
 
