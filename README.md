@@ -30,6 +30,19 @@ sudo nano /etc/xdg/lxsession/LXDE-pi/desktop.conf
 
 window_manager=openbox
 
+###################################################
+
+mkdir -p ~/ffmpeg_sources &&
+cd ~/ffmpeg_sources &&
+git -C fdk-aac pull 2> /dev/null || git clone --depth 1 https://github.com/mstorsjo/fdk-aac &&
+cd fdk-aac &&
+autoreconf -fiv &&
+./configure --enable-shared &&
+make -j4 &&
+sudo make install && sudo ldconfig
+
+
+
 ######################################################
 
 64 bit FFMPEG
@@ -72,61 +85,6 @@ meson --prefix /usr -D platforms=x11 -D vulkan-drivers=broadcom -D dri-drivers= 
 ninja -C build -j4 && sudo ninja -C build install
 
 #####################################
-
-SPIRV optional
-
-cd ~/ffmpeg_sources/ && git clone https://github.com/KhronosGroup/SPIRV-Cross.git  && \
-cd SPIRV-Cross   && \
-./checkout_glslang_spirv_tools.sh && ./build_glslang_spirv_tools.sh  && \
-cd ..  && \
-mkdir cross  && \
-cd cross  && \
-cmake -j4 -DSPIRV_CROSS_SHARED=ON -DSPIRV_CROSS_STATIC=ON  -DSPIRV_CROSS_CLI=ON   ../SPIRV-Cross  && \
-make -j4  && \
-sudo make install
-
-SHADERC optional
-
-cd ~/ffmpeg_sources/ && git clone https://github.com/google/shaderc  && \
-mkdir -p shaderc_build && cd shaderc && ./utils/git-sync-deps && cd ~/ffmpeg_sources/shaderc_build && \
-cmake -GNinja -DCMAKE_BUILD_TYPE=Release ../shaderc && ninja install
-
-
-
-
-install fdkaac
-
-
-mkdir -p ~/ffmpeg_sources &&
-cd ~/ffmpeg_sources &&
-git -C fdk-aac pull 2> /dev/null || git clone --depth 1 https://github.com/mstorsjo/fdk-aac &&
-cd fdk-aac &&
-autoreconf -fiv &&
-./configure --enable-shared &&
-make -j4 &&
-sudo make install && sudo ldconfig
-
-
-KVAZAAR optional
-
-git clone https://github.com/ultravideo/kvazaar.git &&  cd kvazaar && \
-./autogen.sh && \
-./configure && \
-make -j4 &&\
-sudo make install
-
-
-##################################################################
-
-install aomcodec optional
-
-cd ~/ffmpeg_sources && git -C SVT-AV1 pull 2> /dev/null || git clone https://gitlab.com/AOMediaCodec/SVT-AV1.git && \
-mkdir -p SVT-AV1/build && cd SVT-AV1/build && cmake -G "Unix Makefiles"  -DCMAKE_BUILD_TYPE=Release -DBUILD_DEC=OFF -DBUILD_SHARED_LIBS=OFF .. && make -j4 && sudo make install
-
-#############################################################
-
-
-
 
 
 #########################
