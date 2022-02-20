@@ -21,8 +21,7 @@ sudo pip3 install ninja
 
 ########################### 
 
-if you on a 64 bit rpi edit xdg and change to openbox windowmanager mutter is running with to much cpu
-
+mutter is running with to much cpu
 
 sudo nano /etc/xdg/lxsession/LXDE-pi/desktop.conf
 
@@ -31,6 +30,8 @@ sudo nano /etc/xdg/lxsession/LXDE-pi/desktop.conf
 window_manager=openbox
 
 ###################################################
+
+FDK-AAC
 
 mkdir -p ~/ffmpeg_sources &&
 cd ~/ffmpeg_sources &&
@@ -62,6 +63,10 @@ git clone https://github.com/andy-hayes/rpi-ffmpeg.git && cd rpi-ffmpeg && ./con
 
 #############################################
 #####################################################
+
+
+only with apt source mpv on bullseye , github or other not running
+
 
 MPV
 
@@ -190,7 +195,7 @@ mpv test.avi --profile=omx --o=test.mp4
 ##################################################################
 
 
-streaming over ssh example
+streaming over ssh example only with key identification or stored password
 
 ssh user@host from desktop computer
 
