@@ -40,44 +40,31 @@ https://github.com/andy-hayes/rpi-ffmpeg.git
 
 cd rpi-ffmpeg
 
-./configure --prefix=/usr  --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --disable-mmal --enable-neon --enable-v4l2-request --enable-libudev --enable-sand --libdir=/usr/lib/aarch64-linux-gnu --arch=arm64 --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-epoxy   --enable-libxcb --enable-libzimg  --enable-vout-drm --disable-vaapi --disable-vdpau   --enable-libv4l2   --enable-vout-egl --cpu=cortex-a72
+./configure --prefix=/usr  --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --disable-mmal --enable-neon --enable-v4l2-request --enable-libudev --enable-sand --libdir=/usr/lib/aarch64-linux-gnu  --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-epoxy   --enable-libxcb --enable-libzimg  --enable-vout-drm --disable-vaapi --disable-vdpau   --enable-libv4l2   --enable-vout-egl --cpu=cortex-a72 --arch=arm64
+
+for 32 bit change --arch=arm64 to --arch=arm
 
 make -j4
 
 sudo make -j4 install
 
+apt source mpv
+
+cd mpv-o.32
+
+chmod 777 waf
+
+./waf configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --confdir=/etc/mpv --zshdir=/usr/share/zsh/vendor-completions --enable-cdda --enable-dvdnav --enable-libmpv-shared --disable-libsmbclient --enable-sdl2
+
+./waf -j4
+
+sudo .Waf -j4 install
+
 
 ##################################################################
 
 
-
-
-Original FFmpeg 4.3 rpi libreelec
-
-sudo ln -s /usr/include/libdrm /usr/include/drm
-
-git clone -b  4.3-libreelec-rpi  https://github.com/LibreELEC/FFmpeg.git &&  cd FFmpeg && ./configure --prefix=/usr --toolchain=hardened --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --arch=arm --extra-libs='-lpthread -lm -latomic' --extra-cflags=-I/usr/include/libdrm --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vulkan --disable-vdpau --disable-vaapi  --enable-mmal --enable-avresample --disable-filter=resample --enable-libwavpack --enable-libkvazaar --enable-libv4l2 --enable-libsrt --enable-sand --enable-vout-drm --enable-vout-egl  --enable-v4l2-request --enable-libudev  --enable-rpi --cpu=cortex-a72 && make -j4 && sudo make -j4 install 
-
-##  srt error change --enable-libsrt to --disable-libsrt
-
-
-only mpv 0.32 original rpi
-
-apt source mpv
-
-cd mpv-
-
-chmod 777 waf
-
-./waf configure --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2 --enable-libmpv-shared --enable-libplacebo --enable-vulkan  --disable-vaapi --disable-vdpau  && ./waf -j4 && sudo  ./waf -j4 install
-
-./waf -j4
-
-sudo ./waf -j4 install
-
-############################################################
-
-MESA  
+MESA  for 32 bit
 
 wget http://deb.debian.org/debian/pool/main/m/mesa/mesa_21.3.5.orig.tar.gz
 
@@ -160,44 +147,6 @@ git clone https://github.com/cisco/openh264.git && cd openh264 && make -j4   && 
 ZIMG optional
 
 cd ~/ffmpeg_sources/ && git clone https://github.com/sekrit-twc/zimg.git &&  cd zimg  && ./autogen.sh  && ./configure --enable-x86simd  && make -j4  && sudo make install
-
-#########################################
-
-## this is the second FFmpeg take libreelec or Kwiboo
-## with this version you can compile mpv-0.34 
-## i prefer this version because i need to enable scaletempo2 in mpv.conf which makes better sound if you dond"t need take libreelec from above and install apt source mpv 
-
-
-Video out hevc-drm-copy gpu support for pi4
-
-
-git clone https://github.com/Kwiboo/FFmpeg.git
-
-cd FFmpeg
-
-git checkout -b v4l2-request-hwaccel-rpi
-
-./configure --prefix=/usr --toolchain=hardened --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-mmal --enable-neon --enable-v4l2-request --enable-libudev --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libfdk-aac --extra-cflags=-I/usr/include/libdrm --enable-lv2 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-libopenh264 --extra-cflags=-I/usr/include/libdrm --enable-libv4l2
-
-make -j4 
-
-
-sudo make -j4 install
-
-
-
-make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
-
-only running mpv 0.34 
-
-MPV
-
-0.34 is only workink with kwiboo ffmpeg
-
-sudo ln -s /usr/bin/python3.9 /usr/bin/python
-
-cd ~/ffmpeg_sources && wget http://deb.debian.org/debian/pool/main/m/mpv/mpv_0.34.1.orig.tar.gz  && tar -xf mpv_0.34.1.orig.tar.gz && cd ~/ffmpeg_sources/mpv-0.34.1 && ./bootstrap.py &&  ./waf configure --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2 --enable-libmpv-shared --enable-libplacebo --enable-vulkan  --disable-vaapi --disable-vdpau  && ./waf -j4 && sudo  ./waf -j4 install
-
 
 CELLULOID
 
@@ -315,6 +264,7 @@ in my case hw:CARD=Device,DEV=0 -ac 2 stand for stereo mic , -ac 1 mono 1 audio 
 
 mpv av://v4l2:/dev/video0 --audio-file=av://alsa:hw:0 --profile=low-latency --untimed
 
+###########################################
 
  convert avi to mp4
  
