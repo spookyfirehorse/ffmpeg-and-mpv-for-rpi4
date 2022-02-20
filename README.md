@@ -162,10 +162,6 @@ hwdec-image-format=yuv420p
 
 af=lavfi-crystalizer=1,lavfi-bass=gain=1
 
-### only mpv 0.34
-
-#af=lavfi-crystalizer=1,lavfi-bass=gain=1,scaletempo2
-
 [omx]
 
 hwdec=h264-drm-copy
