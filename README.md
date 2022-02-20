@@ -1,5 +1,5 @@
 
-INSTALL FFMPEG for RPI4 32 bit + 64bit
+INSTALL FFMPEG for RPI4 32 bit + 64bit with nonfree codecs v4l2_request sand usw. + mmal on 32 bit
 
 +MPV
 
@@ -7,6 +7,8 @@ INSTALL FFMPEG for RPI4 32 bit + 64bit
 
 
 mkdir ffmpeg_sources
+
+cd ffmpeg_sources
 
 install dev files for mesa ffmpeg usw.
 
