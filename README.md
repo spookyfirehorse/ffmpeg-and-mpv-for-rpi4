@@ -21,7 +21,8 @@ sudo pip3 install ninja
 
 ########################### 
 
-mutter is running with to much cpu
+if you on a 64 bit rpi edit xdg and change to openbox windowmanager mutter is running with to much cpu
+
 
 sudo nano /etc/xdg/lxsession/LXDE-pi/desktop.conf
 
@@ -29,9 +30,7 @@ sudo nano /etc/xdg/lxsession/LXDE-pi/desktop.conf
 
 window_manager=openbox
 
-###################################################
-
-FDK-AAC
+######################################################
 
 mkdir -p ~/ffmpeg_sources &&
 cd ~/ffmpeg_sources &&
@@ -43,8 +42,8 @@ make -j4 &&
 sudo make install && sudo ldconfig
 
 
+###################################################
 
-######################################################
 
 64 bit FFMPEG
 
@@ -57,16 +56,12 @@ git clone https://github.com/andy-hayes/rpi-ffmpeg.git && cd rpi-ffmpeg && ./con
 
 32 bit FFMPEG
 
-git clone https://github.com/andy-hayes/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --toolchain=hardened --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-mmal --enable-neon --enable-v4l2-request --enable-libudev --enable-sand --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-epoxy --enable-libxcb --enable-libzimg --enable-vout-drm --disable-vaapi --disable-vdpau --enable-libv4l2 --enable-vout-egl --cpu=cortex-a72--libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --arch=arm --extra-libs='-lpthread -lm -latomic'  && make -j4 && sudo make -j4 install
+git clone https://github.com/andy-hayes/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --toolchain=hardened --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-mmal --enable-neon --enable-v4l2-request --enable-libudev --enable-sand --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-epoxy --enable-libxcb --enable-libzimg --enable-vout-drm --disable-vaapi --disable-vdpau --enable-libv4l2 --enable-vout-egl --cpu=cortex-a72 --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --arch=arm --extra-libs='-lpthread -lm -latomic'  && make -j4 && sudo make -j4 install
 
 
 
 #############################################
 #####################################################
-
-
-only with apt source mpv on bullseye , github or other not running
-
 
 MPV
 
@@ -91,6 +86,23 @@ ninja -C build -j4 && sudo ninja -C build install
 
 #####################################
 
+SPIRV optional
+
+cd ~/ffmpeg_sources/ && git clone https://github.com/KhronosGroup/SPIRV-Cross.git  && \
+cd SPIRV-Cross   && \
+./checkout_glslang_spirv_tools.sh && ./build_glslang_spirv_tools.sh  && \
+cd ..  && \
+mkdir cross  && \
+cd cross  && \
+cmake -j4 -DSPIRV_CROSS_SHARED=ON -DSPIRV_CROSS_STATIC=ON  -DSPIRV_CROSS_CLI=ON   ../SPIRV-Cross  && \
+make -j4  && \
+sudo make install
+
+SHADERC optional
+
+cd ~/ffmpeg_sources/ && git clone https://github.com/google/shaderc  && \
+mkdir -p shaderc_build && cd shaderc && ./utils/git-sync-deps && cd ~/ffmpeg_sources/shaderc_build && \
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release ../shaderc && ninja install
 
 #########################
 install openh264 optional
@@ -195,7 +207,7 @@ mpv test.avi --profile=omx --o=test.mp4
 ##################################################################
 
 
-streaming over ssh example only with key identification or stored password
+streaming over ssh example
 
 ssh user@host from desktop computer
 
