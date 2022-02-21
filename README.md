@@ -88,25 +88,6 @@ ninja -C build -j4 && sudo ninja -C build install
 
 #####################################
 
-SPIRV optional
-
-cd ~/ffmpeg_sources/ && git clone https://github.com/KhronosGroup/SPIRV-Cross.git  && \
-cd SPIRV-Cross   && \
-./checkout_glslang_spirv_tools.sh && ./build_glslang_spirv_tools.sh  && \
-cd ..  && \
-mkdir cross  && \
-cd cross  && \
-cmake -j4 -DSPIRV_CROSS_SHARED=ON -DSPIRV_CROSS_STATIC=ON  -DSPIRV_CROSS_CLI=ON   ../SPIRV-Cross  && \
-make -j4  && \
-sudo make install
-
-SHADERC optional
-
-cd ~/ffmpeg_sources/ && git clone https://github.com/google/shaderc  && \
-mkdir -p shaderc_build && cd shaderc && ./utils/git-sync-deps && cd ~/ffmpeg_sources/shaderc_build && \
-cmake -GNinja -DCMAKE_BUILD_TYPE=Release ../shaderc && ninja install
-
-#########################
 install openh264 optional
 
 
