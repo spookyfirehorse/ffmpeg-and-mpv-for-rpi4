@@ -10,8 +10,7 @@ autoreconf -i && \
 make -j4 && \
 sudo make install && \
 sudo apt build-dep lsp-plugins pulseeffects && sudo apt install ladspa-sdk lv2-dev mda-lv2 rubberband-ladspa swh-lv2 zam-plugins calf-plugins  \
-cd ~/ffmpeg_sources &&  git clone https://github.com/wwmm/pulseeffects.git && cd ~/ffmpeg_sources/pulseeffects && git checkout v4.8.5 && meson _build --prefix=/usr/local && sudo ninja -C _build install &&\
-cd ~/ffmpeg_sources/pulseeffects &&\
-meson _build --prefix=/usr/local &&\ 
+cd ~/ffmpeg_sources &&  apt source pulseeffects && cd ~/ffmpeg_sources/pulseeffects-4.8.4/ && \
+meson _build --prefix=/usr/ &&\ 
 ninja -C _build install
 
