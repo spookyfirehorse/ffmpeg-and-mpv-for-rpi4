@@ -213,7 +213,7 @@ mpv av://v4l2:/dev/video0 --audio-file=av://alsa:hw:0 --profile=low-latency --un
  convert avi to mp4
  
  
-ffmpeg -hwaccel drm -i /media/moon/Filme/test.avi   -c:v h264_v4l2m2m -b:v 2M   -pix_fmt yuv420p   -f mp4  test.mp4
+ffmpeg -hwaccel drm -i /media/moon/Filme/test.avi   -c:v h264_v4l2m2m -b:v 2M   -pix_fmt yuv420p -c:a libfdk_aac  -profile:a aac_he -b:a 64k  -f mp4  test.mp4
 
 
 
