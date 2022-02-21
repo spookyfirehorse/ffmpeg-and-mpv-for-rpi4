@@ -75,11 +75,7 @@ apt source mpv && cd mpv-0.32.0  && chmod 777 waf && ./waf configure --enable-eg
 
 MESA  for 32 bit
 
-wget http://deb.debian.org/debian/pool/main/m/mesa/mesa_21.3.5.orig.tar.gz
-
-tar -xf mesa_21.3.5.orig.tar.gz
-
-cd mesa*
+wget http://deb.debian.org/debian/pool/main/m/mesa/mesa_21.3.5.orig.tar.gz && tar -xf mesa_21.3.5.orig.tar.gz && cd mesa_21.3.5
 
 CFLAGS="-mcpu=cortex-a72-mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" \
 meson --prefix /usr -D platforms=x11 -D vulkan-drivers=broadcom -D dri-drivers= -D gallium-drivers=kmsro,v3d,vc4  build
