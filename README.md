@@ -21,7 +21,7 @@ sudo pip3 install ninja
 
 ########################### 
 
-if you on a 64 bit rpi edit xdg and change to openbox windowmanager mutter is running with to much cpu
+edit xdg and change to openbox windowmanager mutter is running with to much cpu
 
 
 sudo nano /etc/xdg/lxsession/LXDE-pi/desktop.conf
