@@ -65,20 +65,7 @@ MPV
 apt source mpv && cd mpv-0.32.0  && chmod 777 waf && ./waf configure --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2 --enable-libmpv-shared --disable-libplacebo --disable-vulkan --disable-vaapi --disable-vdpau --enable-ffmpeg-strict-abi && ./waf -j4 && sudo .Waf -j4 install
 
 
-##################################################################
-
-
-MESA  for 32 bit
-
-wget http://deb.debian.org/debian/pool/main/m/mesa/mesa_21.3.5.orig.tar.gz && tar -xf mesa_21.3.5.orig.tar.gz && cd mesa_21.3.5
-
-CFLAGS="-mcpu=cortex-a72-mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" \
-meson --prefix /usr -D platforms=x11 -D vulkan-drivers=broadcom -D dri-drivers= -D gallium-drivers=kmsro,v3d,vc4  build
-
-ninja -C build -j4 && sudo ninja -C build install
-
-#####################################
-
+##############################################
 install openh264 optional
 
 
@@ -91,7 +78,7 @@ ZIMG optional
 
 cd ~/ffmpeg_sources/ && git clone https://github.com/sekrit-twc/zimg.git &&  cd zimg  && ./autogen.sh  && ./configure --enable-x86simd  && make -j4  && sudo make install
 
-CELLULOID
+CELLULOID mpv player with sidebar
 
 
 apt source celluloid && cd celluloid* && meson build && cd build && ninja -j4 && sudo ninja install
@@ -126,7 +113,7 @@ gpu-hwdec-interop=drmprime-drm
 
 #hwdec=h264_mmal-mmal-copy
 
-#h264_v4l2m2m-v4l2m2m
+#h264_v4l2m2m-v4l2m2m-copy
 
 hwdec-image-format=yuv420p
 
@@ -136,7 +123,7 @@ af=lavfi-crystalizer=1,lavfi-bass=gain=1
 
 [omx]
 
-hwdec=h264-drm-copy
+hwdec=hevc-drm-copy
 
 ovc=h264_v4l2m2m
 
