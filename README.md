@@ -198,4 +198,5 @@ mpv av://v4l2:/dev/video0 --audio-file=av://alsa:hw:0 --profile=low-latency --un
 ffmpeg -hwaccel drm -i /media/moon/Filme/test.avi   -c:v h264_v4l2m2m -b:v 2M   -pix_fmt yuv420p -c:a libfdk_aac  -profile:a aac_he -b:a 64k  -f mp4  test.mp4
 
 
+for file in "$1"; do ffmpeg -hwaccel drm -i "$file"  -c:v h264_v4l2m2m -b:v 1500k -pix_fmt yuv420p  -trellis 2 -cmp 2 -subcmp 2  -g 60  -c:a libfdk_aac  -b:a 96k -f mp4 "${file%.*}_1.mp4"; done
 
