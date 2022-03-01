@@ -42,12 +42,10 @@ sudo make install && sudo ldconfig
 
 ###################################################
 
+best
+
 git clone -b kodi/4.3.2-Matrix-19.2/clean_3 https://github.com/jc-kynesim/rpi-ffmpeg.git
 
-good original kodi
-
-git clone -b dev/4.3.1/drm_prime_1  https://github.com/jc-kynesim/rpi-ffmpeg.git
-    
 good original libreelec
 
 git clone -b  4.3-libreelec-rpi  https://github.com/LibreELEC/FFmpeg.git
@@ -74,11 +72,6 @@ git clone -b kodi/4.3.2-Matrix-19.2/clean_3 https://github.com/jc-kynesim/rpi-ff
 MPV
 
 apt source mpv && cd mpv-0.32.0  && chmod 777 waf && ./waf configure --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2 --enable-libmpv-shared --disable-libplacebo --disable-vulkan --disable-vaapi --disable-vdpau --enable-ffmpeg-strict-abi && ./waf -j4 && sudo .waf -j4 install
-
-
-ZIMG optional
-
-cd ~/ffmpeg_sources/ && git clone https://github.com/sekrit-twc/zimg.git &&  cd zimg  && ./autogen.sh  && ./configure --enable-x86simd  && make -j4  && sudo make install
 
 CELLULOID mpv player with sidebar
 
@@ -109,13 +102,13 @@ gpu-api=opengl
 
 vo=gpu
 
-hwdec=hevc-drm-copy
+#hwdec=hevc-drm-copy
 
 gpu-hwdec-interop=drmprime-drm
 
 #hwdec=h264_mmal-mmal-copy
 
-#h264_v4l2m2m-v4l2m2m-copy
+h264_v4l2m2m-v4l2m2m-copy
 
 hwdec-image-format=yuv420p
 
