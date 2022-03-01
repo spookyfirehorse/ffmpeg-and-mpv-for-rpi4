@@ -183,6 +183,16 @@ in my case hw:CARD=Device,DEV=0 -ac 2 stand for stereo mic , -ac 1 mono 1 audio 
 
 mpv av://v4l2:/dev/video0 --audio-file=av://alsa:hw:0 --profile=low-latency --untimed
 
+
+
+
+############################     TEST  #######################################
+
+
+
+git clone dev/4.4/rpi_import_1 https://github.com/jc-kynesim/rpi-ffmpeg.git
+
+
 ###########################################
 
  convert avi to mp4
