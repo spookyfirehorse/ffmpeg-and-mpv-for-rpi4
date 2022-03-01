@@ -41,18 +41,17 @@ sudo make install && sudo ldconfig
 
 
 ###################################################
-good
+
+git clone -b kodi/4.3.2-Matrix-19.2/clean_3 https://github.com/jc-kynesim/rpi-ffmpeg.git
+
+good original kodi
 
 git clone -b dev/4.3.1/drm_prime_1  https://github.com/jc-kynesim/rpi-ffmpeg.git
     
-good 
+good original libreelec
 
 git clone -b  4.3-libreelec-rpi  https://github.com/LibreELEC/FFmpeg.git
 
-
-good 
-
-git clone  https://github.com/andy-hayes/rpi-ffmpeg.git
 
 64 bit FFMPEG
 
