@@ -204,3 +204,12 @@ ffmpeg -hwaccel drm -i /media/moon/Filme/test.avi   -c:v h264_v4l2m2m -b:v 2M   
 
 for file in "$1"; do ffmpeg -hwaccel drm -i "$file"  -c:v h264_v4l2m2m -b:v 1500k -pix_fmt yuv420p  -trellis 2 -cmp 2 -subcmp 2  -g 60  -c:a libfdk_aac  -b:a 96k -f mp4 "${file%.*}_1.mp4"; done
 
+#################################################
+
+xbmc
+
+git clone -b leia_pi4 https://github.com/PIPplware/xbmc.git
+
+git clone https://github.com/PIPplware/xbmc.git
+
+
