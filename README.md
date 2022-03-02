@@ -23,7 +23,9 @@ wget http://deb.debian.org/debian/pool/non-free/f/fdk-aac/fdk-aac_2.0.2.orig.tar
 ./configure  --enable-shared && \
 make -j4 && \
 sudo make install && sudo ldconfig
+######
 
+sudo ln -s /usr/include/libdrm /usr/include/drm/
 
 ###################################################
 
