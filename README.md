@@ -111,13 +111,15 @@ vo=gpu
 
 #hwdec=hevc-drm-copy
 
+hwdec=auto-copy
+
 gpu-hwdec-interop=drmprime-drm
 
 #hwdec=h264_mmal-mmal-copy
 
-h264_v4l2m2m-v4l2m2m-copy
+#h264_v4l2m2m-v4l2m2m-copy
 
-hwdec-image-format=yuv420p
+#hwdec-image-format=yuv420p
 
 ##better-sound
 
@@ -125,7 +127,7 @@ af=lavfi-crystalizer=1,lavfi-bass=gain=1
 
 [omx]
 
-hwdec=hevc-drm-copy
+hwdec=auto-copy
 
 ovc=h264_v4l2m2m
 
@@ -193,16 +195,8 @@ in my case hw:CARD=Device,DEV=0 -ac 2 stand for stereo mic , -ac 1 mono 1 audio 
 mpv av://v4l2:/dev/video0 --audio-file=av://alsa:hw:0 --profile=low-latency --untimed
 
 
+###############################################
 
-
-############################     TEST  #######################################
-
-
-
-git clone dev/4.4/rpi_import_1 https://github.com/jc-kynesim/rpi-ffmpeg.git
-
-
-###########################################
 
  convert avi to mp4
  
@@ -210,7 +204,7 @@ git clone dev/4.4/rpi_import_1 https://github.com/jc-kynesim/rpi-ffmpeg.git
 ffmpeg -hwaccel drm -i /media/moon/Filme/test.avi   -c:v h264_v4l2m2m -b:v 2M   -pix_fmt yuv420p -c:a libfdk_aac  -profile:a aac_he -b:a 64k  -f mp4  test.mp4
 
 
-for file in "$1"; do ffmpeg -hwaccel drm -i "$file"  -c:v h264_v4l2m2m -b:v 1500k -pix_fmt yuv420p  -trellis 2 -cmp 2 -subcmp 2  -g 60  -c:a libfdk_aac  -b:a 96k -f mp4 "${file%.*}_1.mp4"; done
+for file in "$1"; do ffmpeg -hwaccel drm -i "$file"  -c:v h264_v4l2m2m -b:v 1500k -pix_fmt yuv420p  -trellis 2 -cmp 2 -subcmp 2  -g 40  -c:a libfdk_aac  -b:a 96k -f mp4 "${file%.*}_1.mp4"; done
 
 #################################################
 
