@@ -29,13 +29,8 @@ sudo ln -s /usr/include/libdrm /usr/include/drm/
 
 ###################################################
 
-best
 
-git clone -b kodi/4.3.2-Matrix-19.2/clean_3 https://github.com/jc-kynesim/rpi-ffmpeg.git
-
-good original libreelec
-
-git clone -b  4.3-libreelec-rpi  https://github.com/LibreELEC/FFmpeg.git
+new
 
 git clone -b test/4.3.3/rpi_main https://github.com/jc-kynesim/rpi-ffmpeg.git
 
@@ -55,6 +50,8 @@ make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfi
 
 
 32 bit FFMPEG
+
+new
 
 git clone -b test/4.3.3/rpi_main https://github.com/jc-kynesim/rpi-ffmpeg.git
 
