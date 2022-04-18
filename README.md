@@ -118,8 +118,11 @@ git clone https://github.com/aler9/rtsp-simple-server.git
 cd rtsp-simple-server
 
 install rtsp-simple server github
+
 sudo mv rtsp-simple-server /usr/local/bin/
+
 sudo mv rtsp-simple-server.yml /usr/local/etc/
+
 Create the service:
 
 sudo tee /etc/systemd/system/rtsp-simple-server.service >/dev/null << EOF
@@ -130,9 +133,11 @@ ExecStart=/usr/local/bin/rtsp-simple-server /usr/local/etc/rtsp-simple-server.ym
 [Install]
 WantedBy=multi-user.target
 EOF
+
 Enable and start the service:
 
 sudo systemctl enable rtsp-simple-server
+
 sudo systemctl start rtsp-simple-server
 
 
