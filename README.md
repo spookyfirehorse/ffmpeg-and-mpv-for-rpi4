@@ -96,10 +96,48 @@ sudo apt build-dep vlc
 git clone -b dev/3.0.16/drm_1 https://github.com/jc-kynesim/vlc.git && cd vlc && ./bootstrap  && autoreconf -fiv  && ./configure  --enable-mmal  --disable-vdpau --disable-fdkaac --enable-gles2 && make -j4 && sudo make -j4 install
 
 #########################################################
+from any pc 
 
-ssh devil v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=640,height=480  --set-ctrl=exposure_dynamic_framerate=0 --set-ctrl=h264_level=11  --set-ctrl=h264_profile=4 --set-ctrl=power_line_frequency=2  --set-ctrl=video_bitrate=100000000
+autologin to ssh must be enabled
 
-ssh devil  ffmpeg -hwaccel drm  -fflags nobuffer -flags  low_delay  -avioflags direct -fflags rtbufsize -fflags discardcorrupt -fflags igndts -fflags nofillin -hide_banner  -fflags genpts -strict experimental -async 1  -f alsa   -i plughw:CARD=Device,DEV=0  \
+host =pi@raspi
+
+ssh user@host v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=640,height=480  --set-ctrl=exposure_dynamic_framerate=0 --set-ctrl=h264_level=11  --set-ctrl=h264_profile=4 --set-ctrl=power_line_frequency=2  --set-ctrl=video_bitrate=100000000
+
+ssh user@host  ffmpeg -hwaccel drm  -fflags nobuffer -flags  low_delay  -avioflags direct -fflags rtbufsize -fflags discardcorrupt -fflags igndts -fflags nofillin -hide_banner  -fflags genpts -strict experimental -async 1  -f alsa   -i plughw:CARD=Device,DEV=0  \
  -f v4l2 -re -input_format h264    -pix_fmt yuv420p   -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 700k -c:a libopus -application lowdelay -b:a 32k  -ar 48000 -f s16le      -f mpegts  - | mpv  --profile=low-latency  --volume=50  -
  
  
+######################################
+
+
+ 
+rtsp streamig 
+git clone https://github.com/aler9/rtsp-simple-server.git
+
+cd rtsp-simple-server
+
+install rtsp-simple server github
+sudo mv rtsp-simple-server /usr/local/bin/
+sudo mv rtsp-simple-server.yml /usr/local/etc/
+Create the service:
+
+sudo tee /etc/systemd/system/rtsp-simple-server.service >/dev/null << EOF
+[Unit]
+Wants=network.target
+[Service]
+ExecStart=/usr/local/bin/rtsp-simple-server /usr/local/etc/rtsp-simple-server.yml
+[Install]
+WantedBy=multi-user.target
+EOF
+Enable and start the service:
+
+sudo systemctl enable rtsp-simple-server
+sudo systemctl start rtsp-simple-server
+
+
+
+v4l2-ctl -d /dev/video0  --set-parm=15  --set-parm=15 --set-fmt-video=width=640,height=360 --set-ctrl=exposure_dynamic_framerate=1 --set-ctrl=h264_level=4.2  --set-ctrl=h264_profile=high  --set-ctrl=video_bitrate=10000000
+ffmpeg  -fflags nobuffer -hwaccel drm  -hide_banner   -f alsa  -ac 2 -i hw:CARD=S3,DEV=0  -f v4l2 -r 15  -i /dev/video0   \
+ -c:v  mpeg2video  -pix_fmt yuv420p  -b:v 300k  \
+ -c:a libopus -application lowdelay -b:a 32k   -movflags +faststart    -f rtsp rtsp://localhost:8554/mystream
