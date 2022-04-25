@@ -142,7 +142,8 @@ sudo systemctl start rtsp-simple-server
 
 
 
-v4l2-ctl -d /dev/video0  --set-parm=15  --set-parm=15 --set-fmt-video=width=640,height=360 --set-ctrl=exposure_dynamic_framerate=1 --set-ctrl=h264_level=4.2  --set-ctrl=h264_profile=high  --set-ctrl=video_bitrate=10000000
+v4l2-ctl -d /dev/video0  --set-parm=15  --set-parm=15 --set-fmt-video=width=640,height=360 --set-ctrl=exposure_dynamic_framerate=0 --set-ctrl=h264_level=4.2  --set-ctrl=h264_profile=high  --set-ctrl=video_bitrate=10000000
+
 ffmpeg  -fflags nobuffer -hwaccel drm  -hide_banner   -f alsa  -ac 2 -i hw:CARD=S3,DEV=0  -f v4l2 -r 15  -i /dev/video0   \
  -c:v  mpeg2video  -pix_fmt yuv420p  -b:v 300k  \
  -c:a libopus -application lowdelay -b:a 32k   -movflags +faststart    -f rtsp rtsp://localhost:8554/mystream
