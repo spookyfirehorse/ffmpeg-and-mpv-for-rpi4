@@ -3,6 +3,13 @@
 armel rpi nano wget https://github.com/aler9/rtsp-simple-server/releases/download/v0.18.2/rtsp-simple-server_v0.18.2_linux_armv6.tar.gz
 
 
+tar -xf rtsp-simple-server_v0.18.2_linux_arm64v8.tar.gz
+
+cd rtsp-simple-server_v0.18.2_linux_arm64v8
+
+
+
+
 sudo mv rtsp-simple-server /usr/local/bin/
 sudo mv rtsp-simple-server.yml /usr/local/etc/
 Create the service:
