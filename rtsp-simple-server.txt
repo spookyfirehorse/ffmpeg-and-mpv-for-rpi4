@@ -1,0 +1,21 @@
+64 bit arm64   wget https://github.com/aler9/rtsp-simple-server/releases/download/v0.18.2/rtsp-simple-server_v0.18.2_linux_arm64v8.tar.gz
+32 bit armhf wget https://github.com/aler9/rtsp-simple-server/releases/download/v0.18.2/rtsp-simple-server_v0.18.2_linux_armv7.tar.gz
+armel rpi nano wget https://github.com/aler9/rtsp-simple-server/releases/download/v0.18.2/rtsp-simple-server_v0.18.2_linux_armv6.tar.gz
+
+
+sudo mv rtsp-simple-server /usr/local/bin/
+sudo mv rtsp-simple-server.yml /usr/local/etc/
+Create the service:
+
+sudo tee /etc/systemd/system/rtsp-simple-server.service >/dev/null << EOF
+[Unit]
+Wants=network.target
+[Service]
+ExecStart=/usr/local/bin/rtsp-simple-server /usr/local/etc/rtsp-simple-server.yml
+[Install]
+WantedBy=multi-user.target
+EOF
+Enable and start the service:
+
+sudo systemctl enable rtsp-simple-server
+sudo systemctl start rtsp-simple-server
