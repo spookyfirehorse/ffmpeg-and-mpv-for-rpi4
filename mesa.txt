@@ -28,6 +28,8 @@ upstream rpi4
 
 git clone https://gitlab.freedesktop.org/mesa/mesa.git
 
+meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
+
 
 cd mesa_vulkan
 $ CFLAGS="-mcpu=cortex-a72" \
