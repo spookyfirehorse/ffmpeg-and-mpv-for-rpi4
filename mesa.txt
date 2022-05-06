@@ -26,7 +26,12 @@ wget http://deb.debian.org/debian/pool/main/m/mesa/mesa_21.2.6.orig.tar.gz && ta
 
 upstream rpi4
 
+
+https://github.com/mesa3d/mesa.git
+
 git clone https://gitlab.freedesktop.org/mesa/mesa.git
+
+checkout mesa-22.0.3
 
 meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
 
