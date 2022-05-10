@@ -35,7 +35,7 @@ checkout mesa-22.0.3
 wget https://gitlab.freedesktop.org/mesa/mesa.git
 
 
-meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
+meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl,zink -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
 
 
 
