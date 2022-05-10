@@ -38,6 +38,14 @@ wget https://gitlab.freedesktop.org/mesa/mesa.git
 meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
 
 
+
+32 bit CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" \
+
+
+64 bit CFLAGS="-mcpu=cortex-a72" CXXFLAGS="-mcpu=cortex-a72" \
+
+
+
 cd mesa_vulkan
 $ CFLAGS="-mcpu=cortex-a72" \
 CXXFLAGS="-mcpu=cortex-a72" \
