@@ -20,10 +20,6 @@ sudo pip3 install ninja
 
 
 
-#wget http://deb.debian.org/debian/pool/main/m/mesa/mesa_21.3.5.orig.tar.gz && tar -xf  mesa_21.3.5.orig.tar.gz   && cd mesa_21.3.5 && CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
-wget http://deb.debian.org/debian/pool/main/m/mesa/mesa_21.2.6.orig.tar.gz && tar -xf  mesa_21.2.6.orig.tar.gz   && cd mesa_21.2.6 && CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
-
-
 upstream rpi4
 
 git clone https://github.com/mesa3d/mesa.git
@@ -35,27 +31,18 @@ checkout mesa-22.0.3
 wget https://gitlab.freedesktop.org/mesa/mesa.git
 
 
-meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl,zink -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
 
 
 
-32 bit CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" \
+
+32 bit 
+
+CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl,zink -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
 
 
-64 bit CFLAGS="-mcpu=cortex-a72" CXXFLAGS="-mcpu=cortex-a72" \
+64 bit 
+
+CFLAGS="-mcpu=cortex-a72" CXXFLAGS="-mcpu=cortex-a72" meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl,zink -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
 
 
 
-cd mesa_vulkan
-$ CFLAGS="-mcpu=cortex-a72" \
-CXXFLAGS="-mcpu=cortex-a72" \
-meson --prefix /usr \
--D platforms=x11 \
--D vulkan-drivers=broadcom \
--D dri-drivers= \
--D gallium-drivers=kmsro,v3d,vc4 \
--D buildtype=release build
-$ ninja -C build -j4
-$ sudo ninja -C build install
-# check your driver
-$ glxinfo -B
