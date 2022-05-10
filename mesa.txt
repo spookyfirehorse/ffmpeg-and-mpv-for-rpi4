@@ -37,12 +37,12 @@ wget https://gitlab.freedesktop.org/mesa/mesa.git
 
 32 bit 
 
-CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl,zink -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
+git clone https://github.com/mesa3d/mesa.git && cd mesa && CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl,zink -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
 
 
 64 bit 
 
-CFLAGS="-mcpu=cortex-a72" CXXFLAGS="-mcpu=cortex-a72" meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl,zink -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
+git clone https://github.com/mesa3d/mesa.git && cd mesa && CFLAGS="-mcpu=cortex-a72" CXXFLAGS="-mcpu=cortex-a72" meson --prefix /usr -Dgles1=disabled -Dgles2=enabled -Dplatforms=x11 -Dvulkan-drivers=broadcom -Ddri-drivers= -Dgallium-drivers=v3d,kmsro,vc4,virgl,zink -Dbuildtype=release  build && ninja -C build -j4 && sudo ninja -C build install
 
 
 
