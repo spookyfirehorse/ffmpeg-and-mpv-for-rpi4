@@ -90,7 +90,19 @@ ssh user@host  ffmpeg -c:v h264_v4l2m2m  -fflags nobuffer -flags  low_delay  -av
  
 rtsp streamig 
 
-git clone https://github.com/aler9/rtsp-simple-server.git
+https://github.com/aler9/rtsp-simple-server/releases
+
+64 bit
+
+wget https://github.com/aler9/rtsp-simple-server/releases/download/v0.18.3/rtsp-simple-server_v0.18.3_linux_arm64v8.tar.gz
+
+32 bit
+
+wget https://github.com/aler9/rtsp-simple-server/releases/download/v0.18.3/rtsp-simple-server_v0.18.3_linux_armv7.tar.gz
+
+tar -xf rtsp'********
+
+
 
 cd rtsp-simple-server
 
