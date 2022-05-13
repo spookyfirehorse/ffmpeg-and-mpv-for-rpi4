@@ -1,7 +1,7 @@
 Bullseye
 
 
-INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw. + mmal on 32 bit
+INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw. 
 
 +MPV
 
