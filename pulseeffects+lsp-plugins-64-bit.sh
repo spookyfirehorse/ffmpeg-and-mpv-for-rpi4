@@ -12,4 +12,4 @@ sudo make install && \
 sudo apt build-dep lsp-plugins pulseeffects && sudo apt install ladspa-sdk lv2-dev mda-lv2 rubberband-ladspa swh-lv2 zam-plugins calf-plugins  \
 cd ~/ffmpeg_sources &&  apt source pulseeffects && cd ~/ffmpeg_sources/pulseeffects-4.8.4/ && \
 meson _build --prefix=/usr/ &&\ 
-ninja -C _build install
+ninja -j4 -C _build install
