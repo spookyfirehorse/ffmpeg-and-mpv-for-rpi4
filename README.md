@@ -10,6 +10,14 @@ INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 + ssh streaming
 + 
 ############################################
+first of all change sources.list.d/
+
+sudo nano /etc/apt/sources.list.d/raspi.list
+
+deb http://archive.raspberrypi.org/debian/ bullseye main
+# Uncomment line below then 'apt-get update' to enable 'apt-get source'
+deb-src http://archive.raspberrypi.org/debian/ bullseye main
+#####################################################################
 
 FDK-AAC
 
@@ -80,7 +88,7 @@ host =pi@raspi
 
 ssh user@host v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=640,height=480  --set-ctrl=h264_level=8--set-ctrl=h264_profile=1 --set-ctrl=power_line_frequency=2  --set-ctrl=video_bitrate=20000000 --set-ctrl=h264_i_frame_period=15
 
-ssh user@host  ffmpeg -c:v h264_v4l2m2m  -fflags nobuffer -flags  low_delay  -avioflags direct -fflags rtbufsize -fflags discardcorrupt -fflags igndts -fflags nofillin -hide_banner  -fflags genpts -strict experimental -async 1  -f alsa   -i plughw:CARD=Device,DEV=0  \
+ssh user@host  ffmpeg -c:v h264_v4l2m2m -fflags +genpts+nobuffer+igndts+discardcorrupt -hide_banner  -fflags genpts -strict experimental -async 1 -f alsa -i plughw:CARD=Device,DEV=0  \
  -f v4l2 -re -input_format h264    -pix_fmt yuv420p   -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1000k -c:a libopus -application lowdelay -b:a 32k  -ar 48000 -f s16le      -f mpegts  - | mpv  --profile=low-latency  --volume=50  -
  
  
