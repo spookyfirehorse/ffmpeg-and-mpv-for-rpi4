@@ -111,20 +111,14 @@ wget https://github.com/aler9/rtsp-simple-server/releases/download/v0.18.3/rtsp-
 
 tar -xf rtsp'********
 
-
-
-cd rtsp-simple-server
-
-install rtsp-simple server github
-
 sudo mv rtsp-simple-server /usr/local/bin/
 
 sudo mv rtsp-simple-server.yml /usr/local/etc/
 
 Create the service:
 
+####
 sudo tee /etc/systemd/system/rtsp-simple-server.service >/dev/null << EOF
-
 [Unit]
 Wants=network.target
 [Service]
@@ -132,6 +126,7 @@ ExecStart=/usr/local/bin/rtsp-simple-server /usr/local/etc/rtsp-simple-server.ym
 [Install]
 WantedBy=multi-user.target
 EOF
+####
 
 Enable and start the service:
 
