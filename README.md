@@ -140,16 +140,18 @@ sudo systemctl enable rtsp-simple-server
 sudo systemctl start rtsp-simple-server
 
 
-
-v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=640,height=480  --set-ctrl=exposure_dynamic_framerate=0 --set-ctrl=h264_level=8  --set-ctrl=h264_profile=1  --set-ctrl=video_bitrate=2000000 --set-ctrl=h264_i_frame_period=15
-
-
-
 arecord -L show mic device
 
 my audio mic = plughw:CARD=S3,DEV=0
 
 
-ffmpeg  -fflags nobuffer -vcodec h264_v4l2m2m  -hide_banner   -f alsa   -i plughw:CARD=S3,DEV=0  -f v4l2 -re  -i /dev/video0   \
- -c:v  h264_v4l2m2m  -pix_fmt yuv420p  -b:v 1000k  \
- -c:a libopus -application lowdelay -b:a 32k   -movflags +faststart    -f rtsp rtsp://localhost:8554/mystream
+v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
+
+ffmpeg -strict experimental  -hwaccel vulkan -fflags +genpts+nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental -async 1  \
+  -f alsa  -ac 1  -i hw:CARD=Device,DEV=0  -f v4l2 -input_format h264 -use_wallclock_as_timestamps 1  -re   -i /dev/video0 -c:v copy  -pix_fmt yuv420p    \
+  -c:a libopus  -b:a 32k  -application lowdelay -movflags +faststart+write_colr  \
+  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+  
+  mpv rtsp://localhost:8554/mystream
+  from 2nd computer
+  mpv rtsp:/192.168.0.100:8554/mystream
