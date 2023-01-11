@@ -5,3 +5,15 @@ git clone -b dev/5.1.2/rpi_import_1 https://github.com/jc-kynesim/rpi-ffmpeg.git
 make -j4
 sudo make -j4 install
 
+PI3
+  --extra-cflags="-march=armv8-a+crc -mfpu=neon-fp-armv8 -mtune=cortex-a53"
+PI4
+  --extra-cflags="-march=armv8-a+crc+simd -mfpu=neon-fp-armv8 -mtune=cortex-a72"
+
+CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" make -j3
+
+CFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" CXXFLAGS="-mcpu=cortex-a72 -mfpu=neon-fp-armv8" make -j3 install
+
+64bit
+
+CFLAGS="-mcpu=cortex-a72" CXXFLAGS="-mcpu=cortex-a72"
