@@ -1,9 +1,4 @@
 git clone https://github.com/xiph/rnnoise.git
 
 
- ./autogen.sh
- ./configure
- make -j4 
-
-
-sudo make install
+ ./autogen.sh && ./configure && make -j4 sudo make install
