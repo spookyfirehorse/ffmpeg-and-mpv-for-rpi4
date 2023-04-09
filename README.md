@@ -142,11 +142,33 @@ my audio mic = plughw:CARD=S3,DEV=0
 
 v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
 
-ffmpeg -strict experimental  -hwaccel vulkan -fflags +genpts+nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental -async 1  \
-  -f alsa  -ac 1  -i hw:CARD=Device,DEV=0  -f v4l2 -input_format h264 -use_wallclock_as_timestamps 1  -re   -i /dev/video0 -c:v copy  -pix_fmt yuv420p    \
-  -c:a libopus  -b:a 32k  -application lowdelay -movflags +faststart+write_colr  \
+basic +audo
+
+ffmpeg -c:v h264_v4l2m2m  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
+  -f alsa  -i plughw:CARD=Device,DEV=0  -f v4l2 -input_format h264  -use_wallclock_as_timestamps 1  -i /dev/video0 -c:v copy  -pix_fmt yuv420p    \
+  -c:a libopus  -b:a 32k  -application lowdelay  \
+  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+
+without audio
+ffmpeg -c:v h264_v4l2m2m  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
+-f v4l2 -input_format h264  -i /dev/video0 -c:v copy  -pix_fmt yuv420p 
+  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+
+broken h264_v4l2m2m for rtsp 
+
+ffmpeg  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
+-f v4l2 -i /dev/video0 -c:v h264_v4l2m2m  -pix_fmt yuv420p 
+  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+
+
+audio video sync you must try
+
+ffmpeg -strict experimental  -hwaccel vulkan -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
+  -f alsa  -ac 1  -i hw:CARD=Device,DEV=0  -f v4l2 -input_format h264 -itsoffset 1.0 -use_wallclock_as_timestamps 1  -i /dev/video0 -c:v copy  -pix_fmt yuv420p    \
+  -c:a libopus  -b:a 32k  -application lowdelay -map 0:0 -map 1:0 \
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
   
   mpv rtsp://localhost:8554/mystream
   from 2nd computer
   mpv rtsp:/192.168.0.100:8554/mystream
+  
