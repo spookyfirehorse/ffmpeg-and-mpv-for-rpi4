@@ -155,11 +155,17 @@ ffmpeg -c:v h264_v4l2m2m  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 ################
+
+
 broken h264_v4l2m2m for rtsp 
 
 ffmpeg  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
 -f v4l2 -i /dev/video0 -c:v h264_v4l2m2m  -pix_fmt yuv420p 
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+
+i dont now why b-frames or something like this for the moment it was running up to kynesim  ffmpeg 4.3.1 
+
+but not now  ffmpeg 4.3.4
 
 #########################################################
 audio video sync you must try -map 0:0 -map 1:0 -itsoffset 1.0 
