@@ -161,7 +161,11 @@ ffmpeg  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experime
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
-audio video sync you must try
+audio video sync you must try -map 0:0 -map 1:0 -itsoffset 1.0 
+
+map only example one map is video and the second audio
+
+itoffset 1 second
 
 ffmpeg -strict experimental  -hwaccel vulkan -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
   -f alsa  -ac 1  -i hw:CARD=Device,DEV=0  -f v4l2 -input_format h264 -itsoffset 1.0 -use_wallclock_as_timestamps 1  -i /dev/video0 -c:v copy  -pix_fmt yuv420p    \
