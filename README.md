@@ -154,18 +154,21 @@ ffmpeg -c:v h264_v4l2m2m  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner
 -f v4l2 -input_format h264  -i /dev/video0 -c:v copy  -pix_fmt yuv420p 
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
+################
 broken h264_v4l2m2m for rtsp 
 
 ffmpeg  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
 -f v4l2 -i /dev/video0 -c:v h264_v4l2m2m  -pix_fmt yuv420p 
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
-
+#########################################################
 audio video sync you must try -map 0:0 -map 1:0 -itsoffset 1.0 
 
 map only example one map is video and the second audio
 
 itoffset 1 second
+
+example
 
 ffmpeg -strict experimental  -hwaccel vulkan -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
   -f alsa  -ac 1  -i hw:CARD=Device,DEV=0  -f v4l2 -input_format h264 -itsoffset 1.0 -use_wallclock_as_timestamps 1  -i /dev/video0 -c:v copy  -pix_fmt yuv420p    \
