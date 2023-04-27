@@ -5,6 +5,17 @@ git clone -b dev/5.1.2/rpi_import_1 https://github.com/jc-kynesim/rpi-ffmpeg.git
 make -j4
 sudo make -j4 install
 
+
+git clone https://github.com/mpv-player/mpv.git
+meson build
+meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi=enabled -Drpi-mmal=enabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled
+meson compile -C build
+meson install -C build
+
+cross
+
+
+
 PI3
   --extra-cflags="-march=armv8-a+crc -mfpu=neon-fp-armv8 -mtune=cortex-a53"
 PI4
