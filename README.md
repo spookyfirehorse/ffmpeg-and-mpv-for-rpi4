@@ -72,15 +72,10 @@ sudo apt build-dep celluloid
 
 apt source celluloid && cd celluloid* && meson build && cd build && ninja -j4 && sudo ninja install
 
-############################
-
-VLC
-
-sudo apt build-dep vlc
-
-git clone -b dev/3.0.16/drm_1 https://github.com/jc-kynesim/vlc.git && cd vlc && ./bootstrap  && autoreconf -fiv  && ./configure  --enable-mmal  --disable-vdpau --disable-fdkaac --enable-gles2 && make -j4 && sudo make -j4 install
 
 #########################################################
+SSH streaming
+
 from any linux pc with ffmpeg and ssh installed 
 
 autologin to ssh must be enabled
@@ -154,20 +149,7 @@ ffmpeg -c:v h264_v4l2m2m  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner
 -f v4l2 -input_format h264  -i /dev/video0 -c:v copy  -pix_fmt yuv420p 
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
-################
 
-
-broken h264_v4l2m2m for rtsp 
-
-ffmpeg  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
--f v4l2 -i /dev/video0 -c:v h264_v4l2m2m  -pix_fmt yuv420p 
-  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
-
-i dont now why b-frames or something like this for the moment it was running up to kynesim  ffmpeg 4.3.1 
-
-but not now  ffmpeg 4.3.4
-
-#########################################################
 audio video sync you must try -map 0:0 -map 1:0 -itsoffset 1.0 
 
 map only example one map is video and the second audio
@@ -176,7 +158,7 @@ itoffset 1 second
 
 example
 
-ffmpeg -strict experimental  -hwaccel vulkan -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
+ffmpeg -strict experimental  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
   -f alsa  -ac 1  -i hw:CARD=Device,DEV=0  -f v4l2 -input_format h264 -itsoffset 1.0 -use_wallclock_as_timestamps 1  -i /dev/video0 -c:v copy  -pix_fmt yuv420p    \
   -c:a libopus  -b:a 32k  -application lowdelay -map 0:0 -map 1:0 \
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
