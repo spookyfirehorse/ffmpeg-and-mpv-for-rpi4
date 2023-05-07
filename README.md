@@ -73,17 +73,26 @@ git clone -b test/4.3.6/main https://github.com/jc-kynesim/rpi-ffmpeg.git
 #####################################################
 
 MPV
+bullseye
 
 sudo apt build-dep mpv
 
 apt source mpv && cd mpv-0.32.0  && chmod 777 waf && ./waf configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --confdir=/etc/mpv --zshdir=/usr/share/zsh/vendor-completions --enable-cdda --enable-dvdnav --enable-dvbin --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2 --enable-libmpv-shared --enable-libplacebo --enable-vulkan
  --enable-ffmpeg-strict-abi && ./waf -j4 && sudo .waf -j4 install
+ 
+ 
+bookworm
 
-git clone 
+sudo apt build-dep mpv && apt soure mpv
+
+cd mpv 
 
 meson build
-meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi-mmal=enabled -Degl=enabled  
+
+meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi-mmal=enabled -Degl=enabled 
+
 meson compile -C build
+
 sudo meson install -C build
 
 ##############################
@@ -180,12 +189,20 @@ itoffset 1 second
 
 example
 
+set output camera to h264
+
+v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
+
+and run this
+
 ffmpeg -strict experimental  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
   -f alsa  -ac 1  -i hw:CARD=Device,DEV=0  -f v4l2 -input_format h264 -itsoffset 1.0 -use_wallclock_as_timestamps 1  -i /dev/video0 -c:v copy  -pix_fmt yuv420p    \
   -c:a libopus  -b:a 32k  -application lowdelay -map 0:0 -map 1:0 \
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
   
- h264_v4l2m2m working 
+
+
+h264_v4l2m2m working 
  
  
 v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
