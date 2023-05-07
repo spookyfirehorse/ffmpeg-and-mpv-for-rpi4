@@ -179,6 +179,17 @@ ffmpeg -strict experimental  -fflags +nobuffer+igndts+discardcorrupt   -hide_ban
   -c:a libopus  -b:a 32k  -application lowdelay -map 0:0 -map 1:0 \
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
   
+ h264_v4l2m2m working 
+ 
+ 
+ v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
+ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer   -use_wallclock_as_timestamps 1  -flags low_delay -probesize 32 -analyzeduration 0  -hide_banner    \
+  -f alsa -thread_queue_size 256  -i plughw:CARD=Device,DEV=0  -f v4l2 -input_format h264  -itsoffset 1.00  -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1500k  -acodec libfdk_aac    -b:a 64k   -map 1:0 -map 0:0   \
+   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+ 
+  
+  
+  
   mpv rtsp://localhost:8554/mystream
   from 2nd computer
   mpv rtsp:/192.168.0.100:8554/mystream
