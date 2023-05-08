@@ -176,15 +176,9 @@ ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -strict exper
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 without audio
+
 ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -strict experimental  \
 -f v4l2 -input_format h264  -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
-
-
-audio video sync you must try -map 0:0 -map 1:0 -itsoffset 1.0 
-
-map only example one map is video and the second audio
-
-itoffset 1 second
 
 example
 
