@@ -115,7 +115,7 @@ host =pi@raspi
 
 ssh user@host v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=640,height=480  --set-ctrl=h264_level=8--set-ctrl=h264_profile=1 --set-ctrl=power_line_frequency=2  --set-ctrl=video_bitrate=20000000 --set-ctrl=h264_i_frame_period=15
 
-ssh user@host  ffmpeg -c:v h264_v4l2m2m -fflags +genpts+nobuffer+igndts+discardcorrupt -hide_banner  -fflags genpts -strict experimental -async 1 -f alsa -i plughw:CARD=Device,DEV=0  \
+ssh user@host  ffmpeg -c:v h264_v4l2m2m -fflags +genpts+nobuffer+igndts+discardcorrupt -hide_banner  -strict experimental  -f alsa -i plughw:CARD=Device,DEV=0  \
  -f v4l2 -re -input_format h264    -pix_fmt yuv420p   -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1000k -c:a libopus -application lowdelay -b:a 32k  -ar 48000 -f s16le      -f mpegts  - | mpv  --profile=low-latency  --volume=50  -
  
  
@@ -168,17 +168,16 @@ my audio mic = plughw:CARD=S3,DEV=0
 
 v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
 
-basic +audo
+video + audo
 
-ffmpeg -c:v h264_v4l2m2m  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
-  -f alsa  -i plughw:CARD=Device,DEV=0  -f v4l2 -input_format h264  -use_wallclock_as_timestamps 1  -i /dev/video0 -c:v copy  -pix_fmt yuv420p    \
+ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -strict experimental  \
+  -f alsa  -i plughw:CARD=Device,DEV=0  -f v4l2 -input_format h264   -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p    \
   -c:a libopus  -b:a 32k  -application lowdelay  \
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 without audio
-ffmpeg -c:v h264_v4l2m2m  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
--f v4l2 -input_format h264  -i /dev/video0 -c:v copy  -pix_fmt yuv420p 
-  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -strict experimental  \
+-f v4l2 -input_format h264  -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 audio video sync you must try -map 0:0 -map 1:0 -itsoffset 1.0 
@@ -189,35 +188,35 @@ itoffset 1 second
 
 example
 
-set output camera to h264
+set output rpi-camera to h264
 
 v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
 
 and run this
 
-ffmpeg -strict experimental  -fflags +nobuffer+igndts+discardcorrupt   -hide_banner  -strict experimental  \
-  -f alsa  -ac 1  -i hw:CARD=Device,DEV=0  -f v4l2 -input_format h264 -itsoffset 1.0 -use_wallclock_as_timestamps 1  -i /dev/video0 -c:v copy  -pix_fmt yuv420p    \
+ffmpeg  -hide_banner  -strict experimental  \
+  -f alsa  -ac 1  -i hw:CARD=Device,DEV=0  -f v4l2 -input_format h264 -itsoffset 1.0 -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p    \
   -c:a libopus  -b:a 32k  -application lowdelay -map 0:0 -map 1:0 \
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
   
 
 
 h264_v4l2m2m working 
- 
+
+best setting for rpi-cam
  
 v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
  
- 
-ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer   -use_wallclock_as_timestamps 1  -flags low_delay -probesize 32 -analyzeduration 0  -hide_banner    \
+ -itsoffset 1.00  and -map 1:0 -map 0:0  = audio video sync ? set -itsoffset 1.00 mining 1 second difference audio video
+
+ffmpeg -hwaccel drm -hwaccel_output_format drm_prime  -flags low_delay   -hide_banner    \
   -f alsa -thread_queue_size 256  -i plughw:CARD=Device,DEV=0  -f v4l2 -input_format h264  -itsoffset 1.00  -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1500k  -acodec libfdk_aac    -b:a 64k   -map 1:0 -map 0:0   \
    -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
  
-  opus audio
+  opus only audio
   
-  
-  
-  ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer   -use_wallclock_as_timestamps 1  -flags low_delay -probesize 32 -analyzeduration 0  -hide_banner    \
-  -f alsa -thread_queue_size 256  -i plughw:CARD=Device,DEV=0  -f v4l2 -input_format h264  -itsoffset 1.00  -f v4l2  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p  -b:v 1000k   -c:a libopus -application lowdelay -b:a 64k   -map 1:0 -map 0:0   \
+  ffmpeg -flags low_delay   -hide_banner    \
+   -i plughw:CARD=Device,DEV=0  -c:a libopus -application lowdelay -b:a 64k   \
    -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
   
   
