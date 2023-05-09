@@ -206,14 +206,14 @@ my audio mic = plughw:CARD=S3,DEV=0
 
 video + audo opus
 
-ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -strict experimental  \
+ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -hide_banner -flags low_delay -strict experimental  \
   -f alsa  -i plughw:CARD=Device,DEV=0  -f v4l2 -input_format h264   -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p    \
   -c:a libopus  -b:a 32k  -application lowdelay  \
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 without audio
 
-ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -strict experimental  \
+ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -hide_banner -flags low_delay -strict experimental  \
 -f v4l2 -input_format h264  -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
@@ -232,7 +232,11 @@ ffmpeg -hwaccel drm -hwaccel_output_format drm_prime  -flags low_delay   -hide_b
  
   -itsoffset 1.00  and -map 1:0 -map 0:0  = audio video sync ? set -itsoffset 1.00 mining 1 second difference audio video
 
- 
+
+look running stream
+
+mpv rtsp://localhost:8554/mystream
+
  
   opus only audio
   
@@ -247,7 +251,7 @@ ffmpeg -hwaccel drm -hwaccel_output_format drm_prime  -flags low_delay   -hide_b
   
   ########################################################################
   
-  under construct
+  under construct but working
   
   
   streaming from android phone camera
@@ -256,9 +260,21 @@ ffmpeg -hwaccel drm -hwaccel_output_format drm_prime  -flags low_delay   -hide_b
   
   sudo apt install adb
   
-  install ip-webcam from playstore
+  install ip-webcam from playstore https://play.google.com/store/apps/details?id=com.pas.webcam on your phone
   
-  conect android phone with usb cable not over (network is to slow)
+  
+  
+  conect android phone with usb cable not over network (network is to slow)
+  
+  start adb 
+  
+  adb devices
+  
+  confirm on android the adb conction
+  
+  in this app you can chang port settings resolution and frames per second
+  
+  
   
   adb -d forward tcp:8080 tcp:8080
   
@@ -266,7 +282,4 @@ ffmpeg -hwaccel drm -hwaccel_output_format drm_prime  -flags low_delay   -hide_b
  -itsoffset 1.00    -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m -pix_fmt yuv420p  -b:v 1500k   -c:a libfdk_aac -b:a 64k   -map 0:0 -map 0:1  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
 
   
-  
-  
-  
-  
+  cheers
