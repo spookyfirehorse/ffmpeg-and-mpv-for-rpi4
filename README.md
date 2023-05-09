@@ -57,6 +57,8 @@ make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfi
 
 
 ########
+
+
 bullseye
 
 32 bit FFMPEG
