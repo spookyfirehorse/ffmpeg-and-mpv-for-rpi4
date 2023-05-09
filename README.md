@@ -10,13 +10,15 @@ INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 + ssh streaming
 + 
 ############################################
+
 first of all change sources.list.d/
 
 sudo nano /etc/apt/sources.list.d/raspi.list
 
 deb http://archive.raspberrypi.org/debian/ bullseye main
-# Uncomment line below then 'apt-get update' to enable 'apt-get source'
+
 deb-src http://archive.raspberrypi.org/debian/ bullseye main
+
 #####################################################################
 
 FDK-AAC
@@ -36,6 +38,8 @@ sudo apt build-dep ffmpeg
 bookworm 
 
 git clone -b test/5.1.2/main https://github.com/jc-kynesim/rpi-ffmpeg.git
+
+./configure coming son
 
 bullseye 
 
@@ -69,7 +73,7 @@ git clone -b test/4.3.6/main https://github.com/jc-kynesim/rpi-ffmpeg.git
 
 ./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --extra-cflags=-I/usr/include/libdrm --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vulkan --arch=armv7l --enable-mmal --enable-avresample --disable-filter=resample --enable-libwavpack --enable-libv4l2 --enable-sand --enable-vout-drm --enable-vout-egl --enable-v4l2-request --enable-libudev --enable-rpi --enable-neon --enable-v4l2-request --enable-sand --enable-pocketsphinx --disable-static --enable-opencl --enable-libsrt --enable-librabbitmq --enable-version3 --cpu=arm1176jzf-s --arch=armv6t && make -j4 && sudo make -j4 install
 
-#############################################
+
 #####################################################
 
 MPV
@@ -126,6 +130,7 @@ ssh user@host  ffmpeg -c:v h264_v4l2m2m -fflags +genpts+nobuffer+igndts+discardc
 rtsp streamig 
 
 https://github.com/aler9/mediamtx/releases
+
 64 bit
 
 wget https://github.com/aler9/mediamtx/releases/download/v0.22.2/mediamtx_v0.22.2_linux_arm64v8.tar.gz
@@ -138,7 +143,10 @@ tar -xf rtsp'********
 
 
 sudo mv mediamtx /usr/local/bin/
+
 sudo mv mediamtx.yml /usr/local/etc/
+
+#################################
 
 
 sudo tee /etc/systemd/system/mediamtx.service >/dev/null << EOF
@@ -151,6 +159,8 @@ WantedBy=multi-user.target
 EOF
 
 
+########################################
+
 
 sudo systemctl daemon-reload
 
@@ -158,6 +168,9 @@ sudo systemctl enable mediamtx
 
 sudo systemctl start mediamtx
 
+#########################
+
+arecord -L
 
 my audio mic = plughw:CARD=S3,DEV=0
 
@@ -173,32 +186,23 @@ without audio
 ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -strict experimental  \
 -f v4l2 -input_format h264  -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
-example
 
 set output rpi-camera to h264
 
 v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
 
-and run this
-
-ffmpeg  -hide_banner  -strict experimental  \
-  -f alsa  -ac 1  -i hw:CARD=Device,DEV=0  -f v4l2 -input_format h264 -itsoffset 1.0 -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p    \
-  -c:a libopus  -b:a 32k  -application lowdelay -map 0:0 -map 1:0 \
-  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
-  
 
 
-h264_v4l2m2m working 
+Video + Audio libfdk_aac h264_v4l2m2m
 
-best setting for rpi-cam h264 output
- 
-v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
- 
- -itsoffset 1.00  and -map 1:0 -map 0:0  = audio video sync ? set -itsoffset 1.00 mining 1 second difference audio video
 
 ffmpeg -hwaccel drm -hwaccel_output_format drm_prime  -flags low_delay   -hide_banner    \
   -f alsa -thread_queue_size 256  -i plughw:CARD=Device,DEV=0  -f v4l2 -input_format h264  -itsoffset 1.00  -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1500k  -acodec libfdk_aac    -b:a 64k   -map 1:0 -map 0:0   \
    -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+ 
+  -itsoffset 1.00  and -map 1:0 -map 0:0  = audio video sync ? set -itsoffset 1.00 mining 1 second difference audio video
+
+ 
  
   opus only audio
   
