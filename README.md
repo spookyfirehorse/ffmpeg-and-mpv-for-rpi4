@@ -125,48 +125,41 @@ ssh user@host  ffmpeg -c:v h264_v4l2m2m -fflags +genpts+nobuffer+igndts+discardc
  
 rtsp streamig 
 
-https://github.com/aler9/rtsp-simple-server/releases
-
+https://github.com/aler9/mediamtx/releases
 64 bit
 
-wget https://github.com/aler9/rtsp-simple-server/releases/download/v0.18.3/rtsp-simple-server_v0.18.3_linux_arm64v8.tar.gz
+wget https://github.com/aler9/mediamtx/releases/download/v0.22.2/mediamtx_v0.22.2_linux_arm64v8.tar.gz
 
 32 bit
 
-wget https://github.com/aler9/rtsp-simple-server/releases/download/v0.18.3/rtsp-simple-server_v0.18.3_linux_armv7.tar.gz
+wget https://github.com/aler9/mediamtx/releases/download/v0.22.2/mediamtx_v0.22.2_linux_armv7.tar.gz
 
 tar -xf rtsp'********
 
-sudo mv rtsp-simple-server /usr/local/bin/
 
-sudo mv rtsp-simple-server.yml /usr/local/etc/
+sudo mv mediamtx /usr/local/bin/
+sudo mv mediamtx.yml /usr/local/etc/
 
-Create the service:
 
-####
-sudo tee /etc/systemd/system/rtsp-simple-server.service >/dev/null << EOF
+sudo tee /etc/systemd/system/mediamtx.service >/dev/null << EOF
 [Unit]
 Wants=network.target
 [Service]
-ExecStart=/usr/local/bin/rtsp-simple-server /usr/local/etc/rtsp-simple-server.yml
+ExecStart=/usr/local/bin/mediamtx /usr/local/etc/mediamtx.yml
 [Install]
 WantedBy=multi-user.target
 EOF
-####
-
-Enable and start the service:
-
-sudo systemctl enable rtsp-simple-server
-
-sudo systemctl start rtsp-simple-server
 
 
-arecord -L show mic device
+
+sudo systemctl daemon-reload
+
+sudo systemctl enable mediamtx
+
+sudo systemctl start mediamtx
+
 
 my audio mic = plughw:CARD=S3,DEV=0
-
-
-v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
 
 video + audo
 
@@ -197,7 +190,7 @@ ffmpeg  -hide_banner  -strict experimental  \
 
 h264_v4l2m2m working 
 
-best setting for rpi-cam
+best setting for rpi-cam h264 output
  
 v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
  
