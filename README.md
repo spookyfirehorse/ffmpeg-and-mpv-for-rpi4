@@ -136,7 +136,7 @@ cd mpv
 
 meson build
 
-meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi-mmal=enabled -Degl=enabled 
+meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi-mmal=disabled -Degl=enabled 
 
 meson compile -C build
 
