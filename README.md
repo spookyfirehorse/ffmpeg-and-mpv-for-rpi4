@@ -37,13 +37,13 @@ sudo apt install cpuinfo
 
 cpu-info
 
---cpu=arm1176jzf-s --arch=arm rpi zero
+--cpu=arm1176jzf-s --arch=armv6l rpi zero
 
---cpu=a53 --arch=armv7l  rpi 3b 
+--cpu=a53  --arch=arm  rpi 3b 
 
 --cpu=cortex-a72 --arch=arm64  rpi 4 64 bit
 
---cpu=cortex-a72 --arch=armv7l  rpi 4 32 bit
+--cpu=cortex-a72 --arch=arm  rpi 4 32 bit
 
 
 
