@@ -45,7 +45,7 @@ cpu-info
 
 --cpu=cortex-a72 --arch=arm  rpi 4 32 bit
 
-
+64 bit on rpi 2 -3 not compiling
 
 64 bit FFMPEG
 
