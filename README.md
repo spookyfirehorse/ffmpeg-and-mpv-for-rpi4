@@ -124,7 +124,7 @@ bullseye
 sudo apt build-dep mpv
 
 apt source mpv && cd mpv-0.32.0  && chmod 777 waf && ./waf configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --confdir=/etc/mpv --zshdir=/usr/share/zsh/vendor-completions --enable-cdda --enable-dvdnav --enable-dvbin --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2 --enable-libmpv-shared --enable-libplacebo --enable-vulkan
- --enable-ffmpeg-strict-abi && ./waf -j4 && sudo .waf -j4 install
+ --enable-ffmpeg-strict-abi && ./waf -j4 && sudo ./waf -j4 install
  
  
 bookworm
