@@ -15,9 +15,9 @@ first of all change sources.list.d/
 
 sudo nano /etc/apt/sources.list.d/raspi.list
 
-deb http://archive.raspberrypi.org/debian/ bullseye main
+deb http://archive.raspberrypi.org/debian/ bookworm main
 
-deb-src http://archive.raspberrypi.org/debian/ bullseye main
+deb-src http://archive.raspberrypi.org/debian/ bookworm main
 
 #####################################################################
 
