@@ -129,6 +129,8 @@ apt source mpv && cd mpv-0.32.0  && chmod 777 waf && ./waf configure --prefix=/u
  
 bookworm
 
+git clone https://github.com/mpv-player/mpv.git
+
 sudo apt build-dep mpv && apt soure mpv
 
 cd mpv 
