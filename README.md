@@ -299,7 +299,7 @@ mpv rtsp://localhost:8554/mystream
   
   streaming from android phone camera
   
-  install adb on rpi 
+  install adb 
   
   sudo apt install adb
   
@@ -327,7 +327,15 @@ mpv rtsp://localhost:8554/mystream
  ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime   -flags low_delay   -hide_banner -rtsp_transport tcp  \
   -itsoffset 1.00    -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m -pix_fmt yuv420p  -b:v 1500k   -c:a libfdk_aac -b:a 64k   -map 0:0 -map 0:1  -f rtsp -rtsp_transport    tcp  rtsp://localhost:8554/mystream2
 
+
+###############################################################################################
+
+
 android camera in linphone chromium usw
+
+its not working on rpi but on amd64 because libv4l2 and h264_v4l2m2m are the same devices
+
+so only amd64 and i386
 
 sudo apt install libv4l2loopback-dkms
 
@@ -336,9 +344,9 @@ v4l2loopback-ctl set-fps 15 /dev/video1
 
 adb -d forward tcp:8080 tcp:8080
 
-ffmpeg  -an -hwaccel drm  -hwaccel_output_format yuv420p -hide_banner  -fflags discardcorrupt -rtsp_transport tcp  -i rtsp://127.0.0.1:8080/h264_pcm.sdp    -c:v rawvideo -pix_fmt yuv420p   -f v4l2 /dev/video1
+ffmpeg  -an -hwaccel auto -hide_banner  -fflags discardcorrupt -rtsp_transport tcp  -i rtsp://127.0.0.1:8080/h264_pcm.sdp    -c:v rawvideo -pix_fmt yuv420p   -f v4l2 /dev/video1
 
--an = audio no important
+-an = audio no is important
 
 
 apt install qv4l2
