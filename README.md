@@ -335,6 +335,54 @@ mpv rtsp://localhost:8554/mystream
  ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime   -flags low_delay   -hide_banner -rtsp_transport tcp  \
   -itsoffset 1.00    -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m -pix_fmt yuv420p  -b:v 1500k   -c:a libfdk_aac -b:a 64k   -map 0:0 -map 0:1  -f rtsp -rtsp_transport    tcp  rtsp://localhost:8554/mystream2
 
+create service autostart
+
+mkdir bin
+
+sudo nano /usr/local/bin/home-stream.sh
+
+put this example in
+
+chang settings for audio or different port
+
+v4l2-ctl -d /dev/video0  -p 25  --set-fmt-video=width=640,height=360,pixelformat=4 \
+--set ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=11,h264_profile=2,video_bitrate=10000000,h264_i_frame_period=25
+
+ffmpeg -hwaccel drm -hwaccel_output_format drm_prime  -fflags +genpts+nobuffer -avioflags direct  -flags low_delay  -hide_banner  -strict experimental   \
+  -f alsa   -i plughw:CARD=Device,DEV=0  -f v4l2 -input_format h264  -itsoffset 1.00 -i /dev/video0 -c:v h264_v4l2m2m -b:v 1M  -pix_fmt yuv420p    \
+  -c:a libopus  -b:a 32k  -application lowdelay -map 0:0 -map 0:1 \
+  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+
+store it
+
+
+nano .config/systemd/user/home-stream.service
+
+put this in
+
+[Unit]
+Description=stream
+Requires=multi-user.target
+After=multi-user.target
+
+[Service]
+ExecStartPre=/bin/sleep 15
+ExecStart=home-stream.sh
+Restart=always
+ExecStop=killall ffmpeg
+#KillMode=process
+[Install]
+WantedBy=multi-user.target
+
+
+store it strg +o 
+
+systemctl --user enable home-stream.service
+
+systemctl --user start home-stream.service
+
+systemctl --user status home-stream.service
+
 
 ###############################################################################################
 
