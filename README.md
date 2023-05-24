@@ -13,18 +13,11 @@ INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 + rtsp streaming 
 
 + ssh streaming
-+ 
-############################################
 
-first of all change sources.list.d/
-
-sudo nano /etc/apt/sources.list.d/raspi.list
-
-deb http://archive.raspberrypi.org/debian/ bookworm main
-
-deb-src http://archive.raspberrypi.org/debian/ bookworm main
 
 #####################################################################
+
+
 
 FDK-AAC
 
