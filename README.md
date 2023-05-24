@@ -305,9 +305,13 @@ mpv rtsp://localhost:8554/mystream
   
   install ip-webcam from playstore https://play.google.com/store/apps/details?id=com.pas.webcam on your phone
   
-  
+  in this app you can chang port settings resolution and framerate
   
   conect android phone with usb cable not over network (network is to slow)
+  
+  i change fps to 15 on an very old s2 and resolution 320x240 but with a better phone no problems with higher resolutions
+  
+  also you can disable network on android  it is not need
   
   start adb 
   
@@ -315,7 +319,6 @@ mpv rtsp://localhost:8554/mystream
   
   confirm on android the adb conction
   
-  in this app you can chang port settings resolution and framerate
   
   
   
@@ -324,5 +327,23 @@ mpv rtsp://localhost:8554/mystream
  ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime   -flags low_delay   -hide_banner -rtsp_transport tcp  \
   -itsoffset 1.00    -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m -pix_fmt yuv420p  -b:v 1500k   -c:a libfdk_aac -b:a 64k   -map 0:0 -map 0:1  -f rtsp -rtsp_transport    tcp  rtsp://localhost:8554/mystream2
 
-  
-  cheers
+android camera in linphone chromium usw
+
+sudo apt install libv4l2loopback-dkms
+
+sudo modprobe v4l2loopback video_nr=1 card_label="device number 1" exclusive_caps=1
+v4l2loopback-ctl set-fps 15 /dev/video1
+
+adb -d forward tcp:8080 tcp:8080
+
+ffmpeg  -an -hwaccel drm  -hwaccel_output_format yuv420p -hide_banner  -fflags discardcorrupt -rtsp_transport tcp  -i rtsp://127.0.0.1:8080/h264_pcm.sdp    -c:v rawvideo -pix_fmt yuv420p   -f v4l2 /dev/video1
+
+-an = audio no important
+
+
+apt install qv4l2
+
+try it with qv4l2
+
+cheers
+ 
