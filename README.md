@@ -1,5 +1,10 @@
-Bullseye and Bookworm
 
+sorry for my bad english
+
+this is an easy way of streaming on linux 
+
+
+Bullseye and Bookworm RPI 2 3 and 4
 
 INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw. 
 
@@ -58,6 +63,9 @@ arm_64bit=0  for 32 bit
 --cpu=cortex-a72   rpi 4 32 bit
 
 --cpu=cortex-a7    rpi 2
+
+
+change the cpu in configure txt
 
 64 bit FFMPEG
 
