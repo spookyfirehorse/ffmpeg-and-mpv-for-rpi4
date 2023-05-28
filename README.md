@@ -31,7 +31,7 @@ sudo make install && sudo ldconfig
 
 
 
-sudo apt install cpuinfo
+sudo apt install cpuinfo libv4l-dev
 
 cpu-info
 
