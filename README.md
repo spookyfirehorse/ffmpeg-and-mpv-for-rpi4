@@ -157,7 +157,7 @@ dpkg-buildpackage -us -uc
 
 cd ..
 
-sudo dpkg -i mpv*.deb
+sudo dpkg -i *mpv*.deb
 
 or
 
