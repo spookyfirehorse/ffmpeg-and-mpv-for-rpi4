@@ -47,15 +47,31 @@ arm_64bit=0  for 32 bit
 
 ##############################################################################################
 
+        Bullseye
+
+
 --cpu=arm1176jzf-s   rpi zero
 
---cpu=cortex-a53    rpi 3b 
+ --extra-libs=-latomic --cpu=cortex-a53 --arch=armv7    rpi 3b 
 
---cpu=cortex-a72   rpi 4 64 bit
+--extra-libs=-latomic --cpu=cortex-a72 --arch=arm64   rpi 4 64 bit
 
---cpu=cortex-a72   rpi 4 32 bit
+--extra-libs=-latomic --cpu=cortex-a72 --arch=armv7   rpi 4 32 bit
 
---cpu=cortex-a7    rpi 2
+
+    Bookworm
+    
+--extra-libs=-latomic --cpu=cortex-a53 --arch=armv7l --disable-armv5te --disable-armv6t2   rpi 3b 
+
+--extra-libs=-latomic --cpu=cortex-a72 --arch=arm64   rpi 4 64 bit
+
+--extra-libs=-latomic --cpu=cortex-a72 --arch=armv7l --disable-armv5te --disable-armv6t2   rpi 4 32 bit
+ 
+
+
+
+
+
 
 
 change the cpu in configure txt
@@ -64,7 +80,7 @@ change the cpu in configure txt
 
 sudo apt build-dep ffmpeg
 
-bookworm 
+bookworm 64
 
 git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git
 
@@ -75,7 +91,7 @@ make -j4
 sudo make -j4 install
 
 
-bullseye 
+bullseye arm64
 
 git clone -b release/4.3/main https://github.com/jc-kynesim/rpi-ffmpeg.git
 
@@ -88,14 +104,11 @@ make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfi
 ########
 
 
-bullseye
-
-
-32 bit FFMPEG
+bullseye armhf
 
 git clone -b release/4.3/main https://github.com/jc-kynesim/rpi-ffmpeg.git
 
-./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --extra-cflags=-I/usr/include/libdrm --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vulkan  --enable-mmal --enable-avresample --disable-filter=resample --enable-libwavpack --enable-libv4l2 --enable-sand --enable-vout-drm --enable-vout-egl --enable-v4l2-request --enable-libudev --enable-rpi --enable-neon  --enable-sand --enable-pocketsphinx --disable-static --enable-opencl --enable-libsrt --enable-librabbitmq --enable-version3 --cpu=cortex-a72  --enable-libwebp --extra-libs=-latomic --disable-vaapi --disable-vdpau
+./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --extra-cflags=-I/usr/include/libdrm --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vulkan --enable-mmal --enable-avresample --disable-filter=resample --enable-libwavpack --enable-libv4l2 --enable-vout-drm --enable-vout-egl --enable-v4l2-request --enable-libudev --enable-rpi --enable-neon --enable-sand --enable-pocketsphinx --disable-static --enable-opencl --enable-libsrt --enable-librabbitmq --enable-version3 --enable-libwebp --extra-libs=-latomic --cpu=cortex-a53 --arch=armv7 --disable-cuda --disable-vaapi --disable-vdpau
 
 
 make -j4
@@ -106,11 +119,11 @@ make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfi
 
 
 
-bookworm 32 bit
+bookworm armhf
 
 git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git
 
-./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --libdir=/usr/lib/arm-linux-gnueabihf --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --disable-mmal --enable-neon --enable-v4l2-request --enable-libudev --enable-sand --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libfdk-aac --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-epoxy --enable-libxcb --enable-libzimg --enable-vout-drm --enable-libv4l2 --enable-vout-egl --disable-static --enable-libsrt --extra-cflags=-I/usr/include/libdrm --enable-librabbitmq --cpu=cortex-a72  --extra-libs=-latomic
+./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --libdir=/usr/lib/arm-linux-gnueabihf/ --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --disable-mmal --enable-neon --enable-v4l2-request --enable-libudev --enable-sand --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libfdk-aac --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-epoxy --enable-libxcb --enable-libzimg --enable-vout-drm --enable-vout-egl --disable-static --enable-libsrt --extra-cflags=-I/usr/include/libdrm --enable-librabbitmq --cpu=cortex-a53 --arch=armv7l --disable-cuda --disable-vaapi --disable-vdpau --disable-vulkan --disable-armv5te --disable-armv6t2
 
 sudo rm -r /usr/lib/arm-linux-gnueabihf/neon
 
@@ -126,7 +139,7 @@ bullseye
 
 git clone -b release/4.3/main https://github.com/jc-kynesim/rpi-ffmpeg.git
 
-./configure --prefix=/usr  --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-mmal --enable-neon --enable-rpi --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp  --disable-static --enable-nonfree --enable-libfdk-aac  --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vout-egl --enable-sand --extra-libs=-latomic  --disable-vaapi --disable-vdpau --disable-cuda  && make -j4 && sudo make -j4 install
+./configure --prefix=/usr  --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-mmal --enable-neon --enable-rpi --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp  --disable-static --enable-nonfree --enable-libfdk-aac  --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vout-egl --extra-libs=-latomic  --disable-vaapi --disable-vdpau --disable-cuda  && make -j4 && sudo make -j4 install
 
 --cpu=arm1176jzf-s
 
@@ -149,17 +162,19 @@ apt source mpv && cd mpv-0.32.0  && chmod 777 waf && ./waf configure --prefix=/u
  
 bookworm
 
-git clone https://github.com/mpv-player/mpv.git   not always working
 
-sudo apt build-dep mpv && apt soure mpv
+sudo apt build-dep mpv && apt source mpv
 
-cd mpv 
+cd mpv...
 
 dpkg-buildpackage -us -uc 
 
 cd ..
 
-sudo dpkg -i *mpv*.deb
+sudo dpkg -i lib*mpv*.deb mpv*.deb
+
+
+#############
 
 or
 
@@ -172,7 +187,9 @@ meson compile -C build
 
 sudo meson install -C build
 
-##############################
+#############################
+
+only bullseye
 
 CELLULOID mpv player with sidebar
 
@@ -182,11 +199,15 @@ apt source celluloid && cd celluloid* && meson build && cd build && ninja -j4 &&
 
 
 #########################################################
+
 SSH streaming
 
 from any linux pc with ffmpeg and ssh installed 
 
 #################### autologin to ssh must be enabled without password only with key auth  !!!!!!!!!!!!!
+
+install kssh-askpass rsa key 
+
 
 host =user@192.0.0.10
 
@@ -194,11 +215,11 @@ ssh user@host v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=640,height=4
 
 working with distro ffmpeg
 
-ssh user@host  ffmpeg -c:v h264_v4l2m2m -fflags +genpts+nobuffer+igndts+discardcorrupt -flags low_delay -hide_banner -strict experimental -f alsa -i plughw:CARD=Device,DEV=0  \
+ssh user@host  ffmpeg -c:v h264_v4l2m2m -fflags +genpts+nobuffer+igndts+discardcorrupt -avioflag direct -flags +genpts+low_delay -hide_banner -strict experimental -f alsa -i plughw:CARD=Device,DEV=0  \
  -f v4l2  -input_format h264 -pix_fmt yuv420p -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1000k -c:a libopus -application lowdelay -b:a 32k  -ar 48000 -f s16le      -f mpegts  - | mpv  --profile=low-latency  --volume=50  -
  
  
- works better but need libfdk-aac
+ libfdk-aac is more compatible
  
  ssh user@host  ffmpeg -an -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts  -avioflags direct -flags low_delay   -hide_banner  -f alsa -thread_queue_size 256  -i plughw:CARD=S3,DEV=0  -f v4l2    -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le      -f mpegts  - | mpv  --profile=low-latency  --volume=30 -
 
