@@ -2,3 +2,10 @@ meson build
 meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi=enabled -Drpi-mmal=enabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled
 meson compile -C build
 meson install -C build
+
+
+
+meson build
+meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi=disabled -Drpi-mmal=disabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled -Dlibplacebo=enabled  -Dcuda-interop=disabled -Dvulkan=enabled -Dcuda-hwaccel=disabled -Dshaderc=disabled
+meson compile -C build
+sudo meson install -C build
