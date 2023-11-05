@@ -332,17 +332,27 @@ nano .config/systemd/user/home-stream.service
 put this in
 
 [Unit]
+
 Description=stream
+
 Requires=multi-user.target
+
 After=multi-user.target
 
 [Service]
+
 ExecStartPre=/bin/sleep 15
+
 ExecStart=home-stream.sh
+
 Restart=always
+
 ExecStop=killall ffmpeg
+
 #KillMode=process
+
 [Install]
+
 WantedBy=multi-user.target
 
 
