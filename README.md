@@ -4,7 +4,7 @@ sorry for my bad english
 this is an easy way of streaming on linux 
 
 
-Bullseye and Bookworm RPI 2 3 and 4
+Bookworm RPI 2 3 and 4
 
 INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw. 
 
@@ -14,6 +14,21 @@ INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 
 + ssh streaming
 
+#########################
+
+mpv.conf
+
+gpu-dumb-mode=yes
+opengl-glfinish=yes
+gpu-context=x11egl
+gpu-api=opengl
+vo=gpu
+hwdec=auto
+hwdec-codecs=all
+hwdec-image-format=drm_prime
+gpu-hwdec-interop=drmprime-overlay
+
+af=lavfi-crystalizer=1,lavfi-bass=gain=2,scaletempo2
 
 #####################################################################
 
@@ -47,17 +62,7 @@ arm_64bit=0  for 32 bit
 
 ##############################################################################################
 
-        Bullseye
-
-
---cpu=arm1176jzf-s   rpi zero
-
- --extra-libs=-latomic --cpu=cortex-a53 --arch=armv7    rpi 3b 
-
---extra-libs=-latomic --cpu=cortex-a72 --arch=arm64   rpi 4 64 bit
-
---extra-libs=-latomic --cpu=cortex-a72 --arch=armv7   rpi 4 32 bit
-
+  
 
     Bookworm
     
@@ -82,40 +87,15 @@ sudo apt build-dep ffmpeg
 
 bookworm 64
 
-git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git
+apt source ffmpeg 
 
-./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --disable-mmal --enable-neon --enable-v4l2-request --enable-libudev --enable-sand --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libfdk-aac --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-epoxy --enable-libxcb --enable-libzimg --enable-vout-drm --enable-libv4l2 --enable-vout-egl --disable-static --enable-libsrt --extra-cflags=-I/usr/include/libdrm --enable-librabbitmq --arch=arm64 --cpu=cortex-a72     --enable-libwebp  --extra-libs=-latomic
-
-make -j4
-
-sudo make -j4 install
-
-
-bullseye arm64
-
-git clone -b release/4.3/main https://github.com/jc-kynesim/rpi-ffmpeg.git
-
-./configure --prefix=/usr  --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --disable-mmal --enable-neon --enable-v4l2-request --enable-libudev --enable-sand   --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libfdk-aac --enable-version3 --enable-libopencore-amrnb --enable-libopencore-amrwb --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-epoxy   --enable-libxcb --enable-libzimg --enable-liblensfun --enable-neon --enable-vout-drm --enable-libv4l2  --enable-vout-egl  --disable-static --enable-libsrt  --extra-cflags=-I/usr/include/drm --enable-libwebp --enable-libzimg --cpu=cortex-a72 --arch=arm64 --enable-libwebp  --extra-libs=-latomic && make -j4 && sudo make -j4 install
-
-make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
-
-
-
-########
-
-
-bullseye armhf
-
-git clone -b release/4.3/main https://github.com/jc-kynesim/rpi-ffmpeg.git
-
-./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --incdir=/usr/include/arm-linux-gnueabihf --extra-cflags=-I/usr/include/libdrm --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --enable-nonfree --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libpulse --enable-nonfree --enable-libfdk-aac --enable-libx265 --enable-version3 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vulkan --enable-mmal --enable-avresample --disable-filter=resample --enable-libwavpack --enable-libv4l2 --enable-vout-drm --enable-vout-egl --enable-v4l2-request --enable-libudev --enable-rpi --enable-neon --enable-sand --enable-pocketsphinx --disable-static --enable-opencl --enable-libsrt --enable-librabbitmq --enable-version3 --enable-libwebp --extra-libs=-latomic --cpu=cortex-a53 --arch=armv7 --disable-cuda --disable-vaapi --disable-vdpau
+./configure --prefix=/usr --extra-version=1+rpt4 --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl --enable-neon --enable-v4l2-request --enable-libudev --enable-epoxy --libdir=/usr/lib/aarch64-linux-gnu --arch=arm64 --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-libplacebo --enable-librav1e --enable-shared --cpu=cortex-a72 --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-nonfree --enable-libfdk-aac --disable-static --disable-cuda --disable-vaapi --disable-vdpau --enable-vout-drm --enable-vout-egl --enable-vulkan
 
 
 make -j4
 
 sudo make -j4 install
 
-make tools/qt-faststart && sudo cp  tools/qt-faststart /usr/bin/ && sudo ldconfig
 
 
 
@@ -133,34 +113,9 @@ sudo make -j4 install
 
 ############################################################################
 
-rpi zero 
-
-bullseye
-
-git clone -b release/4.3/main https://github.com/jc-kynesim/rpi-ffmpeg.git
-
-./configure --prefix=/usr  --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --enable-avresample --disable-filter=resample --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librsvg --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-mmal --enable-neon --enable-rpi --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp  --disable-static --enable-nonfree --enable-libfdk-aac  --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-vout-egl --extra-libs=-latomic  --disable-vaapi --disable-vdpau --disable-cuda  && make -j4 && sudo make -j4 install
-
---cpu=arm1176jzf-s
-
-
-no bookworm now 
-
-version 5.1 not working chromaprint avcodec
-
-#####################################################
 
 MPV
 
-bullseye
-
-sudo apt build-dep mpv
-
-apt source mpv && cd mpv-0.32.0  && chmod 777 waf && ./waf configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --confdir=/etc/mpv --zshdir=/usr/share/zsh/vendor-completions --enable-cdda --enable-dvdnav --enable-dvbin --enable-egl-drm --enable-gl-x11 --enable-egl --enable-sdl2 --enable-libmpv-shared --enable-libplacebo --enable-vulkan
- --enable-ffmpeg-strict-abi && ./waf -j4 && sudo ./waf -j4 install
- 
- 
-bookworm
 
 
 sudo apt build-dep mpv && apt source mpv
@@ -188,17 +143,6 @@ meson compile -C build
 sudo meson install -C build
 
 #############################
-
-only bullseye
-
-CELLULOID mpv player with sidebar
-
-sudo apt build-dep celluloid
-
-apt source celluloid && cd celluloid* && meson build && cd build && ninja -j4 && sudo ninja install
-
-
-#########################################################
 
 SSH streaming
 
