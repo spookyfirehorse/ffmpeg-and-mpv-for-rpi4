@@ -143,7 +143,9 @@ or
 
 meson build
 
-meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi-mmal=disabled -Degl=enabled 
+meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi=disabled -Drpi-mmal=disabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled -Dlibplacebo=enabled -Dvdpau=disabled -
+
+Dvaapi=disabled
 
 meson compile -C build
 
