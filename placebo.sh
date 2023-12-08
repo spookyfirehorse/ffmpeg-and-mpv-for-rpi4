@@ -8,6 +8,7 @@
 
 git clone https://github.com/haasn/libplacebo.git
 cd libplacebo
+git submodule update --init
 meson setup build
 meson configure build   -Dvulkan=enabled -Dshaderc=enabled
 meson compile -C build
