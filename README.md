@@ -152,11 +152,11 @@ sudo meson install -C build
 
 rtsp-streaming libcamera camera autodedect
 
-rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 60  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg  -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime    -hide_banner  -f alsa -thread_queue_size 16   -i plughw:0  -r 60   -i -  -c:v h264_v4l2m2m  -b:v 1700k -vf select="gte(n\, 1)" -async 1  -r 30   -c:a libopus  -b:a 64k  -application lowdelay   -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 60  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg  -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime    -hide_banner  -f alsa -thread_queue_size 16   -i plughw:0  -re   -i -  -c:v h264_v4l2m2m  -b:v 1700k -vf select="gte(n\, 1)" -async 1  -r 30   -c:a libopus  -b:a 64k  -application lowdelay   -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
-experimental -vsync 0 and libfdk 
+experimental  and libfdk 
 
-rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 60  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg -vsync 0 -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime    -hide_banner  -f alsa -thread_queue_size 16   -i plughw:0  -r 60   -i -  -c:v h264_v4l2m2m  -b:v 1700k  -r 30   -acodec libfdk_aac  -profile 39      -b:a 32k   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 60  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg -async 1 -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -f alsa -thread_queue_size 16 -i plughw:0  -re -i -  -c:v h264_v4l2m2m  -b:v 1700k  -r 30   -acodec libfdk_aac   -eld_sbr 1  -ar 44100      -b:a 32k   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 ##############################################
  
@@ -202,6 +202,13 @@ sudo systemctl start mediamtx
 
 #########################
 
+nano /boot/firmware/config.txt
+
+#gpu_mem=256
+#start_x=1
+disable_camera_led=1
+
+
 set  15 fps with and height
 
 v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
@@ -209,21 +216,21 @@ v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720  --set-ctr
 
 in this examples audio device =  plughw:0  
 
-ffmpeg -vsync 0  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner   \
+ffmpeg -async 1  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner   \
   -f alsa  -i plughw:0  -f v4l2 -input_format yuv420p -re  -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p    \
   -c:a libopus  -b:a 32k  -application lowdelay  \
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 without audio
 
-ffmpeg -vsync 0  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner  \
+ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner  \
 -f v4l2 -input_format yuv420p -re -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 
 Video + Audio libfdk_aac h264_v4l2m2m
 
-ffmpeg -vsync 0  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner      -f alsa  -i plughw:0  -f v4l2 -input_format yuv420p    -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M   -acodec libfdk_aac  -profile 39      -b:a 32k        -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+ffmpeg -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner      -f alsa  -i plughw:0  -f v4l2 -input_format yuv420p    -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M   -acodec libfdk_aac   -eld_sbr 1  -ar 44100      -b:a 32k      -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 look running stream
 
@@ -275,14 +282,15 @@ mpv rtsp://localhost:8554/mystream
   
   adb -d forward tcp:8080 tcp:8080
   
- ffmpeg   -vsync 0  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts -strict experimental -avioflags direct -flags low_delay  -hide_banner -rtsp_transport tcp  \
- -re  -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m -pix_fmt yuv420p  -b:v 1500k   -c:a libfdk_aac -b:a 64k  -profile 23   -f rtsp -rtsp_transport    tcp  rtsp://localhost:8554/mystream2
+ ffmpeg   -async 1  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts -strict experimental -avioflags direct -flags low_delay  -hide_banner -rtsp_transport tcp  \
+ -re  -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m -pix_fmt yuv420p  -b:v 1500k   -acodec libfdk_aac   -eld_sbr 1  -ar 44100      -b:a 32k   -f rtsp -rtsp_transport    tcp  rtsp://localhost:8554/mystream2
 
-without changing
+without bitrat changing
 
 
- ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime   -flags low_delay   -hide_banner -rtsp_transport tcp  \
+ ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime   -flags low_delay   -hide_banner -rtsp_transport tcp  \
  -re  -i rtsp://127.0.0.1:8080/h264_pcm.sdp -codec copy     -f rtsp -rtsp_transport    tcp  rtsp://localhost:8554/mystream2
+
 
 create service autostart
 
@@ -290,11 +298,11 @@ mkdir bin
 
 sudo nano /usr/local/bin/home-stream.sh
 
-put this example in you can change framrate audiodevice bitrate usw
+put this example in ! you can change framrate audiodevice bitrate usw
 
 
 v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
-ffmpeg -hwaccel drm -hwaccel_output_format drm_prime  -fflags +genpts+nobuffer -avioflags direct  -flags low_delay  -hide_banner  -strict experimental   \
+ffmpeg -async 1-hwaccel drm -hwaccel_output_format drm_prime  -fflags +genpts+nobuffer -avioflags direct  -flags low_delay  -hide_banner  -strict experimental   \
   -f alsa   -i plughw:0  -f v4l2 -input_format yuv420p -re -i /dev/video0 -c:v h264_v4l2m2m -b:v 1M  -pix_fmt yuv420p    \
   -c:a libopus  -b:a 32k  -application lowdelay  \
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
