@@ -161,7 +161,7 @@ move it to
 
       sudo mv mediamtx.yml /usr/local/etc/
 
-
+this create mediamtx.service
 
     sudo tee /etc/systemd/system/mediamtx.service >/dev/null << EOF
     [Unit]
@@ -172,12 +172,16 @@ move it to
     WantedBy=multi-user.target
     EOF
     
-
+and reload
 
     sudo systemctl daemon-reload
-    
+
+enable
+
     sudo systemctl enable mediamtx
-    
+
+start
+
     sudo systemctl start mediamtx
 
 #########################
