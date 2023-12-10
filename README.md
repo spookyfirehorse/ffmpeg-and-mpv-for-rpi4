@@ -208,8 +208,8 @@ inputformat h264
 
 without audio
 
-           ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner  \
--f v4l2 -input_format yuv420p -re -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+           ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner 
+    -f v4l2 -input_format yuv420p -re -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 
@@ -217,11 +217,11 @@ Video + Audio libfdk_aac h264_v4l2m2m
 
 most compatible with all players real mp4
 
-ffmpeg -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner      -f alsa  -i plughw:0  -f v4l2 -input_format yuv420p    -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M   -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart      -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+    ffmpeg -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner      -f alsa  -i plughw:0  -f v4l2 -input_format     yuv420p    -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M   -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart      -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 look running stream
 
-mpv rtsp://localhost:8554/mystream
+    mpv rtsp://localhost:8554/mystream
 
  
   opus only audio
@@ -244,7 +244,7 @@ streaming from android phone camera
   
 install adb 
   
-sudo apt install adb
+    sudo apt install adb
   
 install ip-webcam from playstore https://play.google.com/store/apps/details?id=com.pas.webcam on your phone
   
@@ -258,7 +258,7 @@ also you can disable network on android  it is not need
   
 start adb 
   
-adb devices
+    adb devices
   
 confirm on android the adb conction
   
@@ -266,77 +266,66 @@ confirm on android the adb conction
   
   #!/bin/bash
   
-  adb -d forward tcp:8080 tcp:8080
+      adb -d forward tcp:8080 tcp:8080
   
  #!/bin/bash
 
 #Working opus
-ffmpeg -async 1 -threads 4  -hwaccel drm -hwaccel_output_format drm_prime  -strict experimental -flags low_delay -fflags +genpts+nobuffer  -hide_banner -rtsp_transport tcp  \
- -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m  -pix_fmt yuv420p -b:v 1000k -c:a libopus  -b:a 64k  -application lowdelay  -ar 48000   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
+    ffmpeg -async 1 -threads 4  -hwaccel drm -hwaccel_output_format drm_prime  -strict experimental -flags low_delay -fflags +genpts+nobuffer  -hide_banner -rtsp_transport tcp  \
+     -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m  -pix_fmt yuv420p -b:v 1000k -c:a libopus  -b:a 64k  -application lowdelay  -ar 48000   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
 
 
 #Working copy
-ffmpeg  -async 1  -threads 4  -hwaccel drm -hwaccel_output_format drm_prime   -strict experimental -flags low_delay -fflags +genpts+nobuffer+igndts -avioflags direct  -hide_banner -rtsp_transport tcp  \
- -re   -i rtsp://127.0.0.1:8080/h264_pcm.sdp -codec copy   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
+    ffmpeg  -async 1  -threads 4  -hwaccel drm -hwaccel_output_format drm_prime   -strict experimental -flags low_delay -fflags +genpts+nobuffer+igndts -avioflags direct  -hide_banner -rtsp_transport tcp  \
+     -re   -i rtsp://127.0.0.1:8080/h264_pcm.sdp -codec copy   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
 
 #Working libfdk aac_he
-ffmpeg -async 1 -threads 4 -hwaccel drm -hwaccel_output_format drm_prime -strict experimental -flags low_delay -fflags +genpts+nobuffer -hide_banner -rtsp_transport tcp -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m   -b:v 1000k -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
+    ffmpeg -async 1 -threads 4 -hwaccel drm -hwaccel_output_format drm_prime -strict experimental -flags low_delay -fflags +genpts+nobuffer -hide_banner -rtsp_transport tcp -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v         h264_v4l2m2m   -b:v 1000k -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
 
 
 create service autostart
 
-mkdir bin
+    mkdir bin
 
-sudo nano /usr/local/bin/home-stream.sh
+    sudo nano /usr/local/bin/home-stream.sh
 
 put this example in ! you can change framrate audiodevice bitrate usw
 
 
-v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
-ffmpeg -async 1-hwaccel drm -hwaccel_output_format drm_prime  -fflags +genpts+nobuffer -avioflags direct  -flags low_delay  -hide_banner  -strict experimental   \
-  -f alsa   -i plughw:0  -f v4l2 -input_format yuv420p -re -i /dev/video0 -c:v h264_v4l2m2m -b:v 1M  -pix_fmt yuv420p  -r 15  \
-  -c:a libopus  -b:a 32k  -application lowdelay   -ar 48000 \
-  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+    v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
+    ffmpeg -async 1-hwaccel drm -hwaccel_output_format drm_prime  -fflags +genpts+nobuffer -avioflags direct  -flags low_delay  -hide_banner  -strict experimental   \
+      -f alsa   -i plughw:0  -f v4l2 -input_format yuv420p -re -i /dev/video0 -c:v h264_v4l2m2m -b:v 1M  -pix_fmt yuv420p  -r 15  \
+      -c:a libopus  -b:a 32k  -application lowdelay   -ar 48000 \
+      -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 store it
 
 
-nano .config/systemd/user/home-stream.service
+    nano .config/systemd/user/home-stream.service
 
 put this in
 
-[Unit]
-
-Description=stream
-
-Requires=multi-user.target
-
-After=multi-user.target
-
-[Service]
-
-ExecStartPre=/bin/sleep 15
-
-ExecStart=home-stream.sh
-
-Restart=always
-
-ExecStop=killall ffmpeg
-
-#KillMode=process
-
-[Install]
-
-WantedBy=multi-user.target
+    [Unit]
+    Description=stream
+    Requires=multi-user.target
+    After=multi-user.target
+    [Service]
+    ExecStartPre=/bin/sleep 15
+    ExecStart=home-stream.sh
+    Restart=always
+    ExecStop=killall ffmpeg
+    #KillMode=process
+    [Install]
+    WantedBy=multi-user.target
 
 
 store it strg +o 
 
-systemctl --user enable home-stream.service
+    systemctl --user enable home-stream.service
 
-systemctl --user start home-stream.service
+    systemctl --user start home-stream.service
 
-systemctl --user status home-stream.service
+    systemctl --user status home-stream.service
 
 
 ###############################################################################################
@@ -348,19 +337,19 @@ its not working on rpi but on amd64 because libv4l2 and h264_v4l2m2m are the sam
 
 so only amd64 and i386
 
-sudo apt install libv4l2loopback-dkms
+    sudo apt install libv4l2loopback-dkms
 
-sudo modprobe v4l2loopback video_nr=1 card_label="device number 1" exclusive_caps=1
-v4l2loopback-ctl set-fps 15 /dev/video1
+    sudo modprobe v4l2loopback video_nr=1 card_label="device number 1" exclusive_caps=1
+    v4l2loopback-ctl set-fps 15 /dev/video1
 
-adb -d forward tcp:8080 tcp:8080
+    adb -d forward tcp:8080 tcp:8080
 
-ffmpeg  -an -hwaccel auto -hide_banner  -fflags discardcorrupt -rtsp_transport tcp  -i rtsp://127.0.0.1:8080/h264_pcm.sdp    -c:v rawvideo -pix_fmt yuv420p   -f v4l2 /dev/video1
+    ffmpeg  -an -hwaccel auto -hide_banner  -fflags discardcorrupt -rtsp_transport tcp  -i rtsp://127.0.0.1:8080/h264_pcm.sdp    -c:v rawvideo -pix_fmt yuv420p   -f v4l2 /dev/video1
 
 -an = audio no is important
 
 
-apt install qv4l2
+    apt install qv4l2
 
 try it with qv4l2
 
