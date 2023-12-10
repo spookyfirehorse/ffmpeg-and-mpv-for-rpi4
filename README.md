@@ -159,7 +159,11 @@ rtsp streamig
 
       wget https://github.com/aler9/mediamtx/releases/download/v0.22.2/mediamtx_v0.22.2_linux_armv7.tar.gz
 
+unzip
+
       tar -xf mediamtx_v0.22.2_linux_arm64v8.tar.gz
+
+move it to
 
       sudo mv mediamtx /usr/local/bin/
 
