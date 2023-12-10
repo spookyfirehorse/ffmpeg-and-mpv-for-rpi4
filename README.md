@@ -253,24 +253,23 @@ start adb
   
 confirm on android the adb conction
   
-  
-  
-  #!/bin/bash
-  
+    
       adb -d forward tcp:8080 tcp:8080
   
- #!/bin/bash
 
 #Working opus
+    
     ffmpeg -async 1 -threads 4  -hwaccel drm -hwaccel_output_format drm_prime  -strict experimental -flags low_delay -fflags +genpts+nobuffer  -hide_banner -rtsp_transport tcp  \
      -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m  -pix_fmt yuv420p -b:v 1000k -c:a libopus  -b:a 64k  -application lowdelay  -ar 48000   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
 
 
 #Working copy
-    ffmpeg  -async 1  -threads 4  -hwaccel drm -hwaccel_output_format drm_prime   -strict experimental -flags low_delay -fflags +genpts+nobuffer+igndts -avioflags direct  -hide_banner -rtsp_transport tcp  \
+    
+        ffmpeg  -async 1  -threads 4  -hwaccel drm -hwaccel_output_format drm_prime   -strict experimental -flags low_delay -fflags +genpts+nobuffer+igndts -avioflags direct  -hide_banner -rtsp_transport tcp  \
      -re   -i rtsp://127.0.0.1:8080/h264_pcm.sdp -codec copy   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
 
 #Working libfdk aac_he
+    
     ffmpeg -async 1 -threads 4 -hwaccel drm -hwaccel_output_format drm_prime -strict experimental -flags low_delay -fflags +genpts+nobuffer -hide_banner -rtsp_transport tcp -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v         h264_v4l2m2m   -b:v 1000k -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
 
 
