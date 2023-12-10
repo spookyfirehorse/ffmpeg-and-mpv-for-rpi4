@@ -64,7 +64,11 @@ for latest
 
     nano /boot/config.txt
 
+64bit
+    
     arm_64bit=1 for 64 bit
+
+32bit
 
     arm_64bit=0  for 32 bit
 
