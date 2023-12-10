@@ -124,15 +124,7 @@ MPV
 or
 
 
-   meson build
-
-     meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi=disabled -Drpi-mmal=disabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled -Dlibplacebo=enabled -Dvdpau=disabled -
-
-    Dvaapi=disabled
-
-    meson compile -C build
-
-    sudo meson install -C build
+   meson setup  build  && meson configure build -Dprefix=/usr -Dlibmpv=true -Drpi=disabled -Drpi-mmal=disabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled -Dlibplacebo=enabled -Dvdpau=disabled -Dvaapi=disabled && meson compile -C build && sudo meson install -C build
 
 ######################################
 
