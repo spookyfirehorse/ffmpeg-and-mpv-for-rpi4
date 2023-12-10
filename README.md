@@ -63,7 +63,7 @@ for latest
 
 ####################################################
 
-    nano /boot/config.txt
+    nano /boot/firmware/config.txt
 
 64bit
     
