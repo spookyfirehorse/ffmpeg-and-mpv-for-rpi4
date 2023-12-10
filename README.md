@@ -211,15 +211,22 @@ disable_camera_led=1
 
 set  15 fps with and height
 
-v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
+v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
 
 
 in this examples audio device =  plughw:0  
 
-ffmpeg -async 1  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner   \
-  -f alsa  -i plughw:0  -f v4l2 -input_format yuv420p -re  -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p    \
-  -c:a libopus  -b:a 32k  -application lowdelay  \
-  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k   -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+
+
+
+inputformat h264
+
+v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=12,h264_profile=4
+
+ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format h264  -i /dev/video0  -c:v copy   -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+
+
 
 without audio
 
@@ -230,7 +237,9 @@ ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+i
 
 Video + Audio libfdk_aac h264_v4l2m2m
 
-ffmpeg -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner      -f alsa  -i plughw:0  -f v4l2 -input_format yuv420p    -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M   -acodec libfdk_aac   -eld_sbr 1  -ar 44100      -b:a 32k      -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+most compatible with all players real mp4
+
+ffmpeg -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner      -f alsa  -i plughw:0  -f v4l2 -input_format yuv420p    -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M   -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart      -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 look running stream
 
@@ -239,57 +248,61 @@ mpv rtsp://localhost:8554/mystream
  
   opus only audio
   
-  ffmpeg  -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner     \
-   -i plughw:0  -c:a libopus -application lowdelay -b:a 64k   \
-   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+ffmpeg  -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner     \
+ -i plughw:0  -c:a libopus -application lowdelay -b:a 64k  -ar 48000 \
+ -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
   
-  
-  mpv rtsp://localhost:8554/mystream
+mpv rtsp://localhost:8554/mystream
  
  from 2nd computer
   
-  mpv rtsp:/192.168.0.100:8554/mystream
+mpv rtsp:/ip:8554/mystream
   
   ########################################################################
   
-  under construct but working
+under construct but working
+  
+streaming from android phone camera
+  
+install adb 
+  
+sudo apt install adb
+  
+install ip-webcam from playstore https://play.google.com/store/apps/details?id=com.pas.webcam on your phone
+  
+in this app you can chang port settings resolution and framerate
+  
+conect android phone with usb cable not over network (network is to slow)
+  
+i change fps to 15 on an very old s2 and resolution 320x240 but with a better phone no problems with higher resolutions
+  
+also you can disable network on android  it is not need
+  
+start adb 
+  
+adb devices
+  
+confirm on android the adb conction
   
   
-  streaming from android phone camera
   
-  install adb 
-  
-  sudo apt install adb
-  
-  install ip-webcam from playstore https://play.google.com/store/apps/details?id=com.pas.webcam on your phone
-  
-  in this app you can chang port settings resolution and framerate
-  
-  conect android phone with usb cable not over network (network is to slow)
-  
-  i change fps to 15 on an very old s2 and resolution 320x240 but with a better phone no problems with higher resolutions
-  
-  also you can disable network on android  it is not need
-  
-  start adb 
-  
-  adb devices
-  
-  confirm on android the adb conction
-  
-  
-  
+  #!/bin/bash
   
   adb -d forward tcp:8080 tcp:8080
   
- ffmpeg   -async 1  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts -strict experimental -avioflags direct -flags low_delay  -hide_banner -rtsp_transport tcp  \
- -re  -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m -pix_fmt yuv420p  -b:v 1500k   -acodec libfdk_aac   -eld_sbr 1  -ar 44100      -b:a 32k   -f rtsp -rtsp_transport    tcp  rtsp://localhost:8554/mystream2
+ #!/bin/bash
 
-without bitrat changing
+#Working opus
+ffmpeg -async 1 -threads 4  -hwaccel drm -hwaccel_output_format drm_prime  -strict experimental -flags low_delay -fflags +genpts+nobuffer  -hide_banner -rtsp_transport tcp  \
+ -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m  -pix_fmt yuv420p -b:v 1000k -c:a libopus  -b:a 64k  -application lowdelay  -ar 48000   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
 
 
- ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime   -flags low_delay   -hide_banner -rtsp_transport tcp  \
- -re  -i rtsp://127.0.0.1:8080/h264_pcm.sdp -codec copy     -f rtsp -rtsp_transport    tcp  rtsp://localhost:8554/mystream2
+#Working copy
+ffmpeg  -async 1  -threads 4  -hwaccel drm -hwaccel_output_format drm_prime   -strict experimental -flags low_delay -fflags +genpts+nobuffer+igndts -avioflags direct  -hide_banner -rtsp_transport tcp  \
+ -re   -i rtsp://127.0.0.1:8080/h264_pcm.sdp -codec copy   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
+
+#Working libfdk aac_he
+ffmpeg -async 1 -threads 4 -hwaccel drm -hwaccel_output_format drm_prime -strict experimental -flags low_delay -fflags +genpts+nobuffer -hide_banner -rtsp_transport tcp -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m   -b:v 1000k -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
 
 
 create service autostart
@@ -303,8 +316,8 @@ put this example in ! you can change framrate audiodevice bitrate usw
 
 v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
 ffmpeg -async 1-hwaccel drm -hwaccel_output_format drm_prime  -fflags +genpts+nobuffer -avioflags direct  -flags low_delay  -hide_banner  -strict experimental   \
-  -f alsa   -i plughw:0  -f v4l2 -input_format yuv420p -re -i /dev/video0 -c:v h264_v4l2m2m -b:v 1M  -pix_fmt yuv420p    \
-  -c:a libopus  -b:a 32k  -application lowdelay  \
+  -f alsa   -i plughw:0  -f v4l2 -input_format yuv420p -re -i /dev/video0 -c:v h264_v4l2m2m -b:v 1M  -pix_fmt yuv420p  -r 15  \
+  -c:a libopus  -b:a 32k  -application lowdelay   -ar 48000 \
   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 store it
