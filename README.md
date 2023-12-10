@@ -103,7 +103,7 @@ bookworm 32 armhf armv7l pi2+3
 
 rpi zero w
 
-   git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git
+        git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git
 
 
        ./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl --enable-neon --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-libplacebo --enable-librav1e --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf --cpu=arm1176jzf-s --arch=arm --enable-nonfree --enable-libfdk-aac  && make -j4 && sudo make -j4 install
@@ -143,53 +143,51 @@ or
 
 rtsp-streaming libcamera camera autodedect
 
-rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 60  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg  -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime    -hide_banner  -f alsa -thread_queue_size 16   -i plughw:0  -re   -i -  -c:v h264_v4l2m2m  -b:v 1700k -vf select="gte(n\, 1)" -async 1  -r 30   -c:a libopus  -b:a 64k  -application lowdelay   -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+         rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 60  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg  -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime    -hide_banner  -f alsa -thread_queue_size 16   -i plughw:0  -re   -i -  -c:v h264_v4l2m2m  -b:v 1700k -vf select="gte(n\, 1)" -async 1  -r 30   -c:a libopus  -b:a 64k  -application lowdelay   -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 experimental  and libfdk 
 
-rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 60  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg -async 1 -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -f alsa -thread_queue_size 16 -i plughw:0  -re -i -  -c:v h264_v4l2m2m  -b:v 1700k  -r 30   -acodec libfdk_aac   -eld_sbr 1  -ar 44100      -b:a 32k   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+       rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 60  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg -async 1 -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -f alsa -thread_queue_size 16 -i plughw:0  -re -i -  -c:v h264_v4l2m2m  -b:v 1700k  -r 30   -acodec libfdk_aac   -eld_sbr 1  -ar 44100      -b:a 32k   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 ##############################################
  
 rtsp streamig 
 
-https://github.com/aler9/mediamtx/releases
+      https://github.com/aler9/mediamtx/releases
 
 64 bit
 
-wget https://github.com/aler9/mediamtx/releases/download/v0.22.2/mediamtx_v0.22.2_linux_arm64v8.tar.gz
+    wget https://github.com/aler9/mediamtx/releases/download/v0.22.2/mediamtx_v0.22.2_linux_arm64v8.tar.gz
 
 32 bit
 
-wget https://github.com/aler9/mediamtx/releases/download/v0.22.2/mediamtx_v0.22.2_linux_armv7.tar.gz
+      wget https://github.com/aler9/mediamtx/releases/download/v0.22.2/mediamtx_v0.22.2_linux_armv7.tar.gz
 
-tar -xf mediamtx_v0.22.2_linux_arm64v8.tar.gz
+      tar -xf mediamtx_v0.22.2_linux_arm64v8.tar.gz
 
-sudo mv mediamtx /usr/local/bin/
+      sudo mv mediamtx /usr/local/bin/
 
-sudo mv mediamtx.yml /usr/local/etc/
-
-#################################
+      sudo mv mediamtx.yml /usr/local/etc/
 
 
-sudo tee /etc/systemd/system/mediamtx.service >/dev/null << EOF
-[Unit]
-Wants=network.target
-[Service]
-ExecStart=/usr/local/bin/mediamtx /usr/local/etc/mediamtx.yml
-[Install]
-WantedBy=multi-user.target
-EOF
+
+        sudo tee /etc/systemd/system/mediamtx.service >/dev/null << EOF
+        [Unit]
+        Wants=network.target
+        [Service]
+        ExecStart=/usr/local/bin/mediamtx /usr/local/etc/mediamtx.yml
+       [Install]
+       WantedBy=multi-user.target
+       EOF
 
 
-########################################
 
 
-sudo systemctl daemon-reload
+     sudo systemctl daemon-reload
 
-sudo systemctl enable mediamtx
+      sudo systemctl enable mediamtx
 
-sudo systemctl start mediamtx
+       sudo systemctl start mediamtx
 
 #########################
 
@@ -202,26 +200,26 @@ disable_camera_led=1
 
 set  15 fps with and height
 
-v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
+        v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
 
 
 in this examples audio device =  plughw:0  
 
-ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k   -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+      ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k   -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 
 inputformat h264
 
-v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=12,h264_profile=4
+       v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=12,h264_profile=4
 
-ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format h264  -i /dev/video0  -c:v copy   -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+       ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format h264  -i /dev/video0  -c:v copy   -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 
 without audio
 
-ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner  \
+           ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner  \
 -f v4l2 -input_format yuv420p -re -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
@@ -239,15 +237,15 @@ mpv rtsp://localhost:8554/mystream
  
   opus only audio
   
-ffmpeg  -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner     \
- -i plughw:0  -c:a libopus -application lowdelay -b:a 64k  -ar 48000 \
- -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+           ffmpeg  -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner     \
+          -i plughw:0  -c:a libopus -application lowdelay -b:a 64k  -ar 48000 \
+         -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
   
-mpv rtsp://localhost:8554/mystream
+         mpv rtsp://localhost:8554/mystream
  
  from 2nd computer
   
-mpv rtsp:/ip:8554/mystream
+          mpv rtsp:/ip:8554/mystream
   
   ########################################################################
   
