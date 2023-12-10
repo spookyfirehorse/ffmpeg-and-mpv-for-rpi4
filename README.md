@@ -77,7 +77,7 @@ change the cpu in configure txt
 
 64 bit FFMPEG
 
-sudo apt build-dep ffmpeg
+    sudo apt build-dep ffmpeg
 
 bookworm 64 aarch64 arm64
 
