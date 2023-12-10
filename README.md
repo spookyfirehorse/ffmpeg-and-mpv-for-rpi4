@@ -141,7 +141,7 @@ experimental  and libfdk
 
 audio sync best
 
-rpicam-vid  --autofocus-mode continuous --inline 1  --brightness 0.1 \
+    rpicam-vid  --autofocus-mode continuous --inline 1  --brightness 0.1 \
 --contrast 1.0 --sharpness 1.0 --level 4.1 --framerate 25  --width 640 --height 360 \
   -t 0 -n --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o -  \
  |   ffmpeg  -fflags  +genpts+nobuffer+igndts+discardcorrupt -flags low_delay -avioflags direct \
