@@ -14,29 +14,22 @@ INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 
 
 #########################
+    
+    
     nano .config/npv/mpv.conf
 
 exampele for drm-prime
 
-   gpu-dumb-mode=yes
-
-   opengl-glfinish=yes
-
-   gpu-context=x11egl
-
-   gpu-api=opengl
-
-   vo=gpu
-
-   hwdec=auto
-
-   hwdec-codecs=all
-
-   hwdec-image-format=drm_prime
-
-   gpu-hwdec-interop=drmprime-overlay
-
-   af=lavfi-crystalizer=1,lavfi-bass=gain=2,scaletempo2
+    gpu-dumb-mode=yes
+    opengl-glfinish=yes
+    gpu-context=x11egl
+    gpu-api=opengl
+    vo=gpu
+    hwdec=auto
+    hwdec-codecs=all
+    hwdec-image-format=drm_prime
+    gpu-hwdec-interop=drmprime-overlay
+    af=lavfi-crystalizer=1,lavfi-bass=gain=2,scaletempo2
 
 #####################################################################
 
@@ -60,13 +53,11 @@ FDK-AAC
 
 ####################################################
 
-       IMPORTANT
+    nano /boot/config.txt
 
- nano /boot/config.txt
+    arm_64bit=1 for 64 bit
 
-arm_64bit=1 for 64 bit
-
-arm_64bit=0  for 32 bit
+    arm_64bit=0  for 32 bit
 
 ##############################################################################################
 
