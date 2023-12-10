@@ -19,11 +19,12 @@ INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
     
     nano .config/npv/mpv.conf
 
-exampele for drm-prime
+exampele for drm-prime wayland x11egl for x11 session
 
     gpu-dumb-mode=yes
     opengl-glfinish=yes
-    gpu-context=x11egl
+    #gpu-context=x11egl
+    gpu-context=wayland
     gpu-api=opengl
     vo=gpu
     hwdec=auto
