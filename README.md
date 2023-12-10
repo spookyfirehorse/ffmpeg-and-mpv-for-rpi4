@@ -291,11 +291,10 @@ confirm on android the adb conction
 
 create service autostart
 
-    mkdir bin
 
     sudo nano /usr/local/bin/home-stream.sh
 
-put this example in ! you can change framrate audiodevice bitrate usw
+put this example in ! you can change framrate -r 15 audiodevice bitrate usw
 
 
     v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720  --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
