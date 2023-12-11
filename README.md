@@ -17,7 +17,7 @@ INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 
     sudo apt build-dep ffmpeg mpv 
     
-    nano .config/npv/mpv.conf
+    nano .config/mpv/mpv.conf
 
 exampele for drm-prime wayland x11egl for x11 session
 
