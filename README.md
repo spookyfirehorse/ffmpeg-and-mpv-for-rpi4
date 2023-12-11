@@ -203,8 +203,8 @@ start
 
     nano /boot/firmware/config.txt
 
-    #gpu_mem=256
-    #start_x=1
+    gpu_mem=256
+    start_x=1
     disable_camera_led=1
 
 
