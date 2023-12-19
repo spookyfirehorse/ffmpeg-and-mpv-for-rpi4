@@ -130,6 +130,13 @@ or
             Dvdpau=disabled -Dvulkan=enabled -Dlibplacebo=enabled -Dcuda-hwaccel=disabled -Dcuda-interop=disabled -Ddvdnav=enabled -Dzlib=enabled -Dzimg=enabled -Duchardet=enabled -Dvdpau=disabled -Dvaapi=disabled && meson compile -C build 
             sudo meson install -C build
 
+#################################
+
+
+Mplayer
+
+            apt source mplayer && cd mplayer-1.4+ds1/ && ./configure  --enable-faad --enable-gui --enable-dvdnav --disable-ffmpeg_a  --disable-vdpau  && make -j4 && sudo make install
+
 
 ######################################
 
