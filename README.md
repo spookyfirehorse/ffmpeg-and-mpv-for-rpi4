@@ -383,4 +383,14 @@ so only amd64 and i386
 try it with qv4l2
 
 cheers
- 
+
+
+ dvdrenderin vob to mp4 all subtitles plus colorpalette
+
+
+ #!/bin/bash
+for file in "$1"; do   ffmpeg  -ifo_palette default.IFO -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime  \
+  -canvas_size  720x576  -i "$file"  -ss 00:00:02 -metadata title="$file" \
+  -map 0:v -scodec dvdsub   -map 0:s:0 -metadata:s:s:0 language=deu    \
+ -c:v h264_v4l2m2m  -b:v 3M  -num_capture_buffers 92   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
+  -c:a libopus     -b:a 128k -map 0:a -metadata:s:a:0 language=en     -f mp4  "${file%.*}.mp4"; done
