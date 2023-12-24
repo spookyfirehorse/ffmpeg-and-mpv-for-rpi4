@@ -151,7 +151,7 @@ rtsp-streaming libcamera camera autodedect
 
 experimental  and libfdk 
 
-       rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 25  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg -async 1 -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -f alsa -thread_queue_size 16 -i plughw:0  -r 25 -i -  -c:v h264_v4l2m2m  -b:v 1000k  -r 25  -fpsmax 25  -acodec libfdk_aac -profile:a aac_he_v2   -ar 16000      -b:a 32k   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+       rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 25  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg  -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -f alsa -thread_queue_size 16 -i plughw:0  -r 25 -i -  -c:v h264_v4l2m2m  -b:v 1000k   -fpsmax 25  -acodec libfdk_aac -profile:a aac_he_v2   -ar 16000      -b:a 32k   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 audio sync best
 
@@ -229,7 +229,7 @@ set  15 fps with and height
 
 in this examples audio device =  plughw:0  
 
-      ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k   -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+      ffmpeg   -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 
@@ -237,14 +237,14 @@ inputformat h264
 
        v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=12,h264_profile=4
 
-       ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format h264  -i /dev/video0  -c:v copy   -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+       ffmpeg  -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format h264  -i /dev/video0  -c:v copy  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 
 without audio
 
            ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner 
-    -f v4l2 -input_format yuv420p -re -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+    -f v4l2 -input_format yuv420p -re -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -fpsmax 15 -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 
@@ -252,7 +252,7 @@ Video + Audio libfdk_aac h264_v4l2m2m
 
 most compatible with all players real mp4
 
-    ffmpeg -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner      -f alsa  -i plughw:0  -f v4l2 -input_format     yuv420p    -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M   -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart      -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+    ffmpeg -async 1 -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner      -f alsa  -i plughw:0  -f v4l2 -input_format     yuv420p    -f v4l2 -re -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M -fpsmax 15  -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart      -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 look running stream
 
