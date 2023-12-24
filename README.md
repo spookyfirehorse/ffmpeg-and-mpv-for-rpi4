@@ -398,6 +398,13 @@ try it with qv4l2
 
  dont touch the rpi on runtime than is stable
 
+         -probesize 2400M -analyzeduration 2410M  takes 5 minutes to analyse the vob file for subtitles and different audio tracks
+
+ so ther is no output for 5 minutes
+
+         -probesize 200M -analyzeduration 200M
+
+60 seconds
 
         #!/bin/bash
        for file in "$1"; do   ffmpeg  -ifo_palette example.IFO -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime  \
@@ -410,5 +417,12 @@ you find the IFO file ind the dvd foler
 
 direct above the biggest files and copy that file to your home folder
 
+without color palette
+
+     
+       ffmpeg   -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime  \
+        -i example.vob  -ss 00:00:02  \
+      -map 0:v -scodec copy   -c:v h264_v4l2m2m  -b:v 3M  -num_capture_buffers 92   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
+      -c:a libopus     -b:a 128k -map 0:a -metadata:s:a:0 language=en     -f mp4  example.mp4
 
 cheers
