@@ -402,9 +402,9 @@ try it with qv4l2
 
  so ther is no output for 5 minutes
 
-         -probesize 200M -analyzeduration 200M
+         -probesize 200M -analyzeduration 200M  analyse time ca 60 seconds
 
-60 seconds
+
 
         #!/bin/bash
        for file in "$1"; do   ffmpeg  -ifo_palette example.IFO -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime  \
