@@ -146,12 +146,12 @@ Mplayer
 
 rtsp-streaming libcamera camera autodedect
 
-         rpicam-vid --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 25  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg     -hwaccel drm -hwaccel_output_format drm_prime    -hide_banner  -f alsa   -i plughw:0  -r 25    -i -  -c:v copy  -c:a libopus  -b:a 32k  -ar 16000 -application lowdelay  -async 1  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+         rpicam-vid --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 25  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg     -hwaccel drm -hwaccel_output_format drm_prime    -hide_banner  -f alsa   -i plughw:0  -re    -i -  -c:v copy  -c:a libopus  -b:a 32k  -ar 16000 -application lowdelay  -fpsmax 25  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 experimental  and libfdk 
 
-       rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 25  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg -async 1 -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -f alsa -thread_queue_size 16 -i plughw:0  -r 25 -i -  -c:v h264_v4l2m2m  -b:v 1000k  -r 25   -acodec libfdk_aac -profile:a aac_he_v2   -ar 16000      -b:a 32k   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+       rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 25  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg -async 1 -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -f alsa -thread_queue_size 16 -i plughw:0  -re -i -  -c:v h264_v4l2m2m  -b:v 1000k  -r 25  -fpsmax 25  -acodec libfdk_aac -profile:a aac_he_v2   -ar 16000      -b:a 32k   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 audio sync best
 
@@ -161,7 +161,7 @@ audio sync best
      |   ffmpeg  -fflags  +genpts+nobuffer+igndts+discardcorrupt -flags low_delay -avioflags direct \
       -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  \
       -f alsa -thread_queue_size 8   -i plughw:0 -r 25 \
-      -i -  -c:v h264_v4l2m2m -b:v 1700k -vf select="gte(n\, 1)" -async 1   -r 25 \
+      -i -  -c:v h264_v4l2m2m -b:v 1700k -vf select="gte(n\, 1)" -fpsmax 25 \
      -c:a libopus  -b:a 32k  -application lowdelay -ar 48000 -f s16le  -threads 4 \
       -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
