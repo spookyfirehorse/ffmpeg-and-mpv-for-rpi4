@@ -1,1 +1,1 @@
-
+   mpv dvdnav:// --dvd-device=/dev/sr0 --stream-dump=output.vob
