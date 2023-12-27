@@ -417,14 +417,14 @@ try it with qv4l2
 
  dvdrendering vob to mp4 + all subtitles plus colorpalette
 
- dont touch the rpi on runtime than is stable
+ dont touch the rpi on runtime than is stable only comandline no gui because the gpu runns full
 
-         -probesize 2400M -analyzeduration 2410M  takes 5 minutes to analyse the vob file for subtitles and different audio tracks
+you find the IFO file ind the dvd foler
 
- so ther is no output for 5 minutes
+direct above the biggest files and copy that file to your home folder
 
-         -probesize 200M -analyzeduration 200M  analyse time ca 60 seconds
 
+-ifo_palette example.IFO
 
 
         #!/bin/bash
@@ -434,12 +434,8 @@ try it with qv4l2
      -c:v h264_v4l2m2m  -b:v 3M  -num_capture_buffers 92   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
       -c:a libopus -b:a 128k -map 0:a  -f mp4  "${file%.*}.mp4"; done
 
-you find the IFO file ind the dvd foler
-
-direct above the biggest files and copy that file to your home folder
 
 without color palette
-
      
        ffmpeg   -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime  \
         -i example.vob  -ss 00:00:02  \
@@ -448,6 +444,8 @@ without color palette
 
 
 without subtitle
+
+
 ffmpeg   -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime  \
         -i example.vob  -ss 00:00:02  \
       -map 0:v   -c:v h264_v4l2m2m  -b:v 3M  -num_capture_buffers 92   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
