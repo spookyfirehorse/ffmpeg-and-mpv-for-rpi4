@@ -3,6 +3,8 @@ sorry for my bad english
 
 this is an easy way to streaming on rpi
 
+if you not want build ffmpeg and mpv scroll down to streaming
+
 
 
 
@@ -42,7 +44,7 @@ example for drm-prime wayland
 
 #####################################################################
 
-build
+this is optinal if you want libfdk-aac scroll down to streaming
 
 first install all libarys with
 
