@@ -188,9 +188,12 @@ start
     sudo systemctl start mediamtx
 
 ######################################
-sudo nano  /boot/firmware/config.txt
-camera_auto_detect=1
+        sudo nano  /boot/firmware/config.txt
 
+but this in
+
+        camera_auto_detect=1
+        
 
 rtsp-streaming rpicam
 
@@ -219,11 +222,14 @@ audio sync best
 #######################################
 
     nano /boot/firmware/config.txt
-
+    
+    camera_auto_detect=0
     gpu_mem=256
     start_x=1
     disable_camera_led=1
 
+
+this is also for usb cameras only v4l2-ctl have different options
 
 set  15 fps with and height
 
