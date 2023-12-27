@@ -417,7 +417,7 @@ try it with qv4l2
 
  dvdrendering vob to mp4 + all subtitles plus colorpalette
 
- dont touch the rpi on runtime than is stable only comandline no gui because the gpu runns full
+only comand line no gui because the gpu runns full fps ca 100
 
 you find the IFO file ind the dvd foler
 
