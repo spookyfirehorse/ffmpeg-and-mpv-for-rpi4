@@ -1,7 +1,9 @@
 
 sorry for my bad english
 
-this is an easy way of streaming on linux 
+this is an easy way to streaming on rpi
+
+
 
 
 Bookworm RPI 2 3 and 4
@@ -15,7 +17,10 @@ INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 
 #########################
 
-    sudo apt build-dep ffmpeg mpv 
+this mpv.conf is the same in libreelec
+
+do not use hwdec=v4l2m2m or drm , maybe only drm but let mpv the option is better
+
     
     nano .config/mpv/mpv.conf
 
@@ -34,7 +39,11 @@ example for drm-prime wayland
 
 #####################################################################
 
+build
 
+first install all libarys with
+
+         sudo apt build-dep ffmpeg mpv 
 
 FDK-AAC
 
@@ -56,7 +65,7 @@ for latest
 
 
 
-     sudo apt install cpuinfo libv4l-dev
+     sudo apt install cpuinfo 
 
     cpu-info
 
