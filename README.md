@@ -19,9 +19,7 @@ INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 
 this mpv.conf is the same like in libreelec hwdec-image-format=drm_prime 
 
-do not use in this case hwdec=v4l2m2m-copy  or drm-copy , maybe only drm but hwdec=auto is  the best, drm-copy works also but not with hwdec-image-
-
-format=drm_prime  which is very stable for all formats
+do not use in this case hwdec=v4l2m2m-copy  or drm-copy , maybe only drm but hwdec=auto is  the best, drm-copy works also but not with hwdec-imageformat=drm_prime  which is very stable for all formats
 
 anywaybut this in and it works
 
