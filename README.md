@@ -3,8 +3,7 @@ sorry for my bad english
 
 this is an easy way to streaming on rpi
 
-if you not want build ffmpeg and mpv scroll down to streaming
-
+if you not want build ffmpeg and mpv also
 
 
 
