@@ -1,19 +1,22 @@
 
 sorry for my bad english
 
-this is an easy way to streaming on rpi
+this is an easy way to streaming usb cameras, older models of rpi cameras, and rpi-cam  on rpi 
 
-if you not want build ffmpeg and mpv also
+also dvdcopy with all subtitles and colorpalette for the subtitle 
+
+also full harware support for mpv and vlc include libfdk-aac wich is default mp4 for compatiblity with all player
+
+opus is realy good and you heave nothing to to and go to streaming with opus 
+
+this very stable 
+
 
 
 
 Bookworm RPI 2 3 and 4
 
-INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw. 
-
-+MPV
-
-+ rtsp streaming 
+INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 
 
 #########################
