@@ -188,6 +188,9 @@ start
     sudo systemctl start mediamtx
 
 ######################################
+
+RTSP STREAMING WITH AUDIO
+
         sudo nano  /boot/firmware/config.txt
 
 but this in
@@ -218,6 +221,8 @@ audio sync best
 
 
 ##############################################
+
+USB CAMERAS and older rpi cameras
 
 #######################################
 
