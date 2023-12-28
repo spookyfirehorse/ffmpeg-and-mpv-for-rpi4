@@ -215,11 +215,11 @@ start
 
 ######################################
 
-RTSP STREAMING WITH AUDIO
+RTSP STREAMING WITH AUDIO FOR NEW RPI CAMERA 
 
         sudo nano  /boot/firmware/config.txt
 
-but this in
+put this in
 
         camera_auto_detect=1
         
@@ -445,7 +445,7 @@ direct above the biggest files and copy that file to your home folder
        for file in "$1"; do   ffmpeg  -ifo_palette example.IFO -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime  \
       -canvas_size  720x576  -i "$file"  -ss 00:00:02 -metadata title="$file" \
       -map 0:v -scodec dvdsub   -map 0:s    \
-     -c:v h264_v4l2m2m  -b:v 3M  -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
+     -c:v h264_v4l2m2m  -b:v 3M  -num_capture_buffers 512   -num_output_buffers 512 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
       -c:a libopus -b:a 128k -map 0:a  -f mp4  "${file%.*}.mp4"; done
 
 
