@@ -148,7 +148,9 @@ MPV
       sudo dpkg -i lib*mpv*.deb mpv*.deb
 
 
-or
+compile
+
+
         meson setup build
 
         meson configure build -Dprefix=/usr -Dlibmpv=true -Ddvdnav=enabled -Dsdl2=enabled -Dzimg=enabled -Drpi=disabled -Drpi-mmal=disabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -        Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled  -Dcuda-hwaccel=disabled -Dcuda-interop=disabled -Dzlib=enabled 
