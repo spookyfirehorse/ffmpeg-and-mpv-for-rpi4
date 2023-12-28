@@ -52,6 +52,14 @@ first install all libarys with
 
          sudo apt build-dep ffmpeg mpv 
 
+for vulkan hwaccel
+
+         sudo apt install mesa-vulkan-drivers mesa-utils
+
+hwaccel ffmpeg 
+        
+        ffmpeg -init_hw_device "vulkan=vk:0" -hwaccel vulkan -hwaccel_output_format vulkan
+
 FDK-AAC
 
     wget http://deb.debian.org/debian/pool/non-free/f/fdk-aac/fdk-aac_2.0.2.orig.tar.gz && tar -xf fdk-aac_2.0.2.orig.tar.gz  && cd fdk-aac-2.0.2/ && autoreconf -fiv && \
