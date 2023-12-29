@@ -56,9 +56,13 @@ for vulkan hwaccel
 
          sudo apt install mesa-vulkan-drivers mesa-utils
 
-hwaccel ffmpeg 
+hwaccel ffmpeg vulkan
         
         ffmpeg -init_hw_device "vulkan=vk:0" -hwaccel vulkan -hwaccel_output_format vulkan
+
+hwaccel ffmpeg drm
+
+        ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime
 
 FDK-AAC
 
@@ -127,6 +131,11 @@ rpi zero w
 and opnh264 desingned for slow  moving pictures for  voip + omx-rpi
 
         sudo apt install libopenh264-dev
+
+original sources from https://github.com/jc-kynesim/rpi-ffmpeg.git
+
+many thanks to jc-kynesim
+
 
 and compile
 
@@ -215,13 +224,15 @@ start
 
 ######################################
 
-RTSP STREAMING WITH AUDIO FOR NEW RPI CAMERA 
+RTSP STREAMING WITH AUDIO FOR NEWER  RPI CAMERAS 
 
         sudo nano  /boot/firmware/config.txt
 
 put this in
 
-        camera_auto_detect=1
+        camera_auto_detect=1 on bookworm default
+        #gpu_mem=256   disable or delete not needed
+        #start_x=1  disable or delete
         
 
 rtsp-streaming rpicam
@@ -262,18 +273,18 @@ USB CAMERAS and older rpi cameras
 
 this is also for usb cameras only v4l2-ctl have different options
 
-set  15 fps with and height
+set  15 fps with and height always before
 
         v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
 
 
-in this examples audio device =  plughw:0  
+in this examples audio device =  plughw:0  first audio device
 
       ffmpeg   -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 
-inputformat h264
+inputformat h264 and copy output
 
        v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=12,h264_profile=4
 
@@ -283,6 +294,7 @@ inputformat h264
 
 without audio
 
+            v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11
            ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner 
     -f v4l2 -input_format yuv420p -re -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -fpsmax 15 -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
@@ -292,7 +304,8 @@ Video + Audio libfdk_aac h264_v4l2m2m
 
 most compatible with all players real mp4
 
-    ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner      -f alsa  -i plughw:0  -f v4l2 -input_format     yuv420p    -f v4l2 -re -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M -fpsmax 15  -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k        -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+        v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11
+  ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner      -f alsa  -i plughw:0  -f       v4l2 -input_format     yuv420p    -f v4l2 -re -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M -fpsmax 15  -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k        -threads 4  -f rtsp -          rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 look running stream
 
@@ -300,7 +313,8 @@ look running stream
 
  
   opus only audio
-  
+
+
            ffmpeg  -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner     \
           -i plughw:0  -c:a libopus -application lowdelay -b:a 64k  -ar 48000 \
          -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
@@ -347,11 +361,6 @@ confirm on android the adb conction
      -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m  -pix_fmt yuv420p -b:v 1000k -fpsmax 15-c:a libopus  -b:a 64k  -application lowdelay  -ar 48000   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
 
 
-#Working copy
-    
-        ffmpeg    -threads 4  -hwaccel drm -hwaccel_output_format drm_prime   -strict experimental -flags low_delay -fflags +genpts+nobuffer+igndts -avioflags direct  -hide_banner -rtsp_transport tcp  \
-     -re   -i rtsp://127.0.0.1:8080/h264_pcm.sdp -codec copy  -fpsmax 15 -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
-
 #Working libfdk aac_he
     
     ffmpeg  -threads 4 -hwaccel drm -hwaccel_output_format drm_prime -strict experimental -flags low_delay -fflags +genpts+nobuffer -hide_banner -rtsp_transport tcp -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v         h264_v4l2m2m   -b:v 1000k -fpsmax 15 -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
@@ -371,7 +380,7 @@ put this example in ! you can change framrate -r 15 audiodevice bitrate usw
       -c:a libopus  -b:a 32k  -application lowdelay   -ar 48000 \
       -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
-store it
+store it and run it
 
 
     nano .config/systemd/user/home-stream.service
@@ -435,7 +444,7 @@ only comand line no gui because the gpu runns full fps ca 100
 
 you find the IFO file ind the dvd foler
 
-direct above the biggest files and copy that file to your home folder
+direct above the biggest files and copy that file to your home folder blablabla.IFO
 
 
 -ifo_palette example.IFO
