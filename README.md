@@ -14,7 +14,7 @@ this very stable
 
 
 
-Bookworm RPI 2 3 and 4
+Bookworm RPI zero w  3 and 4
 
 INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 
