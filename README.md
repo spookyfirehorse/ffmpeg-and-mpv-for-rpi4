@@ -440,7 +440,9 @@ try it with qv4l2
 
  dvdrendering vob to mp4 + all subtitles plus colorpalette
 
-only comand line no gui because the gpu runns full fps ca 100
+only comand line no gui because the gpu runns full fps ca 100 
+
+go raspi-config boot tu terminal autologin or let the rpi untouched no htop no other gui no terminal the cpu runns on ca 30 % no heating only the gpu runs full
 
 you find the IFO file ind the dvd foler
 
@@ -454,7 +456,7 @@ direct above the biggest files and copy that file to your home folder blablabla.
        for file in "$1"; do   ffmpeg  -ifo_palette example.IFO -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime  \
       -canvas_size  720x576  -i "$file"  -ss 00:00:02 -metadata title="$file" \
       -map 0:v -scodec dvdsub   -map 0:s    \
-     -c:v h264_v4l2m2m  -b:v 3M  -num_capture_buffers 512   -num_output_buffers 512 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
+     -c:v h264_v4l2m2m  -b:v 3M  -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
       -c:a libopus -b:a 128k -map 0:a  -f mp4  "${file%.*}.mp4"; done
 
 
