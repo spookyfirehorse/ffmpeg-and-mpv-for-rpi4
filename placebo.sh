@@ -1,3 +1,7 @@
+git clone --recursive https://code.videolan.org/videolan/libplacebo
+
+or
+
 git clone https://github.com/haasn/libplacebo.git
 cd libplacebo
 git submodule update --init
