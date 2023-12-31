@@ -448,6 +448,8 @@ you find the IFO file ind the dvd foler
 direct above the biggest files and copy that file to your home folder blablabla.IFO
 
 
+-probesize 5400M -analyzeduration 5410M  analyse the vob for audiotracks and subtitle  this takes a long time maybe 10  or 15 minutes there is no output to this time let it run
+
 -ifo_palette example.IFO
 
 
@@ -470,7 +472,7 @@ without color palette
 without subtitle
 
 
-        ffmpeg   -y  -hwaccel drm -hwaccel_output_format drm_prime  \
+        ffmpeg   -y  -hwaccel drm -hwaccel_output_format drm_prime -probesize 400M -analyzeduration 410M  \
         -i example.vob  -ss 00:00:05  \
         -map 0:v   -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
         -c:a libopus     -b:a 128k -map 0:a -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
