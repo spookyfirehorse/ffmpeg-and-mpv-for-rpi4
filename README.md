@@ -46,23 +46,11 @@ example for drm-prime wayland
 
 #####################################################################
 
-this is optinal if you want libfdk-aac scroll down to streaming
 
 first install all libarys with
 
          sudo apt build-dep ffmpeg mpv 
 
-for vulkan hwaccel
-
-         sudo apt install mesa-vulkan-drivers mesa-utils
-
-hwaccel ffmpeg vulkan
-        
-        ffmpeg -init_hw_device "vulkan=vk:0" -hwaccel vulkan -hwaccel_output_format vulkan
-
-hwaccel ffmpeg drm
-
-        ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime
 
 FDK-AAC
 
