@@ -465,7 +465,7 @@ direct above the biggest files and copy that file to your home folder blablabla.
       -canvas_size  720x576  -i "$file"  -ss 00:00:05 -metadata title="$file" \
       -map 0:v -scodec dvdsub   -map 0:s    \
      -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p  -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
-      -c:a libopus -b:a 128k -map 0:a -af volume=1.5   -movflags +faststart -f mp4  "${file%.*}.mp4"; done
+      -c:a libopus -b:a 128k -map 0:a -af volume=1.5   -movflags +faststart  -af volume=1.5 -avoid_negative_ts 1   -max_interleave_delta 0  -f mp4  "${file%.*}.mp4"; done
 
 
 without color palette -scodec copy
