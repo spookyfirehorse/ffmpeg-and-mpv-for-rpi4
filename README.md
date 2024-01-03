@@ -14,7 +14,9 @@ this very stable
 
 
 
-Bookworm RPI zero w  3 and 4
+Bookworm RPI zero w  3 and 4 
+
+NOT FOR RPI 5 the rpi5 have no v4l2m2m encoders
 
 INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 
