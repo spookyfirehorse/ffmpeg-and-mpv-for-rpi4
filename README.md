@@ -459,6 +459,8 @@ try it with qv4l2
        only looking for subtitle and audio tracks 
        mencoder dvdnav://2 -nocache -dvd-device  /media/storage/only_lovers_left_alive.iso -o /dev/null | grep aid 
        mencoder dvdnav://2 -nocache -dvd-device  /media/storage/only_lovers_left_alive.iso -o /dev/null | grep sid 
+       mencoder dvd://1 -ovc copy -oac copy -vobsubout "videoname" -vobsuboutindex 0 -sid 0 -nosound -o /dev/null -vf harddup
+
        sudo lsdvd -t 3 -x  /dev/sr0
 
 only comand line no gui because the gpu runns full fps ca 100 
