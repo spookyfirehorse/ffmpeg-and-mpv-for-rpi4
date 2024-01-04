@@ -450,18 +450,24 @@ try it with qv4l2
 
 
        lsdvd /dev/sr0 ### look for longest track on the end of output
-       mplayer dvdnav://3 -nocache -dvd-device  input.iso  -dumpstream -dumpfile output.vob
-       mplayer dvdnav://3 -nocache -dvd-device -dvd-speed 2 /dev/sr0  -dumpstream -dumpfile output.vob
-       mpv dvdnav://2 --cache=no --dvd-speed=2 --stream-dump=output.vob 
+       mplayer dvd://3 -nocache -dvd-device  input.iso  -dumpstream -dumpfile output.vob
+       mplayer dvd://3 -nocache -dvd-device -dvd-speed 2 /dev/sr0  -dumpstream -dumpfile output.vob
+       mpv dvd://2 --cache=no --dvd-speed=2 --stream-dump=output.vob 
        vobcopy -t example  -i /dev/sr0 -l  -n 3 -o /media/spooky/storage/
        dvdbackup -i  /dev/sr0 -n examplename  -t 2 -p  -o /home/spooky/
 
        only looking for subtitle and audio tracks 
        mencoder dvdnav://2 -nocache -dvd-device  /media/storage/only_lovers_left_alive.iso -o /dev/null | grep aid 
-       mencoder dvdnav://2 -nocache -dvd-device  /media/storage/only_lovers_left_alive.iso -o /dev/null | grep sid 
-       mencoder dvd://1 -ovc copy -oac copy -vobsubout "videoname" -vobsuboutindex 0 -sid 0 -nosound -o /dev/null -vf harddup
-
+       mencoder dvd://2 -nocache -dvd-device  /media/storage/only_lovers_left_alive.iso -o /dev/null | grep sid 
+       mencoder dvd://2 -ovc copy -oac copy -vobsubout "videoname" -vobsuboutindex 0 -sid 0 -nosound -o /dev/null -vf harddup
+       
+       mpv dvdnav:// --cache=no  --dvd-device=exampe.iso --stream-dump=output.vob
+       mpv dvd://1 --cache=no  --dvd-device=exampe.iso --stream-dump=output.vob
        sudo lsdvd -t 3 -x  /dev/sr0
+
+simply
+
+        mpv dvdnav:// --cache=no --dvd-speed=2 --dvd-device=/dev/sr0  --stream-dump=output.vob 
 
 only comand line no gui because the gpu runns full fps ca 100 
 
