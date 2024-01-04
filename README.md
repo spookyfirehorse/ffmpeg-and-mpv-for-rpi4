@@ -500,8 +500,7 @@ without subtitle
 
 separate video
 
-            ffmpeg -y   -fflags +genpts+igndts    -ifo_palette default.IFO    -hwaccel cuda  -probesize 1400M -analyzeduration 1410M -hwaccel drm -        hwaccel_output_format drm_prime \ 
-  -i output.vob -map 0:v  -c:v h264_v4l2m2m   -level 3.0 -b:v 5M -maxrate 6M   -pix_fmt yuv420p  -bufsize 5M  -num_capture_buffers 512   -num_output_buffers 64    -an -sn  -f mp4  only-lovers-audio+sub.mp4
+            ffmpeg -y   -fflags +genpts+igndts -ifo_palette default.IFO   -probesize 1400M -analyzeduration 1410M -hwaccel drm -hwaccel_output_format drm_prime -i output.vob -map 0:v  -c:v h264_v4l2m2m   -level 3.0 -b:v 5M -maxrate 6M   -pix_fmt yuv420p  -bufsize 5M  -num_capture_buffers 512   -num_output_buffers 64    -an -sn  -f mp4  only-lovers-audio+sub.mp4
 
 separate  audio + subtitle
 
