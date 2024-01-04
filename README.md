@@ -498,5 +498,20 @@ without subtitle
         -i example.vob  -ss 00:00:05  \
         -map 0:v   -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
         -c:a libopus     -b:a 128k -map 0:a -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
+
+separate video
+
+            ffmpeg -y   -fflags +genpts+igndts    -ifo_palette default.IFO    -hwaccel cuda  -probesize 1400M -analyzeduration 1410M -hwaccel drm -        hwaccel_output_format drm_prime \ 
+  -i output.vob -map 0:v  -c:v h264_v4l2m2m   -level 3.0 -b:v 5M -maxrate 6M   -pix_fmt yuv420p  -bufsize 5M  -num_capture_buffers 512   -num_output_buffers 64    -an -sn  -f mp4  only-lovers-audio+sub.mp4
+
+separate  audio + subtitle
+
+        ffmpeg  -probesize 1400M -analyzeduration 1410M -fflags +genpts+igndts -ifo_palette default.IFO -fix_sub_duration -canvas_size  720x576    -i only_lovers_left_alive2.vob   -c:a libfdk_aac -b:a 128k    -map 0:a -scodec dvdsub    -map 0:s -vn  -f mp4    test.mp
+
+
+separate only audio 
+
+            ffmpeg  -probesize 1400M -analyzeduration 1410M -fflags +igndts  -i only_lovers_left_alive2.vob   -c:a libfdk_aac -b:a 128k    -map 0:a  -vn -sn  -f mp4    test.mp
+
             
 cheers
