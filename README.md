@@ -448,6 +448,7 @@ try it with qv4l2
 
  dvdrendering vob to mp4 + all subtitles plus colorpalette 
 
+           ddrescue -b 2048 -n -v /dev/sr0 output.iso 
 
        lsdvd /dev/sr0 ### look for longest track on the end of output
        mplayer dvd://3 -nocache -dvd-device  input.iso  -dumpstream -dumpfile output.vob
