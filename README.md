@@ -448,16 +448,31 @@ try it with qv4l2
 
  dvdrendering vob to mp4 + all subtitles plus colorpalette 
 
-           ddrescue -b 2048 -n -v /dev/sr0 output.iso 
+### this is the only line that worked for encrypted dvds that worked for me
 
-       lsdvd /dev/sr0 ### look for longest track on the end of output
+           
+           lsdvd /dev/sr0   && ddrescue  -b 2048  /dev/sr0   of=output.iso
+
+so now is the img save
+
+           
+       lsdvd /dev/sr0 
+
+### look for longest track on the end of output
+       
+
+       
+       
        mplayer dvd://3 -nocache -dvd-device  input.iso  -dumpstream -dumpfile output.vob
        mplayer dvd://3 -nocache -dvd-device -dvd-speed 2 /dev/sr0  -dumpstream -dumpfile output.vob
        mpv dvd://2 --cache=no --dvd-speed=2 --stream-dump=output.vob 
-       vobcopy -t example  -i /dev/sr0 -l  -n 3 -o /media/spooky/storage/
-       dvdbackup -i  /dev/sr0 -n examplename  -t 2 -p  -o /home/spooky/
+       
 
-       only looking for subtitle and audio tracks 
+       
+       
+
+   ### looking for audio and subtitle
+
        mencoder dvdnav://2 -nocache -dvd-device  /media/storage/only_lovers_left_alive.iso -o /dev/null | grep aid 
        mencoder dvd://2 -nocache -dvd-device  /media/storage/only_lovers_left_alive.iso -o /dev/null | grep sid 
        mencoder dvd://2 -ovc copy -oac copy -vobsubout "videoname" -vobsuboutindex 0 -sid 0 -nosound -o /dev/null -vf harddup
