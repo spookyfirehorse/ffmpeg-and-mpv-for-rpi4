@@ -33,7 +33,7 @@ anyway put this in and it works
     
     nano .config/mpv/mpv.conf
 
-## example for drm-prime wayland
+## example for drm-prime wayland  rpi4
 
     gpu-dumb-mode=yes
     opengl-glfinish=yes
@@ -45,6 +45,28 @@ anyway put this in and it works
     hwdec-codecs=all
     hwdec-image-format=drm_prime
     gpu-hwdec-interop=drmprime-overlay
+
+
+## example for drm-prime wayland  rpi5
+
+override-display-fps=60
+video-sync=display-resample
+
+osd-bar=no
+osc=no
+border=no
+cursor-autohide-fs-only=yes
+gpu-dumb-mode=yes
+opengl-glfinish=yes
+gpu-context=wayland
+gpu-api=opengl
+vo=gpu
+gpu-sw=yes
+drm-vrr-enabled=auto
+hwdec=drm-copy
+
+    
+
 
 #####################################################################
 
