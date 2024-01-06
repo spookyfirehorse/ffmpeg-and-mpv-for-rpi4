@@ -49,21 +49,21 @@ anyway put this in and it works
 
 ## example for drm-prime wayland  rpi5
 
-override-display-fps=60
-video-sync=display-resample
+        override-display-fps=60
+        video-sync=display-resample
 
-osd-bar=no
-osc=no
-border=no
-cursor-autohide-fs-only=yes
-gpu-dumb-mode=yes
-opengl-glfinish=yes
-gpu-context=wayland
-gpu-api=opengl
-vo=gpu
-gpu-sw=yes
-drm-vrr-enabled=auto
-hwdec=drm-copy
+        osd-bar=no
+        osc=no
+        border=no
+        cursor-autohide-fs-only=yes
+        gpu-dumb-mode=yes
+        opengl-glfinish=yes
+        gpu-context=wayland
+        gpu-api=opengl
+        vo=gpu
+        gpu-sw=yes
+        drm-vrr-enabled=auto
+        hwdec=drm-copy
 
     
 
