@@ -18,14 +18,14 @@ Bookworm RPI zero w  3 and 4
 
 NOT FOR RPI 5 the rpi5 have no v4l2m2m encoders
 
-INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
+## INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
 
 
 #########################
 
 this mpv.conf is the same like in libreelec hwdec-image-format=drm_prime 
 
-do not use in this case hwdec=v4l2m2m-copy  or drm-copy , maybe only drm but hwdec=auto is  the best, drm-copy works also but not with hwdec-imageformat=drm_prime  which is very stable for all formats
+##  do not use in this case hwdec=v4l2m2m-copy  or drm-copy , maybe only drm but hwdec=auto is  the best, drm-copy works also but not with hwdec-imageformat=drm_prime  which is very stable for all formats
 
 anyway put this in and it works
 
@@ -33,7 +33,7 @@ anyway put this in and it works
     
     nano .config/mpv/mpv.conf
 
-example for drm-prime wayland
+## example for drm-prime wayland
 
     gpu-dumb-mode=yes
     opengl-glfinish=yes
@@ -49,19 +49,19 @@ example for drm-prime wayland
 #####################################################################
 
 
-first install all libarys with
+#  first install all libarys with
 
          sudo apt build-dep ffmpeg mpv 
 
 
-FDK-AAC
+# FDK-AAC
 
     wget http://deb.debian.org/debian/pool/non-free/f/fdk-aac/fdk-aac_2.0.2.orig.tar.gz && tar -xf fdk-aac_2.0.2.orig.tar.gz  && cd fdk-aac-2.0.2/ && autoreconf -fiv && \
     ./configure  --enable-shared && \
     make -j4 && \
     sudo make install && sudo ldconfig
 
-for latest
+# for latest
 
     git clone  https://github.com/mstorsjo/fdk-aac && \
     cd fdk-aac && \
@@ -96,7 +96,7 @@ for latest
 bookworm 64 aarch64 arm64  --arch=arm64 --cpu=cortex-a72 --enable-neon --disable-armv6t2 --disable-armv6 --disable-armv5te 
 
 
-
+# install ffmpeg
 
 
     git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --extra-version=0+rpt1+deb12u1 --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl  --enable-v4l2-request --enable-libudev --enable-epoxy --libdir=/usr/lib/aarch64-linux-gnu --arch=arm64 --cpu=cortex-a72 --enable-neon --disable-armv6t2 --disable-armv6 --disable-armv5te  --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883  --disable-chromaprint --disable-frei0r --disable-libx264 --enable-libplacebo --enable-vulkan  --enable-librav1e --enable-shared --enable-nonfree --enable-libfdk-aac --disable-static --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --disable-vaapi --enable-thumb --enable-libopenh264  --enable-version3 --enable-libopencore-amrwb  --enable-libopencore-amrnb --enable-thumb  && make -j4 && sudo make -j4 install && make -j4 && sudo make -j4 install
@@ -152,7 +152,7 @@ and compile
 
 ############################################################################
 
-MPV
+# MPV
 
 
 
@@ -177,7 +177,7 @@ compile
 #################################
 
 
-Mplayer
+# Mplayer
 
             apt source mplayer && cd mplayer-1.4+ds1/ && ./configure  --enable-faad --enable-gui --enable-dvdnav --disable-ffmpeg_a  --disable-vdpau  && make -j4 && sudo make install
 
@@ -185,7 +185,7 @@ Mplayer
 
 ##############################################
  
-rtsp streamig 
+# rtsp streamig 
 
       https://github.com/aler9/mediamtx/releases
 
@@ -243,16 +243,16 @@ put this in
         #start_x=1  disable or delete
         
 
-rtsp-streaming rpicam
+# rtsp-streaming rpicam
 
          rpicam-vid --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 30  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg     -hwaccel drm -hwaccel_output_format drm_prime    -hide_banner  -f alsa   -i plughw:0  -r 30    -i -  -c:v copy  -c:a libopus  -b:a 32k  -ar 16000 -application lowdelay  -fpsmax 30  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
-experimental  and libfdk 
+# experimental  and libfdk 
 
        rpicam-vid  --autofocus-mode continuous  --inline 1  --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.1 --framerate 30  --width 640 --height 360   -t 0 -n  --codec libav --libav-format mpegts  --libav-video-codec h264_v4l2m2m  -o - | ffmpeg  -fflags  +nobuffer+igndts+genpts -flags low_delay -avioflags direct   -hwaccel drm -hwaccel_output_format drm_prime -hide_banner  -f alsa -thread_queue_size 16 -i plughw:0  -r 30 -i -  -c:v h264_v4l2m2m  -b:v 1000k   -fpsmax 30  -acodec libfdk_aac -profile:a aac_he_v2   -ar 16000      -b:a 32k   -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
-audio sync best
+# audio sync best video
 
         rpicam-vid  --autofocus-mode continuous --inline 1  --brightness 0.1 \
     --contrast 1.0 --sharpness 1.0 --level 4.1 --framerate 30  --width 640 --height 360 \
@@ -267,7 +267,7 @@ audio sync best
 
 ##############################################
 
-USB CAMERAS and older rpi cameras
+# USB CAMERAS and older rpi cameras
 
 #######################################
 
@@ -292,7 +292,7 @@ in this examples audio device =  plughw:0  first audio device
 
 
 
-inputformat h264 and copy output
+# inputformat h264 and copy output
 
        v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=12,h264_profile=4
 
@@ -300,7 +300,7 @@ inputformat h264 and copy output
 
 
 
-without audio
+# without audio
 
             v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11
            ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner 
@@ -308,9 +308,9 @@ without audio
 
 
 
-Video + Audio libfdk_aac h264_v4l2m2m
+# Video + Audio libfdk_aac h264_v4l2m2m
 
-most compatible with all players real mp4
+# most compatible with all players real mp4
 
         v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11
           ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner -f alsa  -i plughw:0  -f  v4l2 -input_format yuv420p -f v4l2 -re -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M -fpsmax 15  -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k -threads 4  -f rtsp - rtsp_transport tcp  rtsp://localhost:8554/mystream
@@ -320,7 +320,7 @@ look running stream
     mpv rtsp://localhost:8554/mystream
 
  
-  opus only audio
+  # opus only audio
 
 
            ffmpeg  -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner     \
