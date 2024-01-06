@@ -126,9 +126,9 @@ bookworm 64 aarch64 arm64  --arch=arm64 --cpu=cortex-a72 --enable-neon --disable
 
 
 
-bookworm 32 armhf armv7l pi2+3 --cpu=cortex-a53 --arch=arm  --disable-armv6t2 --disable-armv6 --disable-armv5te --enable-neon --vfp
+# install ffmpeg rpi3
 
-         git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl  --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --disable-chromaprint --disable-frei0r --disable-libx264 --enable-libplacebo --enable-librav1e --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --cpu=cortex-a53  --arch=arm --disable-armv6t2 --disable-armv6 --disable-armv5te --enable-vfp --enable-neon  --enable-nonfree --enable-libfdk-aac --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --enable-libopenh264 --disable-vaapi --enable-version3 --enable-libopencore-amrwb --enable-libopencore-amrnb --disable-static && make -j4 && sudo make -j4 install  --disable-cuda --disable-vaapi --disable-vdpau --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --enable-nonfree --enable-libfdk-aac --enable-vout-drm --enable-vout-egl --disable-static --enable-vulkan --disable-static --enable-libopenh264 --enable-version3 --enable-libopencore-amrwb  --enable-libopencore-amrnb  && make -j4 && sudo make -j4 install
+         git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl  --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --disable-chromaprint --disable-frei0r --disable-libx264 --enable-libplacebo --enable-librav1e --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --cpu=cortex-a53  --arch=armv7 --disable-armv6t2 --disable-armv6 --disable-armv5te --enable-vfp --enable-neon  --enable-nonfree --enable-libfdk-aac --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --enable-libopenh264 --disable-vaapi --enable-version3 --enable-libopencore-amrwb --enable-libopencore-amrnb --disable-static && make -j4 && sudo make -j4 install  --disable-cuda --disable-vaapi --disable-vdpau --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --enable-nonfree --enable-libfdk-aac --enable-vout-drm --enable-vout-egl --disable-static --enable-vulkan --disable-static --enable-libopenh264 --enable-version3 --enable-libopencore-amrwb  --enable-libopencore-amrnb  && make -j4 && sudo make -j4 install
 
         
 #######################################################################################################
@@ -140,19 +140,21 @@ in the original config from raspberrypi  apt install ffmpeg  = neon enabled whic
 
 rpi zero w  --cpu=arm1176jzf-s --arch=arm --disable-armv6t2 --enable-armv6 --disable-armv5te --disable-vfp --disable-neon
 
-original pi zero w
+# original pi zero w
 
         --prefix=/usr --extra-version=0+rpt1+deb12u1 --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl --enable-neon --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-libplacebo --enable-librav1e --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf --cpu=arm1176jzf-s --arch=arm
 
 
-disable neon and vfp
+# disable neon and vfp my config
 
                 git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl --disable-neon --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --disable-chromaprint --disable-frei0r --disable-libx264 --enable-libplacebo --enable-vulkan --enable-librav1e --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf --cpu=arm1176jzf-s --arch=arm  --disable-armv5te --disable-vfp --disable-neon --disable-thumb --enable-nonfree --enable-libfdk-aac --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --enable-libopenh264 --disable-vaapi --enable-version3 --enable-libopencore-amrwb --enable-libopencore-amrnb --disable-static && make -j4 && sudo make -j4 install
 
 ##################################################################################################################################################################################################
 
 
-32 bit only with openh264 and omx-rpi
+# 32 bit only with openh264 and omx-rpi userland
+
+# install userland omx-rpi
 
     git clone https://github.com/raspberrypi/userland.git
     cd userland
@@ -167,7 +169,7 @@ original sources from https://github.com/jc-kynesim/rpi-ffmpeg.git
 many thanks to jc-kynesim
 
 
-and compile
+# rpi 3 or 32bit  rpi 4
 
     git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl  --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --disable-chromaprint --disable-frei0r --disable-libx264 --enable-libplacebo --enable-librav1e --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --cpu=cortex-a53 --arch=arm  --disable-armv6t2 --disable-armv6 --disable-armv5te  --enable-neon --enable-vfp  --disable-cuda --disable-vaapi --disable-vdpau --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-nonfree --enable-libfdk-aac --enable-vout-drm --enable-vout-egl --disable-static --enable-vulkan --disable-static --enable-libopenh264 --enable-omx --enable-omx-rpi --extra-cflags=-I/opt/vc/include --extra-ldflags=-L/opt/vc/lib --enable-thumb  --enable-version3 --enable-libopencore-amrwb  --enable-libopencore-amrnb   && make -j4 && sudo make -j4 install
 
@@ -468,7 +470,7 @@ try it with qv4l2
 
 ###############################################################################################################################
 
- dvdrendering vob to mp4 + all subtitles plus colorpalette 
+ ##   dvdrendering vob to mp4 + all subtitles plus colorpalette 
 
 ### this is the only line that worked for encrypted dvds that worked for me
 
@@ -529,7 +531,7 @@ direct above the biggest files and copy that file to your home folder blablabla.
       -c:a libopus -b:a 128k -map 0:a -af volume=1.5   -movflags +faststart  -af volume=1.5 -avoid_negative_ts 1   -max_interleave_delta 0  -f mp4  "${file%.*}.mp4"; done
 
 
-without color palette -scodec copy
+# without color palette -scodec copy
      
        ffmpeg  +genpts+igndts+discardcorrupt -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime -fix_sub_duration \
         -i example.vob  -ss 00:00:05  \
@@ -537,7 +539,7 @@ without color palette -scodec copy
       -c:a libopus     -b:a 128k -map 0:a   -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
 
 
-without subtitle
+# without subtitle
 
 
         ffmpeg  +genpts+igndts+discardcorrupt -y  -hwaccel drm -hwaccel_output_format drm_prime -probesize 400M -analyzeduration 410M -fix_sub_duration \
@@ -545,20 +547,20 @@ without subtitle
         -map 0:v   -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
         -c:a libopus     -b:a 128k -map 0:a -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
 
-separate video
+# separate video
 
             ffmpeg -y   -fflags +genpts+igndts -ifo_palette default.IFO   -probesize 1400M -analyzeduration 1410M -hwaccel drm -hwaccel_output_format drm_prime -i output.vob -map 0:v  -c:v h264_v4l2m2m   -level 3.0 -b:v 5M -maxrate 6M   -pix_fmt yuv420p  -bufsize 5M  -num_capture_buffers 512   -num_output_buffers 64    -an -sn  -f mp4  only-lovers-audio+sub.mp4
 
-separate  audio + subtitle
+# separate  audio + subtitle
 
         ffmpeg  -probesize 1400M -analyzeduration 1410M -fflags +genpts+igndts -ifo_palette default.IFO -fix_sub_duration -canvas_size  720x576    -i output.vob   -c:a libfdk_aac -b:a 128k    -map 0:a -scodec dvdsub    -map 0:s -vn  -f mp4    test.mp4
 
 
-separate only audio 
+# separate only audio 
 
             ffmpeg  -probesize 1400M -analyzeduration 1410M -fflags +igndts  -i output.vob   -c:a libfdk_aac -b:a 128k    -map 0:a  -vn -sn  -f mp4    test.mp4
 
-muxing
+# muxing
 
          ffmpeg -fflags +genpts -i testv.mkv  -i test.mkv  -c:v copy -c:a copy -c:s copy  -map 0:v -map 1:a    -map 1:s  -f matroska output.mkv    
 
