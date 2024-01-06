@@ -496,11 +496,11 @@ direct above the biggest files and copy that file to your home folder blablabla.
 
 -probesize 5400M -analyzeduration 5410M  analyse the vob for audiotracks and subtitle  this takes a long time maybe 10  or 15 minutes there is no output to this time let it run
 
--ifo_palette example.IFO -scodec dvdsub
+-ifo_palette example.IFO -scodec dvdsub dvbsub
 
 
         #!/bin/bash
-       for file in "$1"; do   ffmpeg  -ifo_palette example.IFO -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime -fix_sub_duration \
+       for file in "$1"; do   ffmpeg  +genpts+igndts+discardcorrupt -ifo_palette example.IFO -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime -fix_sub_duration \
       -canvas_size  720x576  -i "$file"  -ss 00:00:05 -metadata title="$file" \
       -map 0:v -scodec dvdsub   -map 0:s    \
      -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p  -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
@@ -509,7 +509,7 @@ direct above the biggest files and copy that file to your home folder blablabla.
 
 without color palette -scodec copy
      
-       ffmpeg   -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime -fix_sub_duration \
+       ffmpeg  +genpts+igndts+discardcorrupt -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime -fix_sub_duration \
         -i example.vob  -ss 00:00:05  \
       -map 0:v -scodec copy  -map 0:s -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
       -c:a libopus     -b:a 128k -map 0:a   -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
@@ -518,7 +518,7 @@ without color palette -scodec copy
 without subtitle
 
 
-        ffmpeg   -y  -hwaccel drm -hwaccel_output_format drm_prime -probesize 400M -analyzeduration 410M -fix_sub_duration \
+        ffmpeg  +genpts+igndts+discardcorrupt -y  -hwaccel drm -hwaccel_output_format drm_prime -probesize 400M -analyzeduration 410M -fix_sub_duration \
         -i output.vob  -ss 00:00:05  \
         -map 0:v   -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
         -c:a libopus     -b:a 128k -map 0:a -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
