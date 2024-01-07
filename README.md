@@ -488,8 +488,8 @@ so now is the img save
        
        
        mplayer dvd://3 -nocache -dvd-device  input.iso  -dumpstream -dumpfile output.vob
-       mplayer dvd://3 -nocache -dvd-device -dvd-speed 2 /dev/sr0  -dumpstream -dumpfile output.vob
-       mpv dvd://2 --cache=no --dvd-speed=2 --stream-dump=output.vob 
+       mplayer dvd://3 -nocache -dvd-device /dev/sr0  -dumpstream -dumpfile output.vob
+       mpv dvd://2 --cache=no  --stream-dump=output.vob 
        
 
        
@@ -507,7 +507,7 @@ so now is the img save
 
 simply
 
-        mpv dvdnav:// --cache=no --dvd-speed=2 --dvd-device=/dev/sr0  --stream-dump=output.vob 
+        mpv dvdnav:// --cache=no --dvd-device=/dev/sr0  --stream-dump=output.vob 
 
 only comand line no gui because the gpu runns full fps ca 100 
 
