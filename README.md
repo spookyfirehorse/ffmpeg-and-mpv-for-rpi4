@@ -530,6 +530,9 @@ direct above the biggest files and copy that file to your home folder blablabla.
      -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p  -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
       -c:a libopus -b:a 128k -map 0:a -af volume=1.5   -movflags +faststart  -af volume=1.5 -avoid_negative_ts 1   -max_interleave_delta 0  -f mp4  "${file%.*}.mp4"; done
 
+# seperate subtitles
+
+        ffmpeg  -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime   -i /media/sun/Filme/Neu/the-dead-dont-die.mkv   -map 0:v -scodec copy   -map 0:s:12 -map 0:s:11  -map 0:s:1  -map 0:s:2     -map 0:s:10   -c:v copy -bufsize 5M   -maxrate 5M   -c:a copy     -b:a 128k -map 0:a  -y    /media/dat/test.mkv
 
 # without color palette -scodec copy
      
