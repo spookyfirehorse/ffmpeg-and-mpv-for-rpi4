@@ -23,11 +23,6 @@ NOT FOR RPI 5 the rpi5 have no v4l2m2m encoders
 
 #########################
 
-this mpv.conf is the same like in libreelec hwdec-image-format=drm_prime 
-
-##  do not use in this case hwdec=v4l2m2m-copy  or drm-copy , maybe only drm but hwdec=auto is  the best, drm-copy works also but not with hwdec-imageformat=drm_prime  which is very stable for all formats
-
-anyway put this in and it works
 
 
     
