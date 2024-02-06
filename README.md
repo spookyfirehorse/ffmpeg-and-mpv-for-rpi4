@@ -213,13 +213,16 @@ compile
 
       https://github.com/aler9/mediamtx/releases
 
-64 bit
+64 bit armv8
 
-    wget https://github.com/aler9/mediamtx/releases/download/v0.22.2/mediamtx_v0.22.2_linux_arm64v8.tar.gz
+    wget https://github.com/bluenviron/mediamtx/releases/download/v1.5.1/mediamtx_v1.5.1_linux_arm64v8.tar.gz
+armv7
 
-32 bit
+      wget  https://github.com/bluenviron/mediamtx/releases/download/v1.5.1/mediamtx_v1.5.1_linux_armv7.tar.gz
 
-      wget https://github.com/aler9/mediamtx/releases/download/v0.22.2/mediamtx_v0.22.2_linux_armv7.tar.gz
+armv6
+
+        wget https://github.com/bluenviron/mediamtx/releases/download/v1.5.1/mediamtx_v1.5.1_linux_armv6.tar.gz
 
 unzip
 
