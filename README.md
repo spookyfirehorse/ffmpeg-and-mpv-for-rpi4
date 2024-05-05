@@ -267,7 +267,10 @@ put this in
 
 # rtsp-streaming rpicam
 
-         rpicam-vid --denoise cdn_off  --level 4.2 --framerate 25 --width 1280 --height 720   -t 0  -n  --inline -o  - |  ffmpeg  -fflags +nobuffer+genpts -flags low_delay  -hwaccel drm -hwaccel_output_format drm_prime    -hide_banner -f alsa  -i plughw:CARD=Device,DEV=0   -r 25    -i -  -c:v copy  -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -fpsmax 25  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+        rpicam-vid  -b 700000 --autofocus-mode continuous  --denoise cdn_off    --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.2 --framerate 25 --width 640 --height 360   -t 0  -n  --inline -o  - |  \
+       ffmpeg   -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner \
+      -f alsa  -i plughw:CARD=Device,DEV=0   -r 25    -i -  -metadata title='DEVIL'  -c:v copy  -c:a libopus -application lowdelay -b:a 64k  -ar 16000 -f s16le   -fpsmax 25  -threads 4   \
+      -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
        
@@ -292,16 +295,16 @@ set  15 fps with and height always before
         v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
 
 
-in this examples audio device =  plughw:0  first audio device
+in this examples audio device =  plughw:0  this is the first audio device ! best streaming !! no audio video delay very stable
 
-      ffmpeg   -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+      ffmpeg  -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
-best streaming opus no audio video delay very stable
+libfdkaac
+
+     ffmpeg  -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:CARD=Device,DEV=0   -f v4l2 -re  -input_format yuv420p  -i /dev/video0 -metadata title="SUN"  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k -fpsmax 15 -g 25  -c:a  libfdk_aac -eld_sbr 1  -ar 44100 -b:a 32k  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
-     ffmpeg  -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:CARD=Device,DEV=0   -f v4l2 -re  -input_format yuv420p  -i /dev/video0 -metadata title="SUN"  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k -fpsmax 15 -g 25  -c:a libopus -application lowdelay -b:a 64k  -ar 16000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
-
-# inputformat h264 and copy output
+# inputformat h264 and copy output hwaccel drm
 
        v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=12,h264_profile=4
 
