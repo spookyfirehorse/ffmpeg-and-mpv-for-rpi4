@@ -296,7 +296,10 @@ in this examples audio device =  plughw:0  first audio device
 
       ffmpeg   -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
+best streaming opus no audio video delay very stable
 
+
+     ffmpeg  -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:CARD=Device,DEV=0   -f v4l2 -re  -input_format yuv420p  -i /dev/video0 -metadata title="SUN"  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k -fpsmax 15 -g 25  -c:a libopus -application lowdelay -b:a 64k  -ar 16000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 # inputformat h264 and copy output
 
