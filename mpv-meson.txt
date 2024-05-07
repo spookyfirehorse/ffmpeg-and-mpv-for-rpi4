@@ -12,3 +12,6 @@ meson compile -C build
 sudo meson install -C build
 
 
+RPI
+
+meson configure build -Dprefix=/usr -Dlibmpv=true  -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled  -Dcuda-interop=disabled -Dvulkan=enabled -Dcuda-hwaccel=disabled -Dshaderc=disabled
