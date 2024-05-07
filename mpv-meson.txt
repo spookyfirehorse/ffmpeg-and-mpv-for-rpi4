@@ -1,5 +1,5 @@
 meson setup build
-meson configure build -Dprefix=/usr -Dlibmpv=true  -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled -Ddvdnav=enabled -Dcuda-interop=enabled -Dvulkan=enabled -Dcuda-hwaccel=enabled -Dshaderc=enabled -Dzimg=enabled   -Dzlib=enabled -Dpipewire=enabled -Ddvdnav=enabled -Ddvdbin=enabled
+meson configure build -Dprefix=/usr -Dlibmpv=true  -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled -Ddvdnav=enabled -Dcuda-interop=enabled -Dvulkan=enabled -Dcuda-hwaccel=enabled -Dshaderc=disabled -Dzimg=enabled   -Dzlib=enabled -Dpipewire=enabled -Ddvdnav=enabled 
 meson compile -C build
 sudo meson install -C build
 
@@ -7,7 +7,7 @@ sudo meson install -C build
 cuda
 git clone https://github.com/mpv-player/mpv.git
 meson build
-meson configure build -Dprefix=/usr -Dlibmpv=true  -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled  -Dcuda-interop=enabled -Dvulkan=enabled -Dcuda-hwaccel=enabled -Dshaderc=enabled
+meson configure build -Dprefix=/usr -Dlibmpv=true  -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled  -Dcuda-interop=enabled -Dvulkan=enabled -Dcuda-hwaccel=enabled -Dshaderc=disabled
 meson compile -C build
 sudo meson install -C build
 
