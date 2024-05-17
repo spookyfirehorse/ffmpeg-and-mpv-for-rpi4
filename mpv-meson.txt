@@ -14,4 +14,4 @@ sudo meson install -C build
 
 RPI
 
-meson configure build -Dprefix=/usr -Dlibmpv=true  -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled  -Dcuda-interop=disabled -Dvulkan=enabled -Dcuda-hwaccel=disabled -Dshaderc=disabled
+meson configure build -Dprefix=/usr -Dlibmpv=true  -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled -Dsdl2=enabled -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled  -Dcuda-interop=disabled -Dvulkan=enabled -Dcuda-hwaccel=disabled -Dshaderc=disabled -Dlibplacebo=enabled -Dpulse=disabled -Dpipewire=enabled -Ddvdnav=enabled -Dzimg=enabled   -Dzlib=enabled
