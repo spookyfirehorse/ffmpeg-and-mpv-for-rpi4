@@ -277,10 +277,10 @@ minimum resolution and 15 fps
  imx219@10 camera works with minimal uplod speed over internet ! higher fps  are possible with more upload speed
 
         v4l2-ctl -v width=1640,height=1232,pixelformat=pRAA
-        rpicam-vid  -b 1000000 --autofocus-mode continuous  --denoise cdn_off    --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.2 --framerate 15 --width 1640 --height 1232   -t 0  -n  --inline -o  - |  \
-ffmpeg -avioflags direct  -fflags +nobuffer+genpts -flags low_delay  -hwaccel drm -hwaccel_output_format drm_prime \
-   -hide_banner -f alsa  -i plughw:0   -r 15    -i -  -metadata title='DEVIL'  -c:v copy  -c:a libopus  -b:a 64k  -ar 48000 -f s16le  -fpsmax 15  -threads 4 \
-  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+        rpicam-vid  -b 1000000 --autofocus-mode continuous  --denoise cdn_off    --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.2 --framerate 15 --width 1640 --height 1232   -t 0  -n          --inline -o  - |  \
+        ffmpeg -avioflags direct  -fflags +nobuffer+genpts -flags low_delay  -hwaccel drm -hwaccel_output_format drm_prime \
+           -hide_banner -f alsa  -i plughw:0   -r 15    -i -  -metadata title='DEVIL'  -c:v copy  -c:a libopus  -b:a 64k  -ar 48000 -f s16le  -fpsmax 15  -threads 4 \
+          -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
        
