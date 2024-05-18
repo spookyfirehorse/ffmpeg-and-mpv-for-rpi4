@@ -260,17 +260,27 @@ RTSP STREAMING WITH AUDIO FOR NEWER  RPI CAMERAS
 
 put this in
 
-        camera_auto_detect=1 on bookworm default
-        #gpu_mem=256   disable or delete not needed
-        #start_x=1  disable or delete
+        camera_auto_detect=1 #on bookworm default
+        #gpu_mem=256   #disable or delete not needed
+        #start_x=1  #disable or delete
         
 
 # rtsp-streaming rpicam
 
-        rpicam-vid  -b 700000 --autofocus-mode continuous  --denoise cdn_off    --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.2 --framerate 25 --width 640 --height 360   -t 0  -n  --inline -o  - |  \
+minimum resolution and 15 fps
+
+        rpicam-vid  -b 700000 --autofocus-mode continuous  --denoise cdn_off    --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.2 --framerate 15 --width 640 --height 360   -t 0  -n  --inline -o  - |  \
        ffmpeg   -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner \
-      -f alsa  -i plughw:CARD=Device,DEV=0   -r 25    -i -  -metadata title='DEVIL'  -c:v copy  -c:a libopus -application lowdelay -b:a 64k  -ar 16000 -f s16le   -fpsmax 25  -threads 4   \
+      -f alsa  -i plughw:0   -r 15    -i -  -metadata title='DEVIL'  -c:v copy  -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le   -fpsmax 15  -threads 4   \
       -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+
+ imx219@10 camera works with minimal uplod speed over internet ! higher fps  are possible with more upload speed
+
+        v4l2-ctl -v width=1640,height=1232,pixelformat=pRAA
+        rpicam-vid  -b 1000000 --autofocus-mode continuous  --denoise cdn_off    --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.2 --framerate 15 --width 1640 --height 1232   -t 0  -n  --inline -o  - |  \
+ffmpeg -avioflags direct  -fflags +nobuffer+genpts -flags low_delay  -hwaccel drm -hwaccel_output_format drm_prime \
+   -hide_banner -f alsa  -i plughw:0   -r 15    -i -  -metadata title='DEVIL'  -c:v copy  -c:a libopus  -b:a 64k  -ar 48000 -f s16le  -fpsmax 15  -threads 4 \
+  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
        
