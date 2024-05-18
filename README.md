@@ -286,21 +286,12 @@ minimum resolution and 15 fps
        
 ##############################################
 
-# USB CAMERAS and older rpi cameras
+# USB CAMERAS 
 
 #######################################
 
-    nano /boot/firmware/config.txt
-    
-    camera_auto_detect=0
-    gpu_mem=256
-    start_x=1
-    disable_camera_led=1
 
-
-this is also for usb cameras only v4l2-ctl have different options
-
-set  15 fps with and height always before
+set  15 fps with and height always before 
 
         v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
 
