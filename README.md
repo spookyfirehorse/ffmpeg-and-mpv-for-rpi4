@@ -210,18 +210,18 @@ compile
 
 64 bit armv8
 
-    wget https://github.com/bluenviron/mediamtx/releases/download/v1.5.1/mediamtx_v1.5.1_linux_arm64v8.tar.gz
+    wget https://github.com/bluenviron/mediamtx/releases/download/v1.8.1/mediamtx_v1.8.1_linux_arm64v8.tar.gz
 armv7
 
-      wget  https://github.com/bluenviron/mediamtx/releases/download/v1.5.1/mediamtx_v1.5.1_linux_armv7.tar.gz
+      wget  https://github.com/bluenviron/mediamtx/releases/download/v1.8.1/mediamtx_v1.8.1_linux_armv7.tar.gz
 
 armv6
 
-        wget https://github.com/bluenviron/mediamtx/releases/download/v1.5.1/mediamtx_v1.5.1_linux_armv6.tar.gz
+        wget https://github.com/bluenviron/mediamtx/releases/download/v1.8.1/mediamtx_v1.8.1_linux_armv6.tar.gz
 
 unzip
 
-      tar -xf mediamtx_v0.22.2_linux_arm64v8.tar.gz
+      tar -xf mediamtx_v1.8.1_linux_arm64v8.tar.gz
 
 move it to
 
