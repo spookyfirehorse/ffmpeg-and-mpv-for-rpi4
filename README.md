@@ -272,25 +272,34 @@ put this in
 
 minimum resolution and 15 fps
 
-        rpicam-vid  -b 700000 --autofocus-mode continuous  --denoise cdn_off    --brightness 0.1 --contrast 1.0 --sharpness 1.0  --level 4.2 --framerate 15 --width 640 --height 360   -t 0  -n  --inline -o  - |  \
-       ffmpeg   -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner \
-      -f alsa  -i plughw:0   -r 15    -i -  -metadata title='DEVIL'  -c:v copy  -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le   -fpsmax 15  -threads 4   \
-      -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+       
+
+      rpicam-vid  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
+      --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
+      --sharpness   1.0  --level 4.2 --framerate 15 --width 640 --height 360  \
+      --audio-device=plughw:CARD=Device,DEV=0  --audio-bitrate=96kbps \
+      --audio-codec mp2 --audio-channels 1 --libav-audio 1 --audio-source alsa \
+      -t 0  -n --inline -o  - | ffmpeg -fflags \
+      +genpts+nobuffer+igndts+discardcorrupt   -flags low_delay \
+      -hwaccel drm -hwaccel_output_format drm_prime -i - -metadata title='LUCY'  -codec copy  \
+      -f rtsp -rtsp_transport tcp  rtsp://"spook:&5SQZ20!"@"localhost:8554"/mystream
+
+
 
  imx219@10 camera works with minimal uplod speed over internet ! higher fps  are possible with more upload speed
 
         v4l2-ctl -v width=1640,height=1232,pixelformat=pRAA
         rpicam-vid  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
-        --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
-        --sharpness   1.0  --level 4.2 --framerate 30 --width 1536 --height 864 \
-        --audio-device=plughw:CARD=Device,DEV=0   --audio-bitrate=96kbps \
-        --audio-codec aac --audio-channels 1 --libav-audio 1 --audio-source alsa \
-        -t 0  -n --inline -o  - | ffmpeg -fflags \
-        +genpts+nobuffer+igndts+discardcorrupt -flags low_delay \
-        -hwaccel drm -hwaccel_output_format drm_prime -i - -vcodec copy \
-        -c:a libfdk_aac -b:a 64k  -ar 48000 -f s16le \
-        -f rtsp -rtsp_transport tcp  rtsp://"user:passwort"@"localhost:8554"/mystream
-       
+       --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
+       --sharpness   1.0  --level 4.2 --framerate 30 --width 1536 --height 864 \
+       --audio-device=plughw:CARD=Device,DEV=0  --audio-bitrate=96kbps \
+       --audio-codec mp2 --audio-channels 1 --libav-audio 1 --audio-source alsa \
+       -t 0  -n --inline -o  - | ffmpeg -fflags \
+        +genpts+nobuffer+igndts+discardcorrupt   -flags low_delay \
+       -hwaccel drm -hwaccel_output_format drm_prime -i - -metadata title='LUCY'  -codec copy  \
+       -f rtsp -rtsp_transport tcp  rtsp://"spook:&5SQZ20!"@"localhost:8554"/mystream
+
+
 ##############################################
 
 # USB CAMERAS 
