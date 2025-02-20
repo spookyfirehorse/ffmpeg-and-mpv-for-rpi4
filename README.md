@@ -269,7 +269,7 @@ minimum resolution and 15 fps
 
  imx219@10 camera works with minimal uplod speed over internet ! higher fps  are possible with more upload speed
 
-        v4l2-ctl -v width=1640,height=1232,pixelformat=pRAA
+        
         rpicam-vid  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
        --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
        --sharpness   1.0  --level 4.2 --framerate 30 --width 1536 --height 864 \
