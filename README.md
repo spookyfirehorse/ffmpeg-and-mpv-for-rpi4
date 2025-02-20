@@ -13,14 +13,6 @@ this very stable
 
 
 
-
-Bookworm RPI zero w  3 and 4 
-
-NOT FOR RPI 5 the rpi5 have no v4l2m2m encoders
-
-## INSTALL FFMPEG for RPI4 32 bit + 64bit with libfdk_aac  v4l2_request sand usw.
-
-
 #########################
 
 
@@ -136,16 +128,10 @@ on this side  https://en.wikipedia.org/wiki/Raspberry_Pi   rpi specs  you can re
 in the original config from raspberrypi  apt install ffmpeg  = neon enabled which  is not correct also thumb is not supported 
 
 
-
-
-# disable neon and vfp my config
-
-                git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl --disable-neon --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --disable-chromaprint --disable-frei0r --disable-libx264 --enable-libplacebo --enable-vulkan --enable-librav1e --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf --cpu=arm1176jzf-s --arch=arm  --disable-armv5te --disable-vfp --disable-neon --disable-thumb --enable-nonfree --enable-libfdk-aac --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --enable-libopenh264 --disable-vaapi --enable-version3 --enable-libopencore-amrwb --enable-libopencore-amrnb --disable-static && make -j4 && sudo make -j4 install
-
 ##################################################################################################################################################################################################
 
 
-# 32 bit only with openh264 and omx-rpi userland
+# 32 bit only with openh264 and omx-rpi userland raspivid
 
 # install userland omx-rpi
 
