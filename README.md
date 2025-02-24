@@ -1,5 +1,9 @@
 
-sorry for my bad english
+sorry for my bad english !!!
+
+original sources from https://github.com/jc-kynesim/rpi-ffmpeg.git !!!!  many many thanks !!!!
+
+
 
 this is an easy way to streaming usb cameras, older models of rpi cameras, and rpi-cam  on rpi 
 
@@ -7,25 +11,20 @@ also dvdcopy with all subtitles and colorpalette for the subtitle
 
 also full harware support for mpv and vlc include libfdk-aac wich is default mp4 for compatiblity with all player
 
-opus is realy good and you heave nothing to to and go to streaming with opus 
-
 this very stable 
 
 
 
 #########################
 
+## example for drm-prime wayland  rpi4 rpi 3
 
-
-    
-    nano .config/mpv/mpv.conf
-
-## example for drm-prime wayland  rpi4
+     nano .config/mpv/mpv.conf
 
     gpu-dumb-mode=yes
     opengl-glfinish=yes
-    #gpu-context=x11egl
-    gpu-context=wayland
+    #gpu-context=x11egl   ###x11
+    gpu-context=wayland   ##wayland
     gpu-api=opengl
     vo=gpu
     hwdec=auto
@@ -36,21 +35,19 @@ this very stable
 
 ## example for drm-prime wayland  rpi5
 
-        override-display-fps=60
-        video-sync=display-resample
+        #override-display-fps=60
+        #video-sync=display-resample
 
-        osd-bar=no
-        osc=no
-        border=no
-        cursor-autohide-fs-only=yes
+        
         gpu-dumb-mode=yes
         opengl-glfinish=yes
         gpu-context=wayland
+         #gpu-context=x11egl    ##x11
         gpu-api=opengl
         vo=gpu
         gpu-sw=yes
         drm-vrr-enabled=auto
-        hwdec=drm   ##ordrm-copy
+        hwdec=drm   ##or drm-copy
 
     
 
@@ -128,14 +125,6 @@ this very stable
     git clone https://github.com/raspberrypi/userland.git
     cd userland
     ./buildme
-
-and opnh264 desingned for slow  moving pictures for  voip 
-
-        
-
-original sources from https://github.com/jc-kynesim/rpi-ffmpeg.git
-
-many thanks to jc-kynesim
 
 
 ############################################################################
