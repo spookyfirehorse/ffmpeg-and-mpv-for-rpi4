@@ -102,36 +102,26 @@ this very stable
 ##############################################################################################
 
 
-bookworm 64 aarch64 arm64  --arch=arm64 --cpu=cortex-a72 --enable-neon --disable-armv6t2 --disable-armv6 --disable-armv5te 
+     sudo apt install libopenh264-dev
+
+     sudo apt build-dep mpv ffmpeg 
 
 
-# install ffmpeg rpi4
+ ##  rpi4 64 bit aarch64
 
+    git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --extra-version=0+rpt1+deb12u1 --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl --enable-v4l2-request --enable-libudev --enable-epoxy --libdir=/usr/lib/aarch64-linux-gnu --arch=arm64 --cpu=cortex-a72 --enable-neon --disable-armv6t2 --disable-armv6 --disable-armv5te --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --enable-chromaprint --enable-frei0r --disable-libx264 --enable-libplacebo --enable-vulkan --enable-librav1e --enable-shared --enable-nonfree --enable-libfdk-aac --disable-static --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --disable-vaapi --enable-thumb --enable-libopenh264 --enable-version3 --enable-libopencore-amrwb --enable-libopencore-amrnb --disable-thumb
 
-    git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --extra-version=0+rpt1+deb12u1 --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl --enable-v4l2-request --enable-libudev --enable-epoxy --libdir=/usr/lib/aarch64-linux-gnu --arch=arm64 --cpu=cortex-a72 --enable-neon --disable-armv6t2 --disable-armv6 --disable-armv5te --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --enable-chromaprint --enable-frei0r --disable-libx264 --enable-libplacebo --enable-vulkan --enable-librav1e --enable-shared --enable-nonfree --enable-libfdk-aac --disable-static --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --disable-vaapi --enable-thumb --enable-libopenh264 --enable-version3 --enable-libopencore-amrwb --enable-libopencore-amrnb --enable-thumb
-
-
+ ## rpi4 32 bit  armv7l
+    
+    git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --extra-version=0+rpt1+deb12u1 --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl --enable-v4l2-request --enable-libudev --enable-epoxy --libdir=/usr/lib/aarch64-linux-gnu --arch=armv7l --cpu=cortex-a72 --enable-neon --disable-armv6t2 --disable-armv6 --disable-armv5te --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --enable-chromaprint --enable-frei0r --disable-libx264 --enable-libplacebo --enable-vulkan --enable-librav1e --enable-shared --enable-nonfree --enable-libfdk-aac --disable-static --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --disable-vaapi --enable-thumb --enable-libopenh264 --enable-version3 --enable-libopencore-amrwb --enable-libopencore-amrnb --disable-thumb 
+    
     sudo make -j4 
 
 
+# install ffmpeg rpi3 arch armv7
 
-# install ffmpeg rpi3
-
-         git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl  --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --disable-chromaprint --disable-frei0r --disable-libx264 --enable-libplacebo --enable-librav1e --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --cpu=cortex-a53  --arch=armv7 --disable-armv6t2 --disable-armv6 --disable-armv5te --enable-vfp --enable-neon  --enable-nonfree --enable-libfdk-aac --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --enable-libopenh264 --disable-vaapi --enable-version3 --enable-libopencore-amrwb --enable-libopencore-amrnb --disable-static && make -j4 && sudo make -j4 install  
+         git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl  --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --disable-chromaprint --disable-frei0r --disable-libx264 --enable-libplacebo --enable-librav1e --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --cpu=cortex-a53  --arch=armv7 --disable-armv6t2 --disable-armv6 --disable-armv5te --enable-vfp --enable-neon  --enable-nonfree --enable-libfdk-aac --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --enable-libopenh264 --disable-vaapi --enable-version3 --enable-libopencore-amrwb --enable-libopencore-amrnb --disable-static --disable-thumb && make -j4 && sudo make -j4 install  
          
-
-        
-#######################################################################################################
-
-on this side  https://en.wikipedia.org/wiki/Raspberry_Pi   rpi specs  you can read rpi zero w has no vfp and neon support
-
-in the original config from raspberrypi  apt install ffmpeg  = neon enabled which  is not correct also thumb is not supported 
-
-
-##################################################################################################################################################################################################
-
-
-# 32 bit only with openh264 and omx-rpi userland raspivid
 
 # install userland omx-rpi
 
@@ -139,18 +129,13 @@ in the original config from raspberrypi  apt install ffmpeg  = neon enabled whic
     cd userland
     ./buildme
 
-and opnh264 desingned for slow  moving pictures for  voip + omx-rpi
+and opnh264 desingned for slow  moving pictures for  voip 
 
-        sudo apt install libopenh264-dev
+        
 
 original sources from https://github.com/jc-kynesim/rpi-ffmpeg.git
 
 many thanks to jc-kynesim
-
-
-# rpi 3 or 32bit  rpi 4
-
-    git clone -b release/5.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure --prefix=/usr --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl  --enable-v4l2-request --enable-libudev --enable-epoxy --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --disable-chromaprint --disable-frei0r --disable-libx264 --enable-libplacebo --enable-librav1e --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf/neon/vfp --cpu=cortex-a53 --arch=arm  --disable-armv6t2 --disable-armv6 --disable-armv5te  --enable-neon --enable-vfp  --disable-cuda --disable-vaapi --disable-vdpau --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-nonfree --enable-libfdk-aac --enable-vout-drm --enable-vout-egl --disable-static --enable-vulkan --disable-static --enable-libopenh264 --enable-omx --enable-omx-rpi --extra-cflags=-I/opt/vc/include --extra-ldflags=-L/opt/vc/lib --enable-thumb  --enable-version3 --enable-libopencore-amrwb  --enable-libopencore-amrnb   && make -j4 && sudo make -j4 install
 
 
 ############################################################################
@@ -173,7 +158,8 @@ compile
 
         meson setup build
 
-        meson configure build -Dprefix=/usr -Dlibmpv=true -Ddvdnav=enabled -Dsdl2=enabled -Dzimg=enabled -Drpi=disabled -Drpi-mmal=disabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled         -Dvaapi=disabled -Dvdpau=disabled -Dvulkan=enabled  -Dcuda-hwaccel=disabled -Dcuda-interop=disabled -Dzlib=enabled 
+        meson configure build -Dprefix=/usr -Dlibmpv=true -Ddvdnav=enabled -Dsdl2=enabled -Dzimg=enabled -Drpi=disabled -Drpi-mmal=disabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled  -Dvaapi=disabled -Dvdpau=disabled - 
+        Dvulkan=enabled  -Dcuda-hwaccel=disabled -Dcuda-interop=disabled -Dzlib=enabled 
 
         sudo meson install -C build
 
@@ -260,7 +246,7 @@ minimum resolution and 15 fps
       --audio-codec mp2 --audio-channels 1 --libav-audio 1 --audio-source alsa \
       -t 0  -n --inline -o  - | ffmpeg -fflags \
       +genpts+nobuffer+igndts+discardcorrupt   -flags low_delay \
-      -hwaccel drm -hwaccel_output_format drm_prime -i - -metadata title='LUCY'  -codec copy  \
+      -vcodec h264_v4l2m2m -i - -metadata title='LUCY'  -codec copy  \
       -f rtsp -rtsp_transport tcp  rtsp://"spook:&5SQZ20!"@"localhost:8554"/mystream
 
 
@@ -275,7 +261,7 @@ minimum resolution and 15 fps
        --audio-codec mp2 --audio-channels 1 --libav-audio 1 --audio-source alsa \
        -t 0  -n --inline -o  - | ffmpeg -fflags \
         +genpts+nobuffer+igndts+discardcorrupt   -flags low_delay \
-       -hwaccel drm -hwaccel_output_format drm_prime -i - -metadata title='LUCY'  -codec copy  \
+       -vcodec h264_v4l2m2m -i - -metadata title='LUCY'  -codec copy  \
        -f rtsp -rtsp_transport tcp  rtsp://"spook:&5SQZ20!"@"localhost:8554"/mystream
 
 
