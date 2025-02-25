@@ -234,7 +234,7 @@ minimum resolution and 15 fps
 
       rpicam-vid  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
       --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
-      --sharpness   1.0  --level 4.2 --framerate 15 --width 640 --height 360  \
+      --sharpness   1.0 --profile high --level 4.2 --framerate 15 --width 640 --height 360  \
       --audio-device=plughw:CARD=Device,DEV=0  --audio-bitrate=96kbps \
       --audio-codec mp2 --audio-channels 1 --libav-audio 1 --audio-source alsa \
       -t 0  -n --inline -o  - | ffmpeg -fflags \
@@ -249,7 +249,7 @@ minimum resolution and 15 fps
         
         rpicam-vid  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
        --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
-       --sharpness   1.0  --level 4.2 --framerate 30 --width 1536 --height 864 \
+       --sharpness   1.0 --profile high  --level 4.2 --framerate 30 --width 1536 --height 864 \
        --audio-device=plughw:CARD=Device,DEV=0  --audio-bitrate=96kbps \
        --audio-codec mp2 --audio-channels 1 --libav-audio 1 --audio-source alsa \
        -t 0  -n --inline -o  - | ffmpeg -fflags \
