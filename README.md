@@ -283,7 +283,7 @@ minimum resolution and 15 fps
       -t 0  -n --inline -o  - | ffmpeg -fflags \
       +genpts+nobuffer+igndts+discardcorrupt   -flags low_delay \
       -vcodec h264_v4l2m2m -i - -metadata title='LUCY'  -codec copy  \
-      -f rtsp -rtsp_transport tcp  rtsp://"spook:&5SQZ20!"@"localhost:8554"/mystream
+      -f rtsp -rtsp_transport tcp  rtsp://"user:password"@"localhost:8554"/mystream
 
 
 
@@ -298,7 +298,7 @@ minimum resolution and 15 fps
        -t 0  -n --inline -o  - | ffmpeg -fflags \
         +genpts+nobuffer+igndts+discardcorrupt   -flags low_delay \
        -vcodec h264_v4l2m2m -i - -metadata title='LUCY'  -codec copy  \
-       -f rtsp -rtsp_transport tcp  rtsp://"spook:&5SQZ20!"@"localhost:8554"/mystream
+       -f rtsp -rtsp_transport tcp  rtsp://"user:password"@"localhost:8554"/mystream
 
 
 ##############################################
