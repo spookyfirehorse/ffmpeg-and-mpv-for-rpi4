@@ -24,9 +24,13 @@ Compile REALTIME KERNEL PI 5 optional
 
            head Makefile -n 4
 
+
 SPDX-License-Identifier: GPL-2.0
+
 VERSION = 6
+
 PATCHLEVEL = 6
+
 SUBLEVEL = 74
 
 
