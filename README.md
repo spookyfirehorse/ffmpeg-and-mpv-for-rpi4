@@ -24,7 +24,7 @@ cp /boot/config-6.6.74+rpt-rpi-2712 .config
 
 head Makefile -n 4
 
-# SPDX-License-Identifier: GPL-2.0
+SPDX-License-Identifier: GPL-2.0
 VERSION = 6
 PATCHLEVEL = 6
 SUBLEVEL = 74
