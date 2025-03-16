@@ -12,6 +12,53 @@ also dvdcopy with all subtitles and colorpalette for the subtitle
 also full harware support for mpv and vlc include libfdk-aac wich is default mp4 for compatiblity with all player
 
 this very stable 
+#############################
+Compile REALTIME KERNEL PI 5 optional
+
+
+apt source linux-image-rpi-2712 
+
+cd linux-6.6.74/
+
+cp /boot/config-6.6.74+rpt-rpi-2712 .config
+
+head Makefile -n 4
+
+# SPDX-License-Identifier: GPL-2.0
+VERSION = 6
+PATCHLEVEL = 6
+SUBLEVEL = 74
+
+
+
+wget https://cdn.kernel.org/pub/linux/kernel/projects/rt/6.6/older/patch-6.6.74-rt48.patch.gz
+
+gunzip patch-6.6.74-rt48.patch.gz
+
+cat patch-6.6.74-rt48.patch | patch -p1
+
+make menuconfig ## select General/Preemption Model (Fully Preemptible Kernel (Real-Time))
+
+make -j6 Image.gz modules dtbs
+
+sudo make -j6 modules_install
+
+
+sudo cp /boot/firmware/kernel_2712.img  /boot/firmware/kernel_2712-backup.img
+
+sudo cp arch/arm64/boot/Image.gz /boot/firmware/kernel_2712.img
+
+sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
+
+sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
+
+sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
+
+
+reboot and uname -a
+
+######################
+
 
 
 
