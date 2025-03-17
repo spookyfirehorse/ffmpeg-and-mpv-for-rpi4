@@ -12,7 +12,9 @@ also dvdcopy with all subtitles and colorpalette for the subtitle
 also full harware support for mpv and vlc include libfdk-aac wich is default mp4 for compatiblity with all player
 
 this very stable 
-#############################
+
+
+#################################################################################################
 
 
 Compile REALTIME KERNEL PI 5 optional
@@ -153,7 +155,6 @@ SUBLEVEL = 74
 
      sudo apt install libopenh264-dev
 
-     sudo apt build-dep mpv ffmpeg 
      
 ##   pi 5 64 bit
 
@@ -177,7 +178,7 @@ SUBLEVEL = 74
 
            
 
-# install userland omx-rpi
+# install userland omx-rpi optional not need
 
     git clone https://github.com/raspberrypi/userland.git
     cd userland
@@ -200,7 +201,9 @@ SUBLEVEL = 74
 
 
 compile
+        apt source mpv
 
+        cd mpv
 
         meson setup build
 
