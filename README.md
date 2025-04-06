@@ -24,9 +24,12 @@ Architecture	Model	Command
 
 Raspberry Pi 3
 
-cd linux
-KERNEL=kernel8
-make bcm2711_defconfig
+    cd linux
+    
+    KERNEL=kernel8
+     
+    make bcm2711_defconfig
+    
 Compute Module 3
 
 Raspberry Pi 3+
@@ -45,9 +48,12 @@ Compute Module 4S
 
 Raspberry Pi 5
 
-cd linux
-KERNEL=kernel_2712
-make bcm2712_defconfig
+    cd linux
+
+    KERNEL=kernel_2712
+
+    make bcm2712_defconfig
+
 Pi 500
 
 Compute Module 5
