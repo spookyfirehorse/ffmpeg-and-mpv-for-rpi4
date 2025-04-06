@@ -56,9 +56,12 @@ Compute Module 5
 
 Raspberry Pi 1
 
-cd linux
-KERNEL=kernel
-make bcmrpi_defconfig
+     cd linux
+
+     KERNEL=kernel
+
+     make bcmrpi_defconfig
+
 Compute Module 1
 
 Zero
@@ -67,9 +70,12 @@ Zero W
 
 Raspberry Pi 2
 
-cd linux
-KERNEL=kernel7
-make bcm2709_defconfig
+    cd linux
+
+    KERNEL=kernel7
+
+    make bcm2709_defconfig
+
 Raspberry Pi 3
 
 Compute Module 3
@@ -83,14 +89,12 @@ Zero 2 W
 Raspberry Pi 4
 
 
-cd linux
-KERNEL=kernel7l
-make bcm2711_defconfig
-Pi 400
+    cd linux
+    
+    KERNEL=kernel7l
+    
+    make bcm2711_defconfig
 
-Compute Module 4
-
-Compute Module 4S
 
 
 
