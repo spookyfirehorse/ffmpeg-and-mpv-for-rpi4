@@ -17,6 +17,103 @@ this very stable
 #################################################################################################
 
 
+    https://www.raspberrypi.com/documentation/computers/linux_kernel.html#kernel
+
+Architecture	Model	Command
+64-bit
+
+Raspberry Pi 3
+
+cd linux
+KERNEL=kernel8
+make bcm2711_defconfig
+Compute Module 3
+
+Raspberry Pi 3+
+
+Compute Module 3+
+
+Raspberry Pi Zero 2 W
+
+Raspberry Pi 4
+
+Pi 400
+
+Compute Module 4
+
+Compute Module 4S
+
+Raspberry Pi 5
+
+cd linux
+KERNEL=kernel_2712
+make bcm2712_defconfig
+Pi 500
+
+Compute Module 5
+
+32-bit
+
+Raspberry Pi 1
+
+cd linux
+KERNEL=kernel
+make bcmrpi_defconfig
+Compute Module 1
+
+Zero
+
+Zero W
+
+Raspberry Pi 2
+
+cd linux
+KERNEL=kernel7
+make bcm2709_defconfig
+Raspberry Pi 3
+
+Compute Module 3
+
+Raspberry Pi 3+
+
+Compute Module 3+
+
+Zero 2 W
+
+Raspberry Pi 4
+
+
+cd linux
+KERNEL=kernel7l
+make bcm2711_defconfig
+Pi 400
+
+Compute Module 4
+
+Compute Module 4S
+
+
+
+    To install the 32-bit kernel:
+
+Create a backup of your current kernel and install the fresh kernel image:
+
+sudo cp /boot/firmware/$KERNEL.img /boot/firmware/$KERNEL-backup.img
+sudo cp arch/arm/boot/zImage /boot/firmware/$KERNEL.img
+Depending on your kernel version, run the following command:
+
+For kernels up to version 6.4:
+
+sudo cp arch/arm/boot/dts/*.dtb /boot/firmware/
+For kernels version 6.5 and above:
+
+sudo cp arch/arm/boot/dts/broadcom/*.dtb /boot/firmware/
+Finally, copy over the overlays and README:
+
+sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
+sudo cp arch/arm/boot/dts/overlays/README /boot/firmware/overlays/
+
+
 Compile REALTIME KERNEL PI 5 optional
 
 
