@@ -19,17 +19,15 @@ this very stable
 
     https://www.raspberrypi.com/documentation/computers/linux_kernel.html#kernel
 
+
 Architecture	Model	Command
 64-bit
 
 Raspberry Pi 3
 
-    cd linux
-    
-    KERNEL=kernel8
-     
-    make bcm2711_defconfig
-    
+cd linux
+KERNEL=kernel8
+make bcm2711_defconfig
 Compute Module 3
 
 Raspberry Pi 3+
@@ -48,12 +46,9 @@ Compute Module 4S
 
 Raspberry Pi 5
 
-    cd linux
-
-    KERNEL=kernel_2712
-
-    make bcm2712_defconfig
-
+cd linux
+KERNEL=kernel_2712
+make bcm2712_defconfig
 Pi 500
 
 Compute Module 5
@@ -62,12 +57,9 @@ Compute Module 5
 
 Raspberry Pi 1
 
-     cd linux
-
-     KERNEL=kernel
-
-     make bcmrpi_defconfig
-
+cd linux
+KERNEL=kernel
+make bcmrpi_defconfig
 Compute Module 1
 
 Zero
@@ -76,12 +68,9 @@ Zero W
 
 Raspberry Pi 2
 
-    cd linux
-
-    KERNEL=kernel7
-
-    make bcm2709_defconfig
-
+cd linux
+KERNEL=kernel7
+make bcm2709_defconfig
 Raspberry Pi 3
 
 Compute Module 3
@@ -94,37 +83,17 @@ Zero 2 W
 
 Raspberry Pi 4
 
+cd linux
+KERNEL=kernel7l
+make bcm2711_defconfig
+Pi 400
 
-    cd linux
+Compute Module 4
+
+Compute Module 4S
+
+
     
-    KERNEL=kernel7l
-    
-    make bcm2711_defconfig
-
-
-
-
-    To install the 32-bit kernel:
-
-Create a backup of your current kernel and install the fresh kernel image:
-
-sudo cp /boot/firmware/$KERNEL.img /boot/firmware/$KERNEL-backup.img
-sudo cp arch/arm/boot/zImage /boot/firmware/$KERNEL.img
-Depending on your kernel version, run the following command:
-
-For kernels up to version 6.4:
-
-sudo cp arch/arm/boot/dts/*.dtb /boot/firmware/
-For kernels version 6.5 and above:
-
-sudo cp arch/arm/boot/dts/broadcom/*.dtb /boot/firmware/
-Finally, copy over the overlays and README:
-
-sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
-sudo cp arch/arm/boot/dts/overlays/README /boot/firmware/overlays/
-
-
-Compile REALTIME KERNEL PI 5 optional
 
 
            apt source linux-image-rpi-2712 
@@ -145,12 +114,6 @@ PATCHLEVEL = 6
 SUBLEVEL = 74
 
 
-
-           wget https://cdn.kernel.org/pub/linux/kernel/projects/rt/6.6/older/patch-6.6.74-rt48.patch.gz
-
-           gunzip patch-6.6.74-rt48.patch.gz
-
-          cat patch-6.6.74-rt48.patch | patch -p1
 
            make menuconfig ## select General/Preemption Model (Fully Preemptible Kernel (Real-Time))
 
