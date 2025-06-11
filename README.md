@@ -20,26 +20,23 @@ this very stable
     https://www.raspberrypi.com/documentation/computers/linux_kernel.html#kernel
 
 
-
-           cd linux
-           KERNEL=kernel_2712
-           make bcm2712_defconfig
-
-
-           cd linux
-           KERNEL=kernel8
-           make bcm2711_defconfig
-
-
-
-    
-
-
            apt source linux-image-rpi-2712 
 
            cd linux-6.6.74/
 
            cp /boot/config-6.6.74+rpt-rpi-2712 .config
+
+           or
+
+           KERNEL=kernel_2712
+           
+           make bcm2712_defconfig
+
+           pi4
+
+           KERNEL=kernel8
+           
+           make bcm2711_defconfig
 
            head Makefile -n 4
 
