@@ -20,77 +20,16 @@ this very stable
     https://www.raspberrypi.com/documentation/computers/linux_kernel.html#kernel
 
 
-Architecture	Model	Command
-64-bit
-
-Raspberry Pi 3
-
-cd linux
-KERNEL=kernel8
-make bcm2711_defconfig
-Compute Module 3
-
-Raspberry Pi 3+
-
-Compute Module 3+
-
-Raspberry Pi Zero 2 W
-
-Raspberry Pi 4
-
-Pi 400
-
-Compute Module 4
-
-Compute Module 4S
-
-Raspberry Pi 5
 
 cd linux
 KERNEL=kernel_2712
 make bcm2712_defconfig
-Pi 500
 
-Compute Module 5
-
-32-bit
-
-Raspberry Pi 1
 
 cd linux
-KERNEL=kernel
-make bcmrpi_defconfig
-Compute Module 1
-
-Zero
-
-Zero W
-
-Raspberry Pi 2
-
-cd linux
-KERNEL=kernel7
-make bcm2709_defconfig
-Raspberry Pi 3
-
-Compute Module 3
-
-Raspberry Pi 3+
-
-Compute Module 3+
-
-Zero 2 W
-
-Raspberry Pi 4
-
-cd linux
-KERNEL=kernel7l
+KERNEL=kernel8
 make bcm2711_defconfig
-Pi 400
 
-Compute Module 4
-
-Compute Module 4S
 
 
     
@@ -105,21 +44,12 @@ Compute Module 4S
            head Makefile -n 4
 
 
-SPDX-License-Identifier: GPL-2.0
-
-VERSION = 6
-
-PATCHLEVEL = 6
-
-SUBLEVEL = 74
-
-
 
            make menuconfig ## select General/Preemption Model (Fully Preemptible Kernel (Real-Time))
 
-          make -j6 Image.gz modules dtbs
+           make -j6 Image.gz modules dtbs
 
-          sudo make -j6 modules_install
+           sudo make -j6 modules_install
 
 
            sudo cp /boot/firmware/kernel_2712.img  /boot/firmware/kernel_2712-backup.img
