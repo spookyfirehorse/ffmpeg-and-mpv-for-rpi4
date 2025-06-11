@@ -21,14 +21,14 @@ this very stable
 
 
 
-cd linux
-KERNEL=kernel_2712
-make bcm2712_defconfig
+           cd linux
+           KERNEL=kernel_2712
+           make bcm2712_defconfig
 
 
-cd linux
-KERNEL=kernel8
-make bcm2711_defconfig
+           cd linux
+           KERNEL=kernel8
+           make bcm2711_defconfig
 
 
 
