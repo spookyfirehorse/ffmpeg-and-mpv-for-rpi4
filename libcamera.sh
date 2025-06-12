@@ -8,6 +8,8 @@ meson setup build -Denable_libav=enabled -Denable_drm=enabled -Denable_egl=enabl
 meson compile -C build
 sudo meson install -C build
 
+
+git clone https://github.com/PipeWire/pipewire.git
 meson setup build
 meson configure build -Dprefix=/usr
 meson compile -C build
