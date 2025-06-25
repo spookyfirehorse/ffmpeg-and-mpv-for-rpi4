@@ -17,7 +17,7 @@ meson compile -C build
 
 systemctl --user stop pipewire.service \
                       pipewire.socket \
-                      woreplumber.service \
+                      wireplumber.service \
                       pipewire-pulse.service \
                       pipewire-pulse.socket
 
