@@ -13,6 +13,7 @@ git clone https://github.com/PipeWire/pipewire.git
 meson setup build
 meson configure build -Dprefix=/usr
 meson compile -C build
+sudo meson install -C build                      
 
 
 systemctl --user stop pipewire.service \
@@ -22,4 +23,3 @@ systemctl --user stop pipewire.service \
                       pipewire-pulse.socket
 
 
-sudo meson install -C build                      
