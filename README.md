@@ -178,14 +178,6 @@ this very stable
 
            
 
-# install userland omx-rpi optional not need
-
-    git clone https://github.com/raspberrypi/userland.git
-    cd userland
-    ./buildme
-
-
-############################################################################
 
 # MPV
 
@@ -468,7 +460,7 @@ store it strg +o
 
 android camera in linphone chromium usw
 
-its not working on rpi but on amd64 because libv4l2 and h264_v4l2m2m are the same devices
+its not working on rpi but on amd64 because libv4l2 and h264_v4l2m2m are the same devices on rpi
 
 so only amd64 and i386
 
