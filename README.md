@@ -18,47 +18,50 @@ this very stable
 
 
     https://www.raspberrypi.com/documentation/computers/linux_kernel.html#kernel
+    
+    apt source linux-image-rpi-2712 
+    
+    make bcm2712_defconfig
 
 
-           apt source linux-image-rpi-2712 
+    make menuconfig 
+    
+    make -j6 Image.gz modules dtbs
+    
+    sudo make -j6 modules_install
 
-           cd linux-6.6.74/
+    sudo cp arch/arm64/boot/Image.gz /boot/firmware/kernel_2712.img
+    
+    sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
+    
+    sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
+    
+    sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
 
-           cp /boot/config-6.6.74+rpt-rpi-2712 .config
 
-           or
+    apt source linux-image-rpi-v8
+    
+    make bcm2711_defconfig
+    
+    make menuconfig
+    
+    make -j6 Image.gz modules dtbs
+    
+    sudo make -j6 modules_install
+    
+    cp /boot/config-6.12.25+rpt-rpi-v8 /home/spook/linux-6.12.25/.config
+    
+    sudo cp arch/arm64/boot/Image.gz /boot/firmware/kernel8.img
+    
+    sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
+    
+    sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
+    
+    sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
 
-           KERNEL=kernel_2712
            
-           make bcm2712_defconfig
 
-           pi4
-
-           KERNEL=kernel8
            
-           make bcm2711_defconfig
-
-           head Makefile -n 4
-
-
-
-           make menuconfig ## select General/Preemption Model (Fully Preemptible Kernel (Real-Time))
-
-           make -j6 Image.gz modules dtbs
-
-           sudo make -j6 modules_install
-
-
-           sudo cp /boot/firmware/kernel_2712.img  /boot/firmware/kernel_2712-backup.img
-
-           sudo cp arch/arm64/boot/Image.gz /boot/firmware/kernel_2712.img
-
-           sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
-
-           sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
-
-           sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
-
   reboot and uname -a
 
 ######################
