@@ -1,0 +1,49 @@
+https://www.raspberrypi.com/documentation/computers/linux_kernel.html#kernel
+    
+    apt source linux-image-rpi-2712 
+    
+    make bcm2712_defconfig
+
+
+    make menuconfig 
+    
+    make -j6 Image.gz modules dtbs
+    
+    sudo make -j6 modules_install
+
+    sudo cp arch/arm64/boot/Image.gz /boot/firmware/kernel_2712.img
+    
+    sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
+    
+    sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
+    
+    sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
+
+
+    apt source linux-image-rpi-v8
+    
+    make bcm2711_defconfig
+    
+    make menuconfig
+    
+    make -j6 Image.gz modules dtbs
+    
+    sudo make -j6 modules_install
+    
+    cp /boot/config-6.12.25+rpt-rpi-v8 /home/spook/linux-6.12.25/.config
+    
+    sudo cp arch/arm64/boot/Image.gz /boot/firmware/kernel8.img
+    
+    sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
+    
+    sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
+    
+    sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
+
+           
+
+           
+  reboot and uname -a
+
+######################
+
