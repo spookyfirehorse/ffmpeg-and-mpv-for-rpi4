@@ -15,56 +15,7 @@ this very stable
 #################################################################################################
 
 
-    https://www.raspberrypi.com/documentation/computers/linux_kernel.html#kernel
-    
-    apt source linux-image-rpi-2712 
-    
-    make bcm2712_defconfig
-
-
-    make menuconfig 
-    
-    make -j6 Image.gz modules dtbs
-    
-    sudo make -j6 modules_install
-
-    sudo cp arch/arm64/boot/Image.gz /boot/firmware/kernel_2712.img
-    
-    sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
-    
-    sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
-    
-    sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
-
-
-    apt source linux-image-rpi-v8
-    
-    make bcm2711_defconfig
-    
-    make menuconfig
-    
-    make -j6 Image.gz modules dtbs
-    
-    sudo make -j6 modules_install
-    
-    cp /boot/config-6.12.25+rpt-rpi-v8 /home/spook/linux-6.12.25/.config
-    
-    sudo cp arch/arm64/boot/Image.gz /boot/firmware/kernel8.img
-    
-    sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
-    
-    sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
-    
-    sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
-
-           
-
-           
-  reboot and uname -a
-
-######################
-
-
+   
 
 
 #########################
@@ -112,14 +63,7 @@ this very stable
          sudo apt build-dep ffmpeg mpv 
 
 
-# FDK-AAC
-
-    wget http://deb.debian.org/debian/pool/non-free/f/fdk-aac/fdk-aac_2.0.2.orig.tar.gz && tar -xf fdk-aac_2.0.2.orig.tar.gz  && cd fdk-aac-2.0.2/ && autoreconf -fiv && \
-    ./configure  --enable-shared && \
-    make -j4 && \
-    sudo make install && sudo ldconfig
-
-# for latest
+# for latest libfdk
 
     git clone  https://github.com/mstorsjo/fdk-aac && \
     cd fdk-aac && \
@@ -156,7 +100,7 @@ this very stable
      
 ##   pi 5 64 bit
 
-         git clone -b test/7.1.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure  --prefix=/usr --extra-version=0+rpt1+deb12u1 --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --enable-gpl --disable-stripping --disable-mmal --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sand --enable-sdl2 --disable-sndio --enable-libjxl --enable-v4l2-request --enable-libudev --enable-epoxy --libdir=/usr/lib/aarch64-linux-gnu --arch=arm64 --cpu=cortex-a76 --enable-neon --disable-armv6t2 --disable-armv6 --disable-armv5te --enable-pocketsphinx --enable-librsvg --enable-libdc1394 --enable-libdrm --enable-vout-drm --enable-libiec61883 --disable-chromaprint --disable-frei0r --disable-libx264 --enable-libplacebo --enable-vulkan --enable-librav1e --enable-shared --enable-nonfree --enable-libfdk-aac --disable-static --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --disable-vaapi --disable-thumb --enable-libopenh264 --enable-version3 --enable-libopencore-amrwb --enable-libopencore-amrnb
+         git clone -b test/7.1.1/main https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg && ./configure  --prefix=/usr --extra-version='1~+rpt1' --toolchain=hardened --incdir=/usr/include/aarch64-linux-gnu --enable-gpl --disable-stripping --disable-libmfx --disable-mmal --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --disable-libvpl --libdir=/usr/lib/aarch64-linux-gnu --arch=arm64 --enable-neon --enable-v4l2-request --enable-libudev --enable-epoxy --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-vout-drm --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-libjack --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sand --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-pocketsphinx --enable-librsvg --enable-libjxl --enable-shared --enable-nonfree --enable-libfdk-aac --disable-cuda --disable-vaapi --disable-vdpau --disable-cuda-nvcc --disable-static --disable-cuvid --disable-cuda-llvm --disable-ffnvcodec --disable-libx264 --disable-libx265
      
 
  ##  rpi4 64 bit aarch64
