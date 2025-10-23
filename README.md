@@ -145,7 +145,7 @@ compile
 
 # Mplayer
 
-            apt source mplayer && cd mplayer-1.4+ds1/ && ./configure --prefix=/usr --enable-faad --enable-gui --enable-dvdnav --disable-ffmpeg_a  --disable-vdpau  && make -j4 && sudo make install
+            apt source mplayer && cd mplayer-1.5+svn38674/  && ./configure --prefix=/usr --enable-faad --enable-gui --enable-dvdnav --disable-ffmpeg_a  --disable-vdpau  && make -j4 && sudo make install
 
 
 
