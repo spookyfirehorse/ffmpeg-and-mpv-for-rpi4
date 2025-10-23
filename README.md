@@ -17,47 +17,6 @@ this very stable
 
    
 
-
-#########################
-
-## example for drm-prime wayland  rpi4 rpi 3
-
-     nano .config/mpv/mpv.conf
-
-    gpu-dumb-mode=yes
-    opengl-glfinish=yes
-    #gpu-context=x11egl   ###x11
-    gpu-context=wayland   ##wayland
-    gpu-api=opengl
-    vo=gpu
-    hwdec=auto
-    hwdec-codecs=all
-    hwdec-image-format=drm_prime
-    gpu-hwdec-interop=drmprime-overlay
-
-
-## example for drm-prime wayland  rpi5
-
-        #override-display-fps=60
-        #video-sync=display-resample
-
-        
-        gpu-dumb-mode=yes
-        opengl-glfinish=yes
-        gpu-context=wayland
-         #gpu-context=x11egl    ##x11
-        gpu-api=opengl
-        vo=gpu
-        gpu-sw=yes
-        drm-vrr-enabled=auto
-        hwdec=drm   ##or drm-copy
-
-    
-
-
-#####################################################################
-
-
 #  first install all libarys with
 
          sudo apt build-dep ffmpeg mpv 
@@ -139,6 +98,48 @@ compile
         
         sudo meson install -C build
 
+#########################
+
+## example for drm-prime wayland  rpi4 rpi 3
+
+     nano .config/mpv/mpv.conf
+
+    gpu-dumb-mode=yes
+    opengl-glfinish=yes
+    #gpu-context=x11egl   ###x11
+    gpu-context=wayland   ##wayland
+    gpu-api=opengl
+    vo=gpu
+    hwdec=auto
+    hwdec-codecs=all
+    hwdec-image-format=drm_prime
+    gpu-hwdec-interop=drmprime-overlay
+
+
+## example for drm-prime wayland  rpi5
+
+        #override-display-fps=60
+        #video-sync=display-resample
+
+        
+        gpu-dumb-mode=yes
+        opengl-glfinish=yes
+        gpu-context=wayland
+         #gpu-context=x11egl    ##x11
+        gpu-api=opengl
+        vo=gpu
+        gpu-sw=yes
+        drm-vrr-enabled=auto
+        hwdec=drm   ##or drm-copy
+
+    
+
+
+#####################################################################
+
+
+        
+
 #################################
 
 
@@ -213,35 +214,24 @@ put this in
 
 # rtsp-streaming rpicam
 
-minimum resolution and 15 fps
 
+    rpicam-vid  --low-latency 1  -b 10000000  --autofocus-mode continuous  --denoise cdn_off \
+    --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
+    --sharpness   1.0  --level 4.1 --hdr=off  --profile=high  --framerate 30 --width 1536 --height 864 \
+    --audio-device=plughw:CARD=Device,DEV=0   --audio-bitrate=96kbps \
+    --audio-codec libopus  --audio-channels 1 --libav-audio 1 --audio-source alsa   -t 0  -n --inline -o  - | ffmpeg  -flags low_delay \
+    -vcodec h264_v4l2m2m -i - -metadata title='MOON' -codec copy \
+    -f rtsp -rtsp_transport tcp  rtsp://"user:password"@"localhost:8554"/mystream   >/dev/null 2>&1
        
+without password
 
-      rpicam-vid  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
-      --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
-      --sharpness   1.0 --profile high --level 4.2 --framerate 15 --width 640 --height 360  \
-      --audio-device=plughw:CARD=Device,DEV=0  --audio-bitrate=96kbps \
-      --audio-codec mp2 --audio-channels 1 --libav-audio 1 --audio-source alsa \
-      -t 0  -n --inline -o  - | ffmpeg -fflags \
-      +genpts+nobuffer+igndts+discardcorrupt   -flags low_delay \
-       -hwaccel drm -hwaccel_output_format drm_prime -i - -metadata title='LUCY'  -codec copy  \
-      -f rtsp -rtsp_transport tcp  rtsp://"user:password"@"localhost:8554"/mystream
-
-
-
- imx219@10 camera works with minimal uplod speed over internet ! higher fps  are possible with more upload speed
-
-        
-        rpicam-vid  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
-       --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
-       --sharpness   1.0 --profile high  --level 4.2 --framerate 30 --width 1536 --height 864 \
-       --audio-device=plughw:CARD=Device,DEV=0  --audio-bitrate=96kbps \
-       --audio-codec mp2 --audio-channels 1 --libav-audio 1 --audio-source alsa \
-       -t 0  -n --inline -o  - | ffmpeg -fflags \
-        +genpts+nobuffer+igndts+discardcorrupt   -flags low_delay \
-        -hwaccel drm -hwaccel_output_format drm_prime -i - -metadata title='LUCY'  -codec copy  \
-       -f rtsp -rtsp_transport tcp  rtsp://"user:password"@"localhost:8554"/mystream
-
+    rpicam-vid  --low-latency 1  -b 10000000  --autofocus-mode continuous  --denoise cdn_off \
+    --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
+    --sharpness   1.0  --level 4.1 --hdr=off  --profile=high  --framerate 30 --width 1536 --height 864 \
+    --audio-device=plughw:CARD=Device,DEV=0   --audio-bitrate=96kbps \
+    --audio-codec libopus  --audio-channels 1 --libav-audio 1 --audio-source alsa   -t 0  -n --inline -o  - | ffmpeg  -flags low_delay \
+     -vcodec h264_v4l2m2m -i - -metadata title='MOON' -codec copy \
+    -f rtsp -rtsp_transport tcp  rtsp://"localhost:8554"/mystream      
 
 ##############################################
 
