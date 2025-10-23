@@ -43,8 +43,10 @@ this very stable
 
      sudo apt install cpuinfo 
 
-    cpu-info
+    cpu-info 
 
+    uname -a 
+    
 ####################################################
 
     nano /boot/firmware/config.txt
