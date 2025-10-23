@@ -14,15 +14,21 @@ this very stable
 
 #################################################################################################
 
+#  
+
 
    
 
-#  first install all libarys with
+#   install all libarys with
 
          sudo apt build-dep ffmpeg mpv 
 
 
 # for latest libfdk
+
+      sudo apt install libfdk*
+      
+   if its faild   
 
     git clone  https://github.com/mstorsjo/fdk-aac && \
     cd fdk-aac && \
