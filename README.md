@@ -122,8 +122,8 @@ compile
     vo=gpu
     hwdec=auto
     hwdec-codecs=all
-    hwdec-image-format=drm_prime
-    gpu-hwdec-interop=drmprime-overlay
+    #hwdec-image-format=drm_prime
+    #gpu-hwdec-interop=drmprime-overlay
 
 
 ## example for drm-prime wayland  rpi5
@@ -231,6 +231,30 @@ put this in
     --audio-codec libopus  --audio-channels 1 --libav-audio 1 --audio-source alsa   -t 0  -n --inline -o  - | ffmpeg  -flags low_delay \
     -vcodec h264_v4l2m2m -i - -metadata title='MOON' -codec copy \
     -f rtsp -rtsp_transport tcp  rtsp://"user:password"@"localhost:8554"/mystream   >/dev/null 2>&1
+
+# edit mediamtx for password
+
+         sudo nano /usr/local/etc/mediamtx.yaml
+one time for user one time for passwd
+
+ echo -n "mypass" | argon2 saltItWithSalt -id -l 32 -e
+Then stored with the argon2: prefix:
+
+authInternalUsers:
+  - user: argon2:$argon2id$v=19$m=4096,t=3,p=1$MTIzNDU2Nzg$OGGO0eCMN0ievb4YGSzvS/H+Vajx1pcbUmtLp2tRqRU
+    pass: argon2:$argon2i$v=19$m=4096,t=3,p=1$MTIzNDU2Nzg$oct3kOiFywTdDdt19kT07hdvmsPTvt9zxAUho2DLqZw
+    permissions:
+      - action: publish
+To use SHA256, the string must be hashed with SHA256 and encoded with base64:
+
+echo -n "mypass" | openssl dgst -binary -sha256 | openssl base64
+Then stored with the sha256: prefix:
+
+authInternalUsers:
+  - user: sha256:j1tsRqDEw9xvq/D7/9tMx6Jh/jMhk3UfjwIB2f1zgMo=
+    pass: sha256:BdSWkrdV+ZxFBLUQQY7+7uv9RmiSVA8nrPmjGjJtZQQ=
+    permissions:
+      - action: publish
        
 without password
 
