@@ -280,7 +280,7 @@ set  15 fps with and height always before
 
 in this examples audio device =  plughw:0  this is the first audio device ! best streaming !! no audio video delay very stable
 
-      ffmpeg  -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+      ffmpeg  -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 libfdkaac
 
