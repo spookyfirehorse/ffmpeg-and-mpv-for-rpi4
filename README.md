@@ -63,6 +63,15 @@ this very stable
 
 
      sudo apt install libopenh264-dev
+     
+# for latest ffmpeg
+
+     git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git 
+
+     git clone -b pios/bookworm https://github.com/RPi-Distro/ffmpeg.git
+
+      git clone -b pios/trixie https://github.com/RPi-Distro/ffmpeg.git
+
 
      
 ##   pi 5 64 bit
