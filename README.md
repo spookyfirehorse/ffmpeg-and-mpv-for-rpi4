@@ -239,7 +239,7 @@ put this in
     --sharpness   1.0  --level 4.1 --hdr=off  --profile=high  --framerate 30 --width 1536 --height 864 \
     --audio-device=plughw:CARD=Device,DEV=0   --audio-bitrate=96kbps \
     --audio-codec libopus  --audio-channels 1 --libav-audio 1 --audio-source alsa   -t 0  -n --inline -o  - | ffmpeg  -flags low_delay \
-    -vcodec h264_v4l2m2m -i - -metadata title='MOON' -codec copy \
+    -vcodec h264_v4l2m2m -i - -metadata title='MOON' -codec copy -threads $(nproc) \
     -f rtsp -rtsp_transport tcp  rtsp://"user:password"@"localhost:8554"/mystream   >/dev/null 2>&1
 
 # edit mediamtx for password
