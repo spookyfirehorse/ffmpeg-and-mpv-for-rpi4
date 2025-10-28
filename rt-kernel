@@ -1,6 +1,10 @@
 https://www.raspberrypi.com/documentation/computers/linux_kernel.html#kernel
     
-    apt source linux-image-rpi-2712 
+    git clone --depth=1  https://github.com/raspberrypi/linu2
+
+     cat 0001-drm-v3d-create-a-dedicated-lock-for-dma-fence.patch  | patch -p1
+
+
     
     make bcm2712_defconfig
 
@@ -20,8 +24,10 @@ https://www.raspberrypi.com/documentation/computers/linux_kernel.html#kernel
     sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
 
 
-    apt source linux-image-rpi-v8
-    
+    git clone --depth=1  https://github.com/raspberrypi/linu
+
+    cat 0001-drm-v3d-create-a-dedicated-lock-for-dma-fence.patch  | patch -p1
+
     make bcm2711_defconfig
     
     make menuconfig
