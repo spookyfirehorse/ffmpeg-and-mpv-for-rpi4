@@ -15,9 +15,6 @@ this very stable
 #################################################################################################
 
   sudo ./build-kernel -b default -c 7 -j 6 -u -d
-
-
-  bcm2712_rt_defconfig
    
 
 #   install all libarys with
