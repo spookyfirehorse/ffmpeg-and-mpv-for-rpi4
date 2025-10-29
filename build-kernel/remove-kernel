@@ -1,0 +1,125 @@
+#!/bin/bash
+
+trap '{ stty sane; echo ""; errexit "Aborted"; }' SIGINT SIGTERM
+
+errexit()
+{
+  echo ""
+  echo "$1"
+  echo ""
+  exit 1
+}
+
+if [ $(id -u) -ne 0 ]; then
+  errexit "Must be run as root user: sudo $0"
+fi
+PGMNAME="$(basename $0)"
+for PID in $(pidof -x -o %PPID "${PGMNAME}"); do
+  if [ ${PID} -ne $$ ]; then
+    errexit "${PGMNAME} is already running"
+  fi
+done
+KERNELS=()
+while [ $# -gt 0 ]; do
+  case "$1" in
+
+    -k|--kernel)
+      OIFS=${IFS}
+      IFS=','
+      KERNELS+=($2)
+      IFS=${OIFS}
+      shift 2
+      ;;
+
+    -*|--*)
+      errexit "Unknown option: $1"
+      shift
+      ;;
+
+    *)
+      errexit "Unknown parameter: $1"
+      shift
+      ;;
+
+  esac
+done
+CURVER="$(uname -r | sed -n 's|^.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*$|\1|p')"
+if [ ${#KERNELS[@]} -eq 0 ]; then
+  KERNELS=($(ls -ld /boot/config-* /boot/initrd.img-* /boot/System.map-* /boot/vmlinuz-* /lib/linux-image-* /lib/modules/* 2> /dev/null | sed -n 's|^.*\([0-9]\+\.[0-9]\+\.[0-9]\+.*\)$|\1|p'))
+fi
+for i in ${!KERNELS[@]}; do
+  for j in ${!KERNELS[@]}; do
+    if [[ $i != $j && "${KERNELS[j]}" = "${KERNELS[i]}" ]]; then
+      unset KERNELS[i]
+      continue 2
+    fi
+  done
+  if [ "$(sed -n 's|^.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*$|\1|p' <<< ${KERNELS[i]})" = "${CURVER}" ]; then
+    unset KERNELS[i]
+  else
+    KERNELS[i]="${KERNELS[i]} ${KERNELS[i]} OFF"
+  fi
+done
+if [ ${#KERNELS[@]} -eq 0 ]; then
+  errexit "No available kernels found"
+fi
+KERNELS=($(whiptail --backtitle "Remove Kernel" --title "Kernels" --notags --checklist \
+"\n Select kernel(s) to remove" $((9 + ${#KERNELS[@]})) 35 ${#KERNELS[@]} ${KERNELS[@]} 3>&1 1>&2 2>&3))
+if [[ $? -ne 0 || ${#KERNELS[@]} -eq 0 ]]; then
+  errexit "Aborted"
+fi
+WTTEXT="Remove the following kernels?\n\n"
+for i in ${!KERNELS[@]}; do
+  WTTEXT+="$(sed -e 's/^"//' -e 's/"$//' <<< ${KERNELS[i]})\n"
+done
+whiptail --backtitle "Remove Kernel" --title "Confirmation"  --yesno --defaultno "${WTTEXT}" $((6 + $(echo -e "${WTTEXT}" | wc -l))) 35
+YESNO=$?
+if [ ${YESNO} -ne 0 ]; then
+  errexit "Aborted"
+fi
+apt-get -y update
+for i in ${!KERNELS[@]}; do
+  KERNEL="$(sed -e 's/^"//' -e 's/"$//' <<< ${KERNELS[i]})"
+  dpkg -l "linux-image-${KERNEL}" &> /dev/null
+  if [ $? -eq 0 ]; then
+    apt-get -y purge "linux-image-${KERNEL}"
+  fi
+  if [ -d "/lib/linux-image-${KERNEL}" ]; then
+    echo "Deleting /lib/linux-image-${KERNEL}"
+    rm -r "/lib/linux-image-${KERNEL}"
+  fi
+  if [ -f "/boot/config-${KERNEL}" ]; then
+    echo "Deleting /boot/config-${KERNEL}"
+    rm "/boot/config-${KERNEL}"
+  fi
+  if [ -f "/boot/initrd.img-${KERNEL}" ]; then
+    echo "Deleting /boot/initrd.img-${KERNEL}"
+    rm "/boot/initrd.img-${KERNEL}"
+  fi
+  if [ -f "/boot/System.map-${KERNEL}" ]; then
+    echo "Deleting /boot/System.map-${KERNEL}"
+    rm "/boot/System.map-${KERNEL}"
+  fi
+  if [ -f "/boot/vmlinuz-${KERNEL}" ]; then
+    echo "Deleting /boot/vmlinuz-${KERNEL}"
+    rm "/boot/vmlinuz-${KERNEL}"
+  fi
+  if [ -d "/lib/modules/${KERNEL}" ]; then
+    echo "Deleting /lib/modules/${KERNEL}"
+    rm -r "/lib/modules/${KERNEL}"
+  fi
+  KRNLVN="$(sed -n 's|^.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*$|\1|p' <<< ${KERNELS[i]})"
+  ls /boot/vmlinuz-${KRNLVN}+rpt-rpi-* &> /dev/null
+  if [ $? -ne 0 ]; then
+    dpkg -l "linux-kbuild-${KRNLVN}+rpt" &> /dev/null
+    if [ $? -eq 0 ]; then
+      apt-get -y purge "linux-kbuild-${KRNLVN}+rpt"
+    fi
+    if [ -d "/lib/linux-kbuild-${KRNLVN}+rpt" ]; then
+      echo "Deleting /lib/linux-kbuild-${KRNLVN}+rpt"
+      rm -r "/lib/linux-kbuild-${KRNLVN}+rpt"
+    fi
+  fi
+done
+apt-get -y autoremove
+echo ""

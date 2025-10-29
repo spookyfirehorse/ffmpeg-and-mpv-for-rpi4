@@ -1,0 +1,182 @@
+#!/bin/bash
+
+trap '{ stty sane; echo ""; errexit "Aborted"; }' SIGINT SIGTERM
+
+errexit()
+{
+  echo ""
+  echo "$1"
+  echo ""
+  exit 1
+}
+
+usage()
+{
+  cat <<EOF
+
+Usage: $0 [options] <kernel-archive>
+-d,--delete          Delete bcm* and overlays/*
+-h,--help            This usage description
+-k,--kernel          Kernel(s)
+-r,--reboot          Reboot upon completion
+
+EOF
+}
+
+if [ $(id -u) -ne 0 ]; then
+  errexit "Must be run as root user: sudo $0"
+fi
+PGMNAME="$(basename $0)"
+for PID in $(pidof -x -o %PPID "${PGMNAME}"); do
+  if [ ${PID} -ne $$ ]; then
+    errexit "${PGMNAME} is already running"
+  fi
+done
+DELETE=FALSE
+KERNELS=()
+NOINITRAMFS=FALSE
+REBOOT=FLASE
+while [ $# -gt 0 ]; do
+  case "$1" in
+
+    -d|--delete)
+      DELETE=TRUE
+      shift
+      ;;
+
+    -h|--help)
+      usage
+      exit
+      ;;
+
+    -k|--kernel)
+      OIFS=${IFS}
+      IFS=','
+      KERNELS+=($2)
+      IFS=${OIFS}
+      shift 2
+      ;;
+
+    -n|--noinitramfs)
+      NOINITRAMFS=TRUE
+      shift
+      ;;
+
+    -r|--reboot)
+      REBOOT=TRUE
+      shift
+      ;;
+
+    -*|--*)
+      errexit "Unknown option: $1"
+      shift
+      ;;
+
+    *)
+      errexit "Unknown parameter: $1"
+      shift
+      ;;
+
+  esac
+done
+CURVER="$(uname -r | sed -n 's|^.*\([0-9]\+\.[0-9]\+\.[0-9]\+.*\)$|\1|p')"
+if [ ${#KERNELS[@]} -eq 0 ]; then
+  KERNELS=($(ls -ld /boot/config-* /boot/initrd.img-* /boot/System.map-* /boot/vmlinuz-* /lib/linux-image-* /lib/modules/* 2> /dev/null | sed -n 's|^.*\([0-9]\+\.[0-9]\+\.[0-9]\+.*\)$|\1|p'))
+fi
+for i in ${!KERNELS[@]}; do
+  for j in ${!KERNELS[@]}; do
+    if [[ $i != $j && "${KERNELS[j]}" = "${KERNELS[i]}" ]]; then
+      unset KERNELS[i]
+      continue 2
+    fi
+  done
+  KERNEL="$(sed -n 's|^.*\([0-9]\+\.[0-9]\+\.[0-9]\+.*\)$|\1|p' <<< ${KERNELS[i]})"
+  if [[ ! -f "/boot/initrd.img-${KERNEL}" || ! -f "/boot/vmlinuz-${KERNEL}" || ! -d "/lib/linux-image-${KERNEL}" || ! -d "/lib/modules/${KERNEL}" ]]; then
+    unset KERNELS[i]
+  else
+    if [ "${KERNEL}" = "${CURVER}" ]; then
+      KERNELS[i]="${KERNELS[i]} ${KERNELS[i]} ON"
+    else
+      KERNELS[i]="${KERNELS[i]} ${KERNELS[i]} OFF"
+    fi
+  fi
+done
+if [ ${#KERNELS[@]} -eq 0 ]; then
+  errexit "No available kernels found"
+fi
+KERNEL=($(whiptail --backtitle "Change Kernel" --title "Kernels" --notags --radiolist \
+"\n Select kernel to use:" $((9 + ${#KERNELS[@]})) 35 ${#KERNELS[@]} ${KERNELS[@]} 3>&1 1>&2 2>&3))
+if [[ $? -ne 0 || ${KERNEL} = "" ]]; then
+  errexit "Aborted"
+fi
+KERNEL="$(sed -e 's/^"//' -e 's/"$//' <<< ${KERNEL})"
+WTTEXT=" Use the following kernel?\n\n ${KERNEL}\n"
+whiptail --backtitle "Change Kernel" --title "Confirmation"  --yesno --defaultno "${WTTEXT}" $((6 + $(echo -e "${WTTEXT}" | wc -l))) 35
+YESNO=$?
+if [ ${YESNO} -ne 0 ]; then
+  errexit "Aborted"
+fi
+KRNLID="$(sed -n 's|^.*-\(.*\)$|\1|p' <<< ${KERNEL})"
+case "${KRNLID}" in
+
+  v6)
+    INITRD="initramfs"
+    OLDIMG="kernel.img"
+    ;;
+
+  v7)
+    INITRD="initramfs7"
+    OLDIMG="kernel7.img"
+    ;;
+
+  v7l)
+    INITRD="initramfs7l"
+    OLDIMG="kernel7l.img"
+    ;;
+
+  v8)
+    INITRD="initramfs8"
+    OLDIMG="kernel8.img"
+    ;;
+
+  2712)
+    INITRD="initramfs_2712"
+    OLDIMG="kernel_2712.img"
+    ;;
+
+esac
+cp --preserve=timestamps "/boot/vmlinuz-${KERNEL}" "/boot/firmware/${OLDIMG}"
+if [ "${DELETE}" = "TRUE" ]; then
+  rm /boot/firmware/bcm*
+fi
+cp --preserve=timestamps -r -T "/lib/linux-image-${KERNEL}/broadcom" /boot/firmware
+if [ "${DELETE}" = "TRUE" ]; then
+  rm /boot/firmware/overlays/*
+fi
+cp --preserve=timestamps -r -T "/lib/linux-image-${KERNEL}/overlays" /boot/firmware/overlays
+if [ "${NOINITRAMFS}" = "FALSE" ]; then
+  update-initramfs -c -v -k "${KERNEL}"
+  cp --preserve=timestamps "/boot/initrd.img-${KERNEL}" "/boot/firmware/${INITRD}"
+fi
+echo ""
+echo "Kernel changed to ${KERNEL}"
+echo ""
+if [ "${REBOOT}" = "TRUE" ]; then
+  echo "Rebooting"
+  echo ""
+  shutdown -r now
+else
+  echo "Reboot required to use new kernel"
+  echo ""
+  echo -n "Reboot now (y/n)? "
+  while read -r -n 1 -s answer; do
+    if [[ ${answer} = [yYnN] ]]; then
+      echo "${answer}"
+      if [[ ${answer} = [yY] ]]; then
+        shutdown -r now
+      fi
+      break
+    fi
+  done
+fi
+echo ""

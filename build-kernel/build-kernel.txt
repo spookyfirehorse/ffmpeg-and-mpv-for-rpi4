@@ -1,0 +1,66 @@
+Building the Raspberry Pi OS Kernel : Made Easy
+
+The attached script fully automates building the Raspberry Pi OS kernel as documented at:
+
+[url=https://www.raspberrypi.com/documentation/computers/linux_kernel.html#natively-build-a-kernel]Natively build a kernel[/url]
+
+and
+
+[url=https://www.raspberrypi.com/documentation/computers/linux_kernel.html#cross-compile-the-kernel]Cross-compile the kernel[/url]
+
+[code]
+Usage: build-kernel [options] [output directory]
+-b,--branch          Branch to use (commitid/current/default/rpi-M.N.y)
+-c,--config          Configuration to build:
+   1 = Raspberry Pi 1, Zero, Zero W, and Raspberry Pi Compute Module 1 (32-bit) [kernel.img]
+   2 = Raspberry Pi 2, 3, 3+, Zero 2W, and Raspberry Pi Compute Modules 3, 3+ (32-bit) [kernel7.img]
+   3 = Raspberry Pi 4, 400, and Raspberry Pi Compute Module 4 (32-bit) [kernel7l.img]
+   4 = Raspberry Pi 3, 3+, 4, 5, 400, 500, Zero 2W, and Raspberry Pi Compute Modules 3, 3+, 4, 5 (4k pagesize) (64-bit) [kernel8.img]
+   5 = Raspberry Pi 5, 500 and Raspberry Pi Compute Module 5 (16k pagesize) (64-bit) [kernel_2712.img]
+   6 = Raspberry Pi 4, 5, 400, 500, and Raspberry Pi Compute Modules 4, 5 Realtime (4k pagesize) (64-bit) [kernel8.img]
+   7 = Raspberry Pi 5, 500 and Raspberry Pi Compute Module 5 Realtime (16k pagesize) (64-bit) [kernel_2712.img]
+-d,--delete          Delete existing source files
+-f,--freshen         Freshen existing source files
+-h,--help            This usage description
+-i,--interactive     Interactive shell before compile
+-j,--jobs            Number of jobs to run
+-k,--keep            Keep old kernel as .bak
+-m,--menuconfig      Run menuconfig
+-n,--noinitramfs     Disable running update-initramfs
+-o,--oldbootmnt      Use old boot mount (/boot)
+-p,--purge           Purge source files upon completion
+-r,--reboot          Reboot upon completion
+-s,--suffix          Append modules suffix (suffix)
+-u,--unattended      Unattended operation, defaults:
+   Branch = current
+   Config = Raspberry Pi 3, 3+, 4, 5, 400, 500, Zero 2W, and Raspberry Pi Compute Modules 3, 3+, 4, 5 (4k pagesize) (64-bit) [kernel8.img]
+   Delete = auto
+   Freshen = no
+   Interactive = no
+   Jobs = 4
+   Keep = no
+   Menuconfig = no
+   Noinitramfs = no
+   Oldbootmnt = no
+   Patch = none
+   Purge = no
+   Reboot = no
+   Suffix = none
+   Xcompile = no
+-x,--cross-compile   Cross-compile mode
+-z,--patch           Patch file to apply (filename)
+[/code]
+
+If the -u/--unattended option is not used, [b]build-kernel[/b] operates interactively, prompting for any input not provided on the command line.
+
+If the -u/--unattended option is used, no prompting of any sort will occur.  menuconfig will always be run if the -m/--menuconfig option is used.
+
+For example:
+
+sudo build-kernel --branch rpi-6.12.y --config 4 --jobs 8 --suffix test --unattended --cross-compile ~/kernels
+
+Kernel source files are downloaded to: /usr/src/linux
+
+Existing source files may be reused provided the requested branch is the same.  Existing source files will be deleted unconditionally if the source files don't match the requested branch, regardless of whether the -d/--delete option is used.
+
+Cross-compiled output (kernel-<version>.zip) is placed in the user's home directory if no output directory is specified.  Simply run [b]install-kernel[/b] to install kernel-<version>.zip.
