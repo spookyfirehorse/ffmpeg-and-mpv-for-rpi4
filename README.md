@@ -21,7 +21,7 @@ this very stable
  
 
  
-           sudo apt build-dep linux mpv ffmpeg -y  && wget  https://github.com/spookyfirehorse/ffmpeg-and-mpv-for-rpi4/tree/master/build-kernel &&  cd build-kernel
+           sudo apt build-dep linux mpv ffmpeg -y  && wget  https://github.com/spookyfirehorse/ffmpeg-and-mpv-for-rpi4/tree/master/build-kernel &&  cd build-kernel && chmod +x build-kernel 
 
 
            sudo ./build-kernel -b default -c 7 -j 6 -u -d        ### rpi5 rt-kernel
