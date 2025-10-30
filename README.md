@@ -14,12 +14,18 @@ this very stable
 
 #################################################################################################
 
-  sudo ./build-kernel -b default -c 7 -j 6 -u -d
-   
+ # rt-kernel very simple
+ 
+  sudo apt build-dep linux mpv ffmpeg
 
-#   install all libarys with
+  wget  https://github.com/spookyfirehorse/ffmpeg-and-mpv-for-rpi4/tree/master/build-kernel
 
-         sudo apt build-dep ffmpeg mpv 
+  cd build-kernel
+
+  sudo ./build-kernel -b default -c 7 -j 6 -u -d        ### rpi5 rt-kernel
+
+  
+  sudo ./build-kernel -b default -c 6 -j 6 -u -d        ### rpi4 rt-kernel
 
 
 # for latest libfdk
