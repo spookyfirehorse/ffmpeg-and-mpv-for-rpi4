@@ -15,6 +15,8 @@ this very stable
 #################################################################################################
 
  # rt-kernel very simple
+
+ do not edit config.txt auto initram is enabled
  
            sudo apt build-dep linux mpv ffmpeg
 
