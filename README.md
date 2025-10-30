@@ -15,9 +15,11 @@ this very stable
 #################################################################################################
 
  # rt-kernel very simple
+ 
 
  do not edit config.txt auto initramfs is enabled kernel load automatic
  
+
  
            sudo apt build-dep linux mpv ffmpeg -y  && wget  https://github.com/spookyfirehorse/ffmpeg-and-mpv-for-rpi4/tree/master/build-kernel &&  cd build-kernel
 
