@@ -16,16 +16,16 @@ this very stable
 
  # rt-kernel very simple
  
-  sudo apt build-dep linux mpv ffmpeg
+           sudo apt build-dep linux mpv ffmpeg
 
-  wget  https://github.com/spookyfirehorse/ffmpeg-and-mpv-for-rpi4/tree/master/build-kernel
+           wget  https://github.com/spookyfirehorse/ffmpeg-and-mpv-for-rpi4/tree/master/build-kernel
 
-  cd build-kernel
+           cd build-kernel
 
-  sudo ./build-kernel -b default -c 7 -j 6 -u -d        ### rpi5 rt-kernel
+           sudo ./build-kernel -b default -c 7 -j 6 -u -d        ### rpi5 rt-kernel
 
   
-  sudo ./build-kernel -b default -c 6 -j 6 -u -d        ### rpi4 rt-kernel
+           sudo ./build-kernel -b default -c 6 -j 6 -u -d        ### rpi4 rt-kernel
 
 
 # for latest libfdk
