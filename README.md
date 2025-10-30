@@ -17,7 +17,7 @@ this very stable
  # rt-kernel very simple
  
 
- do not edit config.txt auto initramfs is enabled kernel load automatic
+##   do not edit config.txt auto initramfs is enabled kernel load automatic
  
 
  
