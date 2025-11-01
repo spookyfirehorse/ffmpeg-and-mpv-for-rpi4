@@ -237,18 +237,21 @@ put this in
         #start_x=1  #disable or delete
         
 
-# rtsp-streaming rpicam
+                   pactl list | grep -A2 'Source #' | grep 'Name: '  #####  pipewire pulse device  alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback
+
+
+# rtsp-streaming rpicam pulse pipewire
 
 
     rpicam-vid  --low-latency 1  -b 10000000  --autofocus-mode continuous  --denoise cdn_off \
     --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
     --sharpness   1.0  --level 4.1 --hdr=off  --profile=high  --framerate 30 --width 1536 --height 864 \
-    --audio-device=plughw:CARD=Device,DEV=0   --audio-bitrate=96kbps \
-    --audio-codec libopus  --audio-channels 1 --libav-audio 1 --audio-source alsa   -t 0  -n --inline -o  - | ffmpeg  -flags low_delay \
+    --audio-device=alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback   --audio-bitrate=96kbps \
+    --audio-codec libopus  --audio-channels 1 --libav-audio 1 --audio-source pulse   -t 0  -n --inline -o  - | ffmpeg  -flags low_delay \
     -vcodec h264_v4l2m2m -i - -metadata title='MOON' -codec copy -threads $(nproc) \
     -f rtsp -rtsp_transport tcp  rtsp://"user:password"@"localhost:8554"/mystream   >/dev/null 2>&1
 
-# edit mediamtx for password
+# edit mediamtx for password 
 
          sudo nano /usr/local/etc/mediamtx.yaml
 one time for user one time for passwd
@@ -272,7 +275,7 @@ authInternalUsers:
     permissions:
       - action: publish
        
-without password
+without password alsa
 
     rpicam-vid  --low-latency 1  -b 10000000  --autofocus-mode continuous  --denoise cdn_off \
     --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
