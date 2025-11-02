@@ -236,8 +236,13 @@ put this in
         #gpu_mem=256   #disable or delete not needed
         #start_x=1  #disable or delete
         
+##########################################
+        
+         pactl list sinks 
 
-                   pactl list | grep -A2 'Source #' | grep 'Name: '  #####  pipewire pulse device  alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback
+or
+         
+         pactl list | grep -A2 'Source #' | grep 'Name: '  #####  pipewire pulse device  alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback
 
 
 # rtsp-streaming rpicam pulse pipewire
