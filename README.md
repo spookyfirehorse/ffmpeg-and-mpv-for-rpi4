@@ -238,12 +238,11 @@ put this in
         
 ##########################################
         
-         pactl list sinks 
+         pactl list sources 
 
 or
          
-         pactl list | grep -A2 'Source #' | grep 'Name: '  #####  pipewire pulse device  alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback
-
+         pactl list | grep -A2 'Source #' | grep 'Name: '  
 
 # rtsp-streaming rpicam pulse pipewire
 
