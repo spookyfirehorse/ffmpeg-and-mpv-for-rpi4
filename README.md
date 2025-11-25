@@ -28,6 +28,10 @@ this very stable
 
   
            sudo ./build-kernel -b default -c 6 -j 6 -u -d        ### rpi4 rt-kernel
+           
+
+           sudo ./build-kernel -b default -c 3 -j 6 -u -d        ### rpi4 armv7l-kernel no realtime
+
 
 
 # for latest libfdk
