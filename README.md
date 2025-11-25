@@ -279,16 +279,17 @@ or
 
 ##  pulseaudio flv aac
 
-   nice -n 19  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
-  --codec libav --libav-format flv --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0 \
-  --profile=high --hdr=off    --sharpness   1.0  --level 4.1 --framerate 25  --width 1563 --height 864 \
-  --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo    --audio-bitrate=96kbps \
-  --audio-codec aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --av-sync=1000  \
-  -t 0  -n --inline -o  - | ffmpeg  -fflags +nobuffer+genpts+discardcorrupt -flags low_delay+global_header  -vcodec h264_v4l2m2m -i - -metadata title='lucy' -codec copy  -threads $(nproc)  -rtsp_flags prefer_tcp \
-  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554"/mystream 
+      nice -n 19  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
+      --codec libav --libav-format flv --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0 \
+      --profile=high --hdr=off    --sharpness   1.0  --level 4.1 --framerate 25  --width 1563 --height 864 \
+      --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo    --audio-bitrate=96kbps \
+      --audio-codec aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --av-sync=1000  \
+      -t 0  -n --inline -o  - | ffmpeg  -fflags +nobuffer+genpts+discardcorrupt -flags low_delay+global_header  -vcodec h264_v4l2m2m -i - -metadata title='lucy' -codec copy  -threads $(nproc)  -rtsp_flags prefer_tcp \
+      -f rtsp -rtsp_transport tcp  rtsp://localhost:8554"/mystream 
 
   ### drm alsa  libfdk
-nice -n 19  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
+  
+    nice -n 19  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
   --codec libav --libav-format flv --libav-video-codec h264_v4l2m2m --brightness 0.1 --contrast 1.0 \
   --profile=high --hdr=off    --sharpness   1.0  --level 4.1 --framerate 25  --width 1563 --height 864 \
   --audio-device=plughw:CARD=S3,DEV=0    --audio-bitrate=96kbps \
