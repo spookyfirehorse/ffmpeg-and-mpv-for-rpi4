@@ -206,6 +206,7 @@ compile
    sudo nano /etc/sysctl.d/98-rpi.conf
 
    net.core.rmem_default=1000000
+   
    net.core.rmem_max=1000000
 
       https://github.com/aler9/mediamtx/releases
