@@ -318,7 +318,7 @@ or
   
 ##  --low-latency 1 may add 
 
-## test 
+## test rpi4 out of sync
 
       nice -n 19  rpicam-vid   -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
      --codec=libav --libav-format=flv --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0 \
@@ -326,7 +326,7 @@ or
      --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo   --audio-bitrate=96kbps  \
      --audio-codec aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --av-sync=1000  \
       -t 0  -n --inline -o  - | ffmpeg  -fflags +nobuffer+genpts+discardcorrupt -flags low_delay+global_header \
-      -hwaccel drm -hwaccel_output_format drm_prime  -i - -metadata title='lucy' -codec copy  -threads $(nproc)  -rtsp_flags prefer_tcp  -f rtsp -rtsp_transport tcp  rtsp://"localhost:8554"/mystream
+      -hwaccel drm -hwaccel_output_format drm_prime  -i - -metadata title='lucy' -codec copy  -threads $(nproc)  -rtsp_flags prefer_tcp -rtbufsize 702000k -f rtsp -rtsp_transport tcp  rtsp://"localhost:8554"/mystream
 
 
   
