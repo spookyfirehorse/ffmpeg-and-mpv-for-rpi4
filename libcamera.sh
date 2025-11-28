@@ -1,4 +1,4 @@
-sudo apt build-dep libcamera rpicam-apps
+sudo apt build-dep libcamera rpicam-apps pipewire
 
 git clone https://github.com/raspberrypi/libcamera.git
 cd libcamera
