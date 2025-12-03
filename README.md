@@ -218,11 +218,11 @@ compile
 
 64 bit armv8
 
-      wget https://github.com/bluenviron/mediamtx/releases/download/v1.15.3/mediamtx_v1.15.4_linux_arm64.tar.gz
+      wget https://github.com/bluenviron/mediamtx/releases/download/v1.15.4/mediamtx_v1.15.4_linux_arm64.tar.gz
 
 armv7 32 bit
 
-       wget  https://github.com/bluenviron/mediamtx/releases/download/v1.15.3/mediamtx_v1.15.4_linux_armv7.tar.gz
+       wget  https://github.com/bluenviron/mediamtx/releases/download/v1.15.4/mediamtx_v1.15.4_linux_armv7.tar.gz
      
 
 
