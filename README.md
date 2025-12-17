@@ -328,15 +328,58 @@ or
       -t 0    --av-sync=1000000   -n  -o  - | ffmpeg  -fflags nobuffer   -flags low_delay+global_header   \
       -hwaccel drm -hwaccel_output_format drm_prime   -re   -i  -  -metadata title='lucy' -codec copy \
       -threads $(nproc)   -rtsp_flags prefer_tcp  -f rtsp -rtsp_transport tcp  rtsp://"localhost:8554"/mystream-sync
-
+# MPV
        nice -n 19  rpicam-vid --low-latency 1  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
       --codec=libav --libav-format=mpegts --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0 \
        --profile=high --hdr=off    --sharpness   1.0  --level 4.2 --framerate 25  --width 1280 --height 720 \
        --audio-device=plughw:CARD=S3,DEV=0   --audio-bitrate=96kbps  \
        --audio-codec aac  --audio-channels 2 --libav-audio 1 --audio-source alsa  \
-        -t 0  -n --inline -o  - | mpv -  --profile=stream -o rtsp://"MshcUBHU8P:VPxfYXKRXw"@"localhost:8557"/mystream  
+        -t 0  -n --inline -o  - | mpv -  --profile=stream -o rtsp://"localhost:8557"/mystream  
        
       nano .config/mpv/mpv.conf
+
+
+      [stream]
+
+     hwdec=v4l2m2m-copy
+     #hwdec-codecs=h264
+     #hwdec-image-format=yuv420p
+     #gpu-hwdec-interop=drmprime-overlay
+     ovc=h264_v4l2m2m
+     ovcopts=b=1M
+     oac=libfdk_aac
+     oacopts=b=64k
+     cache=no
+     framedrop=decoder+vo
+     audio-buffer=0.5
+     vd-lavc-threads=1
+     cache-pause=no
+      demuxer-lavf-o-add=fflags=+nobuffer,flags=low_delay
+     #,use_wallclock_as_timestamp=1
+     video-sync=audio
+     of=rtsp
+     volume=100
+     rtsp-transport=tcp
+     #audio=no
+     stream-buffer-size=4k
+     #interpolation=no
+     vd-lavc-threads=1
+     #demuxer-lavf-analyzeduration=0.1
+     #demuxer-lavf-probe-info=nostreams
+     initial-audio-sync=yes
+     oset-metadata=title="LUCY",comment="stream"
+     audio-format=floatp
+     audio-samplerate=44100
+     #profile=fast
+     #untimed=yes
+     no-correct-pts
+     vo-null-fps=23.947
+     #demuxer-lavf-genpts-mode=no 
+     demuxer-lavf-hacks=yes
+     #autosync=0
+     #container-fps-override=25
+
+
 
 
        wget https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb
