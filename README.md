@@ -292,7 +292,7 @@ or
     --audio-device=alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback   --audio-bitrate=96kbps \
     --audio-codec libopus  --audio-channels 1 --libav-audio 1 --audio-source pulse   -t 0  -n --inline -o  - | ffmpeg  -flags low_delay \
     -vcodec h264_v4l2m2m -i - -metadata title='MOON' -codec copy -threads $(nproc) \
-    -f rtsp -rtsp_transport tcp  rtsp://"user:password"@"localhost:8554"/mystream   >/dev/null 2>&1
+    -f rtsp -rtsp_transport udp  rtsp://"user:password"@"localhost:8554"/mystream   >/dev/null 2>&1
 
 ##  pulseaudio flv aac
 
@@ -301,8 +301,8 @@ or
       --profile=high --hdr=off    --sharpness   1.0  --level 4.1 --framerate 25  --width 1563 --height 864 \
       --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo    --audio-bitrate=96kbps \
       --audio-codec aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --av-sync=1000  \
-      -t 0  -n --inline -o  - | ffmpeg  -fflags +nobuffer+genpts+discardcorrupt -flags low_delay+global_header  -vcodec h264_v4l2m2m -i - -metadata title='lucy' -codec copy  -threads $(nproc)  -rtsp_flags prefer_tcp \
-      -f rtsp -rtsp_transport tcp  rtsp://localhost:8554"/mystream 
+      -t 0  -n --inline -o  - | ffmpeg  -fflags +nobuffer+genpts+discardcorrupt -flags low_delay+global_header  -vcodec h264_v4l2m2m -i - -metadata title='lucy' -codec copy  -threads $(nproc)   \
+      -f rtsp -rtsp_transport udp  rtsp://localhost:8554"/mystream 
 
   ### drm alsa  libfdk
   
@@ -311,8 +311,8 @@ or
      --profile=high --hdr=off    --sharpness   1.0  --level 4.1 --framerate 25  --width 1563 --height 864 \
      --audio-device=plughw:CARD=S3,DEV=0    --audio-bitrate=96kbps \
      --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source alsa --av-sync=1000  \
-     -t 0  -n --inline -o  - | ffmpeg  -fflags +nobuffer+genpts+discardcorrupt -flags low_delay+global_header  -hwaccel drm -hwaccel_output_format drm_prime -i - -metadata title='lucy' -codec copy  -threads $(nproc)  -rtsp_flags prefer_tcp \
-     -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+     -t 0  -n --inline -o  - | ffmpeg  -fflags +nobuffer+genpts+discardcorrupt -flags low_delay+global_header  -hwaccel drm -hwaccel_output_format drm_prime -i - -metadata title='lucy' -codec copy  -threads $(nproc)  \
+     -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
   
 
   
@@ -396,7 +396,7 @@ or
 
 
 
-
+## vapoursynth
 
        wget https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb
 
