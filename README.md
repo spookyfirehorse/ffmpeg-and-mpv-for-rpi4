@@ -355,43 +355,43 @@ or
     oac=libfdk_aac
     oacopts=b=64k
     cache=no
-   framedrop=decoder+vo
+    framedrop=decoder+vo
     audio-buffer=0.5
     vd-lavc-threads=1
-    cache-pause=no
-    demuxer-lavf-o-add=fflags=+nobuffer,flags=low_delay
-    #,use_wallclock_as_timestamp=1
-    of=rtsp
-   volume=100
-   rtsp-transport=udp
-   #audio=no
-   stream-buffer-size=4k
-   #interpolation=no
-   vd-lavc-threads=1
-   #demuxer-lavf-analyzeduration=0.1
-   #demuxer-lavf-probe-info=nostreams
-   initial-audio-sync=yes
-   oset-metadata=title="Devil",comment="stream"
-   audio-format=s16
-   audio-samplerate=48000
-   #untimed=yes
-   #correct-pts=no
-   vo-null-fps=25
-   demuxer-lavf-hacks=yes
-   #container-fps-override=25
-   hr-seek-framedrop=no
-   video-sync=audio
-   pulse-latency-hacks=yes
-  gpu-dumb-mode=yes
-  video-latency-hacks=yes
-  audio-demuxer=lavf
-   #speed=1.001
-   #audio-delay=-1
-  #display-fps-override=50
-   #input-ipc-server=mpvpipe
-   #audio-backward-batch=50 
-   #autosync=100
-   #tscale=oversample
+     cache-pause=no
+     demuxer-lavf-o-add=fflags=+nobuffer,flags=low_delay
+     #,use_wallclock_as_timestamp=1
+     of=rtsp
+     volume=100
+     rtsp-transport=udp
+     #audio=no
+     stream-buffer-size=4k
+     #interpolation=no
+     vd-lavc-threads=1
+     #demuxer-lavf-analyzeduration=0.1
+     #demuxer-lavf-probe-info=nostreams
+     initial-audio-sync=yes
+     oset-metadata=title="Devil",comment="stream"
+     audio-format=s16
+     audio-samplerate=48000
+     #untimed=yes
+     #correct-pts=no
+     vo-null-fps=25
+     demuxer-lavf-hacks=yes
+     #container-fps-override=25
+     hr-seek-framedrop=no
+     video-sync=audio
+     pulse-latency-hacks=yes
+     gpu-dumb-mode=yes
+     video-latency-hacks=yes
+     audio-demuxer=lavf
+     #speed=1.001
+     #audio-delay=-1
+     #display-fps-override=50
+     #input-ipc-server=mpvpipe
+     #audio-backward-batch=50 
+     #autosync=100
+     #tscale=oversample
 
 
 
