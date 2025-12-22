@@ -318,66 +318,82 @@ or
   
 
 
-## test rpi4  sync over 3 hour 0  --av-sync= 1sec
+## test rpi4  
 
-      nice -n 19  rpicam-vid --low-latency 1  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
+      nice -n 19  rpicam-vid --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5  --denoise cdn_off \
       --codec=libav --libav-format=mpegts --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0 \
       --profile=high --hdr=off    --sharpness   1.0  --level 4.2 --framerate 25  --width 1280 --height 720 \
       --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo   --audio-bitrate=96kbps  \
       --audio-codec libopus  --audio-channels 2 --libav-audio 1 --audio-source pulse  \
-      -t 0    --av-sync=1000000   -n  -o  - | ffmpeg  -fflags nobuffer   -flags low_delay+global_header   \
+      -t 0    --av-sync=0   -n  -o  - | ffmpeg  -fflags nobuffer   -flags low_delay+global_header   \
       -hwaccel drm -hwaccel_output_format drm_prime   -re   -i  -  -metadata title='lucy' -codec copy \
       -threads $(nproc)   -rtsp_flags prefer_tcp  -f rtsp -rtsp_transport tcp  rtsp://"localhost:8554"/mystream-sync
-# MPV
-       nice -n 19  rpicam-vid --low-latency 1  -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
-      --codec=libav --libav-format=mpegts --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0 \
-       --profile=high --hdr=off    --sharpness   1.0  --level 4.2 --framerate 25  --width 1280 --height 720 \
-       --audio-device=plughw:CARD=S3,DEV=0   --audio-bitrate=96kbps  \
-       --audio-codec aac  --audio-channels 2 --libav-audio 1 --audio-source alsa  \
-        -t 0  -n --inline -o  - | mpv -  --profile=stream -o rtsp://"localhost:8557"/mystream  
+      
+# MPV rpi 3  , zero2w 
+
+
+       nice -n 19  rpicam-vid --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5  --denoise cdn_off \
+      --codec=libav --libav-format=flv --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0  \
+      --profile=high --hdr=off    --sharpness   1.0  --level 4.2 --framerate 25  --width 1280 --height 720 \
+      --audio-device=alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback   --audio-bitrate=96kbps --audio-samplerate=48000   \
+      --audio-codec aac  --audio-channels 1 --libav-audio 1 --audio-source pulse  \
+      -t 0 --inline  -n  -o  -  | mpv -  --profile=stream -o rtsp://"localhost:8554"/mystream  
        
       nano .config/mpv/mpv.conf
 
 
-      [stream]
+     [stream]
 
-     hwdec=v4l2m2m-copy
-     #hwdec-codecs=h264
-     #hwdec-image-format=yuv420p
-     #gpu-hwdec-interop=drmprime-overlay
-     ovc=h264_v4l2m2m
-     ovcopts=b=1M
-     oac=libfdk_aac
-     oacopts=b=64k
-     cache=no
-     framedrop=decoder+vo
-     audio-buffer=0.5
-     vd-lavc-threads=1
-     cache-pause=no
-      demuxer-lavf-o-add=fflags=+nobuffer,flags=low_delay
-     #,use_wallclock_as_timestamp=1
-     video-sync=audio
-     of=rtsp
-     volume=100
-     rtsp-transport=tcp
-     #audio=no
-     stream-buffer-size=4k
-     #interpolation=no
-     vd-lavc-threads=1
-     #demuxer-lavf-analyzeduration=0.1
-     #demuxer-lavf-probe-info=nostreams
-     initial-audio-sync=yes
-     oset-metadata=title="LUCY",comment="stream"
-     audio-format=floatp
-     audio-samplerate=44100
-     #profile=fast
-     #untimed=yes
-     no-correct-pts
-     vo-null-fps=23.947
-     #demuxer-lavf-genpts-mode=no 
-     demuxer-lavf-hacks=yes
-     #autosync=0
-     #container-fps-override=25
+    #hwdec=v4l2m2m-copy
+    hwdec=drm
+    hwdec-codecs=hevc
+    hwdec-image-format=drm_prime
+    gpu-hwdec-interop=drmprime
+    hwdec-extra-frames=2
+    ovc=h264_v4l2m2m
+    ovcopts=b=1M
+    oac=libfdk_aac
+    oacopts=b=64k
+    cache=no
+   framedrop=decoder+vo
+    audio-buffer=0.5
+    vd-lavc-threads=1
+    cache-pause=no
+    demuxer-lavf-o-add=fflags=+nobuffer,flags=low_delay
+    #,use_wallclock_as_timestamp=1
+    of=rtsp
+   volume=100
+   rtsp-transport=udp
+   #audio=no
+   stream-buffer-size=4k
+   #interpolation=no
+   vd-lavc-threads=1
+   #demuxer-lavf-analyzeduration=0.1
+   #demuxer-lavf-probe-info=nostreams
+   initial-audio-sync=yes
+   oset-metadata=title="Devil",comment="stream"
+   audio-format=s16
+   audio-samplerate=48000
+   #untimed=yes
+   #correct-pts=no
+   vo-null-fps=25
+   demuxer-lavf-hacks=yes
+   #container-fps-override=25
+   hr-seek-framedrop=no
+   video-sync=audio
+   pulse-latency-hacks=yes
+  gpu-dumb-mode=yes
+  video-latency-hacks=yes
+  audio-demuxer=lavf
+   #speed=1.001
+   #audio-delay=-1
+  #display-fps-override=50
+   #input-ipc-server=mpvpipe
+   #audio-backward-batch=50 
+   #autosync=100
+   #tscale=oversample
+
+
 
 
 
