@@ -49,5 +49,47 @@ nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --a
 ######################################################
 
 
+nice -n 19  rpicam-vid --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --denoise cdn_off \
+ --codec=libav --libav-format=flv --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0 \
+ --profile=high --hdr=off    --sharpness   1.0  --level 4.2 --framerate 24  --width 1280 --height 720 \
+ --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo   --audio-bitrate=96kbps --audio-samplerate=48000   \
+ --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse  \
+  -t 0  -n --inline  -o  - | mpv -  --profile=stream -o  rtsp
+
+
+
+[stream]
+
+hwdec=drm
+hwdec-codecs=hevc
+hwdec-image-format=drm_prime
+gpu-hwdec-interop=drmprime
+hwdec-extra-frames=2
+ovc=h264_v4l2m2m
+ovcopts=profile=high
+ovcopts=level=4.2
+ovcopts=b=1M
+oac=libfdk_aac
+oacopts=b=64k
+cache=no
+framedrop=decoder+vo
+demuxer-lavf-o-add=fflags=+nobuffer,flags=low_delay
+#,use_wallclock_as_timestamp=1
+of=rtsp
+volume=100
+rtsp-transport=udp
+oset-metadata=title="Lucy",comment="stream"
+audio-format=s16
+audio-samplerate=48000
+#vo-null-fps=23.976
+vo-null-fps=25
+#demuxer-lavf-hacks=yes
+hr-seek-framedrop=no
+video-sync=audio
+pulse-latency-hacks=yes
+video-latency-hacks=yes
+audio-demuxer=lavf
+demuxer=lavf
+#speed=1.001
 
 
