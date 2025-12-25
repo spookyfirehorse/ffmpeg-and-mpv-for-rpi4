@@ -54,7 +54,7 @@ nice -n 19  rpicam-vid --low-latency 1  -b 1000000 --autofocus-mode manual --aut
  --profile=high --hdr=off    --sharpness   1.0  --level 4.2 --framerate 24  --width 1280 --height 720 \
  --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo   --audio-bitrate=96kbps --audio-samplerate=48000   \
  --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse  \
-  -t 0  -n --inline  -o  - | mpv -  --profile=stream -o  rtsp
+  -t 0  -n --inline  -o  - | mpv -  --profile=stream 
 
 
 
