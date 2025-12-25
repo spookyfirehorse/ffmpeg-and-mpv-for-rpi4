@@ -73,7 +73,7 @@ oac=libfdk_aac
 oacopts=b=64k
 cache=no
 framedrop=decoder+vo
-demuxer-lavf-o-add=fflags=+nobuffer,flags=low_delay
+demuxer-lavf-o-add=fflags=+nobuffer+genpts,flags=low_delay
 #,use_wallclock_as_timestamp=1
 of=rtsp
 volume=100
@@ -81,8 +81,8 @@ rtsp-transport=udp
 oset-metadata=title="Lucy",comment="stream"
 audio-format=s16
 audio-samplerate=48000
-#vo-null-fps=23.976
-vo-null-fps=25
+vo-null-fps=23.976
+#vo-null-fps=25
 #demuxer-lavf-hacks=yes
 hr-seek-framedrop=no
 video-sync=audio
