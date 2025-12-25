@@ -40,7 +40,7 @@ nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --a
   --profile=high --hdr=off --libav-video-codec h264_v4l2m2m   --sharpness   1.0  --level 4.2 --framerate 24  --width 1280 --height 720 \
   --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=0 \
   --audio-codec aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=96kbps  \
-  -t 0  -n --inline -o  - | ffmpeg -r 24  -hide_banner -fflags nobuffer  -flags low_delay -hwaccel drm -hwaccel_output_format drm_prime -i -\
+  -t 0  -n --inline -o  - | ffmpeg -r 24  -hide_banner -fflags nobuffer+genpts  -flags low_delay -hwaccel drm -hwaccel_output_format drm_prime -i -\
   -metadata title='Lucy'  -vcodec h264_v4l2m2m  -b:v 1M -num_output_buffers 32 -num_capture_buffers 16  -acodec aac -profile:a aac_low \
   -b:a 32k -threads $(nproc) -fps_mode:v cfr   -filter:v  fps=fps=film:round=near:start_time=30  \
    -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
