@@ -283,36 +283,15 @@ or
 
          for alsa   arecord -L
 
-# rtsp-streaming rpicam pulse pipewire
+# rtsp-streaming rpicam pulse pipewire on rpi 3 rpi zw2 10 h test no desync
 
 
-    rpicam-vid    -b 10000000  --autofocus-mode continuous  --denoise cdn_off \
-    --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
-    --sharpness   1.0  --level 4.1 --hdr=off  --profile=high  --framerate 30 --width 1536 --height 864 \
-    --audio-device=alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback   --audio-bitrate=96kbps \
-    --audio-codec libopus  --audio-channels 1 --libav-audio 1 --audio-source pulse   -t 0  -n --inline -o  - | ffmpeg  -flags low_delay \
-    -vcodec h264_v4l2m2m -i - -metadata title='MOON' -codec copy -threads $(nproc) \
-    -f rtsp -rtsp_transport udp  rtsp://"user:password"@"localhost:8554"/mystream   >/dev/null 2>&1
-
-##  pulseaudio flv aac
-
-      nice -n 19  rpicam-vid    -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
-      --codec libav --libav-format flv --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0 \
-      --profile=high --hdr=off    --sharpness   1.0  --level 4.1 --framerate 25  --width 1563 --height 864 \
-      --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo    --audio-bitrate=96kbps \
-      --audio-codec aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --av-sync=1000  \
-      -t 0  -n --inline -o  - | ffmpeg  -fflags +nobuffer+genpts+discardcorrupt -flags low_delay+global_header  -vcodec h264_v4l2m2m -i - -metadata title='lucy' -codec copy  -threads $(nproc)   \
-      -f rtsp -rtsp_transport udp  rtsp://localhost:8554"/mystream 
-
-  ### drm alsa  libfdk
-  
-    nice -n 19  rpicam-vid    -b 1000000 --autofocus-mode continuous  --denoise cdn_off \
-     --codec libav --libav-format flv --libav-video-codec h264_v4l2m2m --brightness 0.1 --contrast 1.0 \
-     --profile=high --hdr=off    --sharpness   1.0  --level 4.1 --framerate 25  --width 1563 --height 864 \
-     --audio-device=plughw:CARD=S3,DEV=0    --audio-bitrate=96kbps \
-     --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source alsa --av-sync=1000  \
-     -t 0  -n --inline -o  - | ffmpeg  -fflags +nobuffer+genpts+discardcorrupt -flags low_delay+global_header  -hwaccel drm -hwaccel_output_format drm_prime -i - -metadata title='lucy' -codec copy  -threads $(nproc)  \
-     -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
+   nice -n -11  rpicam-vid  --low-latency 1  -b 1000000    --denoise cdn_off   --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0    --profile=high --hdr=off --libav-video-codec h264_v4l2m2m \
+  --level 4.2 --framerate 24  --width 1536 --height 864   --audio-device==alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback  --av-sync=0 \
+  --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps --libav-video-codec-opts bf=0 --intra 0    \
+   -t 0  -n --inline -o  - | ffmpeg -r 23.976  -hide_banner -fflags nobuffer+genpts  -flags low_delay  \
+  -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='kali'  -vcodec copy -copytb 1  -acodec libfdk_aac -eld_v2 1  -vbr 0  -b:a 64k   \
+   -f rtsp -rtsp_transport udp  rtsp://"user:password"@"localhost:8554"/mystream   >/dev/null 2>&1
   
 
   
@@ -332,12 +311,10 @@ or
 # MPV rpi 3  , zero2w 
 
 
-       nice -n 19  rpicam-vid --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5  --denoise cdn_off \
-      --codec=libav --libav-format=flv --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0  \
-      --profile=high --hdr=off    --sharpness   1.0  --level 4.2 --framerate 25  --width 1280 --height 720 \
-      --audio-device=alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback   --audio-bitrate=96kbps --audio-samplerate=48000   \
-      --audio-codec aac  --audio-channels 1 --libav-audio 1 --audio-source pulse  \
-      -t 0 --inline  -n  -o  -  | mpv -  --profile=stream -o rtsp://"localhost:8554"/mystream  
+       nice -n -11  rpicam-vid  --low-latency 1  -b 1000000    --denoise cdn_off   --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0    --profile=high --hdr=off --libav-video-codec h264_v4l2m2m \
+      --level 4.2 --framerate 24  --width 1536 --height 864   --audio-device==alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback  --av-sync=0 \
+      --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps --libav-video-codec-opts bf=0 --intra 0    \
+      -t 0  -n --inline -o  -  | mpv -  --profile=stream -o rtsp://"localhost:8554"/mystream  
        
       nano .config/mpv/mpv.conf
 
@@ -359,7 +336,7 @@ or
     audio-buffer=0.5
     vd-lavc-threads=1
      cache-pause=no
-     demuxer-lavf-o-add=fflags=+nobuffer,flags=low_delay
+     demuxer-lavf-o-add=fflags=+nobuffer+genpts,flags=low_delay
      #,use_wallclock_as_timestamp=1
      of=rtsp
      volume=100
@@ -376,9 +353,9 @@ or
      audio-samplerate=48000
      #untimed=yes
      #correct-pts=no
-     vo-null-fps=25
+     vo-null-fps=23.976
      demuxer-lavf-hacks=yes
-     #container-fps-override=25
+     #container-fps-override=23.976
      hr-seek-framedrop=no
      video-sync=audio
      pulse-latency-hacks=yes
