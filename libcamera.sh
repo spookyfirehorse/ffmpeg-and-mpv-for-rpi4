@@ -81,7 +81,7 @@ oac=libfdk_aac
 oacopts=b=64k,has_b_frames=0,copytb=1,eld_v2=1
 cache=no
 framedrop=decoder+vo
-demuxer-lavf-o-add=fflags=+nobuffer+genpts,flags=low_delay
+demuxer-lavf-o-add=fflags=+nobuffer+genpts+discardcorrupt,flags=low_delay
 #+igndts
 #,use_wallclock_as_timestamp=1
 of=rtsp
