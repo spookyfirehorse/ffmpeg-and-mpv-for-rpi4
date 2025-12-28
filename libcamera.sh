@@ -75,14 +75,14 @@ hwdec-image-format=drm_prime
 gpu-hwdec-interop=drmprime
 hwdec-extra-frames=2
 ovc=h264_v4l2m2m
-ovcopts=profile=high
-ovcopts=level=4.2
-ovcopts=b=1M
+ovcopts=preset=profile:v=high,level=4.2
+ovcopts=bf=0,b=1M,fps_mode:v=cfr
 oac=libfdk_aac
-oacopts=b=64k
+oacopts=b=64k,has_b_frames=0,copytb=1,eld_v2=1
 cache=no
 framedrop=decoder+vo
 demuxer-lavf-o-add=fflags=+nobuffer+genpts,flags=low_delay
+#+igndts
 #,use_wallclock_as_timestamp=1
 of=rtsp
 volume=100
@@ -90,15 +90,14 @@ rtsp-transport=udp
 oset-metadata=title="Lucy",comment="stream"
 audio-format=s16
 audio-samplerate=48000
-vo-null-fps=24  # rpi4
-#vo-null-fps=23.976 # rpi 3
-#demuxer-lavf-hacks=yes
+#vo-null-fps=24
 hr-seek-framedrop=no
 video-sync=audio
-pulse-latency-hacks=yes
-video-latency-hacks=yes
+#pulse-latency-hacks=yes
+#video-latency-hacks=yes
 audio-demuxer=lavf
 demuxer=lavf
 #speed=1.001
-
-
+#demuxer=mkv
+stream-buffer-size=4k
+pipewire-buffer=10
