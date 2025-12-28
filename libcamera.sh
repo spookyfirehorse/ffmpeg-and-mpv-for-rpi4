@@ -40,7 +40,7 @@ ninja -C build install
  --level 4.2 --framerate 24  --width 1536 --height 864   --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=0  \
  --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=96kbps  \
  -t 0  -n --inline -o  - | ffmpeg   -hide_banner -fflags nobuffer+genpts  -flags low_delay -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy'  -vcodec h264_v4l2m2m \
- -b:v 1M -num_output_buffers 32 -num_capture_buffers 16  -acodec libfdk_aac -profile:a aac_he_v2   -b:a 64k -threads $(nproc) -fps_mode:v cfr  -copytb 1   \
+ -b:v 1M -num_output_buffers 32 -num_capture_buffers 16  -acodec libfdk_aac libfdk_aac -eld_v2 1  -vbr 0  -b:a 64k -threads $(nproc) -fps_mode:v cfr  -copytb 1   \
  -f rtsp -rtsp_transport udp
 
 
