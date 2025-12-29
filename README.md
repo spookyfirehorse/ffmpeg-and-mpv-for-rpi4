@@ -294,15 +294,17 @@ or
      --profile=high --hdr=off --libav-video-codec h264_v4l2m2m   --level 4.2 --framerate 24  --width 1536 --height 864 \
      --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=10000  \
      --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps  \
-     -t 0  -n --inline -o  - | ffmpeg -ss 00:00:03 -async 1  -hide_banner -fflags nobuffer+genpts  -flags low_delay \
+     -t 0  -n --inline -o  - | ffmpeg -ss 00:00:03   -hide_banner -fflags nobuffer+genpts  -flags low_delay \
      -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy' \
-     -c:v h264_v4l2m2m  -b:v 1500k -num_output_buffers 32 -num_capture_buffers 16  \
+     -c:v h264_v4l2m2m  -b:v 1500k -num_output_buffers 32 -num_capture_buffers 16 -filter:v  fps=fps=source_fps:round=near \
      -c:a libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -copytb 1 -threads $(nproc) -fps_mode:v cfr    \
      -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
 
       The only difference is that normally the video and audio take 1 second to travel from sender to receiver.
       In this case, however, the video and audio take 5 seconds after 10 h
 
+
+## test    -filter:v  fps=fps=film:round=near:start_time=0  -fps_mode:v cfr 
 
 ## optios for libfdk
 
