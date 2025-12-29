@@ -108,7 +108,7 @@ nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --a
   --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=0  \
   --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps  \
   -t 0  -n --inline -o  - | ffmpeg   -hide_banner -fflags nobuffer+genpts  -flags low_delay \
-  -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy'  -c:v  h264_v4l2m2m  -b:v 1500k  -filter:v  fps=fps=film:round=near   -threads $(nproc) \
+  -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy'  -c:v  h264_v4l2m2m  -b:v 1500k  -filter:v  fps=fps=source_fps:round=near   -threads $(nproc) \
   -c:a  libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -threads $(nproc) -fps_mode:v cfr  \
    -f rtsp -rtsp_transport udp rtsp://"MshcUBHU8P:VPxfYXKRXw"@"localhost:8557"/mystream
 
