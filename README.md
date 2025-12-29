@@ -252,7 +252,7 @@ or
 
          for alsa   arecord -L
 
-#  all tests with running with  imx 708, but it works with all cameras. the only differents is with hight and autofocus
+#  all tests  running with  imx 708, but it works with all cameras. the only differents is with hight and autofocus
 
 #  the different option between rpi3 and 4 is -r 23.976 fps as input option for ffmpeg
 
@@ -298,7 +298,8 @@ or
      -acodec libfdk_aac -profile:a aac_he  -vbr 0  -b:a 64k  -copytb 1 -threads $(nproc) -fps_mode:v cfr   \
      -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
 
-      The only difference is that normally the video and audio take 1 second to travel from sender to receiver. In this case, however, the video and audio take 5 seconds after 10 h
+      The only difference is that normally the video and audio take 1 second to travel from sender to receiver.
+      In this case, however, the video and audio take 5 seconds after 10 h
 
 
 ## optios for libfdk
