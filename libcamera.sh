@@ -50,7 +50,7 @@ nice -n -11  rpicam-vid  --low-latency 1  -b 1000000    --denoise cdn_off   --co
 --profile=high --hdr=off --libav-video-codec h264_v4l2m2m  --level 4.2 --framerate 24  --width 1536 --height 864 \
 --audio-device==alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback  --av-sync=0 \
 --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps --libav-video-codec-opts bf=0 --intra 0    \
-  -t 0  -n --inline -o  - | ffmpeg -r 23.976  -hide_banner -fflags nobuffer+genpts  -flags low_delay  \
+  -t 0  -n --inline -o  - | ffmpeg -r -r 23.97602398  -hide_banner -fflags nobuffer+genpts  -flags low_delay  \
   -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='kali'  -vcodec copy -copytb 1  -acodec libfdk_aac -eld_v2 1  -vbr 0  -b:a 64k   \
    -f rtsp -rtsp_transport udp  
 
@@ -110,7 +110,7 @@ nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --a
   -t 0  -n --inline -o  - | ffmpeg   -hide_banner -fflags nobuffer+genpts  -flags low_delay \
   -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy'  -c:v  h264_v4l2m2m  -b:v 1500k  -filter:v  fps=fps=source_fps:round=near   -threads $(nproc) \
   -c:a  libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -threads $(nproc) -fps_mode:v cfr  \
-   -f rtsp -rtsp_transport udp rtsp://"MshcUBHU8P:VPxfYXKRXw"@"localhost:8557"/mystream
+   -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
 
 
 # -filter:v  fps=fps=source_fps:round=near or -filter:v  fps=fps=film:round=near 
@@ -125,4 +125,4 @@ nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --a
 -t 0  -n --inline -o  - | ffmpeg   -hide_banner -fflags nobuffer+genpts  -flags low_delay   -hwaccel drm -hwaccel_output_format drm_prime \
 -i -  -metadata title='Lucy'  -c:v  h264_v4l2m2m  -b:v 1500k   -threads $(nproc) \
 -c:a  libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -threads $(nproc) -fps_mode:v cfr   -af "rubberband=tempo=0.9999"  \
--f rtsp -rtsp_transport udp rtsp://"MshcUBHU8P:VPxfYXKRXw"@"localhost:8557"/mystream
+-f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
