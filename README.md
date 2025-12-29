@@ -66,6 +66,9 @@ this very stable
     wget http://deb.debian.org/debian/pool/non-free/f/fdk-aac/libfdk-aac-dev_2.0.3-1_arm64.deb
 
     wget http://deb.debian.org/debian/pool/non-free/f/fdk-aac/libfdk-aac2t64_2.0.3-1_arm64.deb
+
+
+    sudo dpkg -i libfdk*
     
 
 ###################################################
@@ -259,6 +262,10 @@ start
 
     sudo systemctl start mediamtx
 
+upgrade
+
+    sudo mediamtx --upgrade
+
 ######################################
 
 RTSP STREAMING WITH AUDIO FOR NEWER  RPI CAMERAS 
@@ -272,6 +279,17 @@ put this in
         #start_x=1  #disable or delete
         
 ##########################################
+
+
+         sudo nano /etc/sysctl.d/98-rpi.conf
+
+         net.core.rmem_default=1000000
+   
+         net.core.rmem_max=1000000
+
+          sudo reboot
+
+ ###############################################
         
          pactl list sources 
 
@@ -283,92 +301,54 @@ or
 
          for alsa   arecord -L
 
-# rtsp-streaming rpicam pulse pipewire on rpi 3 rpi zw2 10 h test no desync
+#  all tests with running with  imx 708, but it works with all cameras. the only differents is with hight and autofocus
+
+#  the different option between rpi3 and 4 is -r 23.976
+
+# rtsp-streaming rpicam pulse pipewire on rpi 3 rpi zw2 !!! 24 h test sync
+
+#  may it works with aac free codec also
+
+#   all this exaples running for 24h stable sync
 
 
-      nice -n -11  rpicam-vid  --low-latency 1  -b 1000000    --denoise cdn_off   --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0    --profile=high --hdr=off --libav-video-codec h264_v4l2m2m \
+      nice -n -11  rpicam-vid  --low-latency 1  -b 1000000  --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0  \
+      --profile=high --hdr=off --libav-video-codec h264_v4l2m2m --autofocus-mode manual --autofocus-range normal \
+      --autofocus-window  0.25,0.25,0.5,0.5 --denoise cdn_off --libav-video-codec-opts bf=0 --intra 0  \
       --level 4.2 --framerate 24  --width 1536 --height 864   --audio-device==alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback  --av-sync=0 \
-      --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps --libav-video-codec-opts bf=0 --intra 0    \
+      --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps   \
        -t 0  -n --inline -o  - | ffmpeg -r 23.976  -hide_banner -fflags nobuffer+genpts  -flags low_delay  \
-      -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='kali'  -vcodec copy -copytb 1  -acodec libfdk_aac -eld_v2 1  -vbr 0  -b:a 64k   \
-      -f rtsp -rtsp_transport udp  rtsp://"user:password"@"localhost:8554"/mystream   >/dev/null 2>&1
+      -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Devil'  -vcodec copy -copytb 1  -acodec libfdk_aac -eld_v2 1  -vbr 0  -b:a 64k -vbr 0  -threads $(nproc)   \
+      -f rtsp -rtsp_transport udp  rtsp://"user:password"@"localhost:8554"/mystream   
   
 
-  
+
+## test rpi4  24 h test sync
+
+      nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --denoise cdn_off \ 
+      --libav-video-codec-opts bf=0 --intra 0 --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0 \
+      --profile=high --hdr=off --libav-video-codec h264_v4l2m2m   --level 4.2 --framerate 24  --width 1536 --height 864 \
+      --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=0  \
+      --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps  \
+      -t 0  -n --inline -o  - | ffmpeg   -hide_banner -fflags nobuffer+genpts  -flags low_delay \
+      -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy'  -vcodec copy -threads $(nproc) \
+      -acodec libfdk_aac -profile:a aac_he   -vbr 0 -fps_mode:v cfr   -b:a 64k  -copytb 1   \
+      -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
+
+ ## test 2 rpi4  -vcodec h264_v4l2m2m -acodec libfdk_aac !!!  10h test sync !!!   --av-sync=10000 = 0,1 sec in my case
 
 
-## test rpi4  
+      nice -n -11  rpicam-vid  --low-latency 1  -b 1500000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --denoise cdn_off  \
+     --libav-video-codec-opts bf=0 --intra 0 --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0 \
+     --profile=high --hdr=off --libav-video-codec h264_v4l2m2m   --level 4.2 --framerate 24  --width 1536 --height 864 \
+     --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=10000  \
+     --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps  \
+     -t 0  -n --inline -o  - | ffmpeg -ss 00:00:03 -async 1  -hide_banner -fflags nobuffer+genpts  -flags low_delay \
+     -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy'  -vcodec h264_v4l2m2m  -b:v 1500k -num_output_buffers 32 -num_capture_buffers 16  \
+     -acodec libfdk_aac -profile:a aac_he  -vbr 0  -b:a 64k  -copytb 1 -threads $(nproc) -fps_mode:v cfr   \
+     -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
 
-      nice -n 19  rpicam-vid --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5  --denoise cdn_off \
-      --codec=libav --libav-format=mpegts --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0 \
-      --profile=high --hdr=off    --sharpness   1.0  --level 4.2 --framerate 25  --width 1280 --height 720 \
-      --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo   --audio-bitrate=96kbps  \
-      --audio-codec libopus  --audio-channels 2 --libav-audio 1 --audio-source pulse  \
-      -t 0    --av-sync=0   -n  -o  - | ffmpeg  -fflags nobuffer   -flags low_delay+global_header   \
-      -hwaccel drm -hwaccel_output_format drm_prime   -re   -i  -  -metadata title='lucy' -codec copy \
-      -threads $(nproc)   -rtsp_flags prefer_tcp  -f rtsp -rtsp_transport tcp  rtsp://"localhost:8554"/mystream-sync
-      
-# MPV rpi 3  , zero2w 
-
-
-       nice -n -11  rpicam-vid  --low-latency 1  -b 1000000    --denoise cdn_off   --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0    --profile=high --hdr=off --libav-video-codec h264_v4l2m2m \
-      --level 4.2 --framerate 24  --width 1536 --height 864   --audio-device==alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback  --av-sync=0 \
-      --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps --libav-video-codec-opts bf=0 --intra 0    \
-      -t 0  -n --inline -o  -  | mpv -  --profile=stream -o rtsp://"localhost:8554"/mystream  
-       
-      nano .config/mpv/mpv.conf
-
-
-     [stream]
-
-    #hwdec=v4l2m2m-copy
-    hwdec=drm
-    hwdec-codecs=hevc
-    hwdec-image-format=drm_prime
-    gpu-hwdec-interop=drmprime
-    hwdec-extra-frames=2
-    ovc=h264_v4l2m2m
-    ovcopts=b=1M
-    oac=libfdk_aac
-    oacopts=b=64k
-    cache=no
-    framedrop=decoder+vo
-    audio-buffer=0.5
-    vd-lavc-threads=1
-     cache-pause=no
-     demuxer-lavf-o-add=fflags=+nobuffer+genpts,flags=low_delay
-     #,use_wallclock_as_timestamp=1
-     of=rtsp
-     volume=100
-     rtsp-transport=udp
-     #audio=no
-     stream-buffer-size=4k
-     #interpolation=no
-     vd-lavc-threads=1
-     #demuxer-lavf-analyzeduration=0.1
-     #demuxer-lavf-probe-info=nostreams
-     initial-audio-sync=yes
-     oset-metadata=title="Devil",comment="stream"
-     audio-format=s16
-     audio-samplerate=48000
-     #untimed=yes
-     #correct-pts=no
-     vo-null-fps=23.976
-     demuxer-lavf-hacks=yes
-     #container-fps-override=23.976
-     hr-seek-framedrop=no
-     video-sync=audio
-     pulse-latency-hacks=yes
-     gpu-dumb-mode=yes
-     video-latency-hacks=yes
-     audio-demuxer=lavf
-     #speed=1.001
-     #audio-delay=-1
-     #display-fps-override=50
-     #input-ipc-server=mpvpipe
-     #audio-backward-batch=50 
-     #autosync=100
-     #tscale=oversample
+      The only difference is that normally the video and audio take 1 second to travel from sender to receiver. In this case, however, the video and audio take 5 seconds after 10 h
 
 
 
