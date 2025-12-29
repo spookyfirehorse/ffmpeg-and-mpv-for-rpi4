@@ -305,61 +305,12 @@ or
 ## optios for libfdk
 
 
-#‘aac_he’
-#High Efficiency AAC (HE-AAC)
+     -c:a libfdk_aac -eld_v2 1   working
+     -c:a  libfdk_aac -profile:a aac_he -b:a 32k
+     -c:a  libfdk_aac -profile:a aac_he_v2 -b:a 32k
 
-#‘aac_he_v2’
-#High Efficiency AAC version 2 (HE-AACv2)
+###  vapoursynth
 
-#‘aac_ld’
-#Low Delay AAC (LD)
-
-#‘aac_eld’
-#Enhanced Low Delay AAC (ELD)
-
-
-#eld_v2
-#Enhanced Low Delay AAC V2 (ELD)
-
-
-
-#   -c:a  libfdk_aac -profile:a eld_v2 -b:a 32k
-
-or
-
-#   -c:a  libfdk_aac -profile:a 44 -b:a 32k
-
-
-#-p, --profile <n>
-
- 
-  MPEG-4 AAC LC (default) 2
-
-  MPEG-4 HE-AAC (SBR)  5
-  
-  MPEG-4 HE-AAC v2 (SBR+PS)  29
- 
-  MPEG-4 AAC LD  23
-  
- MPEG-4 AAC ELD  39
-
- MPEG-4 ELD_V2  44
-
-
- 
-AAC profiles that FDK supports
-Profile name	MPEG-4 Objects involved	FDK	FDK 2
-Low-Complexity (AAC-LC)	2	
-High-Efficiency (HE-AAC)	2, 5	
-High-Efficiency version 2 (HE-AAC)	2, 5, 29	
-Baseline USAC	42		
-Extended High-Efficiency (xHE-AAC)	2, 5, 29, 42		Decoding only
-Low-Delay (AAC-LD)	23	
-Enhanced Low-Delay (AAC-ELD)	39	
-Enhanced Low-Delay version 2 (AAC-ELDv2)	44		
-
-
-## vapoursynth
 
        wget https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb
 
@@ -380,7 +331,7 @@ Enhanced Low-Delay version 2 (AAC-ELDv2)	44
 
        sudo apt install vapoursynth-dev
 
-       
+       ffmpeg ./configure --enable-vapoursynth
        
        
 # edit mediamtx for password 
