@@ -116,7 +116,8 @@ sorry for my bad english !!!
       sudo dpkg -i lib*mpv*.deb mpv*.deb
 
 
-compile
+# compile
+
         apt source mpv
 
         cd mpv
