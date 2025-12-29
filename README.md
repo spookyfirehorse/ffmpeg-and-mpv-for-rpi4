@@ -29,6 +29,9 @@ sorry for my bad english !!!
 
     wget http://deb.debian.org/debian/pool/non-free/f/fdk-aac/libfdk-aac-dev_2.0.3-1_armhf.deb
 
+    
+    sudo dpkg -i libfdk*
+
 ####  rpi4 arm64
 
     wge t http://deb.debian.org/debian/pool/non-free/f/fdk-aac/libfdk-aac-dev_2.0.3-1_arm64.deb
