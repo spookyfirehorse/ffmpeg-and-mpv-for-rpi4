@@ -304,7 +304,7 @@ or
 
 ## optios for libfdk
 
-
+      -c:a libfdk_aac -eld_sbr 1
      -c:a libfdk_aac -eld_v2 1   working
      -c:a  libfdk_aac -profile:a aac_he -b:a 32k
      -c:a  libfdk_aac -profile:a aac_he_v2 -b:a 32k
