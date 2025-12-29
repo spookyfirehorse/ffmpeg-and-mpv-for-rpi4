@@ -86,7 +86,7 @@ this very stable
     
 ####################################################
 
-## important select the kernel to boot and it is important for compiling
+## important select the kernel arch to boot and it is important for compiling
 
     nano /boot/firmware/config.txt
 
@@ -155,13 +155,13 @@ compile
 
         meson setup build
 
-        meson configure build -Dprefix=/usr -Dlibmpv=true -Ddvdnav=enabled -Dsdl2=enabled -Dzimg=enabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled  -Dvaapi=disabled -Dvdpau=disabled    -Dvulkan=enabled  -Dcuda-interop=disabled -Dzlib=enabled -Ddrm=enabled -Ddmabuf-wayland=enabled -Dalsa=enabled -Dcuda-hwaccel=disabled -Dpipewire=enabled  -Ddmabuf-wayland=enabled -Dvaapi-x11=disabled  -Dvaapi-wayland=disabled -Dvaapi-drm=disabled -Dvapoursynth=enabled
+        meson configure build -Dprefix=/usr -Dlibmpv=true -Ddvdnav=enabled -Dsdl2=enabled -Dzimg=enabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled  -Dvaapi=disabled -Dvdpau=disabled         -Dvulkan=enabled  -Dcuda-interop=disabled -Dzlib=enabled -Ddrm=enabled -Ddmabuf-wayland=enabled -Dalsa=enabled -Dcuda-hwaccel=disabled -Dpipewire=enabled  -Ddmabuf-wayland=enabled -Dvaapi        -x11=disabled  -Dvaapi-wayland=disabled -Dvaapi-drm=disabled -Dvapoursynth=enabled
         
         sudo meson install -C build
 
 #########################
 
-## example for drm-prime wayland  rpi4 rpi 3
+## example for drm-prime wayland all rpi
 
      nano .config/mpv/mpv.conf
 
@@ -171,34 +171,11 @@ compile
     gpu-context=wayland   ##wayland
     gpu-api=opengl
     vo=gpu
-    hwdec=auto
-    hwdec-codecs=all
-    #hwdec-image-format=drm_prime
-    #gpu-hwdec-interop=drmprime-overlay
-
-
-## example for drm-prime wayland  rpi5
-
-        #override-display-fps=60
-        #video-sync=display-resample
-
-        
-        gpu-dumb-mode=yes
-        opengl-glfinish=yes
-        gpu-context=wayland
-         #gpu-context=x11egl    ##x11
-        gpu-api=opengl
-        vo=gpu
-        gpu-sw=yes
-        drm-vrr-enabled=auto
-        hwdec=drm   ##or drm-copy
-
-    
-
-
-#####################################################################
-
-
+    hwdec=drm
+    hwdec-codecs=hevc
+    hwdec-image-format=drm_prime
+    gpu-hwdec-interop=drmprime
+    drm-vrr-enabled=auto
         
 
 #################################
@@ -306,14 +283,13 @@ or
 
 #  all tests with running with  imx 708, but it works with all cameras. the only differents is with hight and autofocus
 
-#  the different option between rpi3 and 4 is -r 23.976
-
-# rtsp-streaming rpicam pulse pipewire on rpi 3 rpi zw2 !!! 24 h test sync
+#  the different option between rpi3 and 4 is -r 23.976 fps as input option for ffmpeg
 
 #  may it works with aac free codec also
 
 #   all this exaples running for 24h stable sync
 
+# test rpi3 z2w armhf  24h stable av sync
 
       nice -n -11  rpicam-vid  --low-latency 1  -b 1000000  --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0  \
       --profile=high --hdr=off --libav-video-codec h264_v4l2m2m --autofocus-mode manual --autofocus-range normal \
@@ -354,6 +330,41 @@ or
       The only difference is that normally the video and audio take 1 second to travel from sender to receiver. In this case, however, the video and audio take 5 seconds after 10 h
 
 
+## optios for libfdk
+
+
+#‘aac_he’
+#High Efficiency AAC (HE-AAC)
+
+#‘aac_he_v2’
+#High Efficiency AAC version 2 (HE-AACv2)
+
+#‘aac_ld’
+#Low Delay AAC (LD)
+
+#‘aac_eld’
+#Enhanced Low Delay AAC (ELD)
+
+
+#eld_v2
+#Enhanced Low Delay AAC V2 (ELD)
+
+
+# -c:a  libfdk_aac -profile:a aac_low -b:a 32k
+
+
+#-p, --profile <n>
+# Target profile (MPEG4 audio object type, AOT)
+#  2
+#  MPEG-4 AAC LC (default)
+#  5
+#  MPEG-4 HE-AAC (SBR)
+#  29
+#  MPEG-4 HE-AAC v2 (SBR+PS)
+#  23
+#  MPEG-4 AAC LD
+#  39
+# MPEG-4 AAC ELD
 
 
 ## vapoursynth
