@@ -56,12 +56,15 @@ this very stable
     make -j4 && \
     sudo make install && sudo ldconfig
 
-   ## alternativ and quick 
+   ## alternativ and quick
+
+   ### rpi3 armhf z2w
 
     wget http://deb.debian.org/debian/pool/non-free/f/fdk-aac/libfdk-aac2t64_2.0.3-1_armhf.deb
 
     wget http://deb.debian.org/debian/pool/non-free/f/fdk-aac/libfdk-aac-dev_2.0.3-1_armhf.deb
 
+####  rpi4 arm64
 
     wget http://deb.debian.org/debian/pool/non-free/f/fdk-aac/libfdk-aac-dev_2.0.3-1_arm64.deb
 
