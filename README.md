@@ -213,7 +213,7 @@ upgrade
 
 ######################################
 
-RTSP STREAMING WITH AUDIO FOR NEWER  RPI CAMERAS 
+RTSP STREAMING WITH AUDIO FOR RPI CAMERAS 
 
         sudo nano  /boot/firmware/config.txt
 
@@ -225,6 +225,7 @@ put this in
         
 ##########################################
 
+## very important
 
          sudo nano /etc/sysctl.d/98-rpi.conf
 
@@ -235,7 +236,8 @@ put this in
           sudo reboot
 
  ###############################################
-        
+## alsa or pulse or pipewire   mikrofon name 
+
          pactl list sources 
 
 or
@@ -263,7 +265,7 @@ or
       --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps   \
        -t 0  -n --inline -o  - | ffmpeg -r 23.976  -hide_banner -fflags nobuffer+genpts  -flags low_delay  \
       -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Devil'  -vcodec copy -copytb 1  -acodec libfdk_aac -eld_v2 1  -vbr 0  -b:a 64k -vbr 0  -threads $(nproc)   \
-      -f rtsp -rtsp_transport udp  rtsp://"user:password"@"localhost:8554"/mystream   
+      -f rtsp -rtsp_transport udp  rtsp://localhost:8554"/mystream   
   
 
 
@@ -409,87 +411,19 @@ authInternalUsers:
 
 # USB CAMERAS 
 
-#######################################
-
-
-set  15 fps with and height always before 
-
-        v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0
-
-
-in this examples audio device =  plughw:0  this is the first audio device ! best streaming !! no audio video delay very stable
-
-      ffmpeg  -vcodec h264_v4l2m2m   -fflags +nobuffer+genpts+igndts -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
-
-libfdkaac
-
-     ffmpeg  -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:CARD=Device,DEV=0   -f v4l2 -re  -input_format yuv420p  -i /dev/video0 -metadata title="SUN"  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k -fpsmax 15 -g 25  -c:a  libfdk_aac -eld_sbr 1  -ar 44100 -b:a 32k  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
-
-
-# inputformat h264 and copy output hwaccel drm
-
-       v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11,exposure_dynamic_framerate=0,h264_level=12,h264_profile=4
-
-       ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts  -avioflags direct -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format h264  -i /dev/video0  -c:v copy  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
-
-
-
-# without audio
-
-            v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11
-           ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner 
-    -f v4l2 -input_format yuv420p -re -i /dev/video0 -vcodec h264_v4l2m2m -b:v 1500k  -pix_fmt yuv420p -fpsmax 15 -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
-
-
-
 # Video + Audio libfdk_aac h264_v4l2m2m
 
 # most compatible with all players real mp4
 
         v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11
-          ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner -f alsa  -i plughw:0  -f  v4l2 -input_format yuv420p -f v4l2 -re -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M -fpsmax 15  -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k -threads 4  -f rtsp - rtsp_transport tcp  rtsp://localhost:8554/mystream
+          ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner -f alsa  -i plughw:0  -f  v4l2 -input_format yuv420p -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M -fpsmax 15  -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k -threads 4  -f rtsp - rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 look running stream
 
     mpv rtsp://localhost:8554/mystream
 
- 
- 
-  
-under construct but working
-  
-streaming from android phone camera
-  
-install adb 
-  
-    sudo apt install adb
-  
-install ip-webcam from playstore https://play.google.com/store/apps/details?id=com.pas.webcam on your phone
-  
-in this app you can chang port settings resolution and framerate
-  
-conect android phone with usb cable not over network (network is to slow)
-  
-i change fps to 15 on an very old s2 and resolution 320x240 but with a better phone no problems with higher resolutions
-  
-also you can disable network on android  it is not need
-  
-start adb 
-  
-    adb devices
-  
-confirm on android the adb conction
-  
-    
-      adb -d forward tcp:8080 tcp:8080
-  
 
-#Working libfdk aac_he
-    
-    ffmpeg  -threads 4 -hwaccel drm -hwaccel_output_format drm_prime -strict experimental -flags low_delay -fflags +genpts+nobuffer -hide_banner -rtsp_transport tcp -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v         h264_v4l2m2m   -b:v 1000k -fpsmax 15 -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
-
-
-create service autostart
+## create service autostart
 
 
     sudo nano /usr/local/bin/home-stream.sh
@@ -533,50 +467,25 @@ store it strg +o
     systemctl --user status home-stream.service
 
 
-###############################################################################################
-
-
-android camera in linphone chromium usw
-
-its not working on rpi but on amd64 because libv4l2 and h264_v4l2m2m are the same devices on rpi
-
-so only amd64 and i386
-
-    sudo apt install libv4l2loopback-dkms
-
-    sudo modprobe v4l2loopback video_nr=1 card_label="device number 1" exclusive_caps=1
-    v4l2loopback-ctl set-fps 15 /dev/video1
-
-    adb -d forward tcp:8080 tcp:8080
-
-    ffmpeg  -an -hwaccel auto -hide_banner  -fflags discardcorrupt -rtsp_transport tcp  -i rtsp://127.0.0.1:8080/h264_pcm.sdp    -c:v rawvideo -pix_fmt yuv420p   -f v4l2 /dev/video1
-
--an = audio no is important
-
-
-    apt install qv4l2
-
-try it with qv4l2
-
-
 ###############################################################################################################################
 
  ##   dvdrendering vob to mp4 + all subtitles plus colorpalette 
 
 ### this is the only line that worked for encrypted dvds that worked for me
-
+##  optional
            
            lsdvd /dev/sr0   && ddrescue  -b 2048  /dev/sr0   of=output.iso
 
 so now is the img save
 
+## lets beginn
            
        lsdvd /dev/sr0 
 
-### look for longest track on the end of output
+### look for longest track number on the end of output
        
 
-       
+       # only examples
        
        mplayer dvd://3 -nocache -dvd-device  input.iso  -dumpstream -dumpfile output.vob
        mplayer dvd://3 -nocache -dvd-device /dev/sr0  -dumpstream -dumpfile output.vob
