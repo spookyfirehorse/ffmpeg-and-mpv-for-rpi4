@@ -302,7 +302,7 @@ or
   
 
 
-## test rpi4  24 h test sync
+## test rpi4  24 h test sync stable
 
       nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --denoise cdn_off \ 
       --libav-video-codec-opts bf=0 --intra 0 --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0 \
@@ -314,7 +314,7 @@ or
       -acodec libfdk_aac -profile:a aac_he   -vbr 0 -fps_mode:v cfr   -b:a 64k  -copytb 1   \
       -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
 
- ## test 2 rpi4  -vcodec h264_v4l2m2m -acodec libfdk_aac !!!  10h test sync !!!   --av-sync=10000 = 0,1 sec in my case
+ ## test 2 rpi4  -vcodec h264_v4l2m2m -acodec libfdk_aac !!!  10h test sync !!!   --av-sync=10000 = 0,1 sec in my case !  stable
 
 
       nice -n -11  rpicam-vid  --low-latency 1  -b 1500000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --denoise cdn_off  \
@@ -436,7 +436,7 @@ set  15 fps with and height always before
 
 in this examples audio device =  plughw:0  this is the first audio device ! best streaming !! no audio video delay very stable
 
-      ffmpeg  -vcodec h264_v4l2m2m -avoid_negative_ts make_zero  -fflags +nobuffer+genpts+igndts -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
+      ffmpeg  -vcodec h264_v4l2m2m   -fflags +nobuffer+genpts+igndts -flags low_delay   -hide_banner  -f alsa  -i plughw:0  -f v4l2 -re  -input_format yuv420p  -i /dev/video0  -c:v h264_v4l2m2m -pix_fmt yuv420p -b:v 1700k  -fpsmax 15 -c:a libopus -application lowdelay -b:a 64k  -ar 48000 -f s16le  -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 libfdkaac
 
@@ -471,20 +471,7 @@ look running stream
     mpv rtsp://localhost:8554/mystream
 
  
-  # opus only audio
-
-
-           ffmpeg  -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner     \
-          -i plughw:0  -c:a libopus -application lowdelay -b:a 64k  -ar 48000 \
-         -threads 4  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
-  
-         mpv rtsp://localhost:8554/mystream
  
- from 2nd computer
-  
-          mpv rtsp:/ip:8554/mystream
-  
-  ########################################################################
   
 under construct but working
   
@@ -514,15 +501,9 @@ confirm on android the adb conction
       adb -d forward tcp:8080 tcp:8080
   
 
-#Working opus
-    
-    ffmpeg  -threads 4  -hwaccel drm -hwaccel_output_format drm_prime  -strict experimental -flags low_delay -fflags +genpts+nobuffer  -hide_banner -rtsp_transport tcp  \
-     -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v h264_v4l2m2m  -pix_fmt yuv420p -b:v 1000k -fpsmax 15-c:a libopus  -b:a 64k  -application lowdelay  -ar 48000   -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
-
-
 #Working libfdk aac_he
     
-    ffmpeg  -threads 4 -hwaccel drm -hwaccel_output_format drm_prime -strict experimental -flags low_delay -fflags +genpts+nobuffer -hide_banner -rtsp_transport tcp -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v         h264_v4l2m2m   -b:v 1000k -fpsmax 15 -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream2
+    ffmpeg  -threads 4 -hwaccel drm -hwaccel_output_format drm_prime -strict experimental -flags low_delay -fflags +genpts+nobuffer -hide_banner -rtsp_transport tcp -re -i rtsp://127.0.0.1:8080/h264_pcm.sdp -c:v         h264_v4l2m2m   -b:v 1000k -fpsmax 15 -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k  -movflags +faststart  -f rtsp -rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 
 create service autostart
