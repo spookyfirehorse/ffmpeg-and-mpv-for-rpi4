@@ -268,7 +268,9 @@ or
       --level 4.2 --framerate 24  --width 1536 --height 864   --audio-device==alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback  --av-sync=0 \
       --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps   \
        -t 0  -n --inline -o  - | ffmpeg -r 23.976  -hide_banner -fflags nobuffer+genpts  -flags low_delay  \
-      -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Devil'  -c:v copy   -c:a -acodec libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -copytb 1 -threads $(nproc) -fps_mode:v cfr\
+      -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Devil' \
+      -c:v copy \
+      -c:a -acodec libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -copytb 1 -threads $(nproc) -fps_mode:v cfr\
       -f rtsp -rtsp_transport udp  rtsp://localhost:8554"/mystream   
   
 
