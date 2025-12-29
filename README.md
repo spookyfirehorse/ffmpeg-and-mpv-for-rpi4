@@ -12,7 +12,7 @@ sorry for my bad english !!!
 
       sudo apt install libfdk*
       
-   if its faild   
+   if its faild
 
     git clone  https://github.com/mstorsjo/fdk-aac && \
     cd fdk-aac && \
