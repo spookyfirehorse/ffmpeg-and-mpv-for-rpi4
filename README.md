@@ -350,21 +350,23 @@ or
 #Enhanced Low Delay AAC V2 (ELD)
 
 
-# -c:a  libfdk_aac -profile:a aac_low -b:a 32k
+#   -c:a  libfdk_aac -profile:a 39 -b:a 32k
+or
+#   -c:a  libfdk_aac -profile:a eld_v2 -b:a 32k
 
 
 #-p, --profile <n>
-# Target profile (MPEG4 audio object type, AOT)
-#  2
-#  MPEG-4 AAC LC (default)
-#  5
-#  MPEG-4 HE-AAC (SBR)
-#  29
-#  MPEG-4 HE-AAC v2 (SBR+PS)
-#  23
-#  MPEG-4 AAC LD
-#  39
-# MPEG-4 AAC ELD
+ Target profile (MPEG4 audio object type, AOT)
+  2
+  MPEG-4 AAC LC (default)
+  5
+  MPEG-4 HE-AAC (SBR)
+  29
+  MPEG-4 HE-AAC v2 (SBR+PS)
+  23
+  MPEG-4 AAC LD
+  39
+ MPEG-4 AAC ELD
 
 
 ## vapoursynth
@@ -406,7 +408,9 @@ authInternalUsers:
       - action: publish
 To use SHA256, the string must be hashed with SHA256 and encoded with base64:
 
-echo -n "mypass" | openssl dgst -binary -sha256 | openssl base64
+echo -n "user" | openssl dgst -binary -sha256 | openssl base64
+echo -n "password" | openssl dgst -binary -sha256 | openssl base64
+
 Then stored with the sha256: prefix:
 
 authInternalUsers:
@@ -414,17 +418,10 @@ authInternalUsers:
     pass: sha256:BdSWkrdV+ZxFBLUQQY7+7uv9RmiSVA8nrPmjGjJtZQQ=
     permissions:
       - action: publish
-       
-without password alsa
+      - 
+ rtsp://"user:password"@"localhost:8557"/mystream
 
-    rpicam-vid  --low-latency 1  -b 10000000  --autofocus-mode continuous  --denoise cdn_off \
-    --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 \
-    --sharpness   1.0  --level 4.1 --hdr=off  --profile=high  --framerate 30 --width 1536 --height 864 \
-    --audio-device=plughw:CARD=Device,DEV=0   --audio-bitrate=96kbps \
-    --audio-codec libopus  --audio-channels 1 --libav-audio 1 --audio-source alsa   -t 0  -n --inline -o  - | ffmpeg  -flags low_delay \
-     -vcodec h264_v4l2m2m -i - -metadata title='MOON' -codec copy \
-    -f rtsp -rtsp_transport tcp  rtsp://"localhost:8554"/mystream      
-
+      
 ##############################################
 
 # USB CAMERAS 
