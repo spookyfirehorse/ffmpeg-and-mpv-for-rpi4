@@ -254,11 +254,10 @@ or
 
 #  all tests  running with  imx 708, but it works with all cameras. the only differents is with hight and autofocus
 
-#  the different option between rpi3 and 4 is -r 23.976 fps as input option for ffmpeg
+#  the different option between rpi3 and 4 is -r 23.976 fps as input option for ffmpeg and for rpi 3 -af "rubberband=tempo=0.9999"
 
 #  may it works with aac free codec also
 
-#   all this exaples running for 24h stable sync
 
 # test rpi3 z2w armhf  24h stable av sync
 
@@ -288,7 +287,7 @@ or
       -c:a -acodec libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -copytb 1  -fps_mode:v cfr  -af "rubberband=tempo=0.9999"  \
       -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
 
- ## test 2 rpi4  -vcodec h264_v4l2m2m -acodec libfdk_aac !!!  10h test sync !!!   --av-sync=10000 = 0,1 sec in my case !  stable
+ ## test 2 rpi4  -vcodec h264_v4l2m2m -acodec libfdk_aac !!!  10h test sync !!! 
 
 
       nice -n -11  rpicam-vid  --low-latency 1  -b 1500000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --denoise cdn_off  \
