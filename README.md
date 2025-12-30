@@ -97,10 +97,7 @@ sorry for my bad english !!!
    
     sudo apt build-dep ffmpeg -y &&  git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git  && cd rpi-ffmpeg/  && ./configure --extra-version=0+deb13u1+rpt2 --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-libmfx --disable-mmal --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --disable-libvpl --enable-neon --enable-v4l2-request --enable-libudev --enable-epoxy --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-vout-drm --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-libjack --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1  --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sand --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-pocketsphinx --enable-librsvg --enable-libjxl --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf --enable-nonfree --enable-libfdk-aac --enable-libopenh264  --disable-static --disable-nvdec --disable-nvenc --disable-cuvid --disable-cuda-llvm --disable-cuda-nvcc --disable-ffnvcodec --disable-vdpau --disable-vaapi  --disable-libx264 --disable-libx265 --disable-doc --disable-htmlpages  --disable-manpages --disable-podpages --disable-txtpages --cpu=cortex-a53 --arch=armv7 && make -j4 && sudo make install
 
- #### rpi4 armv7l
-
-    sudo apt build-dep ffmpeg &&  git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git  && cd rpi-ffmpeg/  &&     ./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 --toolchain=hardened --incdir=/usr/include/arm-linux-gnueabihf --enable-gpl --disable-stripping --disable-libmfx --disable-mmal --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --disable-libvpl --enable-neon --enable-v4l2-request --enable-libudev --enable-epoxy --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-vout-drm --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-libjack --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libx264 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sand --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-pocketsphinx --enable-librsvg --enable-libjxl --enable-shared --libdir=/usr/lib/arm-linux-gnueabihf  --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --enable-nonfree --enable-libfdk-aac --cpu=cortex-a72 --arch=armv7l
-        
+ 
 
 
 # MPV
@@ -254,7 +251,7 @@ or
 
 #  all tests  running with  imx 708, but it works with all cameras. the only differents is with hight and autofocus
 
-#  the different option between rpi3 and 4 is -r 23.976 fps as input option for ffmpeg and for rpi 3 -af "rubberband=tempo=0.9999"
+#  the different option between rpi3 and 4 is -r 23.976 fps as input option for -ss 20 start time ffmpeg
 
 #  may it works with aac free codec also
 
@@ -266,7 +263,7 @@ or
       --autofocus-window  0.25,0.25,0.5,0.5 --denoise cdn_off --libav-video-codec-opts bf=0 --intra 0  \
       --level 4.2 --framerate 24  --width 1536 --height 864   --audio-device==alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback  --av-sync=0 \
       --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps   \
-       -t 0  -n --inline -o  - | ffmpeg -r 23.97602398  -hide_banner -fflags nobuffer+genpts  -flags low_delay  \
+       -t 0  -n --inline -o  - | ffmpeg -ss 20 -r 23.97602398  -hide_banner -fflags nobuffer+genpts  -flags low_delay  \
       -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Devil' \
       -c:v copy \
       -c:a -acodec libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -copytb 1 -threads $(nproc) -fps_mode:v cfr\
@@ -281,10 +278,10 @@ or
       --profile=high --hdr=off --libav-video-codec h264_v4l2m2m   --level 4.2 --framerate 24  --width 1536 --height 864 \
       --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=0  \
       --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps  \
-      -t 0  -n --inline -o  - | ffmpeg   -hide_banner -fflags nobuffer+genpts  -flags low_delay \
+      -t 0  -n --inline -o  - | ffmpeg -ss 20  -hide_banner -fflags nobuffer+genpts  -flags low_delay \
       -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy' -threads $(nproc) \
       -c:v copy \
-      -c:a -acodec libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -copytb 1  -fps_mode:v cfr  -af "rubberband=tempo=0.9999"  \
+      -c:a -acodec libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -copytb 1  -fps_mode:v cfr    \
       -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
 
  ## test 2 rpi4  -vcodec h264_v4l2m2m -acodec libfdk_aac !!!  10h test sync !!! 
@@ -295,15 +292,15 @@ or
      --profile=high --hdr=off --libav-video-codec h264_v4l2m2m   --level 4.2 --framerate 24  --width 1536 --height 864 \
      --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=10000  \
      --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps  \
-     -t 0  -n --inline -o  - | ffmpeg -ss 00:00:03   -hide_banner -fflags nobuffer+genpts  -flags low_delay \
+     -t 0  -n --inline -o  - | ffmpeg -ss 20   -hide_banner -fflags nobuffer+genpts  -flags low_delay \
      -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy' \
-     -c:v h264_v4l2m2m  -b:v 1500k -num_output_buffers 32 -num_capture_buffers 16 -filter:v  fps=fps=source_fps:round=near \
+     -c:v h264_v4l2m2m  -b:v 1500k  -filter:v  fps=fps=source_fps:round=near \
      -c:a libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -copytb 1 -threads $(nproc) -fps_mode:v cfr    \
      -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
 
       
 
-## test    -filter:v  fps=fps=film:round=near:start_time=0  -fps_mode:v cfr 
+## test    -filter:v  fps=fps=film:round=near:start_time=0  -fps_mode:v cfr -af "rubberband=tempo=0.9999"
 
 ## optios for libfdk
 
@@ -315,6 +312,7 @@ or
      -c:a libfdk_aac -eld_v2 1   
      -c:a  libfdk_aac -profile:a aac_he -b:a 32k
      -c:a  libfdk_aac -profile:a aac_he_v2 -b:a 32k
+
 
 ###  vapoursynth
 
