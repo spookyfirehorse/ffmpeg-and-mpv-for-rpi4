@@ -55,6 +55,9 @@ https://www.raspberrypi.com/documentation/computers/linux_kernel.html#kernel
 
         sudo ./build-kernel -b default -c 7 -j 6 -u -d -z rt.patch
 
-        sudo ./build-kernel -b default -c 7 -j 6 -u -d
- 
+        sudo ./build-kernel -b default -c 7 -j 6 -u -d  rpi 5
+
+
+         sudo ./build-kernel -b default -c 6 -j 6 -u -d  rpi 4
+
         
