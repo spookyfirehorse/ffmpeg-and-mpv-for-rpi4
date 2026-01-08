@@ -251,55 +251,11 @@ or
 
 #  all tests  running with  imx 708, but it works with all cameras. the only differents is with hight and autofocus
 
-
-#  may it works with aac free codec also
-
-
-# test rpi3 z2w armhf  24h stable av sync
-
-      nice -n -11  rpicam-vid  --low-latency 1  -b 1000000  --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0  \
-      --profile=high --hdr=off --libav-video-codec h264_v4l2m2m --autofocus-mode manual --autofocus-range normal \
-      --autofocus-window  0.25,0.25,0.5,0.5 --denoise cdn_off --libav-video-codec-opts bf=0 --intra 0  \
-      --level 4.2 --framerate 24  --width 1536 --height 864   --audio-device==alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback  --av-sync=0 \
-      --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps   \
-       -t 0  -n --inline -o  - | ffmpeg -ss 20 -r 23.97602398  -hide_banner -fflags nobuffer+genpts  -flags low_delay  \
-      -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Devil' \
-      -c:v copy \
-      -c:a -acodec libfdk_aac -profile:a aac_he  -vbr 0  -b:a 64k  -copytb 1 -threads $(nproc) -fps_mode:v cfr\
-      -f rtsp -rtsp_transport udp  rtsp://localhost:8554"/mystream   
+         nice -n -11  rpicam-vid  --brightness 0.1 --contrast 1.0 --sharpness   1.0  --hdr=off --denoise cdn_off      --width 1536 --height 864 --autofocus-mode manual --autofocus-range               normal --autofocus-window  0.25,0.25,0.5,0.5    --low-latency 1 --framerate 24  -b 1000000  --codec libav --libav-format flv  --libav-video-codec h264_v4l2m2m   --profile=high --             level 4.2  --intra 0    --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo  --av-sync=0     --audio-codec libfdk_aac  --audio-              channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps     -t 0  -n  --inline  -o - |  ffmpeg   -hide_banner -fflags nobuffer  -flags               low_delay   -hwaccel drm -hwaccel_output_format drm_prime  -i -  -metadata title='lucy' -probesize 30M -analyzeduration 15M    -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M           -bufsize 500k -fps_mode:v cfr     -filter:v  fps=fps=source_fps:round=near   -threads $(nproc)   -c:a aac   -af aresample=async=1:first_pts=0   -b:a 32k  -max_muxing_queue_size 9999           -flush_packets 0  -bf 0  -f rtsp -rtsp_transport udp 
   
-
- ## test 2 rpi3 48 h
-
-
-                   nice -n -11  rpicam-vid  --low-latency 1  -b 1000000  --codec libav --libav-format mpegts  --brightness 0.1 --contrast 1.0 --sharpness   1.0 \
-                   --profile=high --hdr=off --   libav-video-codec h264_v4l2m2m \
-                   --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 --denoise cdn_off --libav-video-codec-opts bf=0 --intra 0  \
-                   --level 4.2 --framerate 24  --width 1536 --height 864   --audio-device==alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback  --av-sync=0 \
-                   --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps   \
-                   -t 0  -n --inline -o - |  ffmpeg   -ss 20  -hide_banner -fflags nobuffer+genpts  -flags +low_delay \
-                   -hwaccel drm -hwaccel_output_format drm_prime   -i -  -metadata title='devil'  -probesize 20M -analyzeduration 5M  \
-                   -c:v  h264_v4l2m2m  -b:v 1000k \
-                   -filter:v  fps=fps=source_fps:round=zero:start_time=0:eof_action=pass  -threads $(nproc) \
-                   -c:a  libfdk_aac -profile:a aac_he    -vbr 0  -b:a 64k -fps_mode:v cfr   \
-                   -f rtsp -rtsp_transport udp
-
-## test rpi4
-
-      nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --denoise cdn_off  \
-     --libav-video-codec-opts bf=0 --intra 0 --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0 \
-     --profile=high --hdr=off --libav-video-codec h264_v4l2m2m   --level 4.2 --framerate 24  --width 1536 --height 864 \
-     --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=10000  \
-     --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps  \
-     -t 0  -n --inline -o  - | ffmpeg -hide_banner -fflags nobuffer+genpts  -flags low_delay \
-     -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy' \
-     -c:v h264_v4l2m2m -maxrate 1M -minrate 1M  -bufsize 500k -fps_mode:v cfr -b:v 1M  -filter:v  fps=fps=source_fps:round=near \
-     -c:a libfdk_aac -profile:a aac_he  -vbr 0  -b:a 64k   -threads $(nproc) -fps_mode:v cfr  -max_muxing_queue_size 9999     -flush_packets 0 \
-     -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
-
+ 
       
 
-## test    -filter:v  fps=fps=film:round=near:start_time=0  -fps_mode:v cfr -af "rubberband=tempo=0.9999"
 
 ## optios for libfdk
 
