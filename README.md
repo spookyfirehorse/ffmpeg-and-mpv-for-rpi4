@@ -282,7 +282,7 @@ or
                    -hwaccel drm -hwaccel_output_format drm_prime   -i -  -metadata title='devil'  -probesize 20M -analyzeduration 5M  \
                    -c:v  h264_v4l2m2m  -b:v 1000k \
                    -filter:v  fps=fps=source_fps:round=zero:start_time=0:eof_action=pass  -threads $(nproc) \
-                   -c:a  libfdk_aac -eld_sbr 1    -vbr 0  -b:a 64k -fps_mode:v cfr   \
+                   -c:a  libfdk_aac -profile:a aac_he    -vbr 0  -b:a 64k -fps_mode:v cfr   \
                    -f rtsp -rtsp_transport udp
 
 ## test rpi4
@@ -295,7 +295,7 @@ or
      -t 0  -n --inline -o  - | ffmpeg -ss 20   -hide_banner -fflags nobuffer+genpts  -flags low_delay \
      -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy' \
      -c:v h264_v4l2m2m  -b:v 1500k  -filter:v  fps=fps=source_fps:round=near \
-     -c:a libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k   -threads $(nproc) -fps_mode:v cfr  \
+     -c:a libfdk_aac -profile:a aac_he  -vbr 0  -b:a 64k   -threads $(nproc) -fps_mode:v cfr  \
      -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
 
       
