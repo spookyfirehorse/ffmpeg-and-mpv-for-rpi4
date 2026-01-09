@@ -57,7 +57,7 @@ first make a copy of your os
     
 ####################################################
 
-## important select the kernel arch to boot and it is important for compiling
+## set arch to boot and it is important for compiling
 
     nano /boot/firmware/config.txt
 
