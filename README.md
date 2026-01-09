@@ -1,6 +1,11 @@
 
 sorry for my bad english !!!
 
+first make a copy of your os
+
+       XAUTHORITY=/home/spook/.Xauthority sudo dbus-launch piclone
+
+
 
 #  build FFMPEG with libfdk_aac
 
