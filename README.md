@@ -251,7 +251,16 @@ or
 
 #    running with  imx 708, but it works with all cameras. the only differents is with hight and autofocus
 
-         nice -n -11  rpicam-vid  --brightness 0.1 --contrast 1.0 --sharpness   1.0  --hdr=off --denoise cdn_off      --width 1536 --height 864 --autofocus-mode manual --autofocus-range               normal --autofocus-window  0.25,0.25,0.5,0.5    --low-latency 1 --framerate 24  -b 1000000  --codec libav --libav-format flv  --libav-video-codec h264_v4l2m2m   --profile=high --             level 4.2  --intra 0    --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo  --av-sync=0     --audio-codec libfdk_aac  --audio-              channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps     -t 0  -n  --inline  -o - |  ffmpeg   -hide_banner -fflags nobuffer  -flags               low_delay   -hwaccel drm -hwaccel_output_format drm_prime  -i -  -metadata title='lucy' -probesize 30M -analyzeduration 15M    -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M           -bufsize 500k -fps_mode:v cfr -filter:v  fps=fps=source_fps:round=near   -threads $(nproc)  -c:a libfdk_aac -profile:a aac_he  -b:a 32k -vbr 0  -af aresample=async=1:first_pts=0              -max_muxing_queue_size 9999  -flush_packets 0  -bf 0  -f rtsp -rtsp_transport udp rtsp://localhost:8554/mystream
+         nice -n -11  rpicam-vid  --brightness 0.1 --contrast 1.0 --sharpness   1.0  --hdr=off --denoise cdn_off  \
+         --width 1536 --height 864 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
+         --low-latency 1 --framerate 24  -b 1000000  --codec libav --libav-format flv  --libav-video-codec h264_v4l2m2m   --profile=high --level 4.2 \
+         --intra 0    --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo  --av-sync=0 \
+         --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps \
+         -t 0  -n  --inline  -o - |  ffmpeg   -hide_banner -fflags nobuffer  -flags low_delay  \
+         -hwaccel drm -hwaccel_output_format drm_prime  -i -  -metadata title='lucy' -probesize 30M -analyzeduration 15M \
+         -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M  -bufsize 500k -fps_mode:v cfr -filter:v  fps=fps=source_fps:round=near \
+         -threads $(nproc)  -c:a libfdk_aac -profile:a aac_he  -b:a 32k -vbr 0  -af aresample=async=1:first_pts=0  -max_muxing_queue_size 9999 \
+         -flush_packets 0  -bf 0  -f rtsp -rtsp_transport udp rtsp://localhost:8554/mystream
   
  
       
