@@ -357,7 +357,10 @@ authInternalUsers:
 # most compatible with all players real mp4
 
         v4l2-ctl -d /dev/video0  -p 15  --set-fmt-video=width=1280,height=720 --set-ctrl=brightness=57,contrast=-11
-          ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+genpts+igndts   -strict experimental    -avioflags direct -flags low_delay  -hide_banner -f alsa  -i plughw:0  -f  v4l2 -input_format yuv420p -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M -fpsmax 15  -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k -threads 4  -f rtsp - rtsp_transport tcp  rtsp://localhost:8554/mystream
+          ffmpeg  -hwaccel drm -hwaccel_output_format drm_prime -fflags +nobuffer+discardcorrupt  \
+          -strict experimental -flags low_delay  -hide_banner -f alsa  -i plughw:0 \
+          -f  v4l2 -input_format yuv420p -f v4l2  -i /dev/video0  -vcodec h264_v4l2m2m -b:v 1M -fpsmax 15\
+          -c:a libfdk_aac -profile:a aac_he -ar 44100  -b:a 32k -threads 4  -f rtsp - rtsp_transport tcp  rtsp://localhost:8554/mystream
 
 look running stream
 
