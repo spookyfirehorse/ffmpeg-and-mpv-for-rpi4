@@ -273,7 +273,7 @@ or
   # winner of rpi3 zero2w
 
                 nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --denoise cdn_off --codec libav --libav-format flv --profile=main --hdr=off  \
-               --level 4.1 --framerate 30  --width 1536 --height 864  --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
+               --level 4.1 --framerate 24  --width 1536 --height 864  --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
                --audio-codec libfdk_aac --audio-bitrate=96kbps --audio-channels 1 --libav-audio 1 --audio-source pulse     \
                -t 0 --flush 0   -n  -o  - | ffmpeg  -hide_banner -fflags genpts   \
                -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Devil' \
@@ -281,7 +281,7 @@ or
                -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
 
 
-# winner pi4 difference is one 9999 on rpi 3 999
+# winner pi4 
 
                 nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --denoise cdn_off --codec libav --libav-format flv --profile=main --hdr=off  \
                --level 4.1 --framerate 30  --width 1536 --height 864  --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
