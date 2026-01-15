@@ -281,7 +281,8 @@ or
                -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
 
 
-# winner pi4
+# winner pi4 difference is one 9999 on rpi 3 999
+
                 nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --denoise cdn_off --codec libav --libav-format flv --profile=main --hdr=off  \
                --level 4.1 --framerate 30  --width 1536 --height 864  --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
                --audio-codec libfdk_aac --audio-bitrate=96kbps --audio-channels 1 --libav-audio 1 --audio-source pulse     \
@@ -290,19 +291,6 @@ or
                -vcodec copy -copyts -acodec libfdk_aac -b:a 96k  -max_muxing_queue_size 9999 -bufsize 2000k  -af "rubberband=tempo=0.9999"   \
                -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
                 
-  
-
-
-## optios for libfdk
-
-                        ffmpeg -h encoder=libfdk_aac
-                        
-                    working
-                    
-      -c:a libfdk_aac -eld_sbr 1
-     -c:a libfdk_aac -eld_v2 1   
-     -c:a  libfdk_aac -profile:a aac_he -b:a 32k
-     -c:a  libfdk_aac -profile:a aac_he_v2 -b:a 32k
 
 
 ###  vapoursynth
