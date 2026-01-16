@@ -280,7 +280,7 @@ or
          --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libopus   --audio-channels 2 --libav-audio 1 \ 
          --audio-source pulse  --intra 0  --low-latency 1     -t 0 --flush 0   -n   -o  - | ffmpeg  -hide_banner -fflags genpts  \
          -hwaccel drm -hwaccel_output_format drm_prime  -r ntsc -i -  -metadata title='lucy'  -c:v  copy -c:a libfdk_aac -af "rubberband=tempo=0.99999" \
-         -map 0:0 -map 0:1  -f rtsp -rtsp_transport udp  rtsp://"MshcUBHU8P:VPxfYXKRXw"@"localhost:8557"/mystream
+         -map 0:0 -map 0:1  -f rtsp -rtsp_transport udp  rtsp://localhost:8557"/mystream
   
  
 ###  vapoursynth
