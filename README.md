@@ -255,44 +255,18 @@ or
 #    running with  imx 708, but it works with all cameras. the only differents is with hight and autofocus full comand
 
 
-##  only pi 4 for now very stable
+##  all rpi audio default 
 
          nice -n -11  rpicam-vid  --brightness 0.1 --contrast 1.0 --sharpness   1.0  --hdr=off --denoise cdn_off --framerate 30  \
         --width 1536 --height 864 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
-        --low-latency 1   -b 1000000  --codec libav --libav-format flv   --profile=main --level 4.1 --intra 0  --av-sync=0 \
+        --low-latency 1  --framerate 30 -b 1000000  --codec libav --libav-format flv   --profile=main --level 4.1 --intra 0  --av-sync=0 \
         --audio-codec libfdk_aac --audio-bitrate=96kbps  --audio-channels 2 --libav-audio 1 --audio-source pulse \
-        -t 0  -n  -o - |  ffmpeg   -hide_banner -fflags genpts -hwaccel drm -hwaccel_output_format drm_prime  -i -  -metadata title='lucy' \
-        -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M  -bufsize 2000k -fps_mode:v cfr -filter:v  fps=fps=ntsc:round=zero \
-        -threads $(nproc)  -c:a libfdk_aac -profile:a aac_he  -b:a 96k -vbr 0  -max_muxing_queue_size 9999      -flush_packets 0  -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
+        -t 0  -n  -o - |  ffmpeg   -hide_banner -fflags genpts -hwaccel drm -hwaccel_output_format drm_prime -r ntsc  -i -  -metadata title='lucy' \
+        -c copy -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
   
-       no drm =  --libav-video-codec h264_v4l2m2m and -c:v h264_v4l2m2m
 
        
-  # best for cpu and mem
-  
-  # winner of rpi3 zero2w
-
-                nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --denoise cdn_off --codec libav --libav-format flv --profile=main --hdr=off  \
-               --level 4.1 --framerate 24  --width 1536 --height 864  --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
-               --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse     \
-               -t 0 --flush 0   -n  -o  - | ffmpeg  -hide_banner -fflags genpts   \
-               -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Devil' \
-               -vcodec copy -copyts -acodec libfdk_aac   -max_muxing_queue_size 9999 -bufsize 2000k  -af "rubberband=tempo=0.999"   \
-               -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
-
-
-# winner pi4 
-
-                nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --denoise cdn_off --codec libav --libav-format flv --profile=main --hdr=off  \
-               --level 4.1 --framerate 30  --width 1536 --height 864  --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
-               --audio-codec libfdk_aac --audio-channels 1 --libav-audio 1 --audio-source pulse     \
-               -t 0 --flush 0   -n  -o  - | ffmpeg  -hide_banner -fflags genpts   \
-               -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Devil' \
-               -vcodec copy -copyts -acodec libfdk_aac -max_muxing_queue_size 9999 -bufsize 2000k  -af "rubberband=tempo=0.9999"   \
-               -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
-                
-
-
+ 
 ###  vapoursynth
 
 
