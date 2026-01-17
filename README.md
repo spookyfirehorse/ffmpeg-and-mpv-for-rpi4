@@ -255,14 +255,14 @@ or
 #    running with  imx 708, but it works with all cameras rpicam-vid --list-cameras show the high and width
 
 
-##  rpi 3 armhf and pi z2w armhf trixie audio default 
+##  rpi 3 armhf and pi z2w armhf trixie audio default 24 h stable
 
          nice -n -11  rpicam-vid  --brightness 0.1 --contrast 1.0 --sharpness   1.0  --hdr=off --denoise cdn_off --framerate 30  \
         --width 1536 --height 864 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
         --low-latency 1  --framerate 30 -b 1000000  --codec libav --libav-format flv   --profile=main --level 4.1  --av-sync=0 \
         --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse \
         -t 0  -n  -o - |  ffmpeg   -hide_banner -fflags genpts+nobuffer -flags low_delay -hwaccel drm -hwaccel_output_format drm_prime -r ntsc  -i -  -metadata title='lucy' \
-        -c copy -map 0:0 -map 0:1  -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
+        -c copy   -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
   
 
          nice -n -11  rpicam-vid  --brightness 0.1 --contrast 1.0 --sharpness   1.0  --hdr=off --denoise cdn_off --framerate 30  \
@@ -282,7 +282,7 @@ or
          -hwaccel drm -hwaccel_output_format drm_prime   -i -  -metadata title='lucy'  -c:v  copy -c:a libfdk_aac -af "rubberband=tempo=0.9999" \
          -f rtsp -rtsp_transport udp  rtsp://localhost:8557"/mystream
 
-# now 2h stable
+# now 2h 30 min stable may more pi 4
   
          nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format flv  \
         --profile=main --hdr=off    --level 4.1 --framerate 30  --width 1536 --height 864  \
