@@ -252,7 +252,7 @@ or
 
          for alsa   arecord -L
 
-#    running with  imx 708, but it works with all cameras. the only differents is with hight and autofocus full comand
+#    running with  imx 708, but it works with all cameras rpicam-vid --list-cameras show the high and width
 
 
 ##  rpi 3 armhf and pi z2w armhf trixie audio default 
