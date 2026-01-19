@@ -267,11 +267,25 @@ or
 
          nice -n -11  rpicam-vid  --brightness 0.1 --contrast 1.0 --sharpness   1.0  --hdr=off --denoise cdn_off --framerate 30  \
         --width 1536 --height 864 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
-        --low-latency 1  --framerate 30 -b 1000000  --codec libav --libav-format mpegts   --profile=main --level 4.1  --av-sync=0 \
+        --low-latency 1  -b 1000000  --codec libav --libav-format mpegts   --profile=main --level 4.1  --av-sync=0 \
         --audio-codec libopus   --audio-channels 2 --libav-audio 1 --audio-source pulse \
         -t 0  -n  -o - |  ffmpeg   -hide_banner -fflags genpts+nobuffer -flags low_delay -hwaccel drm -hwaccel_output_format drm_prime -r ntsc  -i -  -metadata title='lucy' \
         -c copy   -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
 
+
+
+# pi 4 4h stable! may more
+
+                     nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format flv     --profile=main --hdr=off  \
+                    --level 4.1 --framerate 29.97  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
+                    --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse --low-latency 1   \
+                    -t 0     -n   -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay   \
+                    -hwaccel drm -hwaccel_output_format drm_prime  -i -  -metadata title='lucy'  -c:v copy  -c:a libfdk_aac -af "rubberband=tempo=0.9999" -map 0:0 -map 0:1  \
+                    -f rtsp -rtsp_transport udp  
+
+
+
+#######################################################################################################################################
 
  # pi 4  test 
 
@@ -303,7 +317,7 @@ or
         --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse  \
         -t 0     -n   -o  -  | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay  \
         -hwaccel drm -hwaccel_output_format drm_prime   -i -  -metadata title='lucy' \
-        -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 2M  -filter:v  fps=fps=ntsc:round=zero:start_time=0:eof_action=pass  \
+        -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 2M  -filter:v  fps=fps=ntsc:round=zero:start_time=2.1:eof_action=pass  \
         -threads $(nproc)    -c:a libfdk_aac    -f rtsp -rtsp_transport udp
  
 ###  vapoursynth
