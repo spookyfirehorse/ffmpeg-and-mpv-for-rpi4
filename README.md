@@ -252,61 +252,92 @@ or
 
          for alsa   arecord -L
 
-#    realtime stream all under 1 second to the reciever
+#    realtime stream all under 0.5 second to the reciever
 
 
 ##  rpi 3 armhf and pi z2w armhf trixie audio default 24 h stable
 
-         nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off    --level 4.1 --framerate 30  --width 1536          --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
-         --audio-codec libfdk_aac    --audio-channels 1 --libav-audio 1 --audio-source pulse  --awb indoor     -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay            -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil'  \
-         -vcodec copy -acodec libfdk_aac  -mpegts_copyts 1  -map 0:0 -map 0:1      -f rtsp -rtsp_transport udp  rtsp://localhost:8554/mystream
-  
+         nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
+        --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
+        --audio-codec libfdk_aac    --audio-channels 1 --libav-audio 1 --audio-source pulse  --awb indoor \
+         -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay  \
+        -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy  -mpegts_copyts 1  -map 0:0 -map 0:1   \
+       -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
 
-# pi 4 4h stable! may more
 
-                     nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format flv     --profile=main --hdr=off  \
-                    --level 4.1 --framerate 30  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
-                    --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse --low-latency 1   \
-                    -t 0     -n   -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay   \
-                    -hwaccel drm -hwaccel_output_format drm_prime  -i -  -metadata title='lucy'  -c:v copy  -c:a libfdk_aac -af "rubberband=tempo=0.9999" -map 0:0 -map 0:1  \
-                    -f rtsp -rtsp_transport udp  
+      nano .config/mpv/mpv.conf
 
+      [cam]
+
+      #container-fps-override=25
+      #no-correct-pts
+      #untimed
+      osc=no
+      opengl-swapinterval=0
+      profile=fast
+      interpolation=no
+      #rtsp-transport=tcp
+      framedrop=decoder+vo
+      no-resume-playback
+      video-latency-hacks=yes
+      pulse-latency-hacks=yes
+      demuxer-lavf-o-add=fflags=+nobuffer
+      stream-buffer-size=4k
+      vd-lavc-threads=1
+      fullscreen=yes
+
+
+         mpv --profile=cam rtsp://ip:8554
+
+
+on pi 3 container override untimed no-correct-pts not nessesary
+
+###########################  
+
+
+# pi 4 4h stable! 
+
+      nice -n -11  rpicam-vid  -b 1000000  --denoise cdn_off --codec libav --libav-format mpegts --profile=main \
+      --hdr=off --level 4.1 --framerate 25  --width 1280 --height 720 \
+     --av-sync=20000  --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5  \
+     --audio-codec libfdk_aac   --audio-channels 1 --libav-audio 1 \
+     --audio-source pulse   --low-latency 1 -t 0 -n -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay  \
+     -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 2M   -i -  -metadata title='lucy'  -c copy -f rtsp  -buffer_size 4k -rtpflags latm \
+     -muxdelay 0.1   -rtsp_transport udp  rtsp://localhost:8554/mystream  
+
+      nano .config/mpv/mpv.conf
+
+      
+
+      [cam]
+
+      container-fps-override=25
+      no-correct-pts
+      untimed
+      osc=no
+      opengl-swapinterval=0
+      profile=fast
+      interpolation=no
+      #rtsp-transport=tcp
+      framedrop=decoder+vo
+      no-resume-playback
+      video-latency-hacks=yes
+      pulse-latency-hacks=yes
+      demuxer-lavf-o-add=fflags=+nobuffer
+      stream-buffer-size=4k
+      vd-lavc-threads=1
+      fullscreen=yes
+
+
+         mpv --profile=cam rtsp://ip:8554
 
 
 #######################################################################################################################################
 
- # pi 4  test 
 
-         nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format flv  \
-         --profile=high --hdr=off    --level 4.1 --framerate 30  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual \
-         --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libopus   --audio-channels 2 --libav-audio 1 \ 
-         --audio-source pulse  --low-latency 1     -t 0    -n   -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay  \
-         -hwaccel drm -hwaccel_output_format drm_prime   -i -  -metadata title='lucy'  -c:v  copy -c:a libfdk_aac -af "rubberband=tempo=0.9999" \
-         -f rtsp -rtsp_transport udp  rtsp://localhost:8557"/mystream
-
-# now 2h 30 min stable may more pi 4
-  
-         nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format flv  \
-        --profile=main --hdr=off    --level 4.1 --framerate 29.97002997  --width 1536 --height 864  \
-        --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5  \
-        --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse  \
-        -t 0     -n   -o  -  | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay  \
-        -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='lucy' \
-        -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 2M  -filter:v  fps=fps=ntsc:round=zero:start_time=0:eof_action=pass  \
-        -threads $(nproc)    -c:a libfdk_aac -af "rubberband=tempo=0.9999"    -f rtsp -rtsp_transport udp
-
-
-# test pi4
 
  
-         nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format flv  \
-        --profile=main --hdr=off    --level 4.1 --framerate 30  --width 1536 --height 864  \
-        --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5  \
-        --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse  \
-        -t 0     -n   -o  -  | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay  \
-        -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='lucy' \
-        -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 2M  -filter:v  fps=fps=ntsc:round=zero:start_time=2.1:eof_action=pass  \
-        -threads $(nproc)    -c:a libfdk_aac    -f rtsp -rtsp_transport udp
+         
  
 ###  vapoursynth
 
