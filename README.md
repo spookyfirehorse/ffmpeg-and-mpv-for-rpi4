@@ -260,7 +260,7 @@ or
        vc4.tv_norm=PAL   #which is 25 fps
 
 
-       may you want to set to NTSC PA60 for framerate=30
+       may you want to set to NTSC PAL60 for framerate=30
 
 ##  rpi 3  and pi z2w  trixie audio default usb micro u-green
 
@@ -310,16 +310,16 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
 
       avioflags very agressive if you start the camera a lot of errors give them 5 seconds 
 
-
-      
+      -rtbufsize 2M before -i           #realtimebufer
+            
 
 
        nice -n -11  rpicam-vid  -b 1000000  --denoise cdn_off --codec libav --libav-format mpegts --profile=main \
        --hdr=off --level 4.1 --framerate 25  --width 1280 --height 720 \
-       --av-sync=20000  --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5  \
+       --av-sync=25000  --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5 --awb indoor \
        --audio-codec libfdk_aac   --audio-channels 1 --libav-audio 1 \
        --audio-source pulse   --low-latency 1 -t 0 -n -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -avioflags=direct -flags low_delay  \
-       -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 2M   -i -  -metadata title='lucy'  -c copy -f rtsp  -buffer_size 4k -rtpflags latm \
+       -hwaccel drm -hwaccel_output_format drm_prime -re   -i -  -metadata title='lucy'  -c copy -f rtsp  -buffer_size 4k -rtpflags latm \
        -muxdelay 0.1   -rtsp_transport udp  rtsp://localhost:8554/mystream  
 
       nano .config/mpv/mpv.conf
