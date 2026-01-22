@@ -288,7 +288,7 @@ or
       no-resume-playback
       video-latency-hacks=yes
       pulse-latency-hacks=yes
-      demuxer-lavf-o-add=fflags=+nobuffer
+      demuxer-lavf-o-add=fflags=+nobuffer+genpts
       stream-buffer-size=4k
       vd-lavc-threads=1
       fullscreen=yes
@@ -297,7 +297,7 @@ or
          mpv --profile=cam rtsp://ip:8554
 
 
-on pi 3 container override untimed no-correct-pts not nessesary
+on pi 3 container override untimed no-correct-pts not nessesary       demuxer-lavf-o-add=fflags=+nobuffer+genpts for pi4 and pi 3
 
 ###########################  
 
