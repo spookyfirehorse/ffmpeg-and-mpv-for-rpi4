@@ -267,7 +267,7 @@ or
          nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
         --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
         --audio-codec libfdk_aac    --audio-channels 1 --libav-audio 1 --audio-source pulse  --awb indoor \
-         -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay  \
+         -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay -avioflags direct \
         -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy  -mpegts_copyts 1  -map 0:0 -map 0:1   \
        -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
 
@@ -309,6 +309,30 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
       -avioflags=direct
 
       avioflags very agressive if you start the camera a lot of errors give them 5 seconds 
+
+# output
+
+         [h264 @ 0x5559d710b0] decode_slice_header error
+         [h264 @ 0x5559d710b0] no frame!
+         [h264 @ 0x5559d710b0] non-existing PPS 0 referenced
+         Last message repeated 1 times
+         [h264 @ 0x5559d710b0] decode_slice_header error
+         [h264 @ 0x5559d710b0] no frame!
+         Input #0, mpegts, from 'fd:':
+          Duration: N/A, start: 0.256000, bitrate: N/A
+         Program 1 
+         Metadata:
+         service_name    : Service01
+         service_provider: FFmpeg
+         Stream #0:0[0x100]: Video: h264 (Main) ([27][0][0][0] / 0x001B), yuv420p(progressive), 1280x720, 25 fps, 25 tbr, 90k tbn
+         Stream #0:1[0x101]: Audio: aac (LC) ([15][0][0][0] / 0x000F), 48000 Hz, mono, fltp, 32 kb/s
+         Stream mapping:
+         Stream #0:0 -> #0:0 (copy)
+         Stream #0:1 -> #0:1 (copy)
+
+       runing
+
+      
 
       -rtbufsize 2M before -i           #realtimebufer
             
