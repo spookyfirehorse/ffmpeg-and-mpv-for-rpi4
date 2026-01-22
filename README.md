@@ -272,7 +272,7 @@ or
        -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
 
 
-      nano .config/mpv/mpv.conf
+      nano .config/mpv/mpv.conf   on the end of file put this in
 
       [cam]
 
@@ -337,6 +337,21 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
 
 
          mpv --profile=cam rtsp://ip:8554
+
+
+
+
+   ### realtime o.1 sec to reciever pi 4
+
+
+   nice -n -11  rpicam-vid  -b 1000000  --denoise cdn_off --codec libav --libav-format mpegts --profile=main \
+      --hdr=off --level 4.1 --framerate 25  --width 1280 --height 720 \
+     --av-sync=20000  --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5  \
+     --audio-codec libfdk_aac   --audio-channels 1 --libav-audio 1 \
+     --audio-source pulse   --low-latency 1 -t 0 -n -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay -avioflags direct \
+     -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 2M   -i -  -metadata title='lucy'  -c copy -f rtsp  -buffer_size 4k -rtpflags latm \
+     -muxdelay 0.1   -rtsp_transport udp  rtsp://localhost:8554/mystream  
+
 
 
 #######################################################################################################################################
