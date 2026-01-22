@@ -255,7 +255,14 @@ or
 #    realtime stream all under 0.5 second to the reciever
 
 
-##  rpi 3 armhf and pi z2w armhf trixie audio default 24 h stable
+       sudo nano /boot/firmware/config.txt
+
+       vc4.tv_norm=PAL   #which is 25 fps
+
+
+       may you want to set to NTSC PA60 for framerate=30
+
+##  rpi 3  and pi z2w  trixie audio default usb micro u-green
 
          nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
         --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
@@ -295,7 +302,7 @@ on pi 3 container override untimed no-correct-pts not nessesary
 ###########################  
 
 
-# pi 4 4h stable! 
+# pi 4 4h stable! micro usb ugreen and may all usb devices
 
       nice -n -11  rpicam-vid  -b 1000000  --denoise cdn_off --codec libav --libav-format mpegts --profile=main \
       --hdr=off --level 4.1 --framerate 25  --width 1280 --height 720 \
