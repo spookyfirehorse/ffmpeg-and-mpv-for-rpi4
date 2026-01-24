@@ -397,6 +397,18 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
 
 # give the stream 60s to be stabilized then start recieving
 
+
+
+
+# rtmp
+
+# -av-sync=700000 sounblaster usb play 3 may all usb card on rpi 4 on rpi 3 -av-sync=0
+
+rpicam-vid -t 0  --width 1536 --height 864   --av-sync=700000 --autofocus-mode manual   --framerate 24 --codec libav  \
+  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-codec libfdk_aac --av-sync=1000000  --hdr=off \
+  --low-latency 1  --autofocus-window  0.25,0.25,0.5,0.5 -b 1000000   --libav-format flv --libav-audio   -n  -o rtmp://localhost:1935/live?"user=pi&pass=password"
+
+
 #######################################################################################################################################
 
 
