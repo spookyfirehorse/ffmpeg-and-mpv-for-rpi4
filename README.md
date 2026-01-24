@@ -275,6 +275,16 @@ or
         -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy  -map 0:0 -map 0:1   \
        -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
        
+       # or
+
+       nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
+        --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
+        --audio-codec libfdk_aac    --audio-channels 1 --libav-audio 1 --audio-source pulse  --awb indoor \
+         -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay -avioflags direct \
+        -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy -mpegts_copyts 1 -map 0:0 -map 0:1   \
+       -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
+
+
        
         rtsp://"user:passwd"@"localhost:8554"/mystream
 
@@ -411,7 +421,7 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
 
 # rtmp
 
-# -av-sync=700000 sounblaster usb play 3 may all usb card on rpi 4 on rpi 3 -av-sync=0
+# -av-sync=700000 soundblaster usb play 3 may all usb card on rpi 4 on rpi 3 -av-sync=0
 
        rpicam-vid -t 0  --width 1536 --height 864  --autofocus-mode manual   --framerate 24 --codec libav  \
        --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-codec libfdk_aac --av-sync=700000  --hdr=off \
