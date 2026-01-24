@@ -317,15 +317,14 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
 
       -rtbufsize 2M before -i           #realtimebufer if needed
             
+        nice -n -11  rpicam-vid  -b 1000000  --denoise cdn_off --codec libav --libav-format mpegts --profile=main --hdr=off \
+        --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=700000  --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5 \
+        --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1   --audio-source pulse  \
+        --low-latency 1 -t 0 -n -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
+        -hwaccel drm -hwaccel_output_format drm_prime -r 25   -rtbufsize 500k  \
+        -i -  -metadata title='lucy'  -c copy   -f rtsp  -buffer_size 4k -rtpflags latm \
+        -muxdelay 0.1   -rtsp_transport udp  rtsp://localhost:8554/mystream
 
-
-       nice -n -11  rpicam-vid  -b 1000000  --denoise cdn_off --codec libav --libav-format mpegts --profile=main \
-       --hdr=off --level 4.1 --framerate 25  --width 1280 --height 720 \
-       --av-sync=25000  --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5 --awb indoor \
-       --audio-codec libfdk_aac   --audio-channels 1 --libav-audio 1 \
-       --audio-source pulse   --low-latency 1 -t 0 -n -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -avioflags=direct -flags low_delay  \
-       -hwaccel drm -hwaccel_output_format drm_prime -re   -i -  -metadata title='lucy'  -c copy -f rtsp  -buffer_size 4k -rtpflags latm \
-       -muxdelay 0.1   -rtsp_transport udp  rtsp://localhost:8554/mystream  
 
       nano .config/mpv/mpv.conf
 
