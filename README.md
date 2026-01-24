@@ -124,7 +124,11 @@ first make a copy of your os
 
         meson setup build
 
-        meson configure build -Dprefix=/usr -Dlibmpv=true -Ddvdnav=enabled -Dsdl2=enabled -Dzimg=enabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled  -Dvaapi=disabled -Dvdpau=disabled         -Dvulkan=enabled  -Dcuda-interop=disabled -Dzlib=enabled -Ddrm=enabled -Ddmabuf-wayland=enabled -Dalsa=enabled -Dcuda-hwaccel=disabled -Dpipewire=enabled  -Ddmabuf-wayland=enabled -Dvaapi        -x11=disabled  -Dvaapi-wayland=disabled -Dvaapi-drm=disabled -Dvapoursynth=enabled
+        meson configure build -Dprefix=/usr -Dlibmpv=true -Ddvdnav=enabled \
+        -Dsdl2=enabled -Dzimg=enabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled  -Dvaapi=disabled -Dvdpau=disabled \
+        -Dvulkan=enabled  -Dcuda-interop=disabled -Dzlib=enabled -Ddrm=enabled -Ddmabuf-wayland=enabled \
+        -Dalsa=enabled -Dcuda-hwaccel=disabled -Dpipewire=enabled  -Ddmabuf-wayland=enabled -Dvaapi-x11=disabled \
+        -Dvaapi-wayland=disabled -Dvaapi-drm=disabled -Dvapoursynth=enabled
         
         sudo meson install -C build
 
@@ -134,17 +138,17 @@ first make a copy of your os
 
      nano .config/mpv/mpv.conf
 
-    gpu-dumb-mode=yes
-    opengl-glfinish=yes
-    #gpu-context=x11egl   ###x11
-    gpu-context=wayland   ##wayland
-    gpu-api=opengl
-    vo=gpu
-    hwdec=drm
-    hwdec-codecs=hevc
-    hwdec-image-format=drm_prime
-    gpu-hwdec-interop=drmprime
-    drm-vrr-enabled=auto
+      gpu-dumb-mode=yes
+      opengl-glfinish=yes
+      #gpu-context=x11egl   ###x11
+      gpu-context=wayland   ##wayland
+      gpu-api=opengl
+      vo=gpu
+      hwdec=drm
+      hwdec-codecs=hevc
+      hwdec-image-format=drm_prime
+      gpu-hwdec-interop=drmprime
+      drm-vrr-enabled=auto
         
 
 #################################
@@ -270,6 +274,11 @@ or
          -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay -avioflags direct \
         -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy  -mpegts_copyts 1  -map 0:0 -map 0:1   \
        -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
+       
+       
+        rtsp://"user:passwd"@"localhost:8554"/mystream
+
+       
 
 
       nano .config/mpv/mpv.conf   on the end of file put this in
