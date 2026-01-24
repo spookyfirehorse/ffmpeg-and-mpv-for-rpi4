@@ -345,32 +345,6 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
         -muxdelay 0.1   -rtsp_transport udp  rtsp://localhost:8554/mystream
 
 
-      nano .config/mpv/mpv.conf
-
-      
-
-      [cam]
-
-      container-fps-override=25
-      no-correct-pts
-      untimed
-      # this 3 values can be disabled but better for realtime
-      
-      
-      osc=no
-      opengl-swapinterval=0
-      profile=fast
-      interpolation=no
-      #rtsp-transport=tcp
-      framedrop=decoder+vo
-      no-resume-playback
-      video-latency-hacks=yes
-      pulse-latency-hacks=yes
-      demuxer-lavf-o-add=fflags=+nobuffer,avioflags=direct
-      stream-buffer-size=4k
-      vd-lavc-threads=1
-      fullscreen=yes
-
 
          mpv --profile=cam rtsp://ip:8554
 
@@ -488,7 +462,7 @@ authInternalUsers:
     permissions:
       - action: publish
       - 
- rtsp://"user:password"@"localhost:8557"/mystream
+ rtsp://"user:password"@"localhost:8554"/mystream
 
       
 ##############################################
