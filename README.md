@@ -268,14 +268,7 @@ or
 
 ##  rpi 3  and pi z2w  trixie audio default usb mikrofon u-green  24 h stable
 
-         nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
-        --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
-        --audio-codec libfdk_aac    --audio-channels 1 --libav-audio 1 --audio-source pulse  --awb indoor \
-         -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags genpts+nobuffer -flags low_delay -avioflags direct \
-        -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy  -map 0:0 -map 0:1   \
-       -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
        
-       # or
 
        nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
         --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
@@ -284,9 +277,16 @@ or
         -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy -mpegts_copyts 1 -map 0:0 -map 0:1  -fflags +genpts \
        -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
 
-
+         nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
+        --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
+        --audio-codec libfdk_aac    --audio-channels 1 --libav-audio 1 --audio-source pulse  --awb indoor \
+         -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
+        -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy -mpegts_copyts 1 -map 0:0 -map 0:1  -fflags +genpts \
+        -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://"user:passwd"@"localhost:8554"/mystream
        
-        mpv rtsp://"user:passwd"@"localhost:8554"/mystream
+               mpv rtsp://"user:passwd"@"receiverip:8554"/mystream
+               
+               mpv rtsp://receiverip:8554/mystream
 
        
 
@@ -387,7 +387,7 @@ or
          --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-codec libfdk_aac   --hdr=off \
          --low-latency 1  --autofocus-window  0.25,0.25,0.5,0.5 -b 1000000   --libav-format flv --libav-audio   -n  -o - | ffmpeg  -hide_banner \
          -fflags nobuffer -flags low_delay -avioflags direct \
-         -hwaccel drm -hwaccel_output_format drm_prime -r 25  -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy -reset_timestamps 1 \
+         -hwaccel drm -hwaccel_output_format drm_prime -r 24  -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy -reset_timestamps 1 \
          -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1  rtmp://localhost:1935/live?"user=spooky&pass=password"
 
 
