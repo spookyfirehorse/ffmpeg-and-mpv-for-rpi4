@@ -266,7 +266,7 @@ or
 
        may you want to set to NTSC PAL60 for framerate=30
 
-##  rpi 3  and pi z2w  trixie audio default usb mikrofon u-green
+##  rpi 3  and pi z2w  trixie audio default usb mikrofon u-green  24 h stable
 
          nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
         --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
@@ -295,22 +295,27 @@ or
 
       [cam]
 
-      #container-fps-override=25
-      #no-correct-pts
-      #untimed
-      osc=no
-      opengl-swapinterval=0
-      profile=fast
-      interpolation=no
-      #rtsp-transport=tcp
-      framedrop=decoder+vo
-      no-resume-playback
-      video-latency-hacks=yes
-      pulse-latency-hacks=yes
-      demuxer-lavf-o-add=fflags=+nobuffer+genpts,avioflags=direct
-      stream-buffer-size=4k
-      vd-lavc-threads=1
-      fullscreen=yes
+       #container-fps-override=25
+       #no-correct-pts
+       #untimed
+       osc=no
+       opengl-swapinterval=0
+       profile=fast
+       interpolation=no
+       #rtsp-transport=tcp
+       framedrop=decoder+vo
+       no-resume-playback
+       video-latency-hacks=yes
+       pulse-latency-hacks=yes
+       demuxer-lavf-o-add=fflags=+nobuffer+genpts,avioflags=direct
+       stream-buffer-size=4k
+       vd-lavc-threads=1
+       fullscreen=yes
+       ytdl=no
+       hr-seek=no
+       demuxer=lavf
+       chache=no
+      
 
 
          mpv --profile=cam rtsp://ip:8554
@@ -321,47 +326,17 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
 ###########################  
 
 
-# pi 4 4h stable! mikrofon usb ugreen and may all usb devices
-
-     # realtime section
-
-      demuxer-lavf-o-add=fflags=+nobuffer,avioflags=direct  mpv.conf
-
-      -avioflags=direct
-
-      avioflags very agressive if you start the camera a lot of errors give them 5 seconds 
-
-
-      
-
-      -rtbufsize 2M before -i           #realtimebufer if needed
-            
-        nice -n -11  rpicam-vid  -b 1000000  --denoise cdn_off --codec libav --libav-format mpegts --profile=main --hdr=off \
-        --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=700000  --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5 \
-        --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1   --audio-source pulse  \
-        --low-latency 1 -t 0 -n -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
-        -hwaccel drm -hwaccel_output_format drm_prime -r 25   -rtbufsize 50k  \
-        -i -  -metadata title='lucy'  -c copy   -f rtsp  -buffer_size 4k -rtpflags latm \
-        -muxdelay 0.1   -rtsp_transport udp  rtsp://localhost:8554/mystream
-
-
-
-         mpv --profile=cam rtsp://ip:8554
-
-
-
 
    ### realtime o.1 sec to reciever pi 4
 
 
-       nice -n -11  rpicam-vid  -b 1000000  --denoise cdn_off --codec libav --libav-format mpegts --profile=main \
-       --hdr=off --level 4.1 --framerate 25  --width 1280 --height 720 -av-sync=1000 \
-       --av-sync=20000  --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5  \
-       --audio-codec libfdk_aac   --audio-channels 1 --libav-audio 1 \
-       --audio-source pulse --inline  --low-latency 1 -t 0 -n -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
-       -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 5k   -i -  -metadata title='lucy'  -c:v copy  \
-       -c:a copy -mpegts_copyts 1  -map 0:0 -map 0:1 -fflags +genpts -f rtsp  -buffer_size 4k -rtpflags latm \
-       -muxdelay 0.1   -rtsp_transport udp  rtsp://localhost:8554/mystream  
+           nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts \
+           --profile=main --hdr=off    --level 4.1 --framerate 25  --width 1536 --height 864  \
+           --av-sync=0 --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5 \
+           --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse   --low-latency 1 \
+           --audio-samplerate=48000    -t 0     -n   -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
+           -hwaccel drm -hwaccel_output_format drm_prime -r 25  -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy -reset_timestamps 1 \
+           -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1 -rtsp_transport udp  rtsp://"user:passwort"@"localhost:8554"/mystream 
 
 
 
@@ -396,11 +371,12 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
 
 # rtmp
 
-# -av-sync=700000 soundblaster usb play 3 may all usb card on rpi 4 on rpi 3 -av-sync=0
-
-       rpicam-vid -t 0  --width 1536 --height 864  --autofocus-mode manual   --framerate 24 --codec libav  \
-       --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-codec libfdk_aac --av-sync=700000  --hdr=off \
-       --low-latency 1  --autofocus-window  0.25,0.25,0.5,0.5 -b 1000000   --libav-format flv --libav-audio   -n  -o rtmp://localhost:1935/live?"user=pi&pass=password"
+         rpicam-vid -t 0  --width 1536 --height 864  --autofocus-mode manual   --framerate 24 --codec libav  \
+         --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-codec libfdk_aac   --hdr=off \
+         --low-latency 1  --autofocus-window  0.25,0.25,0.5,0.5 -b 1000000   --libav-format flv --libav-audio   -n  -o - | ffmpeg  -hide_banner \
+         -fflags nobuffer -flags low_delay -avioflags direct \
+         -hwaccel drm -hwaccel_output_format drm_prime -r 25  -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy -reset_timestamps 1 \
+         -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1  rtmp://localhost:1935/live?"user=spooky&pass=password"
 
 --av-sync  audio is first and than the video  set the the time to little bit video first than audio and go back a little bit to sync 700000 = 0.7 sek
 
