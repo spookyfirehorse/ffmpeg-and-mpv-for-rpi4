@@ -286,7 +286,7 @@ or
 
 
        
-        rtsp://"user:passwd"@"localhost:8554"/mystream
+        mpv rtsp://"user:passwd"@"localhost:8554"/mystream
 
        
 
@@ -319,9 +319,6 @@ or
 
 
          mpv --profile=cam rtsp://ip:8554
-
-
-on pi 3 container override untimed no-correct-pts not nessesary       demuxer-lavf-o-add=fflags=+nobuffer+genpts for pi4 and pi 3
 
 ###########################  
 
@@ -364,7 +361,22 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
        runing
 
 
+
+                mpv --profile=cam rtsp://ip:8554
+
+
+
 # give the stream 60s to be stabilized then start recieving
+
+
+# test 
+
+        nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts   --profile=main --hdr=off  \
+        --level 4.1 --framerate 25  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal  \
+        --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse \
+        --low-latency 1  --audio-samplerate=48000    -t 0     -n   -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
+        -hwaccel drm -hwaccel_output_format drm_prime -r 25  -rtbufsize 4k  -i -  -metadata title='lucy'   -c:v copy -acodec libfdk_aac \
+        -af rubberband=tempo=0.9999:pitch=1.0001  -map 0:0 -map 0:1  -fflags +genpts   -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1 -rtsp_transport udp
 
 
 
@@ -378,7 +390,6 @@ on pi 3 container override untimed no-correct-pts not nessesary       demuxer-la
          -hwaccel drm -hwaccel_output_format drm_prime -r 25  -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy -reset_timestamps 1 \
          -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1  rtmp://localhost:1935/live?"user=spooky&pass=password"
 
---av-sync  audio is first and than the video  set the the time to little bit video first than audio and go back a little bit to sync 700000 = 0.7 sek
 
 
 #######################################################################################################################################
