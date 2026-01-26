@@ -327,13 +327,17 @@ or
    ### realtime o.1 sec to reciever pi 4
 
 
-           nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts \
-           --profile=main --hdr=off    --level 4.1 --framerate 25  --width 1536 --height 864  \
-           --av-sync=0 --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5 \
-           --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse   --low-latency 1 \
-           --audio-samplerate=48000    -t 0     -n   -o  - | ffmpeg -itsscale 1.01 -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
-           -hwaccel drm -hwaccel_output_format drm_prime -r 25  -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy  \
+           nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off --awb indoor  --codec libav --libav-format mpegts   --profile=main --hdr=off \
+           --level 4.1 --framerate 25  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal \
+           --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libfdk_aac \
+           --audio-channels 1 --libav-audio 1 --audio-source pulse   --low-latency 1  --audio-samplerate=48000 \
+           -t 0     -n   -o  - | ffmpeg -use_wallclock_as_timestamps 1  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
+           -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 4k  -i -  -metadata title='lucy' -c:a copy  \
+           -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 1M -filter:v "setpts=PTS/1.0001,fps=25" -r 25   -map 0:0 -map 0:1  \
            -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1 -rtsp_transport udp  rtsp://"user:passwort"@"localhost:8554"/mystream 
+
+
+           
 
 
 
@@ -366,14 +370,17 @@ or
 
 
 
-# rtmp
+# rtmp not sure
 
-         rpicam-vid -t 0  --width 1536 --height 864  --autofocus-mode manual   --framerate 24 --codec libav  \
+         rpicam-vid -t 0  --width 1536 --height 864  --autofocus-mode manual   --framerate 25 --codec libav  \
          --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-codec libfdk_aac   --hdr=off \
-         --low-latency 1  --autofocus-window  0.25,0.25,0.5,0.5 -b 1000000   --libav-format flv --libav-audio   -n  -o - | ffmpeg  -hide_banner \
-         -fflags nobuffer -flags low_delay -avioflags direct \
-         -hwaccel drm -hwaccel_output_format drm_prime -r 24 -itsscale 1.01 -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy \
-         -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1  rtmp://localhost:1935/live?"user=spooky&pass=password"
+         --low-latency 1  --autofocus-window  0.25,0.25,0.5,0.5 -b 1000000   --libav-format flv --libav-audio \
+         -n  -o - | ffmpeg -use_wallclock_as_timestamps 1  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
+           -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 4k  -i -  -metadata title='lucy' -c:a copy  \
+           -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 1M \
+           -filter:v "setpts=PTS/1.0001,fps=25" -r 25   -map 0:0 -map 0:1 rtmp://localhost:1935/live?"user=spooky&pass=password"
+         
+         -  rtmp://localhost:1935/live?"user=spooky&pass=password"
 
 
 
