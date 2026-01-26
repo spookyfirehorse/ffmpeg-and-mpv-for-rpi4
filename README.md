@@ -331,8 +331,8 @@ or
            --profile=main --hdr=off    --level 4.1 --framerate 25  --width 1536 --height 864  \
            --av-sync=0 --autofocus-mode manual --autofocus-range normal   --autofocus-window  0.25,0.25,0.5,0.5 \
            --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse   --low-latency 1 \
-           --audio-samplerate=48000    -t 0     -n   -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
-           -hwaccel drm -hwaccel_output_format drm_prime -r 25  -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy -reset_timestamps 1 \
+           --audio-samplerate=48000    -t 0     -n   -o  - | ffmpeg -itsscale 1.01 -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
+           -hwaccel drm -hwaccel_output_format drm_prime -r 25  -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy  \
            -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1 -rtsp_transport udp  rtsp://"user:passwort"@"localhost:8554"/mystream 
 
 
@@ -365,17 +365,6 @@ or
                 mpv --profile=cam rtsp://ip:8554
 
 
-# test 
-
-        nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts   --profile=main --hdr=off  \
-        --level 4.1 --framerate 25  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal  \
-        --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse \
-        --low-latency 1  --audio-samplerate=48000    -t 0     -n   -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
-        -hwaccel drm -hwaccel_output_format drm_prime -r 25  -rtbufsize 4k  -i -  -metadata title='lucy'   -c:v copy -acodec libfdk_aac \
-        -af rubberband=tempo=0.9999  -map 0:0 -map 0:1 -reset_timestamps 1 -fflags +genpts   -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1 -rtsp_transport udp
-
-
-
 
 # rtmp
 
@@ -383,7 +372,7 @@ or
          --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-codec libfdk_aac   --hdr=off \
          --low-latency 1  --autofocus-window  0.25,0.25,0.5,0.5 -b 1000000   --libav-format flv --libav-audio   -n  -o - | ffmpeg  -hide_banner \
          -fflags nobuffer -flags low_delay -avioflags direct \
-         -hwaccel drm -hwaccel_output_format drm_prime -r 24  -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy -reset_timestamps 1 \
+         -hwaccel drm -hwaccel_output_format drm_prime -r 24 -itsscale 1.01 -rtbufsize 4k  -i -  -metadata title='lucy'   -c copy \
          -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1  rtmp://localhost:1935/live?"user=spooky&pass=password"
 
 
