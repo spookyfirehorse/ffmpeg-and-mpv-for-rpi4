@@ -376,7 +376,7 @@ or
         --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libfdk_aac   --audio-channels 2 --libav-audio 1 --audio-source pulse \
         --low-latency 1  --audio-samplerate=48000    -t 0     -n   -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
         -hwaccel drm -hwaccel_output_format drm_prime -r 25  -rtbufsize 4k  -i -  -metadata title='lucy'   -c:v copy -acodec libfdk_aac \
-        -af rubberband=tempo=0.9999:pitch=1.0001  -map 0:0 -map 0:1  -fflags +genpts   -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1 -rtsp_transport udp
+        -af rubberband=tempo=0.9999  -map 0:0 -map 0:1 -reset_timestamps 1 -fflags +genpts   -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1 -rtsp_transport udp
 
 
 
