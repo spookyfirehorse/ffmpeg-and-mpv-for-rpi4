@@ -270,7 +270,7 @@ or
 
        
 
-       nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
+         nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
         --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
         --audio-codec libfdk_aac    --audio-channels 1 --libav-audio 1 --audio-source pulse  --awb indoor \
          -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
@@ -363,10 +363,6 @@ or
 
 
                 mpv --profile=cam rtsp://ip:8554
-
-
-
-# give the stream 60s to be stabilized then start recieving
 
 
 # test 
