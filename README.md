@@ -368,7 +368,16 @@ or
 
                 mpv --profile=cam rtsp://ip:8554
 
+# test pi 4 mediamtx absolute timestamp false itsscale wallclock
 
+       nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off --awb indoor  --codec libav --libav-format mpegts   --profile=main --hdr=off \
+       --level 4.1 --framerate 25  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal \
+       --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libfdk_aac \
+       --audio-channels 1 --libav-audio 1 --audio-source pulse   --low-latency 1  --audio-samplerate=48000 \
+       -t 0     -n   -o  - | ffmpeg -use_wallclock_as_timestamps 1  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
+       -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 4k -itsscale 1.0001 -i -  -metadata title='lucy' -c:a copy  \
+       -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 1M  -map 0:0 -map 0:1  \
+       -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1 -rtsp_transport udp 
 
 # rtmp not sure
 
