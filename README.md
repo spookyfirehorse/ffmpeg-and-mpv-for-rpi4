@@ -277,16 +277,24 @@ or
         --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
         --audio-codec libfdk_aac    --audio-channels 1 --libav-audio 1 --audio-source pulse  --awb indoor \
          -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
-        -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy -mpegts_copyts 1 -map 0:0 -map 0:1  -fflags +genpts \
+        -hwaccel drm -hwaccel_output_format drm_prime -f mpegts -re  -i -  -metadata title='devil' -c  copy -mpegts_copyts 1 -map 0:0 -map 0:1  -fflags +genpts \
        -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
 
-         nice -n -11 rpicam-vid -b 1000000 --denoise cdn_off --awb indoor --codec libav --libav-format matroska \
-         --profile main --hdr off --level 4.1 --framerate 25 --width 1536 --height 864  \
-         --autofocus-mode manual --autofocus-range normal --autofocus-window 0.25,0.25,0.5,0.5 \
-         --audio-codec libfdk_aac --audio-channels 1 --libav-audio 1 --audio-source pulse \
-         --audio-samplerate 48000 --inline -t 0 -n -o - | ffmpeg -f matroska  -re  -i - \
-         -c copy -metadata title='lucy'   -f rtsp -rtsp_transport tcp -muxdelay 0 -rtpflags latm \
-         -fflags nobuffer+igndts+flush_packets -flags low_delay -avioflags direct    rtsp://"user:passwd"@"localhost:8554"/mystream
+         nice -n -11 rpicam-vid \
+         -b 1000000 --denoise cdn_off --awb indoor \
+         --codec libav --libav-format mpegts --profile main \
+         --hdr off --level 4.1 --framerate 25 \
+         --width 1536 --height 864 \
+         --autofocus-mode manual --autofocus-range normal \
+         --autofocus-window 0.25,0.25,0.5,0.5 \
+         --audio-codec libfdk_aac --audio-channels 1 \
+         --libav-audio 1 --audio-source pulse --audio-samplerate 48000 \
+         --inline -t 0 -n -o - | \
+         ffmpeg -f mpegts -i - \
+         -c copy -mpegts_copyts 1 -metadata title='lucy' \
+         -f rtsp -rtsp_transport tcp -muxdelay 0 -rtpflags latm \
+         -fflags nobuffer+igndts+flush_packets -flags low_delay -avioflags direct \
+          rtsp://"user:passwd"@"localhost:8554"/mystream
        
                mpv rtsp://"user:passwd"@"receiverip:8554"/mystream
                
