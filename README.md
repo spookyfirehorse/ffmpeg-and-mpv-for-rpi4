@@ -280,12 +280,13 @@ or
         -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy -mpegts_copyts 1 -map 0:0 -map 0:1  -fflags +genpts \
        -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
 
-         nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
-        --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
-        --audio-codec libfdk_aac    --audio-channels 1 --libav-audio 1 --audio-source pulse  --awb indoor \
-         -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
-        -hwaccel drm -hwaccel_output_format drm_prime -re  -i -  -metadata title='devil' -c  copy -mpegts_copyts 1 -map 0:0 -map 0:1  -fflags +genpts \
-        -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://"user:passwd"@"localhost:8554"/mystream
+         nice -n -11 rpicam-vid -b 1000000 --denoise cdn_off --awb indoor --codec libav --libav-format matroska \
+         --profile main --hdr off --level 4.1 --framerate 25 --width 1536 --height 864  \
+         --autofocus-mode manual --autofocus-range normal --autofocus-window 0.25,0.25,0.5,0.5 \
+         --audio-codec libfdk_aac --audio-channels 1 --libav-audio 1 --audio-source pulse \
+         --audio-samplerate 48000 --inline -t 0 -n -o - | ffmpeg -f matroska  -re  -i - \
+         -c copy -metadata title='lucy'   -f rtsp -rtsp_transport tcp -muxdelay 0 -rtpflags latm \
+         -fflags nobuffer+igndts+flush_packets -flags low_delay -avioflags direct    rtsp://"user:passwd"@"localhost:8554"/mystream
        
                mpv rtsp://"user:passwd"@"receiverip:8554"/mystream
                
@@ -334,40 +335,11 @@ or
            --level 4.1 --framerate 25  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal \
            --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libfdk_aac \
            --audio-channels 1 --libav-audio 1 --audio-source pulse   --low-latency 1  --audio-samplerate=48000 \
-           -t 0     -n   -o  - | ffmpeg -use_wallclock_as_timestamps 1  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
+           -t 0     -n   -o  - | ffmpeg -use_wallclock_as_timestamps 1 -fflags +genpts -hide_banner  \
            -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 4k  -i -  -metadata title='lucy' -c:a copy  \
            -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 1M -filter:v "setpts=PTS/1.0001,fps=25" -r 25   -map 0:0 -map 0:1  \
-           -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1 -rtsp_transport udp  rtsp://"user:passwort"@"localhost:8554"/mystream 
-
-
-           
-
-
-
-
-         # output
-
-         [h264 @ 0x5559d710b0] decode_slice_header error
-         [h264 @ 0x5559d710b0] no frame!
-         [h264 @ 0x5559d710b0] non-existing PPS 0 referenced
-         Last message repeated 1 times
-         [h264 @ 0x5559d710b0] decode_slice_header error
-         [h264 @ 0x5559d710b0] no frame!
-         Input #0, mpegts, from 'fd:':
-          Duration: N/A, start: 0.256000, bitrate: N/A
-         Program 1 
-         Metadata:
-         service_name    : Service01
-         service_provider: FFmpeg
-         Stream #0:0[0x100]: Video: h264 (Main) ([27][0][0][0] / 0x001B), yuv420p(progressive), 1280x720, 25 fps, 25 tbr, 90k tbn
-         Stream #0:1[0x101]: Audio: aac (LC) ([15][0][0][0] / 0x000F), 48000 Hz, mono, fltp, 32 kb/s
-         Stream mapping:
-         Stream #0:0 -> #0:0 (copy)
-         Stream #0:1 -> #0:1 (copy)
-
-       runing
-
-
+           -f rtsp -buffer_size 4k -fflags nobuffer -flags low_delay -avioflags direct \ 
+           -rtpflags latm -muxdelay 0.1 -rtsp_transport udp  rtsp://"user:passwort"@"localhost:8554"/mystream 
 
                 mpv --profile=cam rtsp://ip:8554
 
@@ -377,10 +349,10 @@ or
        --level 4.1 --framerate 25  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal \
        --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libfdk_aac \
        --audio-channels 2 --libav-audio 1 --audio-source pulse   --low-latency 1  --audio-samplerate=48000 \
-       -t 0     -n   -o  - | ffmpeg -use_wallclock_as_timestamps 1  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
+       -t 0     -n   -o  - | ffmpeg -use_wallclock_as_timestamps 1  -hide_banner  \
        -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 4k  -i -  -metadata title='lucy' -c:a libfdk_aac -b:a 32k  \
        -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 1M -filter:v "setpts=PTS/1.0001,fps=25" -r 25 -af aresample=async=1  -map 0:0 -map 0:1  \
-       -f rtsp -buffer_size 4k -rtpflags latm -muxdelay 0.1 -rtsp_transport udp  rtsp://localhost:8554/mystream 
+       -f rtsp -buffer_size 4k -fflags nobuffer -flags low_delay -avioflags direct -rtpflags latm -muxdelay 0.1 -rtsp_transport udp  rtsp://localhost:8554/mystream 
 
  
 
