@@ -362,6 +362,14 @@ or
        -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 1M -filter:v "setpts=PTS/1.0001,fps=25" -r 25 -af aresample=async=1  -map 0:0 -map 0:1  \
        -f rtsp -buffer_size 4k -fflags nobuffer -flags low_delay -avioflags direct -rtpflags latm -muxdelay 0.1 -rtsp_transport udp  rtsp://localhost:8554/mystream 
 
+
+
+best ever more cpu pi 4
+
+
+     nice -n -11 rpicam-vid -t 0 --width 1280 --height 720 --framerate 25 --codec h264 --inline --flush -n -o - | ffmpeg -y  -f h264 -fflags nobuffer \
+     -r 25 -i -  -f pulse -i default   -c:v h264_v4l2m2m -b:v 1500k -g 50   -c:a libfdk_aac -b:a 128k -ac 1  -af "aresample=async=1:first_pts=0" \
+     -map 0:v:0 -map 1:a:0   -fps_mode cfr   -f rtsp -rtsp_transport tcp   -muxdelay 0.1 -flags low_delay   -avioflags direct   rtsp://
  
 
 # rtmp not sure
