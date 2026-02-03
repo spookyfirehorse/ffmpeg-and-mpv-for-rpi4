@@ -368,8 +368,27 @@ best ever more cpu pi 4
 
 
      nice -n -11 rpicam-vid -t 0 --width 1280 --height 720 --framerate 25 --codec h264 --inline --flush -n -o - | ffmpeg -y  -f h264 -fflags nobuffer \
-     -r 25 -i -  -f pulse -i default   -c:v h264_v4l2m2m -b:v 1500k -g 50   -c:a libfdk_aac -b:a 128k -ac 1  -af "aresample=async=1:first_pts=0" \
+     -r 25 -i -  -f pulse -isync 0 -i default   -c:v h264_v4l2m2m -b:v 1500k -g 50   -c:a libfdk_aac -b:a 128k -ac 1  -af "aresample=async=1:first_pts=0" \
      -map 0:v:0 -map 1:a:0   -fps_mode cfr   -f rtsp -rtsp_transport tcp   -muxdelay 0.1 -flags low_delay   -avioflags direct   rtsp://
+
+
+ more advanced
+
+           nice -n -11 rpicam-vid -t 0 --width 1280 --height 720 --framerate 25 --codec h264 --inline --flush -n -o - | \
+           ffmpeg -y -use_wallclock_as_timestamps 1 \
+          -fflags +genpts+nobuffer \
+          -thread_queue_size 4096 -f h264 -i - \
+          -thread_queue_size 4096 -f pulse -isync 0 -i default \
+          -c:v h264_v4l2m2m -b:v 1500k -maxrate 1500k -bufsize 3000k -g 50 \
+          -c:a libfdk_aac -b:a 128k -ac 1 \
+          -af "aresample=async=1000:min_hard_comp=0.01" \
+          -map 0:v:0 -map 1:a:0 \
+          -fps_mode cfr \
+          -f rtsp -rtsp_transport udp \
+          -muxdelay 0 -flags low_delay \
+          rtsp://"user:passwd"@"localhost:8557"/mystream
+
+
  
 
 # rtmp not sure
