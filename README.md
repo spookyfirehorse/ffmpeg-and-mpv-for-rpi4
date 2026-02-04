@@ -358,29 +358,31 @@ the winner
 
    ### realtime o.1 sec to reciever pi 4 stable run for ever without  desync ! may it works also on pi3 zero2w
 
-   you can change h264 with mpegts but also on input -f mpegts
+   you can change --libav-format h264 with mpegts but please also on input -f mpegts
 
 
    tcp h264
 
    
-           nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
-          --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
-          --awb indoor --profile baseline --hdr off --intra 25 --level 4.1 -b 1000000 \
-          --flush -n -o - | \
-          nice -n -11 ffmpeg -y \
-          -use_wallclock_as_timestamps 1 \
-          -fflags +genpts+nobuffer+flush_packets \
-         -thread_queue_size 1024 \
-         -c:v h264_v4l2m2m -num_output_buffers 4 -f h264 -i - \
-         -thread_queue_size 1024 -f pulse -fragment_size 512 -isync 0  -i default \
-         -map 0:v:0 -map 1:a:0 \
-         -c:v h264_v4l2m2m -num_capture_buffers 8 -num_output_buffers 4 \
-         -b:v 1000k -maxrate 1000k -bufsize 500k -g 25 -bf 0 -fps_mode cfr \
-         -c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0 -signaling explicit_sbr \
-         -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
-          -muxdelay 0 -max_interleave_delta 1 -flags +low_delay -avioflags direct -pkt_size 1316 \
-          rtsp://"user:pwd"@"localhost:8554"/mystream
+              nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
+              --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
+              --autofocus-mode manual --autofocus-range normal --autofocus-window 0.25,0.25,0.5,0.5 \
+              --awb indoor --profile baseline --hdr off --intra 25 --level 4.1 -b 1000000 \
+              --flush -n -o - | \
+              nice -n -11 ffmpeg -y \
+              -use_wallclock_as_timestamps 1 \
+              -fflags +genpts+nobuffer+flush_packets \
+              -thread_queue_size 1024 \
+              -c:v h264_v4l2m2m -num_output_buffers 4 -f h264 -i - \
+              -thread_queue_size 1024 -f pulse -fragment_size 512 -isync 0 -i default \
+              -map 0:v:0 -map 1:a:0 \
+              -c:v h264_v4l2m2m -num_capture_buffers 8 -num_output_buffers 4 \
+              -b:v 1000k -maxrate 1000k -bufsize 500k -g 25 -bf 0 -fps_mode cfr \
+              -c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0 -signaling explicit_sbr \
+              -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
+              -muxdelay 0 -max_interleave_delta 1 -flags +low_delay -avioflags direct -pkt_size 1316 \
+              rtsp://"MshcUBHU8P:VPxfYXKRXw"@"localhost:8557"/mystream
+
 
 
 
@@ -407,25 +409,27 @@ the winner
 
 # rtmp not sure
 
-         nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
-          --libav-video-codec h264_v4l2m2m --libav-format flv --codec libav --inline \
-          --awb indoor --profile baseline --hdr off --intra 25 --level 4.1 -b 1000000 \
-          --flush -n -o - | \
-          nice -n -11 ffmpeg -y \
-          -use_wallclock_as_timestamps 1 \
-          -fflags +genpts+nobuffer+flush_packets \
-         -thread_queue_size 1024 \
-         -c:v h264_v4l2m2m -num_output_buffers 4 -f flv -i - \
-         -thread_queue_size 1024 -f pulse -fragment_size 512 -isync 0  -i default \
-         -map 0:v:0 -map 1:a:0 \
-         -c:v h264_v4l2m2m -num_capture_buffers 8 -num_output_buffers 4 \
-         -b:v 1000k -maxrate 1000k -bufsize 500k -g 25 -bf 0 -fps_mode cfr \
-         -c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0 -signaling explicit_sbr \
-         -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
-          -muxdelay 0 -max_interleave_delta 1 -flags +low_delay -avioflags direct -pkt_size 1316 \
+              nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 24 \
+              --libav-video-codec h264_v4l2m2m --libav-format flv --codec libav --inline \
+              --autofocus-mode manual --autofocus-range normal --autofocus-window 0.25,0.25,0.5,0.5 \
+              --awb indoor --profile baseline --hdr off --intra 25 --level 4.1 -b 1000000 \
+              --flush -n -o - | \
+              nice -n -11 ffmpeg -y \
+              -use_wallclock_as_timestamps 1 \
+              -fflags +genpts+nobuffer+flush_packets \
+              -thread_queue_size 1024 \
+              -c:v h264_v4l2m2m -num_output_buffers 4 -f flv -i - \
+              -thread_queue_size 1024 -f pulse -fragment_size 512 -isync 0 -i default \
+              -map 0:v:0 -map 1:a:0 \
+              -c:v h264_v4l2m2m -num_capture_buffers 8 -num_output_buffers 4 \
+              -b:v 1000k -maxrate 1000k -bufsize 500k -g 25 -bf 0 -fps_mode cfr \
+              -c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0 -signaling explicit_sbr \
+              -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
+              -muxdelay 0 -max_interleave_delta 1 -flags +low_delay -avioflags direct -pkt_size 1316 \
+              rtmp://localhost:1935/live?"user=spooky&pass=password"
+
           rtmp://localhost:1935/live?"user=spooky&pass=password"
          
-         -  rtmp://localhost:1935/live?"user=spooky&pass=password"
 
 ### rec 
 
