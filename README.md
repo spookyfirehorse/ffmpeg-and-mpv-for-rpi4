@@ -655,7 +655,7 @@ direct above the biggest files and copy that file to your home folder blablabla.
      
          ffmpeg  +genpts+igndts+discardcorrupt -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime -fix_sub_duration \
         -i example.vob  -ss 00:00:05  \
-        -map 0:v -scodec copy  -map 0:s -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
+        -map 0:v -scodec copy  -map 0:s -c:v h264_v4l2m2m  -b:v 5M -maxrate 5M -minrate 5M -bufsize 5M -pix_fmt yuv420p -num_capture_buffers 512 -num_output_buffers 64  -aspect 16:9 \
         -c:a libopus     -b:a 128k -map 0:a?   -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
 
 
@@ -664,15 +664,15 @@ direct above the biggest files and copy that file to your home folder blablabla.
 
         ffmpeg  +genpts+igndts+discardcorrupt -y  -hwaccel drm -hwaccel_output_format drm_prime -probesize 400M -analyzeduration 410M -fix_sub_duration \
         -i output.vob  -ss 00:00:05  \
-        -map 0:v?   -c:v h264_v4l2m2m  -b:v 5M -maxrate 5M -minrate 5M -buffsize 5M  -pix_fmt yuv420p -num_capture_buffers 512 -num_output_buffers 64 -bufsize 5M  -aspect 16:9 \
+        -map 0:v?   -c:v h264_v4l2m2m  -b:v 5M -maxrate 5M -minrate 5M -bufsize 5M  -pix_fmt yuv420p -num_capture_buffers 512 -num_output_buffers 64  -aspect 16:9 \
         -c:a libopus     -b:a 128k -map 0:a? -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
 
 # separate video
 
             ffmpeg -y   -fflags +genpts+igndts -ifo_palette default.IFO \
            -probesize 1400M -analyzeduration 1410M -hwaccel drm -hwaccel_output_format drm_prime -i output.vob -map 0:v? \
-           -c:v h264_v4l2m2m  -b:v 5M -maxrate 5M -minrate 5M -buffsize 5M  -pix_fmt yuv420p  -bufsize 5M  -num_capture_buffers 512 \
-           -num_output_buffers 64    -an -sn  -f mp4  only-lovers-audio+sub.mp4
+           -c:v h264_v4l2m2m  -b:v 5M -maxrate 5M -minrate 5M -bufsize 5M  -pix_fmt yuv420p  -num_capture_buffers 512 \
+           -num_output_buffers 64 -an -sn  -f mp4  only-lovers-audio+sub.mp4
 
 # separate  audio + subtitle
 
