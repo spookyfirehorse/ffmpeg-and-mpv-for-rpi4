@@ -428,38 +428,38 @@ the winner
               -muxdelay 0 -max_interleave_delta 1 -flags +low_delay -avioflags direct -pkt_size 1316 \
               rtmp://localhost:1935/live?"user=spooky&pass=password"
 
-          rtmp://localhost:1935/live?"user=spooky&pass=password"
+              mpv  --profile=cam rtmp://localhost:1935/live?"user=spooky&pass=password"
          
 
 ### rec 
 
 
-nano .config/mpv/mpv.conf
+       nano .config/mpv/mpv.conf
 
 
-[convert]
+       [convert]
 
-hwaccel=auto
-#vf-add = scale=480:-2
-ovc = libx264
-ovcopts-add = preset=medium
-ovcopts-add = tune=fastdecode
-ovcopts-add = b=1M
-ovcopts-add = maxrate=1M,minrate=1M
-ovcopts-add = bufsize=1M
-ovcopts-add = rc_init_occupancy=900k
-ovcopts-add = refs=2
-ovcopts-add = profile=baseline
-profile=enc-a-aac
-of=matroska
-framedrop=decoder
-#demuxer-lavf-o-add=fflags=+nobuffer+genpts
-container-fps-override=25
-no-correct-pts
-untimed
+       hwaccel=auto
+       #vf-add = scale=480:-2
+       ovc = libx264
+       ovcopts-add = preset=medium
+       ovcopts-add = tune=fastdecode
+       ovcopts-add = b=1M
+       ovcopts-add = maxrate=1M,minrate=1M
+       ovcopts-add = bufsize=1M
+       ovcopts-add = rc_init_occupancy=900k
+       ovcopts-add = refs=2
+       ovcopts-add = profile=baseline
+       profile=enc-a-aac
+       of=matroska
+       framedrop=decoder
+       #demuxer-lavf-o-add=fflags=+nobuffer+genpts
+       container-fps-override=25
+       no-correct-pts
+       untimed
 
 
-mpv rtsp://"user:pwd"@"ip:8554"/mystream  --profile=convert --o=`date +%Y-%m-%d-%H-%M`.mkv
+       mpv rtsp://"user:pwd"@"ip:8554"/mystream  --profile=convert --o=`date +%Y-%m-%d-%H-%M`.mkv
 
 
 #######################################################################################################################################
@@ -469,7 +469,7 @@ mpv rtsp://"user:pwd"@"ip:8554"/mystream  --profile=convert --o=`date +%Y-%m-%d-
  
          
  
-###  vapoursynth
+                                            vapoursynth
 
 
        wget https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb
@@ -628,11 +628,7 @@ simply
 
         mpv dvdnav:// --cache=no --dvd-device=/dev/sr0  --stream-dump=output.vob 
 
-only comand line no gui because the gpu runns full fps ca 100 
-
-go raspi-config boot tu terminal autologin or let the rpi untouched no htop no other gui no terminal the cpu runns on ca 30 % no heating only the gpu runs full
-
-you find the IFO file ind the dvd foler
+you find the IFO file in the dvd foler
 
 direct above the biggest files and copy that file to your home folder blablabla.IFO
 
@@ -643,22 +639,24 @@ direct above the biggest files and copy that file to your home folder blablabla.
 
 
         #!/bin/bash
-       for file in "$1"; do   ffmpeg  +genpts+igndts+discardcorrupt -ifo_palette example.IFO -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime -fix_sub_duration \
+       for file in "$1"; do   ffmpeg  +genpts+igndts+discardcorrupt -ifo_palette example.IFO -y \
+       -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime -fix_sub_duration \
       -canvas_size  720x576  -i "$file"  -ss 00:00:05 -metadata title="$file" \
-      -map 0:v -scodec dvdsub   -map 0:s    \
-     -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p  -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
-      -c:a libopus -b:a 128k -map 0:a -af volume=1.5   -movflags +faststart  -af volume=1.5 -avoid_negative_ts 1   -max_interleave_delta 0  -f mp4  "${file%.*}.mp4"; done
+      -map 0:v -scodec dvdsub   -map 0:s?    \
+     -c:v h264_v4l2m2m  -b:v 5M  -pix_fmt yuv420p  -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M --minrate 5M  -maxrate 5M  -aspect 16:9 -map 0:v? \
+      -c:a libopus -b:a 128k -map 0:a? -af volume=1.5   -movflags +faststart  -af volume=1.5 -avoid_negative_ts 1   -max_interleave_delta 0  -f mp4  "${file%.*}.mp4"; done
 
-# seperate subtitles
+# only  subtitles you want with all audio and video
 
-        ffmpeg  -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime   -i /media/sun/Filme/Neu/the-dead-dont-die.mkv   -map 0:v -scodec copy   -map 0:s:12 -map 0:s:11  -map 0:s:1  -map 0:s:2     -map 0:s:10   -c:v copy -bufsize 5M   -maxrate 5M   -c:a copy     -b:a 128k -map 0:a  -y    /media/dat/test.mkv
+        ffmpeg  -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime   -i /media/sun/Filme/Neu/the-dead-dont-die.mkv   -map 0:v? -scodec copy \
+        -map 0:s:1 -map 0:s:2  -c:v copy   -c:a copy     -b:a 128k -map 0:a?  -y    /media/dat/test.mkv
 
 # without color palette -scodec copy
      
-       ffmpeg  +genpts+igndts+discardcorrupt -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime -fix_sub_duration \
+         ffmpeg  +genpts+igndts+discardcorrupt -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime -fix_sub_duration \
         -i example.vob  -ss 00:00:05  \
-      -map 0:v -scodec copy  -map 0:s -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
-      -c:a libopus     -b:a 128k -map 0:a   -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
+        -map 0:v -scodec copy  -map 0:s -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
+        -c:a libopus     -b:a 128k -map 0:a?   -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
 
 
 # without subtitle
@@ -666,21 +664,25 @@ direct above the biggest files and copy that file to your home folder blablabla.
 
         ffmpeg  +genpts+igndts+discardcorrupt -y  -hwaccel drm -hwaccel_output_format drm_prime -probesize 400M -analyzeduration 410M -fix_sub_duration \
         -i output.vob  -ss 00:00:05  \
-        -map 0:v   -c:v h264_v4l2m2m  -b:v 3M  -pix_fmt yuv420p -num_capture_buffers 512   -num_output_buffers 64 -bufsize 5M   -maxrate 5M  -aspect 16:9 \
-        -c:a libopus     -b:a 128k -map 0:a -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
+        -map 0:v?   -c:v h264_v4l2m2m  -b:v 5M -maxrate 5M -minrate 5M -buffsize 5M  -pix_fmt yuv420p -num_capture_buffers 512 -num_output_buffers 64 -bufsize 5M  -aspect 16:9 \
+        -c:a libopus     -b:a 128k -map 0:a? -af volume=1.5   -movflags +faststart   -f mp4  example.mp4
 
 # separate video
 
-            ffmpeg -y   -fflags +genpts+igndts -ifo_palette default.IFO   -probesize 1400M -analyzeduration 1410M -hwaccel drm -hwaccel_output_format drm_prime -i output.vob -map 0:v  -c:v h264_v4l2m2m   -level 3.0 -b:v 5M -maxrate 6M   -pix_fmt yuv420p  -bufsize 5M  -num_capture_buffers 512   -num_output_buffers 64    -an -sn  -f mp4  only-lovers-audio+sub.mp4
+            ffmpeg -y   -fflags +genpts+igndts -ifo_palette default.IFO \
+           -probesize 1400M -analyzeduration 1410M -hwaccel drm -hwaccel_output_format drm_prime -i output.vob -map 0:v? \
+           -c:v h264_v4l2m2m  -b:v 5M -maxrate 5M -minrate 5M -buffsize 5M  -pix_fmt yuv420p  -bufsize 5M  -num_capture_buffers 512 \
+           -num_output_buffers 64    -an -sn  -f mp4  only-lovers-audio+sub.mp4
 
 # separate  audio + subtitle
 
-        ffmpeg  -probesize 1400M -analyzeduration 1410M -fflags +genpts+igndts -ifo_palette default.IFO -fix_sub_duration -canvas_size  720x576    -i output.vob   -c:a libfdk_aac -b:a 128k    -map 0:a -scodec dvdsub    -map 0:s -vn  -f mp4    test.mp4
+        ffmpeg  -probesize 1400M -analyzeduration 1410M -fflags +genpts+igndts -ifo_palette default.IFO -fix_sub_duration -canvas_size  720x576  \
+        -i output.vob   -c:a libfdk_aac -b:a 128k    -map 0:a? -scodec dvdsub    -map 0:s? -vn  -f mp4    test.mp4
 
 
 # separate only audio 
 
-            ffmpeg  -probesize 1400M -analyzeduration 1410M -fflags +igndts  -i output.vob   -c:a libfdk_aac -b:a 128k    -map 0:a  -vn -sn  -f mp4    test.mp4
+            ffmpeg  -probesize 1400M -analyzeduration 1410M -fflags +igndts  -i output.vob   -c:a libfdk_aac -b:a 128k    -map 0:a?  -vn -sn  -f mp4    test.mp4
 
 # muxing
 
