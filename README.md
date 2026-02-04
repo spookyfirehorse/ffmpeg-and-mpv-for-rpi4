@@ -347,26 +347,51 @@ or
          mpv --profile=cam rtsp://ip:8554
 
 ###########################  
+the winner
 
+
+ende best pi4
+
+          nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
+          --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
+          --awb indoor --profile baseline --hdr off --intra 25 --level 4.1 -b 1000000 \
+          --flush -n -o - | \
+         nice -n -11 ffmpeg -y \
+         -use_wallclock_as_timestamps 1 \
+         -fflags +genpts+nobuffer+flush_packets \
+         -thread_queue_size 1024 -r 25 \
+         -c:v h264_v4l2m2m -num_output_buffers 4 -f h264 -i - \
+        -thread_queue_size 1024 -f pulse -fragment_size 512 -i default \
+        -map 0:v:0 -map 1:a:0 \
+        -c:v h264_v4l2m2m -num_capture_buffers 8 -num_output_buffers 4 \
+        -qmin 20 -qmax 30 -g 25 -bf 0 -fps_mode cfr \
+        -c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0 -signaling explicit_sbr \
+        -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
+        -muxdelay 0 -max_interleave_delta 1 -flags +low_delay -avioflags direct -pkt_size 1316 \
+        rtsp://
 
 
    ### realtime o.1 sec to reciever pi 4 stable runn fur ever without  desync
 
    
            nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
-           --libav-video-codec h264_v4l2m2m --libav-format mpegts --codec libav --inline \
-           --awb indoor --profile baseline --hdr off --intra 25 --level 4.1 -b 1000000 \  
-           --flush -n -o - | \
-           nice -n -11 ffmpeg -y -use_wallclock_as_timestamps 1 -fflags +genpts+nobuffer+flush_packets \
-          -c:v h264_v4l2m2m -num_output_buffers 4 -f mpegts -i - \
-          -f pulse -isync 0 -i default \
-          -c:v h264_v4l2m2m -num_capture_buffers 8 -num_output_buffers 4 \
-          -b:v 1000k -maxrate 1000k -bufsize 500k -g 25 -bf 0 \
-          -c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0 \
-          -map 0:v:0 -map 1:a:0 \
-          -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
-          -muxdelay 0 -flags +low_delay -avioflags direct -fps_mode cfr   \
-            rtsp://"user:pwd"@"localhost:8554"/mystream
+          --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
+          --awb indoor --profile baseline --hdr off --intra 25 --level 4.1 -b 1000000 \
+          --flush -n -o - | \
+        nice -n -11 ffmpeg -y \
+          -use_wallclock_as_timestamps 1 \
+          -fflags +genpts+nobuffer+flush_packets \
+         -thread_queue_size 1024 \
+         -c:v h264_v4l2m2m -num_output_buffers 4 -f h264 -i - \
+         -thread_queue_size 1024 -f pulse -fragment_size 512 -isync 0  -i default \
+         -map 0:v:0 -map 1:a:0 \
+         -c:v h264_v4l2m2m -num_capture_buffers 8 -num_output_buffers 4 \
+         -b:v 1000k -maxrate 1000k -bufsize 500k -g 25 -bf 0 -fps_mode cfr \
+         -c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0 \
+         -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
+          -muxdelay 0 -max_interleave_delta 1 -flags +low_delay -avioflags direct -pkt_size 1316 \
+          rtsp://"MshcUBHU8P:VPxfYXKRXw"@"localhost:8557"/mystream
+
 
 
            
