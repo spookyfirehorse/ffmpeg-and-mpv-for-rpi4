@@ -303,7 +303,7 @@ or
                 -metadata title='lucy' \
                 -f rtsp \
                 -rtsp_transport tcp -muxdelay 0 -rtpflags latm -tcp_nodelay 1  \
-                -flags low_delay -avioflags direct \
+                -flags +low_delay -avioflags direct \
                   rtsp://"user:passwd"@"localhost:8554"/mystream
        
 
@@ -365,7 +365,7 @@ or
           -c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0 \
           -map 0:v:0 -map 1:a:0 \
           -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
-          -muxdelay 0 -flags +low_delay -fps_mode cfr   \
+          -muxdelay 0 -flags +low_delay -avioflags direct -fps_mode cfr   \
             rtsp://"user:pwd"@"localhost:8554"/mystream
 
 
