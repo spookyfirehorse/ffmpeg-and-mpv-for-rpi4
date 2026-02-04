@@ -427,6 +427,35 @@ the winner
          
          -  rtmp://localhost:1935/live?"user=spooky&pass=password"
 
+### rec 
+
+
+nano .config/mpv/mpv.conf
+
+
+[convert]
+
+hwaccel=auto
+#vf-add = scale=480:-2
+ovc = libx264
+ovcopts-add = preset=medium
+ovcopts-add = tune=fastdecode
+ovcopts-add = b=1M
+ovcopts-add = maxrate=1M,minrate=1M
+ovcopts-add = bufsize=1M
+ovcopts-add = rc_init_occupancy=900k
+ovcopts-add = refs=2
+ovcopts-add = profile=baseline
+profile=enc-a-aac
+of=matroska
+framedrop=decoder
+#demuxer-lavf-o-add=fflags=+nobuffer+genpts
+container-fps-override=25
+no-correct-pts
+untimed
+
+
+mpv rtsp://"user:pwd"@"ip:8554"/mystream  --profile=convert --o=`date +%Y-%m-%d-%H-%M`.mkv
 
 
 #######################################################################################################################################
