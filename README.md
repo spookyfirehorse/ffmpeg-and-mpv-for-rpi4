@@ -271,30 +271,44 @@ or
 
 ##  rpi 3  and pi z2w  trixie audio default usb mikrofon u-green  24 h stable
 
+
+
+                nice -n -11 rpicam-vid \
+               -b 1000000 \
+               --denoise cdn_off \
+               --awb indoor \
+               --codec libav \
+               --libav-format mpegts \
+               --profile main \
+               --hdr off \
+               --level 4.1 \
+               --framerate 25 \
+               --width 1280 \
+                --height 720 \
+               --autofocus-mode manual \
+                --autofocus-range normal \
+                --autofocus-window 0.25,0.25,0.5,0.5 \
+                --audio-codec libfdk_aac \
+                --audio-channels 1 \
+                --libav-audio 1 \
+                --audio-source pulse \
+                --audio-samplerate 48000 \
+                --inline \
+                -t 0 \
+                -n \
+                -o - | \
+               ffmpeg -f mpegts -fflags +genpts+nobuffer+flush_packets \
+                -i - \
+                -c copy \
+                -metadata title='lucy' \
+                -f rtsp \
+                -rtsp_transport tcp -muxdelay 0 -rtpflags latm -tcp_nodelay 1  \
+                -flags low_delay -avioflags direct \
+                  rtsp://"user:passwd"@"localhost:8554"/mystream
        
 
-         nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off   --codec libav --libav-format mpegts  --low-latency 1   --profile=main --hdr=off \
-        --level 4.1 --framerate 25  --width 1280 --height 720   --av-sync=0 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
-        --audio-codec libfdk_aac    --audio-channels 1 --libav-audio 1 --audio-source pulse  --awb indoor \
-         -t 0    -n  -o  - | ffmpeg  -hide_banner -fflags nobuffer -flags low_delay -avioflags direct \
-        -hwaccel drm -hwaccel_output_format drm_prime -f mpegts -re  -i -  -metadata title='devil' -c  copy -mpegts_copyts 1 -map 0:0 -map 0:1  -fflags +genpts \
-       -f rtsp -buffer_size 4k  -muxdelay 0.1  -rtpflags latm  -rtsp_transport udp    rtsp://localhost:8554/mystream
-
-         nice -n -11 rpicam-vid \
-         -b 1000000 --denoise cdn_off --awb indoor \
-         --codec libav --libav-format mpegts --profile main \
-         --hdr off --level 4.1 --framerate 25 \
-         --width 1536 --height 864 \
-         --autofocus-mode manual --autofocus-range normal \
-         --autofocus-window 0.25,0.25,0.5,0.5 \
-         --audio-codec libfdk_aac --audio-channels 1 \
-         --libav-audio 1 --audio-source pulse --audio-samplerate 48000 \
-         --inline -t 0 -n -o - | \
-         ffmpeg -f mpegts -i - \
-         -c copy -mpegts_copyts 1 -metadata title='lucy' \
-         -f rtsp -rtsp_transport tcp -muxdelay 0 -rtpflags latm \
-         -fflags nobuffer+igndts+flush_packets -flags low_delay -avioflags direct \
-          rtsp://"user:passwd"@"localhost:8554"/mystream
+         
+         
        
                mpv rtsp://"user:passwd"@"receiverip:8554"/mystream
                
@@ -353,14 +367,38 @@ or
 
 # test pi 4 mediamtx absolute timestamp false 10 h sync  3 seconds delay to reciever
 
-       nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off --awb indoor  --codec libav --libav-format mpegts   --profile=main --hdr=off \
-       --level 4.1 --framerate 25  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal \
-       --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libfdk_aac \
-       --audio-channels 2 --libav-audio 1 --audio-source pulse   --low-latency 1  --audio-samplerate=48000 \
-       -t 0     -n   -o  - | ffmpeg -use_wallclock_as_timestamps 1  -hide_banner  \
-       -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 4k  -i -  -metadata title='lucy' -c:a libfdk_aac -b:a 32k  \
-       -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 1M -filter:v "setpts=PTS/1.0001,fps=25" -r 25 -af aresample=async=1  -map 0:0 -map 0:1  \
-       -f rtsp -buffer_size 4k -fflags nobuffer -flags low_delay -avioflags direct -rtpflags latm -muxdelay 0.1 -rtsp_transport udp  rtsp://localhost:8554/mystream 
+       nice  -n -11 rpicam-vid \
+       -b 1000000 \
+       --denoise cdn_off \
+       --awb indoor --repeat-sequence --gop 25  \
+       --codec libav --libav-format mpegts --profile baseline  --hdr off --level 4.1 \
+       --framerate 25 --width 1280 --height 720 \
+       --autofocus-mode manual --autofocus-range normal  --autofocus-window 0.25,0.25,0.5,0.5 \
+       --audio-codec libfdk_aac \
+       --audio-channels 1 \
+       --libav-audio 1 \
+       --audio-source pulse \
+       --audio-samplerate 48000 \
+       --inline \
+       -t 0 \
+       -n \
+        -o - | \
+        ffmpeg -fflags +genpts+nobuffer+flush_packets -flags low_delay \
+       -f mpegts \
+       -i - \
+       -c:v copy \
+        -c:a libfdk_aac \
+        -af "asetrate=48000*0.9999,aresample=48000:async=1:min_hard_comp=0.1" \
+        -metadata title='lucy' \
+        -f rtsp \
+        -rtsp_transport tcp -tcp_nodelay 1   \
+        -muxdelay 0 \
+        -rtpflags min_latency+latm  \
+        -flags low_delay \
+       -avioflags direct \
+        rtsp://"MshcUBHU8P:VPxfYXKRXw"@"localhost:8557"/mystream
+
+
 
 
 
