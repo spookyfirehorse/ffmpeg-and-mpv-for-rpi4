@@ -333,7 +333,7 @@ or
        no-resume-playback
        video-latency-hacks=yes
        pulse-latency-hacks=yes
-       demuxer-lavf-o-add=fflags=+nobuffer+genpts,avioflags=direct
+       demuxer-lavf-o-add=fflags=+nobuffer+genpts
        stream-buffer-size=4k
        vd-lavc-threads=1
        fullscreen=yes
