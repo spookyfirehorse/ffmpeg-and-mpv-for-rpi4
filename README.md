@@ -352,63 +352,17 @@ or
 
    ### realtime o.1 sec to reciever pi 4
 
-
-           nice -n -11  rpicam-vid    -b 1000000    --denoise cdn_off --awb indoor  --codec libav --libav-format mpegts   --profile=main --hdr=off \
-           --level 4.1 --framerate 25  --width 1536 --height 864   --av-sync=0 --autofocus-mode manual --autofocus-range normal \
-           --autofocus-window  0.25,0.25,0.5,0.5   --audio-codec libfdk_aac \
-           --audio-channels 1 --libav-audio 1 --audio-source pulse   --low-latency 1  --audio-samplerate=48000 \
-           -t 0     -n   -o  - | ffmpeg -use_wallclock_as_timestamps 1 -fflags +genpts -hide_banner  \
-           -hwaccel drm -hwaccel_output_format drm_prime -re  -rtbufsize 4k  -i -  -metadata title='lucy' -c:a copy  \
-           -c:v  h264_v4l2m2m   -b:v 1M  -maxrate 1M -minrate 1M -bufsize 1M -filter:v "setpts=PTS/1.0001,fps=25" -r 25   -map 0:0 -map 0:1  \
-           -f rtsp -buffer_size 4k -fflags nobuffer -flags low_delay -avioflags direct \ 
-           -rtpflags latm -muxdelay 0.1 -rtsp_transport udp  rtsp://"user:passwort"@"localhost:8554"/mystream 
-
-                mpv --profile=cam rtsp://ip:8554
-
-# test pi 4 mediamtx absolute timestamp false 10 h sync  3 seconds delay to reciever
-
-       nice  -n -11 rpicam-vid \
-       -b 1000000 \
-       --denoise cdn_off \
-       --awb indoor --repeat-sequence --gop 25  \
-       --codec libav --libav-format mpegts --profile baseline  --hdr off --level 4.1 \
-       --framerate 25 --width 1280 --height 720 \
-       --autofocus-mode manual --autofocus-range normal  --autofocus-window 0.25,0.25,0.5,0.5 \
-       --audio-codec libfdk_aac \
-       --audio-channels 1 \
-       --libav-audio 1 \
-       --audio-source pulse \
-       --audio-samplerate 48000 \
-       --inline \
-       -t 0 \
-       -n \
-        -o - | \
-        ffmpeg -fflags +genpts+nobuffer+flush_packets -flags low_delay \
-       -f mpegts \
-       -i - \
-       -c:v copy \
-        -c:a libfdk_aac \
-        -af "asetrate=48000*0.9999,aresample=48000:async=1:min_hard_comp=0.1" \
-        -metadata title='lucy' \
-        -f rtsp \
-        -rtsp_transport tcp -tcp_nodelay 1   \
-        -muxdelay 0 \
-        -rtpflags min_latency+latm  \
-        -flags low_delay \
-       -avioflags direct \
-        rtsp://"user:passwd"@"localhost:8557"/mystream
+   
+           nice -n -11 rpicam-vid  --denoise cdn_off  -t 0 --width 1280 --height 720 --framerate 25 --codec h264 \ 
+           --inline --awb indoor --profile baseline  --hdr off --level 4.1  --flush -n -o - | ffmpeg -y -use_wallclock_as_timestamps 1 \ 
+           -fflags +genpts+nobuffer+flush_packets -flags low_delay    -thread_queue_size 1024 -f h264 -i -   -thread_queue_size 1024 \
+           -f pulse -isync 0 -i default   -c:v h264_v4l2m2m -b:v 1500k -maxrate 1500k -bufsize 1500k -g 25 -bf 0 -num_capture_buffers 8 \
+           -num_output_buffers 8   -c:a libfdk_aac -b:a 128k -ac 1 -afterburner 1 -cutoff 18000 \
+           -af "aresample=async=1:min_hard_comp=0.01:max_soft_comp=0.0001:first_pts=0"   -map 0:v:0 -map 1:a:0   -fps_mode cfr   -f rtsp -rtsp_transport tcp -tcp_nodelay 1  \
+           -rtsp_flags prefer_tcp    -muxdelay 0 -flags low_delay   rtsp://"user:pwd"@"localhost:8554"/mystream
 
 
-
-
-
-best ever more cpu pi 4
-
-
-     nice -n -11 rpicam-vid -t 0 --width 1280 --height 720 --framerate 25 --codec h264 --inline --flush -n -o - | ffmpeg -y  -f h264 -fflags nobuffer \
-     -r 25 -i -  -f pulse -isync 0 -i default   -c:v h264_v4l2m2m -b:v 1500k -g 50   -c:a libfdk_aac -b:a 128k -ac 1  -af "aresample=async=1:first_pts=0" \
-     -map 0:v:0 -map 1:a:0   -fps_mode cfr   -f rtsp -rtsp_transport tcp   -muxdelay 0.1 -flags low_delay   -avioflags direct   rtsp://
-
+           
 
  more advanced
 
