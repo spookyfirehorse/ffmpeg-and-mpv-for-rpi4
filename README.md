@@ -396,7 +396,7 @@ or
         -rtpflags min_latency+latm  \
         -flags low_delay \
        -avioflags direct \
-        rtsp://"MshcUBHU8P:VPxfYXKRXw"@"localhost:8557"/mystream
+        rtsp://"user:passwd"@"localhost:8557"/mystream
 
 
 
