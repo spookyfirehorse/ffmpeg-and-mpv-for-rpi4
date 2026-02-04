@@ -341,6 +341,10 @@ or
        hr-seek=no
        demuxer=lavf
        chache=no
+       gpu-dumb-mode=yes
+       frames=1000000
+       demuxer-readahead-secs=0
+
       
 
 
