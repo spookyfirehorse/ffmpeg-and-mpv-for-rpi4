@@ -404,7 +404,21 @@ the winner
           -muxdelay 0 -flags low_delay -avioflags direct -pkt_size 1316 \
           rtsp://"user:passwd"@"localhost:8557"/mystream
 
+best cpu best streaming favorit pi 4 and 5
 
+              nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
+              --autofocus-mode manual --autofocus-range normal --autofocus-window 0.25,0.25,0.5,0.5 \
+              --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
+              --awb indoor --profile baseline --intra 10 -b 1000000 -n -o - | \
+              nice -n -11 ffmpeg -y -fflags +genpts+igndts+nobuffer+flush_packets \
+              -use_wallclock_as_timestamps 1 \
+              -thread_queue_size 32 -f h264 -r 25 -i - \
+              -thread_queue_size 128 -f pulse -fragment_size 512 -isync 0 -i default \
+              -c:v copy \
+              -c:a libfdk_aac -profile:a aac_low -b:a 64k -ac 1 -vbr 0 \
+              -map 0:v:0 -map 1:a:0 \
+              -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -muxdelay 0 -flags +low_delay -avioflags direct -pkt_size 1316 -rtpflags latm \
+              rtsp://"spooky:password"@"localhost:8554"/mystream
  
 
 # rtmp not sure
