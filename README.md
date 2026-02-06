@@ -761,13 +761,13 @@ direct above the biggest files and copy that file to your home folder blablabla.
 
 
 
-              stdbuf -oL -eL chrt -f 95   rpicam-vid --verbose 0  \
+              stdbuf -oL -eL chrt -f 90   rpicam-vid --verbose 0  \
               --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
               --autofocus-mode manual --autofocus-range normal \
               --autofocus-window 0.25,0.25,0.5,0.5 \
               --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
               --awb indoor --profile baseline --intra 25 -b 1500000 -n -o - 2>/dev/null  | \
-              PULSE_LATENCY_MSEC=10 chrt -f 80 taskset -c 2,3   ffmpeg -y -loglevel warning  -hwaccel drm -hwaccel_device /dev/dri/renderD128  \
+              PULSE_LATENCY_MSEC=10 chrt -f 90 taskset -c 2,3   ffmpeg -y -loglevel warning  -hwaccel drm -hwaccel_device /dev/dri/renderD128  \
               -fflags +genpts+igndts+nobuffer+flush_packets  \
               -use_wallclock_as_timestamps 1  \
               -thread_queue_size 128 -f h264 -r 25 -i - \
