@@ -356,31 +356,28 @@ or
 the winner
 
 
-   ### realtime o.1 sec to reciever pi 4 stable run for ever without  desync ! may it works also on pi3 zero2w
-
-   you can change --libav-format h264 with mpegts but please also on input -f mpegts
+## realtime on the end of this file
 
 
    # tcp h264  for all rpi low latenz
 
    
-         nice -n -11 stdbuf -oL -eL rpicam-vid \
-         --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
-         --autofocus-mode manual --autofocus-range normal \
-         --autofocus-window 0.25,0.25,0.5,0.5 \
-         --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
-         --awb indoor --profile baseline --intra 25 -b 1500000 -n -o - | \
-         nice -n -11 ffmpeg -y \
-         -fflags +genpts+igndts+nobuffer+flush_packets \
-         -use_wallclock_as_timestamps 1 \
-         -thread_queue_size 128 -f h264 -r 25 -i - \
-         -thread_queue_size 256 -f pulse -fragment_size 512 -isync 0 -i default \
-         -c:v copy \
-         -c:a libfdk_aac -profile:a aac_low -b:a 64k -ac 1 -vbr 0 -afterburner 0 \
-         -map 0:v:0 -map 1:a:0 \
-         -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -muxdelay 0 \
-         -flags +low_delay -avioflags direct -pkt_size 1316 -rtpflags latm \
-          rtsp://"user:pwd"@"localhost:8554"/mystream
+                nice -n -11 stdbuf -oL -eL taskset -c 2,3  rpicam-vid --verbose 0  \
+              --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
+              --autofocus-mode manual --autofocus-range normal \
+              --autofocus-window 0.25,0.25,0.5,0.5 \
+              --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
+              --awb indoor --profile baseline --intra 25 -b 1500000 -n -o - 2>/dev/null  | \
+              nice -n -11 taskset -c 0,1  ffmpeg -y -hwaccel drm -hwaccel_device /dev/dri/renderD128  \
+              -fflags +genpts+igndts+nobuffer+flush_packets -loglevel warning  \
+              -use_wallclock_as_timestamps 1 \
+              -thread_queue_size 512 -f h264 -r 25 -i - \
+              -thread_queue_size 512 -f pulse -fragment_size 1024 -isync 0 -i default \
+              -c:v copy -metadata title='kali'  \
+              -c:a libopus -application lowdelay -ac 1 -vbr off -b:a 64k -frame_duration 5  -compression_level 0  \
+              -map 0:v:0 -map 1:a:0 \
+              -f rtsp -rtsp_transport udp  -muxdelay 0 -flags +low_delay -avioflags direct -pkt_size 1316  \
+              rtsp://"user:pwd"@"localhost:8554"/mystream
 
 
 
@@ -405,22 +402,25 @@ the winner
 
 best cpu best streaming favorit pi 4 and 5
 
-              nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
-              --autofocus-mode manual --autofocus-range normal --autofocus-window 0.25,0.25,0.5,0.5 \
+              nice -n -11 stdbuf -oL -eL taskset -c 2,3  rpicam-vid --verbose 0  \
+              --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
+              --autofocus-mode manual --autofocus-range normal \
+              --autofocus-window 0.25,0.25,0.5,0.5 \
               --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
-              --awb indoor --profile baseline --intra 25 -b 1000000 -n -o - | \
-              nice -n -11 ffmpeg -y -fflags +genpts+igndts+nobuffer+flush_packets \
+              --awb indoor --profile baseline --intra 25 -b 1500000 -n -o - 2>/dev/null  | \
+              nice -n -11 taskset -c 0,1  ffmpeg -y -hwaccel drm -hwaccel_device /dev/dri/renderD128  \
+              -fflags +genpts+igndts+nobuffer+flush_packets -loglevel warning  \
               -use_wallclock_as_timestamps 1 \
-              -thread_queue_size 32 -f h264 -r 25 -i - \
-              -thread_queue_size 128 -f pulse -fragment_size 512 -isync 0 -i default \
-              -c:v copy \
-              -c:a libfdk_aac -profile:a aac_low -b:a 64k -ac 1 -vbr 0 -afterburner 0  \
+              -thread_queue_size 512 -f h264 -r 25 -i - \
+              -thread_queue_size 512 -f pulse -fragment_size 1024 -isync 0 -i default \
+              -c:v copy -metadata title='kali'  \
+              -c:a libopus -application lowdelay -ac 1 -vbr off -b:a 64k -frame_duration 5  -compression_level 0  \
               -map 0:v:0 -map 1:a:0 \
-              -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -muxdelay 0 -flags +low_delay -avioflags direct -pkt_size 1316 -rtpflags latm \
+              -f rtsp -rtsp_transport udp  -muxdelay 0 -flags +low_delay -avioflags direct -pkt_size 1316  \
               rtsp://"spooky:password"@"localhost:8554"/mystream
  
 
-# rtmp not sure
+# rtmp 
 
               nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 24 \
               --libav-video-codec h264_v4l2m2m --libav-format flv --codec libav --inline \
