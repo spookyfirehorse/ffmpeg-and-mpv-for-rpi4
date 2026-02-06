@@ -704,6 +704,14 @@ direct above the biggest files and copy that file to your home folder blablabla.
 
 ## realtime
 
+
+              sudo ./build-kernel -b default --branch rpi-6.12.y -c 7 -j 6 -u -d  rpi 5
+
+
+              sudo ./build-kernel -b default --branch rpi-6.18.y -c 6 -j 6 -u -d  rpi 4
+
+              
+
               sudo nano /etc/environment
 
               PIPEWIRE_LATENCY=256/48000
