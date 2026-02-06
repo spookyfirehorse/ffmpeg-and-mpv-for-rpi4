@@ -701,5 +701,48 @@ direct above the biggest files and copy that file to your home folder blablabla.
 
          ffmpeg -fflags +genpts -i testv.mkv  -i test.mkv  -c:v copy -c:a copy -c:s copy  -map 0:v -map 1:a    -map 1:s  -f matroska output.mkv    
 
-            
+
+## realtime
+
+              sudo nano /etc/environment
+
+              PIPEWIRE_LATENCY=256/48000
+
+              sudo nano /etc/security/limits.d/99-realtime.conf
+
+              spook  -  rtprio     99
+              spook  -  memlock    unlimited
+              spook  -  nice      -20
+              #*  -  rtprio     99
+              #*  -  memlock    unlimited
+
+#              
+              
+              sudo nano /boot/firmware/cmdline.txt
+              
+              isolcpus=3
+
+              
+# example 
+              stdbuf -oL -eL chrt -f 95   rpicam-vid --verbose 0  \
+              --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
+              --autofocus-mode manual --autofocus-range normal \
+              --autofocus-window 0.25,0.25,0.5,0.5 \
+              --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
+              --awb indoor --profile baseline --intra 25 -b 1500000 -n -o - 2>/dev/null  | \
+                     chrt -f 80 taskset -c 2,3  ffmpeg -y -loglevel warning  -hwaccel drm -hwaccel_device /dev/dri/renderD128  \
+              -fflags +genpts+igndts+nobuffer+flush_packets  \
+              -use_wallclock_as_timestamps 1  \
+              -thread_queue_size 128 -f h264 -r 25 -i - \
+              -thread_queue_size 256 -f pulse -fragment_size 512  -isync 0 -i default \
+              -c:v copy -metadata title='lucy'  \
+              -c:a libopus -application lowdelay -ac 1  -vbr off -b:a 64k -frame_duration 5  -compression_level 0  \
+              -map 0:v:0 -map 1:a:0 \
+              -f rtsp -rtsp_transport udp  -muxdelay 0 -flags +low_delay -avioflags direct -pkt_size 1316 rtsp://
+
+
+              stdbuf -oL -eL chrt -f 95  ffmpeg  -y -probesize 2400M -analyzeduration 2410M -hwaccel drm -hwaccel_output_format drm_prime \
+              -i /media/sun/Filme/Neu/the-dead-dont-die.mkv   -map 0:v? -scodec copy \
+              -map 0:s:1 -map 0:s:2  -c:v copy   -c:a copy     -b:a 128k -map 0:a?  -y    /media/dat/test.mkv
+           
 cheers
