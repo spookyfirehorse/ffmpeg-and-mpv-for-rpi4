@@ -116,7 +116,7 @@ most of comands for all rpi but sure for trixie
 
          
               sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
-              ./configure --prefix=/usr --extra-version='1~+rpt1' \
+              ./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 \
               --toolchain=hardened --enable-gpl --enable-nonfree \
               --enable-shared --disable-static \
               --disable-doc --disable-debug --disable-stripping \
@@ -154,7 +154,7 @@ most of comands for all rpi but sure for trixie
               --extra-cflags="-march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
       
               sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
-              ./configure --prefix=/usr --extra-version='1~+rpt1' --toolchain=hardened --enable-gpl --enable-nonfree --enable-shared \
+              ./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 --toolchain=hardened --enable-gpl --enable-nonfree --enable-shared \
               --disable-static --disable-doc --disable-debug --disable-stripping --enable-epoxy --enable-neon --enable-libssh --enable-v4l2-m2m \
               --disable-v4l2-request --enable-libdrm --enable-libudev --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d --enable-libopus \
               --enable-libfdk-aac --enable-libmp3lame --enable-libssh --enable-libvorbis --enable-libpulse --enable-libxml2 --enable-gnutls --enable-libass --enable-libfreetype \
