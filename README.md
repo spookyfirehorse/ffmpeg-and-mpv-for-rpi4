@@ -118,7 +118,7 @@ most of comands for all rpi but sure for trixie
               sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
               ./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 \
               --toolchain=hardened --enable-gpl --enable-nonfree \
-              --enable-shared --disable-static \
+              --enable-shared --disable-static --incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
               --disable-doc --disable-debug --disable-stripping \
               --arch=aarch64 --enable-neon --disable-vfp --disable-thumb --enable-epoxy \
               --enable-libssh --enable-gnutls --enable-network \
@@ -164,7 +164,7 @@ most of comands for all rpi but sure for trixie
               --disable-podpages --disable-txtpages --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec \
               --disable-ffnvcodec --disable-libcaca --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --disable-appkit \
               --disable-avfoundation --disable-coreimage --disable-audiotoolbox --disable-videotoolbox --disable-amf --disable-d3d11va --disable-dxva2 \
-              --disable-mediafoundation --disable-vulkan --disable-libmfx --disable-libvpl \
+              --disable-mediafoundation --disable-vulkan --disable-libmfx --disable-libvpl --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
               --disable-libnpp --disable-mmal --disable-omx --enable-vfp --enable-thumb --arch=armhf --cpu=cortex-a53 --disable-armv5te --disable-armv6 --disable-armv6t2 \
                && make -j$(nproc) && sudo make install
 
