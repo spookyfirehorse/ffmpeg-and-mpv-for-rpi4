@@ -90,22 +90,23 @@ most of comands for all rpi but sure for trixie
        ./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 --toolchain=hardened \
        --incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
        --enable-gpl --enable-nonfree --enable-shared --disable-static \
-       --arch=aarch64 --enable-neon --enable-gnutls --enable-libxml2 --enable-libudev \
+       --arch=aarch64 --enable-neon --enable-gnutls --enable-libxml2 --enable-libudev --enable-v4l2-m2m --enable-sand \
        --enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
        --enable-libvorbis --enable-libvpx --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg \
        --enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
        --enable-libpulse --enable-libjack --enable-libssh --enable-libsrt --enable-libzmq \
-       --enable-opengl --enable-vulkan --enable-epoxy --enable-libdrm --enable-vout-drm --enable-sand --enable-sdl2 \
-       --enable-v4l2-request --disable-mmal --disable-omx --disable-libmfx --disable-libvpl \
+       --enable-opengl --enable-vulkan --enable-epoxy --enable-libdrm  --enable-vout-drm  --enable-sdl2 \
+       --disable-v4l2-request --disable-mmal --disable-omx --disable-libmfx --disable-libvpl \
        --disable-libbluray --disable-libmysofa --disable-libcaca --disable-pocketsphinx --disable-libjxl \
        --disable-chromaprint --disable-libdvdnav --disable-libdvdread --disable-libcodec2 --disable-libgsm --disable-libgme --disable-libopenmpt \
        --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-vaapi --disable-vdpau \
        --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-vfp --disable-thumb \
-       --extra-cflags="-O3 -march=native -mtune=native -ffast-math" && \
-       make -j$(nproc) && sudo make install
+       --extra-cflags="-O3 -march=armv8.2-a+crc+crypto -mtune=cortex-a76 -ffast-math" && \
+        make -j$(nproc) && sudo make install
 
 
-                 --extra-cflags="-O3 -march=armv8.2-a+crc+crypto -mtune=cortex-a76 -ffast-math"
+       # works also an aaarch 64        --extra-cflags="-O3 -march=native -mtune=native -ffast-math"
+
   
 
 
@@ -119,12 +120,12 @@ most of comands for all rpi but sure for trixie
               --toolchain=hardened --enable-gpl --enable-nonfree \
               --enable-shared --disable-static \
               --disable-doc --disable-debug --disable-stripping \
-              --arch=aarch64 --enable-neon --disable-vfp --disable-thumb \
+              --arch=aarch64 --enable-neon --disable-vfp --disable-thumb --enable-epoxy \
               --enable-libssh --enable-gnutls --enable-network \
-              --enable-v4l2-m2m --enable-v4l2-request --enable-libdrm --enable-libudev \
+              --enable-v4l2-m2m --disable-v4l2-request --enable-libdrm --enable-libudev \
               --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d \
               --enable-libopus --enable-libfdk-aac --enable-libmp3lame --enable-libvorbis \
-              --enable-libpulse --enable-libxml2 \
+              --enable-libpulse --enable-libxml2  \
               --enable-libass --enable-libfreetype --enable-libfontconfig \
               --enable-libwebp --enable-libzimg \
               --enable-opengl --enable-sand --enable-vout-drm \
@@ -135,7 +136,7 @@ most of comands for all rpi but sure for trixie
               --disable-mediafoundation --disable-libmfx --disable-libvpl --disable-libnpp \
               --disable-mmal --disable-omx --disable-vfp --disable-thumb \
               --disable-libcaca --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl \
-              --extra-cflags="-O3 -march=native -mtune=native -ffast-math" && \
+              --extra-cflags="-march=armv8-a+crc -mtune=cortex-a72 -O3 -ffast-math" && \
               make -j$(nproc) && \
               sudo make install
 
@@ -148,10 +149,14 @@ most of comands for all rpi but sure for trixie
       pi3 armhf new
 
       
+               export CFLAGS="-march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard" &&  export CXXFLAGS="$CFLAGS"
+
+              --extra-cflags="-march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
+      
               sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
               ./configure --prefix=/usr --extra-version='1~+rpt1' --toolchain=hardened --enable-gpl --enable-nonfree --enable-shared \
-              --disable-static --disable-doc --disable-debug --disable-stripping --arch=aarch64 --enable-neon --enable-libssh --enable-v4l2-m2m \
-              --enable-v4l2-request --enable-libdrm --enable-libudev --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d --enable-libopus \
+              --disable-static --disable-doc --disable-debug --disable-stripping --enable-epoxy --enable-neon --enable-libssh --enable-v4l2-m2m \
+              --disable-v4l2-request --enable-libdrm --enable-libudev --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d --enable-libopus \
               --enable-libfdk-aac --enable-libmp3lame --enable-libssh --enable-libvorbis --enable-libpulse --enable-libxml2 --enable-gnutls --enable-libass --enable-libfreetype \
               --enable-libfontconfig --enable-libwebp --enable-libzimg --enable-opengl --enable-sand --enable-vout-drm  --enable-network \
               --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-libcaca \
@@ -159,8 +164,8 @@ most of comands for all rpi but sure for trixie
               --disable-podpages --disable-txtpages --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec \
               --disable-ffnvcodec --disable-libcaca --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --disable-appkit \
               --disable-avfoundation --disable-coreimage --disable-audiotoolbox --disable-videotoolbox --disable-amf --disable-d3d11va --disable-dxva2 \
-              --disable-mediafoundation --disable-vulkan --disable-libmfx --disable-libvpl --disable-libnpp --disable-mmal --disable-omx --enable-vfp --enable-thumb  \
-              --extra-cflags="-O3 -mcpu=cortex-a53 -mfpu=neon-vfpv4 -mfloat-abi=hard -ffast-math" --extra-ldflags="-mcpu=cortex-a53 -mfpu=neon-vfpv4" \
+              --disable-mediafoundation --disable-vulkan --disable-libmfx --disable-libvpl \
+              --disable-libnpp --disable-mmal --disable-omx --enable-vfp --enable-thumb --arch=armhf --cpu=cortex-a53 --disable-armv5te --disable-armv6 --disable-armv6t2 \
                && make -j$(nproc) && sudo make install
 
          
@@ -179,7 +184,25 @@ most of comands for all rpi but sure for trixie
       sudo dpkg -i lib*mpv*.deb mpv*.deb
 
 
-# compile
+
+
+        pi 5
+
+       export CFLAGS="-O3 -march=armv8.2-a+crc+crypto -mtune=cortex-a76 -flto"
+       export CXXFLAGS="-O3 -march=armv8.2-a+crc+crypto -mtune=cortex-a76 -flto"
+       export LDFLAGS="-flto"
+
+       pi 4
+       
+       export CFLAGS="-O3 -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -flto"
+       export CXXFLAGS="-O3 -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -flto"
+       export LDFLAGS="-flto"
+
+       pi 3  
+       
+       export CFLAGS="-march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
+       export CXXFLAGS="$CFLAGS"
+
 
         apt source mpv
 
@@ -187,13 +210,43 @@ most of comands for all rpi but sure for trixie
 
         meson setup build
 
-        meson configure build -Dprefix=/usr -Dlibmpv=true -Ddvdnav=enabled \
-        -Dsdl2=enabled -Dzimg=enabled -Degl=enabled -Dwayland=enabled -Degl-wayland=enabled  -Dvaapi=disabled -Dvdpau=disabled \
-        -Dvulkan=enabled  -Dcuda-interop=disabled -Dzlib=enabled -Ddrm=enabled -Ddmabuf-wayland=enabled \
-        -Dalsa=enabled -Dcuda-hwaccel=disabled -Dpipewire=enabled  -Ddmabuf-wayland=enabled -Dvaapi-x11=disabled \
-        -Dvaapi-wayland=disabled -Dvaapi-drm=disabled -Dvapoursynth=enabled
+        meson setup build \
+    --prefix=/usr \
+    --buildtype=release \
+    -Dlibmpv=true \
+    -Dwayland=enabled \
+    -Ddmabuf-wayland=enabled \
+    -Dpipewire=enabled \
+    -Dvulkan=enabled \
+    -Dshaderc=enabled \
+    -Dv4l2-m2m=enabled \
+    -Ddrm=enabled \
+    -Dgbm=enabled \
+    -Dvaapi=disabled \
+    -Dvdpau=disabled \
+    -Dcuda-hwaccel=disabled \
+    -Dsdl2=disabled
+
         
         sudo meson install -C build
+
+
+        pi 5
+
+       export CFLAGS="-O3 -march=armv8.2-a+crc+crypto -mtune=cortex-a76 -flto"
+       export CXXFLAGS="-O3 -march=armv8.2-a+crc+crypto -mtune=cortex-a76 -flto"
+       export LDFLAGS="-flto"
+
+       pi 4
+       
+       export CFLAGS="-O3 -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -flto"
+       export CXXFLAGS="-O3 -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -flto"
+       export LDFLAGS="-flto"
+
+       pi 3  
+       
+       export CFLAGS="-march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
+       export CXXFLAGS="$CFLAGS"
 
 #########################
 
@@ -212,6 +265,8 @@ most of comands for all rpi but sure for trixie
       hwdec-image-format=drm_prime
       gpu-hwdec-interop=drmprime
       drm-vrr-enabled=auto
+      dither=no
+       scale=bilinear
         
 
 #################################
