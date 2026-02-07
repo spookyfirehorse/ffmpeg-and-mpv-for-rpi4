@@ -142,16 +142,13 @@ most of comands for all rpi but sure for trixie
 
 
 
-                      --extra-cflags="-march=armv8-a+crc -mtune=cortex-a72 -O3 -ffast-math"
 
 
 
       pi3 armhf new
 
       
-               export CFLAGS="-march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard" &&  export CXXFLAGS="$CFLAGS"
 
-              --extra-cflags="-march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
       
               sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
               ./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 --toolchain=hardened --enable-gpl --enable-nonfree --enable-shared \
@@ -183,25 +180,6 @@ most of comands for all rpi but sure for trixie
        cd ..
       sudo dpkg -i lib*mpv*.deb mpv*.deb
 
-
-
-
-        pi 5
-
-       export CFLAGS="-O3 -march=armv8.2-a+crc+crypto -mtune=cortex-a76 -flto"
-       export CXXFLAGS="-O3 -march=armv8.2-a+crc+crypto -mtune=cortex-a76 -flto"
-       export LDFLAGS="-flto"
-
-       pi 4
-       
-       export CFLAGS="-O3 -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -flto"
-       export CXXFLAGS="-O3 -march=armv8-a+crc -mtune=cortex-a72 -mfpu=neon-fp-armv8 -mfloat-abi=hard -flto"
-       export LDFLAGS="-flto"
-
-       pi 3  
-       
-       export CFLAGS="-march=armv8-a+crc -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
-       export CXXFLAGS="$CFLAGS"
 
 
         apt source mpv
