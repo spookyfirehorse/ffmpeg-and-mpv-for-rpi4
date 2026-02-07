@@ -1,11 +1,11 @@
 
 sorry for my bad english !!!
 
-first make a copy of your os
+first make a copy of your trixie os
 
        XAUTHORITY=/home/spook/.Xauthority sudo dbus-launch piclone
 
-
+most of comands for all rpi but sure for trixie
 
 #  build FFMPEG with libfdk_aac
 
@@ -100,7 +100,7 @@ first make a copy of your os
        --disable-libbluray --disable-libmysofa --disable-libcaca --disable-pocketsphinx --disable-libjxl \
        --disable-chromaprint --disable-libdvdnav --disable-libdvdread --disable-libcodec2 --disable-libgsm --disable-libgme --disable-libopenmpt \
        --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-vaapi --disable-vdpau \
-       --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-vfp \
+       --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-vfp --disable-thumb \
        --extra-cflags="-O3 -march=native -mtune=native -ffast-math" && \
        make -j$(nproc) && sudo make install
 
@@ -115,45 +115,55 @@ first make a copy of your os
 
          
               sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
-              ./configure --prefix=/usr --extra-version='1~+rpt1' --toolchain=hardened --enable-gpl --enable-nonfree --enable-shared \
-              --disable-static --disable-doc --disable-debug --disable-stripping --arch=aarch64 --enable-neon --enable-libssh --enable-v4l2-m2m \ 
-              --enable-v4l2-request --enable-libdrm --enable-libudev --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d --enable-libopus \
-              --enable-libfdk-aac --enable-libmp3lame --enable-ssh --enable-libvorbis --enable-libpulse --enable-libxml2 --enable-gnutls --enable-libass --enable-libfreetype \
-              --enable-libfontconfig --enable-libwebp --enable-libzimg --enable-opengl --enable-sand --enable-vout-drm  --enable-network \
-              --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-libcaca \
-              --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --disable-doc --disable-htmlpages  --disable-manpages \ 
-              --disable-podpages --disable-txtpages --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec \
-              --disable-ffnvcodec --disable-libcaca --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --disable-appkit \
-              --disable-avfoundation --disable-coreimage --disable-audiotoolbox --disable-videotoolbox --disable-amf --disable-d3d11va --disable-dxva2 \
-              --disable-mediafoundation --disable-vulkan --disable-libmfx --disable-libvpl --disable-libnpp --disable-mmal --disable-omx --disable-vfp \
-              --extra-cflags="-O3 -march=native -mtune=native -ffast-math" && make -j$(nproc) && sudo make install
+              ./configure --prefix=/usr --extra-version='1~+rpt1' \
+              --toolchain=hardened --enable-gpl --enable-nonfree \
+              --enable-shared --disable-static \
+              --disable-doc --disable-debug --disable-stripping \
+              --arch=aarch64 --enable-neon --disable-vfp --disable-thumb \
+              --enable-libssh --enable-gnutls --enable-network \
+              --enable-v4l2-m2m --enable-v4l2-request --enable-libdrm --enable-libudev \
+              --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d \
+              --enable-libopus --enable-libfdk-aac --enable-libmp3lame --enable-libvorbis \
+              --enable-libpulse --enable-libxml2 \
+              --enable-libass --enable-libfreetype --enable-libfontconfig \
+              --enable-libwebp --enable-libzimg \
+              --enable-opengl --enable-sand --enable-vout-drm \
+              --disable-vaapi --disable-vdpau --disable-vulkan \
+              --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec \
+              --disable-appkit --disable-avfoundation --disable-coreimage --disable-audiotoolbox \
+              --disable-videotoolbox --disable-amf --disable-d3d11va --disable-dxva2 \
+              --disable-mediafoundation --disable-libmfx --disable-libvpl --disable-libnpp \
+              --disable-mmal --disable-omx --disable-vfp --disable-thumb \
+              --disable-libcaca --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl \
+              --extra-cflags="-O3 -march=native -mtune=native -ffast-math" && \
+              make -j$(nproc) && \
+              sudo make install
+
 
 
                       --extra-cflags="-march=armv8-a+crc -mtune=cortex-a72 -O3 -ffast-math"
 
 
 
-      pi3 new
+      pi3 armhf new
 
       
               sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
               ./configure --prefix=/usr --extra-version='1~+rpt1' --toolchain=hardened --enable-gpl --enable-nonfree --enable-shared \
-              --disable-static --disable-doc --disable-debug --disable-stripping --arch=aarch64 --enable-neon --enable-libssh --enable-v4l2-m2m \ 
+              --disable-static --disable-doc --disable-debug --disable-stripping --arch=aarch64 --enable-neon --enable-libssh --enable-v4l2-m2m \
               --enable-v4l2-request --enable-libdrm --enable-libudev --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d --enable-libopus \
-              --enable-libfdk-aac --enable-libmp3lame --enable-ssh --enable-libvorbis --enable-libpulse --enable-libxml2 --enable-gnutls --enable-libass --enable-libfreetype \
+              --enable-libfdk-aac --enable-libmp3lame --enable-libssh --enable-libvorbis --enable-libpulse --enable-libxml2 --enable-gnutls --enable-libass --enable-libfreetype \
               --enable-libfontconfig --enable-libwebp --enable-libzimg --enable-opengl --enable-sand --enable-vout-drm  --enable-network \
               --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-libcaca \
-              --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --disable-doc --disable-htmlpages  --disable-manpages \ 
+              --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --disable-doc --disable-htmlpages  --disable-manpages \
               --disable-podpages --disable-txtpages --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec \
               --disable-ffnvcodec --disable-libcaca --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --disable-appkit \
               --disable-avfoundation --disable-coreimage --disable-audiotoolbox --disable-videotoolbox --disable-amf --disable-d3d11va --disable-dxva2 \
-              --disable-mediafoundation --disable-vulkan --disable-libmfx --disable-libvpl --disable-libnpp --disable-mmal --disable-omx --enable-vfp \
-              --extra-cflags="-O3 -march=native -mtune=native -ffast-math" && make -j$(nproc) && sudo make install
+              --disable-mediafoundation --disable-vulkan --disable-libmfx --disable-libvpl --disable-libnpp --disable-mmal --disable-omx --enable-vfp --enable-thumb  \
+              --extra-cflags="-O3 -mcpu=cortex-a53 -mfpu=neon-vfpv4 -mfloat-abi=hard -ffast-math" --extra-ldflags="-mcpu=cortex-a53 -mfpu=neon-vfpv4" \
+               && make -j$(nproc) && sudo make install
 
          
-
-                      --extra-cflags="-O3 -march=armv7-a+fp -mfpu=neon-vfpv4 -mfloat-abi=hard -ffast-math"
-
 
 
 # MPV
