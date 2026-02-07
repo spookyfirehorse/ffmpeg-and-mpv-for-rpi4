@@ -347,39 +347,20 @@ or
 
 
 
-                nice -n -11 rpicam-vid \
-               -b 1000000 \
-               --denoise cdn_off \
-               --awb indoor \
-               --codec libav \
-               --libav-format mpegts \
-               --profile main \
-               --hdr off \
-               --level 4.1 \
-               --framerate 25 \
-               --width 1280 \
-                --height 720 \
-               --autofocus-mode manual \
-                --autofocus-range normal \
-                --autofocus-window 0.25,0.25,0.5,0.5 \
-                --audio-codec libfdk_aac \
-                --audio-channels 1 \
-                --libav-audio 1 \
-                --audio-source pulse \
-                --audio-samplerate 48000 \
-                --inline \
-                -t 0 \
-                -n \
-                -o - | \
-               ffmpeg -f mpegts -fflags +genpts+nobuffer+flush_packets \
-                -i - \
-                -c copy \
-                -metadata title='lucy' \
-                -f rtsp \
-                -rtsp_transport tcp -muxdelay 0 -rtpflags latm -tcp_nodelay 1  \
-                -flags +low_delay -avioflags direct \
-                  rtsp://"user:passwd"@"localhost:8554"/mystream
-       
+           nice -n -11 rpicam-vid \
+         -b 1000000 --denoise cdn_off --awb indoor \
+         --codec libav --libav-format mpegts --profile main \
+         --framerate 25 --width 1280 --height 720 \
+         --inline -t 0 -n -o - | \
+         ffmpeg -f mpegts -fflags +genpts+nobuffer+flush_packets -i - \
+         -f pulse -wallclock 1 -i default \
+         -c:v copy \
+         -c:a libopus -application lowdelay -ac 1 -vbr off -b:a 64k -frame_duration 5 \
+         -metadata title='lucy' \
+         -f rtsp -rtsp_transport tcp -muxdelay 0 -rtpflags latm -tcp_nodelay 1 \
+        -flags +low_delay -avioflags direct \
+         rtsp://lucy:8557"/mystream
+
 
          
          
