@@ -91,7 +91,7 @@ most of comands for all rpi but sure for trixie
        --incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
        --enable-gpl --enable-nonfree --enable-shared --disable-static \
        --arch=aarch64 --cpu=cortex-a76 --extra-cflags="-mcpu=cortex-a76 -mtune=cortex-a76" --extra-ldflags="-latomic" --enable-neon \
-       --enable-gnutls --enable-libxml2 --enable-libudev --enable-v4l2-m2m --enable-sand \
+       --enable-gnutls --enable-libxml2 --enable-libudev --enable-v4l2-m2m --enable-sand --enable-v4l2-request \
        --enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
        --enable-libvorbis --enable-libvpx --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg \
        --enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
@@ -121,7 +121,7 @@ most of comands for all rpi but sure for trixie
               --enable-shared --disable-static --incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
               --disable-doc --disable-debug --disable-stripping \
               --arch=aarch64 --cpu=cortex-a72 --extra-cflags="-mcpu=cortex-a72 -mtune=cortex-a72" --extra-ldflags="-latomic" \
-              --enable-neon --disable-vfp --disable-thumb --enable-epoxy \
+              --enable-neon --disable-vfp --disable-thumb --enable-epoxy --enable-v4l2-request \
               --enable-libssh --enable-gnutls --enable-network \
               --enable-v4l2-m2m --disable-v4l2-request --enable-libdrm --enable-libudev \
               --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d \
@@ -152,7 +152,7 @@ most of comands for all rpi but sure for trixie
       
               sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
               ./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 --toolchain=hardened --enable-gpl --enable-nonfree --enable-shared \
-              --disable-static --disable-doc --disable-debug --disable-stripping --enable-epoxy --enable-neon --enable-libssh --enable-v4l2-m2m \
+              --disable-static --disable-doc --disable-debug --disable-stripping --enable-epoxy --enable-neon --enable-libssh --enable-v4l2-m2m --enable-v4l2-request \
               --disable-v4l2-request --enable-libdrm --enable-libudev --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d --enable-libopus \
               --enable-libfdk-aac --enable-libmp3lame --enable-libssh --enable-libvorbis --enable-libpulse --enable-libxml2 --enable-gnutls --enable-libass --enable-libfreetype \
               --enable-libfontconfig --enable-libwebp --enable-libzimg --enable-opengl --enable-sand --enable-vout-drm  --enable-network \
