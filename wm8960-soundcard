@@ -1,7 +1,7 @@
 git clone https://github.com/waveshare/WM8960-Audio-HAT
 cd WM8960-Audio-HAT
 sudo ./install.sh
-
+echo "blacklist snd_soc_wm8960_soundcard" | sudo tee /etc/modprobe.d/blacklist-wm8960.conf
 
 sudo nano /boot/firmware/config.txt
 
