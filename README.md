@@ -175,9 +175,16 @@ sudo make install && sudo ldconfig
 
 # MPV
 
+sudo apt build-dep mpv -y && \
+apt source mpv && \
+cd mpv-* && \
+dpkg-buildpackage -us -uc && \
+cd .. && \
+sudo dpkg -i lib*mpv*.deb mpv*.deb
 
 
-       sudo apt build-dep mpv && apt source mpv
+       cd ..
+      sudo dpkg -i lib*mpv*.deb mpv*.deb sudo apt build-dep mpv && apt source mpv
 
        cd mpv...version?
        dpkg-buildpackage -us -uc 
