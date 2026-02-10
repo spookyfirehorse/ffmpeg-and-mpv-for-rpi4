@@ -109,31 +109,15 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-vaapi --disable-vdpau \
 --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-vfp --disable-thumb --enable-hardcoded-tables  && \
 make -j$(nproc) && sudo make install
-
-
 ```
+
+
 ```bash
-git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
-./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 --toolchain=hardened \
---incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
---enable-gpl --enable-nonfree --enable-shared --disable-static \
---arch=aarch64 --cpu=cortex-a76 --extra-cflags="-mcpu=cortex-a76 -mtune=cortex-a76" --extra-ldflags="-latomic" --enable-neon \
---enable-gnutls --enable-libxml2 --enable-libudev --enable-v4l2-m2m --enable-sand --enable-v4l2-request \
---enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
---enable-libvorbis --enable-libvpx --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg \
---enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
---enable-libpulse --enable-libjack --enable-libssh --enable-libsrt --enable-libzmq \
---enable-opengl --enable-vulkan --enable-epoxy --enable-libdrm  --enable-vout-drm  --enable-sdl2 \
---disable-v4l2-request --disable-mmal --disable-omx --disable-libmfx --disable-libvpl \
---disable-libbluray --disable-libmysofa --disable-libcaca --disable-pocketsphinx --disable-libjxl \
---disable-chromaprint --disable-libdvdnav --disable-libdvdread --disable-libcodec2 --disable-libgsm --disable-libgme --disable-libopenmpt \
---disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-vaapi --disable-vdpau \
---disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-vfp --disable-thumb --enable-hardcoded-tables  && \
-make -j$(nproc) && sudo make install
+
 ```
             
         
-    #     pi4 new
+   # #     pi4 new
 
 ```bash
 sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
@@ -162,7 +146,7 @@ make -j$(nproc) && \
 sudo make install
 ```
 
-pi3 armhf new      
+## pi3 armhf new      
 
 ```bash
 sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
@@ -259,6 +243,7 @@ sudo nano /etc/sysctl.d/98-rpi.conf
 ```
 ```bash
 net.core.rmem_default=1000000
+net.core.rmem_max=1000000
 ```
 ```bash 
 net.core.rmem_max=1000000
@@ -280,66 +265,41 @@ armv7 32 bit
 
 unzip
 
-         tar -xf mediamtx_v1.15.4_linux_arm64v8.tar.gz
+```bash
+tar -xf mediamtx_v1.15.4_linux_arm64v8.tar.gz
 
 move it to
 
-      sudo mv mediamtx /usr/local/bin/
-
-      sudo mv mediamtx.yml /usr/local/etc/
+```bash
+sudo mv mediamtx /usr/local/bin/
+sudo mv mediamtx.yml /usr/local/etc/
+```
 
 this create mediamtx.service
 
-    sudo tee /etc/systemd/system/mediamtx.service >/dev/null << EOF
-    [Unit]
-    Wants=network.target
-    [Service]
-    ExecStart=/usr/local/bin/mediamtx /usr/local/etc/mediamtx.yml
-    [Install]
-    WantedBy=multi-user.target
-    EOF
-    
+```bash
+sudo tee /etc/systemd/system/mediamtx.service >/dev/null << EOF
+[Unit]
+Wants=network.target
+[Service]
+ExecStart=/usr/local/bin/mediamtx /usr/local/etc/mediamtx.yml
+[Install]
+WantedBy=multi-user.target
+EOF
+```    
 and reload
 
-    sudo systemctl daemon-reload
+```bash
+sudo systemctl daemon-reload && sudo systemctl enable mediamtx && sudo systemctl start mediamtx
+```
 
-enable
-
-    sudo systemctl enable mediamtx
-
-start
-
-    sudo systemctl start mediamtx
 
 upgrade
 
-    sudo mediamtx --upgrade
+```bash
+sudo mediamtx --upgrade
+```
 
-######################################
-
-RTSP STREAMING WITH AUDIO FOR RPI CAMERAS 
-
-        sudo nano  /boot/firmware/config.txt
-
-put this in
-
-        camera_auto_detect=1 #on bookworm default
-        #gpu_mem=256   #disable or delete not needed
-        #start_x=1  #disable or delete
-        
-##########################################
-
-## very important
-
-         sudo nano /etc/sysctl.d/98-rpi.conf
-
-         net.core.rmem_default=1000000
-   
-         net.core.rmem_max=1000000
-
-          sudo reboot
-
- ###############################################
 ## alsa or pulse or pipewire   mikrofon name 
 
          pactl list sources 
@@ -364,22 +324,21 @@ or
 
 ##  rpi 3  and pi z2w  trixie audio default usb mikrofon u-green  24 h stable
 
-
-
-           nice -n -11 rpicam-vid \
-         -b 1000000 --denoise cdn_off --awb indoor \
-         --codec libav --libav-format mpegts --profile main \
-         --framerate 25 --width 1280 --height 720 \
-         --inline -t 0 -n -o - | \
-         ffmpeg -f mpegts -fflags +genpts+nobuffer+flush_packets -i - \
-         -f pulse -wallclock 1 -i default \
-         -c:v copy \
-         -c:a libopus -application lowdelay -ac 1 -vbr off -b:a 64k -frame_duration 5 \
-         -metadata title='lucy' \
-         -f rtsp -rtsp_transport tcp -muxdelay 0 -rtpflags latm -tcp_nodelay 1 \
-        -flags +low_delay -avioflags direct \
-         rtsp://lucy:8557"/mystream
-
+```bash
+nice -n -11 rpicam-vid \
+-b 1000000 --denoise cdn_off --awb indoor \
+--codec libav --libav-format mpegts --profile main \
+--framerate 25 --width 1280 --height 720 \
+--inline -t 0 -n -o - | \
+ffmpeg -f mpegts -fflags +genpts+nobuffer+flush_packets -i - \
+-f pulse -wallclock 1 -i default \
+-c:v copy \
+-c:a libopus -application lowdelay -ac 1 -vbr off -b:a 64k -frame_duration 5 \
+-metadata title='lucy' \
+-f rtsp -rtsp_transport tcp -muxdelay 0 -rtpflags latm -tcp_nodelay 1 \
+-flags +low_delay -avioflags direct \
+rtsp://lucy:8557"/mystream
+```
 
          
          
