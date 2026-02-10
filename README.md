@@ -3,8 +3,11 @@ sorry for my bad english !!!
 
 first make a copy of your trixie os
 
-       XAUTHORITY=/home/spook/.Xauthority sudo dbus-launch piclone
-
+```bash
+```
+```bash
+XAUTHORITY=/home/spook/.Xauthority sudo dbus-launch piclone
+```
 most of comands for all rpi but sure for trixie
 
 #  build FFMPEG with libfdk_aac
@@ -16,13 +19,15 @@ most of comands for all rpi but sure for trixie
       sudo apt install libfdk*
       
    if its faild
-
-    git clone  https://github.com/mstorsjo/fdk-aac && \
-    cd fdk-aac && \
-    autoreconf -fiv && \
-    ./configure  --enable-shared && \
-    make -j4 && \
-    sudo make install && sudo ldconfig
+   
+```bash
+git clone  https://github.com/mstorsjo/fdk-aac && \
+cd fdk-aac && \
+autoreconf -fiv && \
+./configure  --enable-shared && \
+make -j4 && \
+sudo make install && sudo ldconfig
+```
 
    ## alternativ and quick
 
