@@ -6,13 +6,14 @@ http://www.waveshare.net/shop/WM8960-Audio-HAT.htm
 
 http://www.waveshare.com/wm8960-audio-hat.htm
 
-### Install wm8960-soundcard
+### Install wm8960-soundcard kernel 6.18
 Get the wm8960 soundcard source code. and install all linux kernel drivers
 
 ```bash
-git clone https://github.com/waveshare/WM8960-Audio-HAT
-cd WM8960-Audio-HAT
-sudo ./meine-ohne-kernel-install.sh 
+git clone https://github.com/spookyfirehorse/ffmpeg-and-mpv-for-rpi4.git
+cd ffmpeg-and-mpv-for-rpi4/WM8960-Audio-HAT
+sudo ./meine-ohne-kernel-install.sh
+#sudo ./meine-install.sh  # with kernel trixie
 sudo reboot
 ```
 
