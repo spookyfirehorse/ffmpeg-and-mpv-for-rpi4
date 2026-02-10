@@ -16,6 +16,14 @@ sudo ./meine-ohne-kernel-install.sh
 #sudo ./meine-install.sh  # with kernel trixie
 sudo reboot
 ```
+# kernel 6.12
+
+```bash
+git clone https://github.com/waveshare/WM8960-Audio-HAT
+cd WM8960-Audio-HAT
+sudo ./install.sh
+```
+
 
 While the upstream wm8960 codec is not currently supported by current Pi kernel builds, upstream wm8960 has some bugs, we had fixed it. we must it build manually.
 
