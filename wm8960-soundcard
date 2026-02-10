@@ -1,16 +1,17 @@
 git clone https://github.com/waveshare/WM8960-Audio-HAT
 cd WM8960-Audio-HAT
 sudo ./install.sh
-echo "blacklist snd_soc_wm8960_soundcard" | sudo tee /etc/modprobe.d/blacklist-wm8960.conf
+
+
+oder
+
+sudo make install
 
 sudo nano /boot/firmware/config.txt
 
 dtparam=i2s=on
-
 dtoverlay=seeed-2mic-voicecard
-dtoverlay=wm8960-final-fix
-
-#dtoverlay=i2s-mmap
+dtoverlay=i2s-mmap
 
 
 
