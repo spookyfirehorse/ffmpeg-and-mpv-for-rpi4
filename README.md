@@ -91,6 +91,25 @@ sudo make install && sudo ldconfig
      
 ##   pi 5 64 bit
 
+```bash
+git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
+./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 --toolchain=hardened \
+--incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
+--enable-gpl --enable-nonfree --enable-shared --disable-static \
+--arch=aarch64 --cpu=cortex-a76 --extra-cflags="-mcpu=cortex-a76 -mtune=cortex-a76" --extra-ldflags="-latomic" --enable-neon \
+--enable-gnutls --enable-libxml2 --enable-libudev --enable-v4l2-m2m --enable-sand --enable-v4l2-request \
+--enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
+--enable-libvorbis --enable-libvpx --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg \
+--enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
+--enable-libpulse --enable-libjack --enable-libssh --enable-libsrt --enable-libzmq \
+--enable-opengl --enable-vulkan --enable-epoxy --enable-libdrm  --enable-vout-drm  --enable-sdl2 \
+--disable-v4l2-request --disable-mmal --disable-omx --disable-libmfx --disable-libvpl \
+--disable-libbluray --disable-libmysofa --disable-libcaca --disable-pocketsphinx --disable-libjxl \
+--disable-chromaprint --disable-libdvdnav --disable-libdvdread --disable-libcodec2 --disable-libgsm --disable-libgme --disable-libopenmpt \
+--disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-vaapi --disable-vdpau \
+--disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-vfp --disable-thumb --enable-hardcoded-tables  && \
+make -j$(nproc) && sudo make install
+```
          git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
        ./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 --toolchain=hardened \
        --incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
@@ -106,7 +125,7 @@ sudo make install && sudo ldconfig
        --disable-libbluray --disable-libmysofa --disable-libcaca --disable-pocketsphinx --disable-libjxl \
        --disable-chromaprint --disable-libdvdnav --disable-libdvdread --disable-libcodec2 --disable-libgsm --disable-libgme --disable-libopenmpt \
        --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-vaapi --disable-vdpau \
-       --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-vfp --disable-thumb  && \
+       --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-vfp --disable-thumb --enable-hardcoded-tables  && \
         make -j$(nproc) && sudo make install
 
 
@@ -141,7 +160,7 @@ sudo make install && sudo ldconfig
               --disable-videotoolbox --disable-amf --disable-d3d11va --disable-dxva2 \
               --disable-mediafoundation --disable-libmfx --disable-libvpl --disable-libnpp \
               --disable-mmal --disable-omx --disable-vfp --disable-thumb \
-              --disable-libcaca --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl && \
+              --disable-libcaca --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --enable-hardcoded-tables   && \
               make -j$(nproc) && \
               sudo make install
 
@@ -160,7 +179,7 @@ sudo make install && sudo ldconfig
               --disable-static --disable-doc --disable-debug --disable-stripping --enable-epoxy --enable-neon --enable-libssh --enable-v4l2-m2m --enable-v4l2-request \
               --disable-v4l2-request --enable-libdrm --enable-libudev --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d --enable-libopus \
               --enable-libfdk-aac --enable-libmp3lame --enable-libssh --enable-libvorbis --enable-libpulse --enable-libxml2 --enable-gnutls --enable-libass --enable-libfreetype \
-              --enable-libfontconfig --enable-libwebp --enable-libzimg --enable-opengl --enable-sand --enable-vout-drm  --enable-network \
+              --enable-libfontconfig --enable-libwebp --enable-libzimg --enable-opengl --enable-sand --enable-vout-drm  --enable-network --enable-hardcoded-tables \
               --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-libcaca \
               --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --disable-doc --disable-htmlpages  --disable-manpages \
               --disable-podpages --disable-txtpages --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec \
