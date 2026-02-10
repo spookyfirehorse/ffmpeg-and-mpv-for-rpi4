@@ -8,6 +8,7 @@ sudo nano /boot/firmware/config.txt
 dtparam=i2s=on
 
 dtoverlay=seeed-2mic-voicecard
+dtoverlay=wm8960-final-fix
 
 #dtoverlay=i2s-mmap
 
