@@ -1,0 +1,137 @@
+// SPDX-License-Identifier: GPL-2.0
+// ASoC simple sound card support for Kernel 6.18+
+
+#include <linux/clk.h>
+#include <linux/device.h>
+#include <linux/module.h>
+#include <linux/of.h>
+#include <linux/of_device.h>
+#include <linux/platform_device.h>
+#include <linux/string.h>
+#include <linux/version.h>
+#include <sound/simple_card.h>
+#include <sound/soc-dai.h>
+#include <sound/soc.h>
+#include <sound/simple_card_utils.h>
+
+#define DPCM_SELECTABLE 1
+#define DAI	"sound-dai"
+#define CELL	"#sound-dai-cells"
+#define PREFIX	"simple-audio-card,"
+
+/* 6.18+ Makros zur Auflösung der Pfade */
+#ifndef simple_priv_to_card
+#define simple_priv_to_card(priv)	(&(priv)->snd_card)
+#endif
+#ifndef simple_priv_to_dev
+#define simple_priv_to_dev(priv)	((priv)->snd_card.dev)
+#endif
+#ifndef simple_priv_to_link
+#define simple_priv_to_link(priv, i)	((priv)->snd_card.dai_link + (i))
+#endif
+#ifndef simple_priv_to_props
+#define simple_priv_to_props(priv, i)	((priv)->dai_props + (i))
+#endif
+
+/* Stub für entfernte Funktionen in 6.18 */
+static inline void snd_soc_dai_link_set_capabilities(struct snd_soc_dai_link *link) { }
+
+static const struct snd_soc_ops simple_ops = {
+	.startup	= simple_util_startup,
+	.shutdown	= simple_util_shutdown,
+	.hw_params	= simple_util_hw_params,
+};
+
+static int simple_util_parse_dai(struct device_node *node,
+				 struct snd_soc_dai_link_component *dlc,
+				 int *is_single_link)
+{
+	struct of_phandle_args args;
+	int ret;
+
+	if (!node) return 0;
+
+	ret = of_parse_phandle_with_args(node, DAI, CELL, 0, &args);
+	if (ret) return ret;
+
+	ret = snd_soc_of_get_dai_name(node, &dlc->dai_name, 0);
+	if (ret < 0) return ret;
+
+	dlc->of_node = args.np;
+	if (is_single_link) *is_single_link = !args.args_count;
+
+	return 0;
+}
+
+static int simple_parse_node(struct simple_util_priv *priv,
+			     struct device_node *np,
+			     struct link_info *li,
+			     char *prefix,
+			     int *cpu)
+{
+	struct device *dev = simple_priv_to_dev(priv);
+	struct snd_soc_dai_link *dai_link = simple_priv_to_link(priv, li->link);
+	struct simple_dai_props *dai_props = simple_priv_to_props(priv, li->link);
+	struct snd_soc_dai_link_component *dlc;
+	struct simple_util_dai *dai;
+
+	if (cpu) {
+		dlc = snd_soc_link_to_cpu(dai_link, 0);
+		dai = simple_props_to_dai_cpu(dai_props, 0);
+	} else {
+		dlc = snd_soc_link_to_codec(dai_link, 0);
+		dai = simple_props_to_dai_codec(dai_props, 0);
+	}
+
+	return simple_util_parse_dai(np, dlc, cpu);
+}
+
+static int __maybe_unused simple_dai_link_of (struct simple_util_priv *priv,
+			      struct device_node *np,
+			      struct device_node *codec,
+			      struct link_info *li,
+			      bool is_top)
+{
+	struct device *dev = simple_priv_to_dev(priv);
+	struct snd_soc_dai_link *dai_link = simple_priv_to_link(priv, li->link);
+	int ret;
+
+	/* Provider/Consumer Fix für 6.18 */
+	ret = simple_util_parse_daifmt(dev, np, codec, PREFIX, &dai_link->dai_fmt);
+	if (ret < 0) return ret;
+
+	dai_link->ops = &simple_ops;
+	dai_link->init = simple_util_dai_init;
+
+	li->link++;
+	return 0;
+}
+
+/* Platzhalter für die restliche Logik (Probe/Remove) */
+static int simple_probe(struct platform_device *pdev)
+{
+	struct simple_util_priv *priv;
+	struct device *dev = &pdev->dev;
+	
+	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
+	if (!priv) return -ENOMEM;
+
+	priv->snd_card.dev = dev;
+	platform_set_drvdata(pdev, priv);
+
+	return devm_snd_soc_register_card(dev, &priv->snd_card);
+}
+
+static struct platform_driver simple_card_driver = {
+	.driver = {
+		.name = "seeed-voicecard",
+		.of_match_table = of_match_ptr(NULL), // Hier deine ID einfügen
+	},
+	.probe = simple_probe,
+};
+
+module_platform_driver(simple_card_driver);
+
+MODULE_ALIAS("platform:seeed-voicecard");
+MODULE_LICENSE("GPL v2");
+MODULE_DESCRIPTION("WM8960 Audio HAT Driver");
