@@ -48,13 +48,67 @@ sudo make install && sudo ldconfig
 
 
     sudo dpkg -i libfdk*
-    
+#########################################################
 
-###################################################
+```bash
+sudo nano /boot/firmware/cmdline.txt 
+```
+```bash
+console=serial0,115200 console=tty1 root=PARTUUID=37b5fcd6-02 rootfstype=ext4 fsck.repair=yes rootwait  net.ifnames=0 isolcpus=3
+```
+
+
+isoliert 3 cpu for rpicam-vid isolcpus=3
 
 
 
-     sudo apt install cpuinfo 
+
+```bash
+sudo apt install pipewire-alsa rtkit
+```
+
+
+```bash
+sudo rm -r /etc/pipewire
+sudo mkdir /etc/pipewire
+sudo mkdir /etc/pipewire/pipewire.conf.d/
+sudo nano /etc/pipewire/pipewire.conf.d/10-low-latency.conf
+```
+
+```bash
+context.properties = {
+    default.clock.rate          = 48000
+    default.clock.quantum       = 1024
+    default.clock.min-quantum   = 1024
+    default.clock.max-quantum   = 1024
+}
+```
+# dont set it lower because audio comes to late 
+
+```bash
+sudo nano /etc/enviroment
+```
+
+```bash
+PIPEWIRE_LATENCY=512/48000
+```
+
+sudo nano /etc/security/limits.d/99-realtime.conf 
+```
+
+```bash
+spook  -  rtprio     99
+spook  -  memlock    unlimited
+spook  -  nice      -20
+#*  -  rtprio     99
+#*  -  memlock    unlimited
+```
+
+
+
+##################################################
+
+     sudo apt install cpuinfo
 
     cpu-info 
 
