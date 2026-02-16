@@ -90,7 +90,7 @@ sudo nano /etc/enviroment
 ```
 
 ```bash
-PIPEWIRE_LATENCY=512/48000
+PIPEWIRE_LATENCY=1024/48000
 ```
 
 sudo nano /etc/security/limits.d/99-realtime.conf 
@@ -358,11 +358,6 @@ sudo mediamtx --upgrade
 
          pactl list sources 
 
-or
-         
-         pactl list | grep -A2 'Source #' | grep 'Name: '  ##bookworm
-
-         pactl list sources short  ## trixie
 
          for alsa   arecord -L
 
@@ -397,9 +392,9 @@ rtsp://lucy:8557"/mystream
          
          
        
-               mpv rtsp://"user:passwd"@"receiverip:8554"/mystream
+               mpv rtsp://"user:passwd"@"serverip:8554"/mystream
                
-               mpv rtsp://receiverip:8554/mystream
+               mpv rtsp://serverip:8554/mystream
 
        
 
