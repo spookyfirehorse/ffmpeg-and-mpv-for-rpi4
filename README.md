@@ -386,51 +386,40 @@ ffmpeg -f mpegts -fflags +genpts+nobuffer+flush_packets -i - \
 -metadata title='lucy' \
 -f rtsp -rtsp_transport tcp -muxdelay 0 -rtpflags latm -tcp_nodelay 1 \
 -flags +low_delay -avioflags direct \
-rtsp://lucy:8557"/mystream
+rtsp://ip:8554"/mystream
 ```
 
-         
-         
        
-               mpv rtsp://"user:passwd"@"serverip:8554"/mystream
-               
-               mpv rtsp://serverip:8554/mystream
+```bash
+nano .config/mpv/mpv.conf   on the end of file put this in
+```
 
-       
-
-
-      nano .config/mpv/mpv.conf   on the end of file put this in
-
-      [cam]
-
-       #container-fps-override=25
-       #no-correct-pts
-       #untimed
-       osc=no
-       opengl-swapinterval=0
-       profile=fast
-       interpolation=no
-       #rtsp-transport=tcp
-       framedrop=decoder+vo
-       no-resume-playback
-       video-latency-hacks=yes
-       pulse-latency-hacks=yes
-       demuxer-lavf-o-add=fflags=+nobuffer+genpts
-       stream-buffer-size=4k
-       vd-lavc-threads=1
-       fullscreen=yes
-       ytdl=no
-       hr-seek=no
-       demuxer=lavf
-       chache=no
-       gpu-dumb-mode=yes
-       frames=1000000
-       demuxer-readahead-secs=0
-
-      
-
-
-         mpv --profile=cam rtsp://ip:8554
+```bash
+[cam]
+#container-fps-override=25
+#no-correct-pts
+#untimed
+osc=no
+opengl-swapinterval=0
+profile=fast
+interpolation=no
+#rtsp-transport=tcp
+framedrop=decoder+vo
+no-resume-playback
+video-latency-hacks=yes
+pulse-latency-hacks=yes
+demuxer-lavf-o-add=fflags=+nobuffer+genpts
+stream-buffer-size=4k
+vd-lavc-threads=1
+fullscreen=yes
+ytdl=no
+hr-seek=no
+demuxer=lavf
+chache=no
+gpu-dumb-mode=yes
+frames=1000000
+demuxer-readahead-secs=0
+```
 
 ########################### 
 
@@ -482,95 +471,97 @@ rtsp://"user:pwd"@"localhost:8554"/mystream
            
 
  h264 short udp
-
-           nice -n -11 rpicam-vid -t 0 --width 1280 --height 720 --intra 25--framerate 25 --codec h264 --inline --flush -n -o - | \
-           ffmpeg -y -use_wallclock_as_timestamps 1 \
-          -fflags +genpts+nobuffer \
-           -f h264 -i - \
-           -f pulse -isync 0 -i default \
-          -c:v h264_v4l2m2m -b:v 1500k -maxrate 1500k -bufsize 3000k -g 50 \
-          -c:a libfdk_aac -b:a 128k -ac 1 \
-          -af "aresample=async=1000:min_hard_comp=0.01" \
-          -map 0:v:0 -map 1:a:0 \
-          -fps_mode cfr \
-          -f rtsp -rtsp_transport udp \
-          -muxdelay 0 -flags low_delay -avioflags direct -pkt_size 1316 \
-          rtsp://"user:passwd"@"localhost:8557"/mystream
+```bash
+nice -n -11 rpicam-vid -t 0 --width 1280 --height 720 --intra 25--framerate 25 --codec h264 --inline --flush -n -o - | \
+ffmpeg -y -use_wallclock_as_timestamps 1 \
+-fflags +genpts+nobuffer \
+-f h264 -i - \
+-f pulse -isync 0 -i default \
+-c:v h264_v4l2m2m -b:v 1500k -maxrate 1500k -bufsize 3000k -g 50 \
+-c:a libfdk_aac -b:a 128k -ac 1 \
+-af "aresample=async=1000:min_hard_comp=0.01" \
+-map 0:v:0 -map 1:a:0 \
+-fps_mode cfr \
+-f rtsp -rtsp_transport udp \
+-muxdelay 0 -flags low_delay -avioflags direct -pkt_size 1316 \
+rtsp://"user:passwd"@"localhost:8557"/mystream
+```
 
 best cpu best streaming favorit pi 4 and 5
 
-              nice -n -11 stdbuf -oL -eL taskset -c 2,3  rpicam-vid --verbose 0  \
-              --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
-              --autofocus-mode manual --autofocus-range normal \
-              --autofocus-window 0.25,0.25,0.5,0.5 \
-              --libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
-              --awb indoor --profile baseline --intra 25 -b 1500000 -n -o - 2>/dev/null  | \
-              nice -n -11 taskset -c 0,1  ffmpeg -y -hwaccel drm -hwaccel_device /dev/dri/renderD128  \
-              -fflags +genpts+igndts+nobuffer+flush_packets -loglevel warning  \
-              -use_wallclock_as_timestamps 1 \
-              -thread_queue_size 512 -f h264 -r 25 -i - \
-              -thread_queue_size 512 -f pulse -fragment_size 1024 -isync 0 -i default \
-              -c:v copy -metadata title='kali'  \
-              -c:a libopus -application lowdelay -ac 1 -vbr off -b:a 64k -frame_duration 5  -compression_level 0  \
-              -map 0:v:0 -map 1:a:0 \
-              -f rtsp -rtsp_transport udp  -muxdelay 0 -flags +low_delay -avioflags direct -pkt_size 1316  \
-              rtsp://"spooky:password"@"localhost:8554"/mystream
- 
+```bash
+nice -n -11 stdbuf -oL -eL taskset -c 2,3  rpicam-vid --verbose 0  \
+--denoise cdn_off -t 0 --width 1280 --height 720 --framerate 25 \
+--autofocus-mode manual --autofocus-range normal \
+--autofocus-window 0.25,0.25,0.5,0.5 \
+--libav-video-codec h264_v4l2m2m --libav-format h264 --codec libav --inline \
+--awb indoor --profile baseline --intra 25 -b 1500000 -n -o - 2>/dev/null  | \
+nice -n -11 taskset -c 0,1  ffmpeg -y -hwaccel drm -hwaccel_device /dev/dri/renderD128  \
+-fflags +genpts+igndts+nobuffer+flush_packets -loglevel warning  \
+-use_wallclock_as_timestamps 1 \
+-thread_queue_size 512 -f h264 -r 25 -i - \
+-thread_queue_size 512 -f pulse -fragment_size 1024 -isync 0 -i default \
+-c:v copy -metadata title='kali'  \
+-c:a libopus -application lowdelay -ac 1 -vbr off -b:a 64k -frame_duration 5  -compression_level 0  \
+-map 0:v:0 -map 1:a:0 \
+-f rtsp -rtsp_transport udp  -muxdelay 0 -flags +low_delay -avioflags direct -pkt_size 1316  \
+rtsp://"spooky:password"@"localhost:8554"/mystream
+``` 
 
 # rtmp 
+```bash
+nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 24 \
+--libav-video-codec h264_v4l2m2m --libav-format flv --codec libav --inline \
+--autofocus-mode manual --autofocus-range normal --autofocus-window 0.25,0.25,0.5,0.5 \
+--awb indoor --profile baseline --hdr off --intra 25 --level 4.1 -b 1000000 \
+--flush -n -o - | \
+nice -n -11 ffmpeg -y \
+-use_wallclock_as_timestamps 1 \
+-fflags +genpts+nobuffer+flush_packets \
+-thread_queue_size 1024 \
+-c:v h264_v4l2m2m -num_output_buffers 4 -f flv -i - \
+-thread_queue_size 1024 -f pulse -fragment_size 512 -isync 0 -i default \
+-map 0:v:0 -map 1:a:0 \
+-c:v h264_v4l2m2m -num_capture_buffers 8 -num_output_buffers 4 \
+-b:v 1000k -maxrate 1000k -bufsize 500k -g 25 -bf 0 -fps_mode cfr \
+-c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0  \
+-f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
+-muxdelay 0 -max_interleave_delta 1 -flags +low_delay -avioflags direct -pkt_size 1316 \
+rtmp://localhost:1935/live?"user=spooky&pass=password"
+```
 
-              nice -n -11 stdbuf -oL -eL rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 24 \
-              --libav-video-codec h264_v4l2m2m --libav-format flv --codec libav --inline \
-              --autofocus-mode manual --autofocus-range normal --autofocus-window 0.25,0.25,0.5,0.5 \
-              --awb indoor --profile baseline --hdr off --intra 25 --level 4.1 -b 1000000 \
-              --flush -n -o - | \
-              nice -n -11 ffmpeg -y \
-              -use_wallclock_as_timestamps 1 \
-              -fflags +genpts+nobuffer+flush_packets \
-              -thread_queue_size 1024 \
-              -c:v h264_v4l2m2m -num_output_buffers 4 -f flv -i - \
-              -thread_queue_size 1024 -f pulse -fragment_size 512 -isync 0 -i default \
-              -map 0:v:0 -map 1:a:0 \
-              -c:v h264_v4l2m2m -num_capture_buffers 8 -num_output_buffers 4 \
-              -b:v 1000k -maxrate 1000k -bufsize 500k -g 25 -bf 0 -fps_mode cfr \
-              -c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0  \
-              -f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
-              -muxdelay 0 -max_interleave_delta 1 -flags +low_delay -avioflags direct -pkt_size 1316 \
-              rtmp://localhost:1935/live?"user=spooky&pass=password"
-
-              mpv  --profile=cam rtmp://localhost:1935/live?"user=spooky&pass=password"
-         
 
 ### rec 
 
+```bash
+nano .config/mpv/mpv.conf
+```
+```bash
 
-       nano .config/mpv/mpv.conf
+[convert]
+
+#vf-add = scale=480:-2
+ovc = libx264
+ovcopts-add = preset=medium
+ovcopts-add = tune=fastdecode
+ovcopts-add = b=1M
+ovcopts-add = maxrate=1M,minrate=1M,bufsize=1M
+ovcopts-add = rc_init_occupancy=900k
+ovcopts-add = refs=2
+ovcopts-add = profile=main
+profile=enc-a-aac
+of=matroska
+framedrop=decoder
+#demuxer-lavf-o-add=fflags=+nobuffer+genpts
+container-fps-override=25
+no-correct-pts
+untimed
+```
 
 
-       [convert]
-
-       hwaccel=auto
-       #vf-add = scale=480:-2
-       ovc = libx264
-       ovcopts-add = preset=medium
-       ovcopts-add = tune=fastdecode
-       ovcopts-add = b=1M
-       ovcopts-add = maxrate=1M,minrate=1M
-       ovcopts-add = bufsize=1M
-       ovcopts-add = rc_init_occupancy=900k
-       ovcopts-add = refs=2
-       ovcopts-add = profile=baseline
-       profile=enc-a-aac
-       of=matroska
-       framedrop=decoder
-       #demuxer-lavf-o-add=fflags=+nobuffer+genpts
-       container-fps-override=25
-       no-correct-pts
-       untimed
-
-
-       mpv rtsp://"user:pwd"@"ip:8554"/mystream  --profile=convert --o=`date +%Y-%m-%d-%H-%M`.mkv
-
+```bash
+mpv rtsp://"user:pwd"@"ip:8554"/mystream  --profile=convert --o=`date +%Y-%m-%d-%H-%M`.mkv
+```
 
 #######################################################################################################################################
 
