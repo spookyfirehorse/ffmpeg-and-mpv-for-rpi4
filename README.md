@@ -125,6 +125,13 @@ context.properties = {
     default.clock.quantum       = 1024
     default.clock.min-quantum   = 1024
     default.clock.max-quantum   = 1024
+    default.clock.allowed-rates = [ 44100 48000 88200 96000 ]
+}
+
+# Dies zwingt alle neuen Streams (inkl. rpicam-vid) auf S32LE
+stream.properties = {
+    audio.format = "S16LE"
+    audio.rate   = 48000
 }
 ```
 # dont set it lower because audio comes to late 
