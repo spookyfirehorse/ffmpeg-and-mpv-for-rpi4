@@ -85,6 +85,42 @@ context.properties = {
 ```
 # dont set it lower because audio comes to late 
 
+
+```bash
+sudo nano /etc/pipewire/client.conf.d/99-alsa-s16.conf
+```
+
+```bash
+alsa.properties = {
+    audio.format = "S16LE"
+}
+```
+```bash
+sudo nano /etc/pipewire/pipewire-pulse.conf.d/99-rpicam-s16.conf
+```
+```bash
+pulse.rules = [
+    {
+        matches = [ { application.process.binary = "rpicam-vid" } ]
+        actions = {
+            update-props = {
+                # Erzwungenes Format
+                pulse.default.format = "S16LE"
+                pulse.fix.format     = "S16LE"
+                audio.format         = "S16LE"
+
+                # Berechnung für 256 Samples:
+                # 256 Samples * 2 Bytes (16-Bit) * 2 Kanäle (Stereo) = 1024 Bytes  meins fragsize   4096 bei quantum 1024
+                pulse.attr.fragsize = "4096"
+
+                # PipeWire Blockgröße
+                node.force-quantum = 1024
+            }
+        }
+    }
+]
+```
+
 ```bash
 sudo nano /etc/enviroment
 ```
@@ -371,23 +407,7 @@ sudo mediamtx --upgrade
 
        may you want to set to NTSC PAL60 for framerate=30
 
-##  rpi 3  and pi z2w  trixie audio default usb mikrofon u-green  24 h stable
 
-```bash
-nice -n -11 rpicam-vid \
--b 1000000 --denoise cdn_off --awb indoor \
---codec libav --libav-format mpegts --profile main \
---framerate 25 --width 1280 --height 720 \
---inline -t 0 -n -o - | \
-ffmpeg -f mpegts  -i - \
--f pulse -wallclock 1 -i default \
--c:v copy \
--c:a libopus -application lowdelay -ac 1 -vbr off -b:a 64k -frame_duration 5 \
--metadata title='lucy' \
--f rtsp -rtsp_transport tcp -muxdelay 0 -rtpflags latm -tcp_nodelay 1 \
--flags +low_delay -avioflags direct \
-rtsp://ip:8554"/mystream
-```
 
        
 ```bash
@@ -423,7 +443,7 @@ demuxer-readahead-secs=0
 
 ########################### 
 
-# rtmp camera  spezial for rpi 4 !  audio drifft !
+# rtmp camera  spezial for rpi 4 !  audio drifft ! works on all rpi ! cpu 30 % zero2w
 
 ```bash
 nice -n -11 stdbuf -oL -eL taskset -c 3 rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 24 \
@@ -446,24 +466,9 @@ nice -n -11 taskset -c 0 ffmpeg -y \
 rtmp://localhost:1935/live?"user=spooky&pass=password"
 ```
 
-```bash
- stdbuf -oL -eL chrt -f 50  taskset -c 3 rpicam-vid --flush -b 1500000 --denoise cdn_off --codec libav --libav-format mpegts \
---profile=main --hdr=off --level 4.0 --framerate 25 --width 1280 --height 720 --av-sync=0 \
---autofocus-mode manual --autofocus-range normal --autofocus-window 0.25,0.25,0.5,0.5 \
---audio-codec libopus --audio-samplerate 48000 --shutter 20000 --tuning-file /usr/share/libcamera/ipa/rpi/vc4/imx708.json \
---audio-channels 2 --libav-audio 1 --audio-source pulse --awb indoor -t 0 --intra 25 \
---inline -n -o - | chrt -f 50  taskset -c 0 ffmpeg -fflags +genpts+igndts+nobuffer+flush_packets -loglevel warning -hide_banner \
- -f mpegts -i - \
--map 0:0 -map 0:1 \
--c copy  \
--metadata title='devil' -copyts -start_at_zero  -fps_mode cfr -flags low_delay -avioflags direct -muxdelay 0 \
--f rtsp -buffer_size 4k -rtsp_flags filter_src -tcp_nodelay 1 -rtsp_transport tcp -pkt_size 1316 \
-rtsp://"user:pwd"@"localhost:8554"/mystream
-```
-
 ##########################################################################################################################
 
-# imx708 all rpi 
+# imx708 all rpi spezial rpi 3 zero2w
 
 ```bash
 stdbuf -o0 -e0  chrt -f 50 taskset -c 3  rpicam-vid --flush   -b 1500000    --denoise cdn_off   --codec libav --libav-format mpegts \
@@ -479,7 +484,7 @@ stdbuf -o0 -e0  chrt -f 50 taskset -c 3  rpicam-vid --flush   -b 1500000    --de
 ```
 
 
-# ov5647 camera all rpi
+# ov5647 camera all rpi  spezial rpi 3 zero2w
 
 ```bash
 stdbuf -o0 -e0  chrt -f 50 taskset -c 3  rpicam-vid --flush   -b 1500000    --denoise cdn_off   --codec libav --libav-format mpegts \
