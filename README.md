@@ -965,6 +965,25 @@ wget -O build_kernel.zip  https://forums.raspberrypi.com/download/file.php?id=74
 
 #
 
+```bash
+sudo nano /etc/group
+```
+```bash
+sudo:x:27:spook
+audio:x:29:spook
+render:x:992:vnc,spook
+_ssh:x:101:spook
+spi:x:989:spook
+i2c:x:987:spook
+gpio:x:986:spook
+pipewire:x:105:spook
+pulse:x:106:spook
+rtkit:x:117:spook
+```
+
+
+
+
 ```bash              
 sudo nano /boot/firmware/cmdline.txt
 ```
