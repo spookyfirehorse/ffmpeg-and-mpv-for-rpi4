@@ -263,7 +263,34 @@ sudo nano /etc/enviroment
 ```bash
 PIPEWIRE_LATENCY=1024/48000
 ```
+```bash
+nano .asoundrc
+```
 
+
+```bash
+ctl.!default {
+    type pipewire
+}
+
+pcm.!default {
+    type plug
+    slave {
+        pcm "pwire"
+        format S16_LE
+        rate 48000
+        period_size 256
+        buffer_size 1024
+    }
+}
+
+pcm.pwire {
+    type pipewire
+    mmap_emulation 1
+}
+```
+
+```bash
 sudo nano /etc/security/limits.d/99-realtime.conf 
 ```
 
