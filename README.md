@@ -244,20 +244,38 @@ pulse.rules = [
     }
 ]
 ```
+#############################################
 
 
+# also  very important
 
 ```bash
 sudo nano /etc/security/limits.d/99-realtime.conf 
 ```
 
 ```bash
-spook  -  rtprio     99
-spook  -  memlock    unlimited
-spook  -  nice      -20
-#*  -  rtprio     99
-#*  -  memlock    unlimited
+user  -  rtprio     99
+user  -  memlock    unlimited
+user  -  nice      -20
 ```
+
+```bash
+sudo nano /etc/group
+```
+```bash
+sudo:x:27:spook
+audio:x:29:spook
+render:x:992:vnc,spook
+_ssh:x:101:spook
+spi:x:989:spook
+i2c:x:987:spook
+gpio:x:986:spook
+pipewire:x:105:spook
+pulse:x:106:spook
+rtkit:x:117:spook
+```
+
+################################
 
 ```bash
 systemctl --user enable --now pipewire pipewire.socket wireplumber pipewire-pulse
