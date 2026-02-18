@@ -61,63 +61,15 @@ console=serial0,115200 console=tty1 root=PARTUUID=37b5fcd6-02 rootfstype=ext4 fs
 isoliert 3 cpu for rpicam-vid isolcpus=3
 
 
-
-
 ```bash
-sudo apt install pipewire-alsa rtkit
+sudo nano /etc/group
 ```
+render:x:992:user
+pipewire:x:105:user
+pulse:x:106:user
+rtkit:x:117:spook
 
 
-```bash
-sudo rm -r /etc/pipewire
-sudo mkdir /etc/pipewire
-sudo mkdir /etc/pipewire/pipewire-pulse.conf.d
-sudo mkdir /etc/pipewire/client.conf.d/
-sudo mkdir /etc/pipewire/pipewire.conf.d/
-sudo mkdir /etc/wireplumber
-sudo mkdir /etc/wireplumber/wireplumber.conf.d/
-```
-```bash
-sudo nano /etc/wireplumber/wireplumber.conf.d/50-alsa-s16le.conf
-```
-
-```bash
-monitor.alsa.rules = [
-  {
-    matches = [
-      {
-        # Matcht alle Ausgänge
-        node.name = "~alsa_output.*"
-      },
-      { 
-        # Matcht alle Eingänge
-        node.name = "~alsa_input.*"
-      }
-    ]
-    actions = {
-      update-props = {
-        # Erzwingt S16LE für beide oben genannten Gruppen
-        audio.format = "S16LE"
-      }
-    }
-  }
-]
-```
-
-
-```bash
-sudo nano /etc/pipewire/pipewire.conf.d/10-low-latency.conf
-```
-
-```bash
-context.properties = {
-    default.clock.rate          = 48000
-    default.clock.quantum       = 1024
-    default.clock.min-quantum   = 1024
-    default.clock.max-quantum   = 1024
-}
-```
-# dont set it lower because audio comes to late 
 
 
 
@@ -126,6 +78,8 @@ context.properties = {
 
 ```bash
 sudo rm -r /etc/pipewire
+rm -r .config/pipewire
+rm -r .config/wireplumber
 sudo mkdir /etc/pipewire
 sudo mkdir /etc/pipewire/pipewire-pulse.conf.d
 sudo mkdir /etc/pipewire/client.conf.d/
@@ -305,7 +259,9 @@ spook  -  nice      -20
 #*  -  memlock    unlimited
 ```
 
-
+```bash
+systemctl --user enable --now pipewire pipewire.socket wireplumber pipewire-pulse
+```
 
 ##################################################
 
