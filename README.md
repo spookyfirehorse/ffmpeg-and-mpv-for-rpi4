@@ -120,51 +120,6 @@ context.properties = {
 # dont set it lower because audio comes to late 
 
 
-# realtime
-
-```bash
-sudo nano /etc/pipewire/pipewire.conf.d/10-realtime.conf
-```
-
-```bash
-context.properties = {
-    default.clock.rate          = 48000
-    default.clock.quantum       = 256
-    default.clock.min-quantum   = 256
-    default.clock.max-quantum   = 256
-}
-```
-
-```bash
-sudo nano /etc/enviroment
-```
-
-```bash
-PIPEWIRE_LATENCY=256/48000
-```
-
-```bash
-pulse.rules = [
-    {
-        matches = [ { application.process.binary = "rpicam-vid" } ]
-        actions = {
-            update-props = {
-                # Erzwungenes Format
-                pulse.default.format = "S16LE"
-                pulse.fix.format     = "S16LE"
-                audio.format         = "S16LE"
-
-                # Berechnung für 256 Samples:
-                # 256 Samples * 2 Bytes (16-Bit) * 2 Kanäle (Stereo) = 1024 Bytes  meins fragsize   4096 bei quantum 1024
-                pulse.attr.fragsize = "1024"
-
-                # PipeWire Blockgröße
-                node.force-quantum = 256
-            }
-        }
-    }
-]
-```
 
 ######################################
 # normal kernel 
@@ -289,6 +244,54 @@ pcm.pwire {
     mmap_emulation 1
 }
 ```
+
+# realtime change to this
+
+```bash
+sudo nano /etc/pipewire/pipewire.conf.d/10-realtime.conf
+```
+
+```bash
+context.properties = {
+    default.clock.rate          = 48000
+    default.clock.quantum       = 256
+    default.clock.min-quantum   = 256
+    default.clock.max-quantum   = 256
+}
+```
+
+```bash
+sudo nano /etc/enviroment
+```
+
+```bash
+PIPEWIRE_LATENCY=256/48000
+```
+
+```bash
+pulse.rules = [
+    {
+        matches = [ { application.process.binary = "rpicam-vid" } ]
+        actions = {
+            update-props = {
+                # Erzwungenes Format
+                pulse.default.format = "S16LE"
+                pulse.fix.format     = "S16LE"
+                audio.format         = "S16LE"
+
+                # Berechnung für 256 Samples:
+                # 256 Samples * 2 Bytes (16-Bit) * 2 Kanäle (Stereo) = 1024 Bytes  meins fragsize   4096 bei quantum 1024
+                pulse.attr.fragsize = "1024"
+
+                # PipeWire Blockgröße
+                node.force-quantum = 256
+            }
+        }
+    }
+]
+```
+
+
 
 ```bash
 sudo nano /etc/security/limits.d/99-realtime.conf 
