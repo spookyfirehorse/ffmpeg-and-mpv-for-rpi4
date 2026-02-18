@@ -262,7 +262,15 @@ spook  -  nice      -20
 ```bash
 systemctl --user enable --now pipewire pipewire.socket wireplumber pipewire-pulse
 ```
+# for checking
 
+```bash
+pw-top
+```
+
+```bash
+pw-cli
+```
 ##################################################
 
      sudo apt install cpuinfo
@@ -513,10 +521,23 @@ sudo mediamtx --upgrade
 
 ## alsa or pulse or pipewire   mikrofon name 
 
-         pactl list sources 
+```bash
+pactl list sources 
+```
+```bash
+arecord -L
+```
 
+# for checking
 
-         for alsa   arecord -L
+```bash
+pw-top
+```
+
+```bash
+pw-cli
+```
+         
 
 #    realtime stream all under 0.5 second to the reciever
 
