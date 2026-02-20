@@ -456,7 +456,7 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
 --enable-v4l2-m2m --enable-sand --enable-libdrm --enable-vout-drm \
 --enable-opengl --enable-epoxy --enable-sdl2 --enable-network \
---enable-gnutls --enable-libxml2 --enable-libudev --enable-libssh \
+--enable-gnutls --enable-libxml2 --enable-libudev --enable-libssh --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
 --enable-libx264 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
 --enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg \
 --enable-libass --enable-libfreetype --enable-libfontconfig \
@@ -474,7 +474,7 @@ make -j$(nproc) && sudo make install
 --extra-cflags="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
 --extra-ldflags="-latomic -Wl,-O1,--as-needed" \
 --enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables \
+--enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
 --enable-v4l2-m2m --enable-sand --enable-v4l2-request --enable-libdrm --enable-vout-drm \
 --enable-libplacebo --enable-vulkan --enable-opengl --enable-epoxy --enable-sdl2 \
 --enable-gnutls --enable-libxml2 --enable-libudev --enable-libssh --enable-network \
@@ -501,7 +501,7 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
 --enable-libpulse --enable-libjack --enable-libssh --enable-libsrt --enable-libzmq \
 --enable-opengl --enable-vulkan --enable-epoxy --enable-libdrm --enable-vout-drm --enable-sdl2 \
---enable-hardcoded-tables --enable-lto \
+--enable-hardcoded-tables --enable-lto --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
 --disable-v4l2-request --disable-mmal --disable-omx --disable-libmfx --disable-libvpl \
 --disable-libbluray --disable-libmysofa --disable-libcaca --disable-pocketsphinx --disable-libjxl \
 --disable-chromaprint --disable-libdvdnav --disable-libdvdread --disable-libcodec2 --disable-libgsm --disable-libgme --disable-libopenmpt \
@@ -535,7 +535,7 @@ bash
 --extra-ldflags="-latomic -Wl,-O1,--as-needed" \
 --enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
 --enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables \
---enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand \
+--enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
 --enable-libdrm --enable-vout-drm --enable-vulkan --enable-libplacebo --enable-opengl --enable-epoxy \
 --enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
 --enable-libvorbis --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg --enable-libass \
@@ -552,7 +552,7 @@ bash
 --extra-cflags="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
 --extra-ldflags="-latomic -Wl,-O1,--as-needed" \
 --enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables \
+--enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
 --enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand --enable-v4l2-request \
 --enable-libdrm --enable-vout-drm --enable-vulkan --enable-libplacebo --enable-opengl --enable-epoxy \
 --enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
@@ -571,7 +571,7 @@ bash
 --extra-ldflags="-latomic -Wl,-O1,--as-needed" \
 --enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
 --enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
---enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand \
+--enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand --enable-avfilter --enable-filter=fps --enable-filter=crystalizer  \
 --enable-libdrm --enable-vout-drm --enable-opengl --enable-epoxy \
 --enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
 --enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg --enable-libass \
@@ -591,11 +591,24 @@ bash
 --enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
 --enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
 --enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand \
---enable-libdrm --enable-vout-drm --enable-opengl --enable-epoxy \
+--enable-libdrm --enable-vout-drm --enable-opengl --enable-epoxy --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
 --enable-libx264 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
 --enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg --enable-libass \
 --disable-vulkan --disable-v4l2-request --disable-libx265 --disable-mmal --disable-omx --disable-doc && \
 make -j2 && sudo make install
+```
+
+
+# filters disable all
+```bash
+--enable-protocol='file,http,https,tcp,udp,rtp,rtsp,rtmp,tls' \
+--enable-encoder='h264_vaapi,hevc_vaapi,av1_vaapi,libx264,libx265,libfdk_aac,libmp3lame,libopus' \
+--enable-decoder='h264,hevc,vp9,av1,aac,mp3,opus' \
+--enable-muxer='mp4,mov,matroska,mp3,rtsp' \
+--enable-demuxer='mov,matroska,mp3,rtsp' \
+--enable-parser='h264,hevc,vp9,av1,aac,mpegaudio' \
+--enable-bsfs \
+--enable-filter='scale_vaapi,procamp_vaapi,scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume'
 ```
 
 # MPV
