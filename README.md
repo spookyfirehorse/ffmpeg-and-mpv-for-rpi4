@@ -506,56 +506,90 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 make -j$(nproc) && sudo make install
 ```
 
-
-Pi 3 (armhf / 32-Bit) – Mit x265 & Modern FPU
+```bash
+Wichtig: Vorbereitung für ALLE Boards
+Installiere zuerst die notwendigen Header, damit configure die Bibliotheken auch findet:
 bash
-./configure --prefix=/usr --extra-version=kali-pi3-v2026-final --toolchain=hardened \
---libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
---arch=arm --cpu=cortex-a53 \
---extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe" \
---extra-ldflags="-latomic -Wl,-O1,--as-needed" \
---enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
---enable-v4l2-m2m --enable-sand --enable-libdrm --enable-vout-drm \
---enable-opengl --enable-epoxy --enable-sdl2 \
---enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
---enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg --enable-libass \
---disable-mmal --disable-omx --disable-v4l2-request --disable-vulkan --disable-doc --enable-libpulse --enable-libssh \
---make -j2 && sudo make install
+sudo apt update && sudo apt install -y \
+  libpulse-dev libssh-dev libgnutls28-dev libxml2-dev libudev-dev libdrm-dev \
+  libx264-dev libx265-dev libopus-dev libfdk-aac-dev libmp3lame-dev \
+  libvorbis-dev libdav1d-dev libaom-dev libwebp-dev libzimg-dev \
+  libass-dev libfontconfig1-dev libfreetype6-dev libharfbuzz-dev \
+  libepoxy-dev glslang-dev libshaderc-dev libsdl2-dev linux-headers-$(uname -r)
 Verwende Code mit Vorsicht.
 
-Pi 4 (aarch64 / 64-Bit) – Der "Next-Level" Allrounder
+1. Raspberry Pi 5 (64-Bit / aarch64)
+Optimiert für Cortex-A76, V4L2-M2M (HEVC/H264) & Vulkan.
 bash
-./configure --prefix=/usr --extra-version=kali-pi4-v2026-final --toolchain=hardened \
---libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
---arch=aarch64 --cpu=cortex-a72 \
---extra-cflags="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
---extra-ldflags="-latomic -Wl,-O1,--as-needed" \
---enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables \
---enable-v4l2-m2m --enable-sand --enable-v4l2-request --enable-libdrm --enable-vout-drm \
---enable-libplacebo --enable-vulkan --enable-opengl --enable-epoxy --enable-sdl2 \
---enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libdav1d \
---disable-mmal --disable-omx --disable-doc --enable-libpulse --enable-libssh && \
-make -j$(nproc) && sudo make install
-Verwende Code mit Vorsicht.
-
-Pi 5 (aarch64 / 64-Bit) – Die saubere Ultra-Version
-bash
-./configure --prefix=/usr --extra-version=kali-pi5-v2026-ultra --toolchain=hardened \
+./configure --prefix=/usr --extra-version=kali-pi5-ultra-2026 --toolchain=hardened \
 --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
 --arch=aarch64 --cpu=cortex-a76 \
 --extra-cflags="-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize" \
 --extra-ldflags="-latomic -Wl,-O1,--as-needed" \
 --enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
 --enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables \
---enable-v4l2-m2m --enable-sand --enable-libdrm --enable-vout-drm \
---enable-vulkan --enable-libplacebo --enable-opengl --enable-epoxy --enable-sdl2 \
---enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libdav1d \
---disable-v4l2-request --disable-mmal --disable-omx --disable-doc --enable-libpulse --enable-libssh && \
+--enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand \
+--enable-libdrm --enable-vout-drm --enable-vulkan --enable-libplacebo --enable-opengl --enable-epoxy \
+--enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
+--enable-libvorbis --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg --enable-libass \
+--disable-v4l2-request --disable-mmal --disable-omx --disable-doc --disable-cuda --disable-vaapi && \
 make -j$(nproc) && sudo make install
+Verwende Code mit Vorsicht.
 
+2. Raspberry Pi 4 (64-Bit / aarch64)
+Optimiert für Cortex-A72, V4L2-M2M (H264) + V4L2-Request (HEVC) & Vulkan.
+bash
+./configure --prefix=/usr --extra-version=kali-pi4-ultra-2026 --toolchain=hardened \
+--libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+--arch=aarch64 --cpu=cortex-a72 \
+--extra-cflags="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
+--extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+--enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
+--enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables \
+--enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand --enable-v4l2-request \
+--enable-libdrm --enable-vout-drm --enable-vulkan --enable-libplacebo --enable-opengl --enable-epoxy \
+--enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
+--enable-libvorbis --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg --enable-libass \
+--disable-mmal --disable-omx --disable-doc --disable-cuda --disable-vaapi && \
+make -j$(nproc) && sudo make install
+Verwende Code mit Vorsicht.
 
+3. Raspberry Pi 3 (32-Bit / armhf)
+Optimiert für Cortex-A53, moderne FPU (fp-armv8) & V4L2-M2M.
+bash
+./configure --prefix=/usr --extra-version=kali-pi3-v7-2026 --toolchain=hardened \
+--libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+--arch=arm --cpu=cortex-a53 \
+--extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe" \
+--extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+--enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
+--enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
+--enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand \
+--enable-libdrm --enable-vout-drm --enable-opengl --enable-epoxy \
+--enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
+--enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg --enable-libass \
+--disable-vulkan --disable-v4l2-request --disable-mmal --disable-omx --disable-doc && \
+make -j$(nproc) && sudo make install
+Verwende Code mit Vorsicht.
+
+4. Raspberry Pi Zero 2 W (32-Bit / armhf)
+Baugleich zu Pi 3, aber RAM-optimiert (Swap-Pflicht!).
+bash
+# Vorher unbedingt Swap auf 1024MB erhöhen!
+./configure --prefix=/usr --extra-version=kali-zero2-v7-2026 --toolchain=hardened \
+--libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+--arch=arm --cpu=cortex-a53 \
+--extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe" \
+--extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+--enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
+--enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
+--enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand \
+--enable-libdrm --enable-vout-drm --enable-opengl --enable-epoxy \
+--enable-libx264 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
+--enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg --enable-libass \
+--disable-vulkan --disable-v4l2-request --disable-libx265 --disable-mmal --disable-omx --disable-doc && \
+make -j2 && sudo make install
+```
 
 # MPV
 ```bash
