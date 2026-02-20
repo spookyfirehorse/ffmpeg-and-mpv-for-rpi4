@@ -7,6 +7,10 @@ ffmpeg -init_hw_device vulkan=vk -i INPUT.mp4 \
 ffmpeg -init_hw_device vulkan=vk:0 -v debug -f null -
 ```
 
+```bash
+ffmpeg -sources pulse
+```
+
 sorry for my bad english !!!
 
 first make a copy of your trixie os
