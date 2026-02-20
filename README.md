@@ -374,10 +374,6 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 make -j$(nproc) && sudo make install
 ```
 
-
-```bash
-
-```
             
         
    # #     pi4 new
@@ -427,7 +423,130 @@ sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://g
 --disable-libnpp --disable-mmal --disable-omx --enable-vfp --enable-thumb --arch=armhf --cpu=cortex-a53 --disable-armv5te --disable-armv6 --disable-armv6t2 \
 --extra-cflags="-mcpu=cortex-a53 -mtune=cortex-a53" --extra-ldflags="-latomic" && make -j$(nproc) && sudo make install
 ```
-         
+
+# test rpi 3 
+```bash
+ # 1. Moderne Dependencies für den Pi 3 installieren
+sudo apt update && sudo apt install -y libgnutls28-dev libxml2-dev libudev-dev libdrm-dev \
+libx264-dev libopus-dev libfdk-aac-dev libmp3lame-dev libvorbis-dev libdav1d-dev \
+libwebp-dev libzimg-dev libass-dev libfontconfig1-dev libfreetype6-dev libepoxy-dev \
+glslang-dev libsdl2-dev linux-headers-$(uname -r)
+
+# 2. Der bereinigte, hochaktuelle Build-Befehl
+
+git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
+./configure --prefix=/usr --extra-version=kali-pi3-v2026-nextgen --toolchain=hardened \
+--libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+--arch=arm --cpu=cortex-a53 \
+--extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe" \
+--extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+--enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
+--enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
+--enable-v4l2-m2m --enable-sand --enable-libdrm --enable-vout-drm \
+--enable-opengl --enable-epoxy --enable-sdl2 --enable-network \
+--enable-gnutls --enable-libxml2 --enable-libudev --enable-libssh \
+--enable-libx264 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
+--enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg \
+--enable-libass --enable-libfreetype --enable-libfontconfig \
+--disable-debug --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
+--disable-mmal --disable-omx --disable-v4l2-request --disable-libx265 --disable-libaom \
+--disable-vaapi --disable-vdpau --disable-cuda --disable-vulkan && \
+make -j$(nproc) && sudo make install
+```       
+# pi 4 test
+
+```bash
+./configure --prefix=/usr --extra-version=kali-pi4-v2026-final --toolchain=hardened \
+--libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+--arch=aarch64 --cpu=cortex-a72 \
+--extra-cflags="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
+--extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+--enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
+--enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables \
+--enable-v4l2-m2m --enable-sand --enable-v4l2-request --enable-libdrm --enable-vout-drm \
+--enable-libplacebo --enable-vulkan --enable-opengl --enable-epoxy --enable-sdl2 \
+--enable-gnutls --enable-libxml2 --enable-libudev --enable-libssh --enable-network \
+--enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
+--enable-libvorbis --enable-libvpx --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg \
+--enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
+--disable-debug --disable-doc --disable-mmal --disable-omx \
+--disable-vaapi --disable-vdpau --disable-cuda --disable-nvenc --disable-nvdec && \
+make -j$(nproc) && sudo make install
+```
+# pi 5 test
+```bash
+git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
+./configure --prefix=/usr --extra-version=0+deb13u1+rpt2+opt --toolchain=hardened \
+--incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
+--arch=aarch64 --cpu=cortex-a76 \
+--extra-cflags="-mcpu=cortex-a76 -mtune=cortex-a76 -O3 -pipe -ftree-vectorize" \
+--extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+--enable-neon --enable-vfpv4 --enable-armv8 --enable-inline-asm \
+--enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
+--enable-gnutls --enable-libxml2 --enable-libudev --enable-v4l2-m2m --enable-sand \
+--enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
+--enable-libvorbis --enable-libvpx --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg \
+--enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
+--enable-libpulse --enable-libjack --enable-libssh --enable-libsrt --enable-libzmq \
+--enable-opengl --enable-vulkan --enable-epoxy --enable-libdrm --enable-vout-drm --enable-sdl2 \
+--enable-hardcoded-tables --enable-lto \
+--disable-v4l2-request --disable-mmal --disable-omx --disable-libmfx --disable-libvpl \
+--disable-libbluray --disable-libmysofa --disable-libcaca --disable-pocketsphinx --disable-libjxl \
+--disable-chromaprint --disable-libdvdnav --disable-libdvdread --disable-libcodec2 --disable-libgsm --disable-libgme --disable-libopenmpt \
+--disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-vaapi --disable-vdpau \
+--disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages && \
+make -j$(nproc) && sudo make install
+```
+
+
+Pi 3 (armhf / 32-Bit) – Mit x265 & Modern FPU
+bash
+./configure --prefix=/usr --extra-version=kali-pi3-v2026-final --toolchain=hardened \
+--libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+--arch=arm --cpu=cortex-a53 \
+--extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe" \
+--extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+--enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
+--enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
+--enable-v4l2-m2m --enable-sand --enable-libdrm --enable-vout-drm \
+--enable-opengl --enable-epoxy --enable-sdl2 \
+--enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
+--enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg --enable-libass \
+--disable-mmal --disable-omx --disable-v4l2-request --disable-vulkan --disable-doc \
+--make -j2 && sudo make install
+Verwende Code mit Vorsicht.
+
+Pi 4 (aarch64 / 64-Bit) – Der "Next-Level" Allrounder
+bash
+./configure --prefix=/usr --extra-version=kali-pi4-v2026-final --toolchain=hardened \
+--libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+--arch=aarch64 --cpu=cortex-a72 \
+--extra-cflags="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
+--extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+--enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
+--enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables \
+--enable-v4l2-m2m --enable-sand --enable-v4l2-request --enable-libdrm --enable-vout-drm \
+--enable-libplacebo --enable-vulkan --enable-opengl --enable-epoxy --enable-sdl2 \
+--enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libdav1d \
+--disable-mmal --disable-omx --disable-doc && \
+make -j$(nproc) && sudo make install
+Verwende Code mit Vorsicht.
+
+Pi 5 (aarch64 / 64-Bit) – Die saubere Ultra-Version
+bash
+./configure --prefix=/usr --extra-version=kali-pi5-v2026-ultra --toolchain=hardened \
+--libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+--arch=aarch64 --cpu=cortex-a76 \
+--extra-cflags="-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize" \
+--extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+--enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
+--enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables \
+--enable-v4l2-m2m --enable-sand --enable-libdrm --enable-vout-drm \
+--enable-vulkan --enable-libplacebo --enable-opengl --enable-epoxy --enable-sdl2 \
+--enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libdav1d \
+--disable-v4l2-request --disable-mmal --disable-omx --disable-doc && \
+make -j$(nproc) && sudo make install
+
 
 
 # MPV
