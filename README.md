@@ -458,7 +458,7 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --enable-libass --enable-libfreetype --enable-libfontconfig \
 --disable-debug --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
 --disable-mmal --disable-omx --disable-v4l2-request --disable-libx265 --disable-libaom \
---disable-vaapi --disable-vdpau --disable-cuda --disable-vulkan && \
+--disable-vaapi --disable-vdpau --disable-cuda --disable-vulkan --enable-libpulse --enable-libssh && \
 make -j$(nproc) && sudo make install
 ```       
 # pi 4 test
@@ -478,7 +478,7 @@ make -j$(nproc) && sudo make install
 --enable-libvorbis --enable-libvpx --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg \
 --enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
 --disable-debug --disable-doc --disable-mmal --disable-omx \
---disable-vaapi --disable-vdpau --disable-cuda --disable-nvenc --disable-nvdec && \
+--disable-vaapi --disable-vdpau --disable-cuda --disable-nvenc --disable-nvdec --enable-libpulse --enable-libssh && \
 make -j$(nproc) && sudo make install
 ```
 # pi 5 test
@@ -520,7 +520,7 @@ bash
 --enable-opengl --enable-epoxy --enable-sdl2 \
 --enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
 --enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg --enable-libass \
---disable-mmal --disable-omx --disable-v4l2-request --disable-vulkan --disable-doc \
+--disable-mmal --disable-omx --disable-v4l2-request --disable-vulkan --disable-doc --enable-libpulse --enable-libssh \
 --make -j2 && sudo make install
 Verwende Code mit Vorsicht.
 
@@ -536,7 +536,7 @@ bash
 --enable-v4l2-m2m --enable-sand --enable-v4l2-request --enable-libdrm --enable-vout-drm \
 --enable-libplacebo --enable-vulkan --enable-opengl --enable-epoxy --enable-sdl2 \
 --enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libdav1d \
---disable-mmal --disable-omx --disable-doc && \
+--disable-mmal --disable-omx --disable-doc --enable-libpulse --enable-libssh && \
 make -j$(nproc) && sudo make install
 Verwende Code mit Vorsicht.
 
@@ -552,7 +552,7 @@ bash
 --enable-v4l2-m2m --enable-sand --enable-libdrm --enable-vout-drm \
 --enable-vulkan --enable-libplacebo --enable-opengl --enable-epoxy --enable-sdl2 \
 --enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libdav1d \
---disable-v4l2-request --disable-mmal --disable-omx --disable-doc && \
+--disable-v4l2-request --disable-mmal --disable-omx --disable-doc --enable-libpulse --enable-libssh && \
 make -j$(nproc) && sudo make install
 
 
