@@ -436,179 +436,113 @@ sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://g
 --extra-cflags="-mcpu=cortex-a53 -mtune=cortex-a53" --extra-ldflags="-latomic" && make -j$(nproc) && sudo make install
 ```
 
-# test rpi 3 
 ```bash
  # 1. Moderne Dependencies für den Pi 3 installieren
 sudo apt update && sudo apt install -y libgnutls28-dev libxml2-dev libudev-dev libdrm-dev \
 libx264-dev libopus-dev libfdk-aac-dev libmp3lame-dev libvorbis-dev libdav1d-dev \
 libwebp-dev libzimg-dev libass-dev libfontconfig1-dev libfreetype6-dev libepoxy-dev \
-glslang-dev libsdl2-dev linux-headers-$(uname -r)
+glslang-dev libsdl2-dev 
 
 # 2. Der bereinigte, hochaktuelle Build-Befehl
 
-git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
-./configure --prefix=/usr --extra-version=kali-pi3-v2026-nextgen --toolchain=hardened \
---libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
---arch=arm --cpu=cortex-a53 \
---extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe" \
---extra-ldflags="-latomic -Wl,-O1,--as-needed" \
---enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
---enable-v4l2-m2m --enable-sand --enable-libdrm --enable-vout-drm \
---enable-opengl --enable-epoxy --enable-sdl2 --enable-network \
---enable-gnutls --enable-libxml2 --enable-libudev --enable-libssh --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
---enable-libx264 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
---enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg \
---enable-libass --enable-libfreetype --enable-libfontconfig \
---disable-debug --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
---disable-mmal --disable-omx --disable-v4l2-request --disable-libx265 --disable-libaom \
---disable-vaapi --disable-vdpau --disable-cuda --disable-vulkan --enable-libpulse --enable-libssh && \
-make -j$(nproc) && sudo make install
-```       
-# pi 4 test
-
-```bash
-./configure --prefix=/usr --extra-version=kali-pi4-v2026-final --toolchain=hardened \
---libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
---arch=aarch64 --cpu=cortex-a72 \
---extra-cflags="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
---extra-ldflags="-latomic -Wl,-O1,--as-needed" \
---enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
---enable-v4l2-m2m --enable-sand --enable-v4l2-request --enable-libdrm --enable-vout-drm \
---enable-libplacebo --enable-vulkan --enable-opengl --enable-epoxy --enable-sdl2 \
---enable-gnutls --enable-libxml2 --enable-libudev --enable-libssh --enable-network \
---enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
---enable-libvorbis --enable-libvpx --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg \
---enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
---disable-debug --disable-doc --disable-mmal --disable-omx \
---disable-vaapi --disable-vdpau --disable-cuda --disable-nvenc --disable-nvdec --enable-libpulse --enable-libssh && \
-make -j$(nproc) && sudo make install
-```
-# pi 5 test
-```bash
-git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
-./configure --prefix=/usr --extra-version=0+deb13u1+rpt2+opt --toolchain=hardened \
---incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
---arch=aarch64 --cpu=cortex-a76 \
---extra-cflags="-mcpu=cortex-a76 -mtune=cortex-a76 -O3 -pipe -ftree-vectorize" \
---extra-ldflags="-latomic -Wl,-O1,--as-needed" \
---enable-neon --enable-vfpv4 --enable-armv8 --enable-inline-asm \
---enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-gnutls --enable-libxml2 --enable-libudev --enable-v4l2-m2m --enable-sand \
---enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
---enable-libvorbis --enable-libvpx --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg \
---enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
---enable-libpulse --enable-libjack --enable-libssh --enable-libsrt --enable-libzmq \
---enable-opengl --enable-vulkan --enable-epoxy --enable-libdrm --enable-vout-drm --enable-sdl2 \
---enable-hardcoded-tables --enable-lto --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
---disable-v4l2-request --disable-mmal --disable-omx --disable-libmfx --disable-libvpl \
---disable-libbluray --disable-libmysofa --disable-libcaca --disable-pocketsphinx --disable-libjxl \
---disable-chromaprint --disable-libdvdnav --disable-libdvdread --disable-libcodec2 --disable-libgsm --disable-libgme --disable-libopenmpt \
---disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-vaapi --disable-vdpau \
---disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages && \
-make -j$(nproc) && sudo make install
-```
-
-```bash
-Wichtig: Vorbereitung für ALLE Boards
-Installiere zuerst die notwendigen Header, damit configure die Bibliotheken auch findet:
+1. Raspberry Pi 3 (32-Bit / armhf)
+Optimiert für den Cortex-A53. Die Pfade sind hier auf arm-linux-gnueabihf gesetzt.
 bash
-sudo apt update && sudo apt install -y \
-  libpulse-dev libssh-dev libgnutls28-dev libxml2-dev libudev-dev libdrm-dev \
-  libx264-dev libx265-dev libopus-dev libfdk-aac-dev libmp3lame-dev \
-  libvorbis-dev libdav1d-dev libaom-dev libwebp-dev libzimg-dev \
-  libass-dev libfontconfig1-dev libfreetype6-dev libharfbuzz-dev \
-  libepoxy-dev glslang-dev libshaderc-dev libsdl2-dev linux-headers-$(uname -r)
-Verwende Code mit Vorsicht.
-
-
---enable-muxer=rtsp --enable-demuxer=rtsp --enable-demuxer=sdp
-
-1. Raspberry Pi 5 (64-Bit / aarch64)
-Optimiert für Cortex-A76, V4L2-M2M (HEVC/H264) & Vulkan.
-bash
-./configure --prefix=/usr --extra-version=kali-pi5-ultra-2026 --toolchain=hardened \
---libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
---arch=aarch64 --cpu=cortex-a76 \
---extra-cflags="-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize" \
---extra-ldflags="-latomic -Wl,-O1,--as-needed" \
---enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables \
---enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
---enable-libdrm --enable-vout-drm --enable-vulkan --enable-libplacebo --enable-opengl --enable-epoxy \
---enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
---enable-libvorbis --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg --enable-libass \
---disable-v4l2-request --disable-mmal --disable-omx --disable-doc --disable-cuda --disable-vaapi && \
-make -j$(nproc) && sudo make install
+./configure \
+  --prefix=/usr \
+  --extra-version=debian-pi3-ultra-2026 \
+  --libdir=/usr/lib/arm-linux-gnueabihf \
+  --incdir=/usr/include/arm-linux-gnueabihf \
+  --arch=arm \
+  --cpu=cortex-a53 \
+  --extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe" \
+  --extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+  --extra-libs="-ludev -lstdc++" \
+  --disable-all \
+  --enable-gpl --enable-version3 --enable-nonfree --enable-shared \
+  --enable-pthreads --enable-neon --enable-armv8 --enable-inline-asm \
+  --enable-libx264 --enable-libx265 --enable-libmp3lame --enable-libopus \
+  --enable-avcodec --enable-avformat --enable-avfilter --enable-avdevice \
+  --enable-swresample --enable-swscale --enable-libdrm --enable-v4l2-m2m \
+  --enable-vulkan --enable-libplacebo --enable-gnutls --enable-network \
+  --enable-libpulse --enable-libudev --enable-libssh \
+  --enable-protocol='file,http,https,tcp,udp,rtp,rtsp,rtmp,tls' \
+  --enable-encoder='libx264,libx265,libmp3lame,libopus,h264_v4l2m2m' \
+  --enable-decoder='h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,mpeg2video,mpeg2_v4l2m2m,vp9,av1,aac,mp3,opus' \
+  --enable-muxer='mp4,mov,matroska,mp3' \
+  --enable-demuxer='mov,matroska,mp3,rtsp,h264,hevc,mpegvideo' \
+  --enable-parser='h264,hevc,mpeg2video,vp9,av1,aac,mpegaudio' \
+  --enable-bsfs \
+  --enable-filter='scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume,libplacebo' \
+  --enable-ffmpeg --enable-ffprobe --enable-indevs --enable-indev='pulse,v4l2,kmsgrab,alsa' \
+  --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && make -j$(nproc)
 Verwende Code mit Vorsicht.
 
 2. Raspberry Pi 4 (64-Bit / aarch64)
-Optimiert für Cortex-A72, V4L2-M2M (H264) + V4L2-Request (HEVC) & Vulkan.
+Optimiert für den Cortex-A72 (Kali/Debian 64-Bit).
 bash
-./configure --prefix=/usr --extra-version=kali-pi4-ultra-2026 --toolchain=hardened \
---libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
---arch=aarch64 --cpu=cortex-a72 \
---extra-cflags="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
---extra-ldflags="-latomic -Wl,-O1,--as-needed" \
---enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-neon --enable-armv8 --enable-inline-asm --enable-hardcoded-tables --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
---enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand --enable-v4l2-request \
---enable-libdrm --enable-vout-drm --enable-vulkan --enable-libplacebo --enable-opengl --enable-epoxy \
---enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
---enable-libvorbis --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg --enable-libass \
---disable-mmal --disable-omx --disable-doc --disable-cuda --disable-vaapi && \
-make -j$(nproc) && sudo make install
+./configure \
+  --prefix=/usr \
+  --extra-version=kali-pi4-ultra-2026 \
+  --libdir=/usr/lib/aarch64-linux-gnu \
+  --incdir=/usr/include/aarch64-linux-gnu \
+  --arch=aarch64 \
+  --cpu=cortex-a72 \
+  --extra-cflags="-mcpu=cortex-a72 -O2 -pipe -ftree-vectorize" \
+  --extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+  --extra-libs="-ludev -lstdc++" \
+  --disable-all \
+  --enable-gpl --enable-version3 --enable-nonfree --enable-shared \
+  --enable-pthreads --enable-neon --enable-armv8 --enable-inline-asm \
+  --enable-libx264 --enable-libx265 --enable-libmp3lame --enable-libopus \
+  --enable-avcodec --enable-avformat --enable-avfilter --enable-avdevice \
+  --enable-swresample --enable-swscale --enable-libdrm --enable-v4l2-m2m \
+  --enable-vulkan --enable-libplacebo --enable-gnutls --enable-network \
+  --enable-libpulse --enable-libudev --enable-libssh \
+  --enable-protocol='file,http,https,tcp,udp,rtp,rtsp,rtmp,tls' \
+  --enable-encoder='libx264,libx265,libmp3lame,libopus,h264_v4l2m2m,hevc_v4l2m2m' \
+  --enable-decoder='h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,mpeg2video,mpeg2_v4l2m2m,vp9,av1,aac,mp3,opus' \
+  --enable-muxer='mp4,mov,matroska,mp3,rtsp' \
+  --enable-demuxer='mov,matroska,mp3,rtsp,mpegvideo' \
+  --enable-parser='h264,hevc,mpeg2video,vp9,av1,aac,mpegaudio' \
+  --enable-bsfs \
+  --enable-filter='scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume,libplacebo' \
+  --enable-ffmpeg --enable-ffprobe --enable-indevs --enable-indev='pulse,v4l2,kmsgrab,alsa' \
+  --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && make -j$(nproc)
 Verwende Code mit Vorsicht.
 
-3. Raspberry Pi 3 (32-Bit / armhf)
-Optimiert für Cortex-A53, moderne FPU (fp-armv8) & V4L2-M2M.
+3. Raspberry Pi 5 (64-Bit / aarch64)
+
+Maximale Power für den Cortex-A76.
 bash
-./configure --prefix=/usr --extra-version=kali-pi3-v7-2026 --toolchain=hardened \
---libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
---arch=arm --cpu=cortex-a53 \
---extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe" \
---extra-ldflags="-latomic -Wl,-O1,--as-needed" \
---enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
---enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand --enable-avfilter --enable-filter=fps --enable-filter=crystalizer  \
---enable-libdrm --enable-vout-drm --enable-opengl --enable-epoxy \
---enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
---enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg --enable-libass \
---disable-vulkan --disable-v4l2-request --disable-mmal --disable-omx --disable-doc && \
-make -j$(nproc) && sudo make install
-Verwende Code mit Vorsicht.
-
-4. Raspberry Pi Zero 2 W (32-Bit / armhf)
-Baugleich zu Pi 3, aber RAM-optimiert (Swap-Pflicht!).
-bash
-# Vorher unbedingt Swap auf 1024MB erhöhen!
-./configure --prefix=/usr --extra-version=kali-zero2-v7-2026 --toolchain=hardened \
---libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
---arch=arm --cpu=cortex-a53 \
---extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe" \
---extra-ldflags="-latomic -Wl,-O1,--as-needed" \
---enable-gpl --enable-version3 --enable-nonfree --enable-shared --disable-static \
---enable-neon --enable-vfp --enable-inline-asm --enable-hardcoded-tables \
---enable-libpulse --enable-libssh --enable-v4l2-m2m --enable-sand \
---enable-libdrm --enable-vout-drm --enable-opengl --enable-epoxy --enable-avfilter --enable-filter=fps --enable-filter=crystalizer \
---enable-libx264 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
---enable-libvorbis --enable-libdav1d --enable-libwebp --enable-libzimg --enable-libass \
---disable-vulkan --disable-v4l2-request --disable-libx265 --disable-mmal --disable-omx --disable-doc && \
-make -j2 && sudo make install
-```
-
-
-# filters disable all
-```bash
---enable-protocol='file,http,https,tcp,udp,rtp,rtsp,rtmp,tls' \
---enable-encoder='h264_vaapi,hevc_vaapi,av1_vaapi,libx264,libx265,libfdk_aac,libmp3lame,libopus' \
---enable-decoder='h264,hevc,vp9,av1,aac,mp3,opus' \
---enable-muxer='mp4,mov,matroska,mp3,rtsp' \
---enable-demuxer='mov,matroska,mp3,rtsp' \
---enable-parser='h264,hevc,vp9,av1,aac,mpegaudio' \
---enable-bsfs \
---enable-filter='scale_vaapi,procamp_vaapi,scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume'
+./configure \
+  --prefix=/usr \
+  --extra-version=debian-pi5-ultra-2026 \
+  --libdir=/usr/lib/aarch64-linux-gnu \
+  --incdir=/usr/include/aarch64-linux-gnu \
+  --arch=aarch64 \
+  --cpu=cortex-a76 \
+  --extra-cflags="-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize" \
+  --extra-ldflags="-latomic -Wl,-O1,--as-needed" \
+  --extra-libs="-ludev -lstdc++" \
+  --disable-all \
+  --enable-gpl --enable-version3 --enable-nonfree --enable-shared \
+  --enable-pthreads --enable-neon --enable-armv8 --enable-inline-asm \
+  --enable-libx264 --enable-libx265 --enable-libmp3lame --enable-libopus \
+  --enable-avcodec --enable-avformat --enable-avfilter --enable-avdevice \
+  --enable-swresample --enable-swscale --enable-libdrm --enable-v4l2-m2m \
+  --enable-vulkan --enable-libplacebo --enable-gnutls --enable-network \
+  --enable-libpulse --enable-libudev --enable-libssh \
+  --enable-protocol='file,http,https,tcp,udp,rtp,rtsp,rtmp,tls' \
+  --enable-encoder='libx264,libx265,libmp3lame,libopus,h264_v4l2m2m' \
+  --enable-decoder='h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,mpeg2video,mpeg2_v4l2m2m,vp9,av1,aac,mp3,opus' \
+  --enable-muxer='mp4,mov,matroska,mp3' \
+  --enable-demuxer='mov,matroska,mp3,rtsp,h264,hevc,mpegvideo' \
+  --enable-parser='h264,hevc,mpeg2video,vp9,av1,aac,mpegaudio' \
+  --enable-bsfs \
+  --enable-filter='scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume,libplacebo' \
+  --enable-ffmpeg --enable-ffprobe --enable-indevs --enable-indev='pulse,v4l2,kmsgrab,alsa' \
+  --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && make -j$(nproc)
 ```
 
 # MPV
