@@ -1,9 +1,9 @@
 1. Raspberry Pi 3 (32-Bit / armhf)
-Optimiert für Cortex-A53, Fokus auf Hardware-H.264 und WebP-Bilder.
+Optimiert für Cortex-A53, Pfade für 32-Bit Userland.
 bash
 ./configure \
   --prefix=/usr \
-  --extra-version=ultra-2026-pi3-final \
+  --extra-version=ultra-2026-pi3-clean \
   --libdir=/usr/lib/arm-linux-gnueabihf \
   --incdir=/usr/include/arm-linux-gnueabihf \
   --arch=arm \
@@ -12,6 +12,7 @@ bash
   --extra-ldflags="-latomic -Wl,-O1,--as-needed" \
   --extra-libs="-ludev -lstdc++" \
   --disable-all \
+  --disable-vaapi --disable-vdpau --disable-xvmc \
   --enable-gpl --enable-version3 --enable-nonfree --enable-shared \
   --enable-pthreads --enable-neon --enable-armv8 --enable-inline-asm \
   --enable-libx264 --enable-libx265 --enable-libmp3lame --enable-libopus --enable-libfdk-aac --enable-libwebp \
@@ -38,7 +39,7 @@ Optimiert für Cortex-A72, inklusive SVT-AV1 und Hardware-HEVC-Encoder.
 bash
 ./configure \
   --prefix=/usr \
-  --extra-version=ultra-2026-pi4-final \
+  --extra-version=ultra-2026-pi4-clean \
   --libdir=/usr/lib/aarch64-linux-gnu \
   --incdir=/usr/include/aarch64-linux-gnu \
   --arch=aarch64 \
@@ -47,6 +48,7 @@ bash
   --extra-ldflags='-latomic -Wl,-O1,--as-needed' \
   --extra-libs='-ludev -lstdc++' \
   --disable-all \
+  --disable-vaapi --disable-vdpau --disable-xvmc \
   --enable-gpl --enable-version3 --enable-nonfree --enable-shared \
   --enable-pthreads --enable-neon --enable-armv8 --enable-inline-asm \
   --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsvtav1 --enable-libwebp \
@@ -69,11 +71,11 @@ make -j$(nproc)
 Verwende Code mit Vorsicht.
 
 3. Raspberry Pi 5 (64-Bit / aarch64)
-Maximale Power mit Cortex-A76 und AV1-Encoding-Optimierung.
+Maximale Power mit Cortex-A76 und AV1-Encoding.
 bash
 ./configure \
   --prefix=/usr \
-  --extra-version=ultra-2026-pi5-final \
+  --extra-version=ultra-2026-pi5-clean \
   --libdir=/usr/lib/aarch64-linux-gnu \
   --incdir=/usr/include/aarch64-linux-gnu \
   --arch=aarch64 \
@@ -82,6 +84,7 @@ bash
   --extra-ldflags='-latomic -Wl,-O1,--as-needed' \
   --extra-libs='-ludev -lstdc++' \
   --disable-all \
+  --disable-vaapi --disable-vdpau --disable-xvmc \
   --enable-gpl --enable-version3 --enable-nonfree --enable-shared \
   --enable-pthreads --enable-neon --enable-armv8 --enable-inline-asm \
   --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsvtav1 --enable-libwebp \
@@ -101,10 +104,3 @@ bash
   --enable-ffmpeg --enable-ffprobe --enable-indevs --enable-indev='pulse,v4l2,kmsgrab,alsa' \
   --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && \
 make -j$(nproc)
-Verwende Code mit Vorsicht.
-
-Soll ich dir zeigen, wie du die neue AV1-Kompression auf dem Pi 5 nutzt, um Speicherplatz zu sparen?
-KI-Antworten können Fehler enthalten. Weitere Informationen
-
-
-
