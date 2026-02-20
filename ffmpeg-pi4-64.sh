@@ -1,18 +1,17 @@
 1. Raspberry Pi 3 (32-Bit / armhf)
-Optimiert für Cortex-A53, Pfade für 32-Bit Userland.
 bash
 ./configure \
   --prefix=/usr \
-  --extra-version=ultra-2026-pi3-clean \
+  --extra-version=ultra-2026-pi3-final-clean \
   --libdir=/usr/lib/arm-linux-gnueabihf \
   --incdir=/usr/include/arm-linux-gnueabihf \
   --arch=arm \
   --cpu=cortex-a53 \
-  --extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize" \
+  --extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe" \
   --extra-ldflags="-latomic -Wl,-O1,--as-needed" \
   --extra-libs="-ludev -lstdc++" \
   --disable-all \
-  --disable-vaapi --disable-vdpau --disable-xvmc \
+  --disable-vaapi --disable-vdpau --disable-xvmc --disable-hwaccel=vaapi --disable-hwaccel=vdpau \
   --enable-gpl --enable-version3 --enable-nonfree --enable-shared \
   --enable-pthreads --enable-neon --enable-armv8 --enable-inline-asm \
   --enable-libx264 --enable-libx265 --enable-libmp3lame --enable-libopus --enable-libfdk-aac --enable-libwebp \
@@ -28,18 +27,15 @@ bash
   --enable-parser='h264,hevc,mpeg2video,vp9,av1,aac,mpegaudio' \
   --enable-bsfs \
   --enable-filter='scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume,libplacebo' \
-  --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
   --enable-ffmpeg --enable-ffprobe --enable-indevs --enable-indev='pulse,v4l2,kmsgrab,alsa' \
-  --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && \
-make -j$(nproc)
+  --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && make -j$(nproc)
 Verwende Code mit Vorsicht.
 
 2. Raspberry Pi 4 (64-Bit / aarch64)
-Optimiert für Cortex-A72, inklusive SVT-AV1 und Hardware-HEVC-Encoder.
 bash
 ./configure \
   --prefix=/usr \
-  --extra-version=ultra-2026-pi4-clean \
+  --extra-version=ultra-2026-pi4-final-clean \
   --libdir=/usr/lib/aarch64-linux-gnu \
   --incdir=/usr/include/aarch64-linux-gnu \
   --arch=aarch64 \
@@ -48,7 +44,7 @@ bash
   --extra-ldflags='-latomic -Wl,-O1,--as-needed' \
   --extra-libs='-ludev -lstdc++' \
   --disable-all \
-  --disable-vaapi --disable-vdpau --disable-xvmc \
+  --disable-vaapi --disable-vdpau --disable-xvmc --disable-hwaccel=vaapi --disable-hwaccel=vdpau \
   --enable-gpl --enable-version3 --enable-nonfree --enable-shared \
   --enable-pthreads --enable-neon --enable-armv8 --enable-inline-asm \
   --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsvtav1 --enable-libwebp \
@@ -64,18 +60,15 @@ bash
   --enable-parser='h264,hevc,mpeg2video,vp9,av1,aac,mpegaudio' \
   --enable-bsfs \
   --enable-filter='scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume,libplacebo' \
-  --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
   --enable-ffmpeg --enable-ffprobe --enable-indevs --enable-indev='pulse,v4l2,kmsgrab,alsa' \
-  --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && \
-make -j$(nproc)
+  --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && make -j$(nproc)
 Verwende Code mit Vorsicht.
 
 3. Raspberry Pi 5 (64-Bit / aarch64)
-Maximale Power mit Cortex-A76 und AV1-Encoding.
 bash
 ./configure \
   --prefix=/usr \
-  --extra-version=ultra-2026-pi5-clean \
+  --extra-version=ultra-2026-pi5-final-clean \
   --libdir=/usr/lib/aarch64-linux-gnu \
   --incdir=/usr/include/aarch64-linux-gnu \
   --arch=aarch64 \
@@ -84,7 +77,7 @@ bash
   --extra-ldflags='-latomic -Wl,-O1,--as-needed' \
   --extra-libs='-ludev -lstdc++' \
   --disable-all \
-  --disable-vaapi --disable-vdpau --disable-xvmc \
+  --disable-vaapi --disable-vdpau --disable-xvmc --disable-hwaccel=vaapi --disable-hwaccel=vdpau \
   --enable-gpl --enable-version3 --enable-nonfree --enable-shared \
   --enable-pthreads --enable-neon --enable-armv8 --enable-inline-asm \
   --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsvtav1 --enable-libwebp \
@@ -100,7 +93,7 @@ bash
   --enable-parser='h264,hevc,mpeg2video,vp9,av1,aac,mpegaudio' \
   --enable-bsfs \
   --enable-filter='scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume,libplacebo' \
-  --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
   --enable-ffmpeg --enable-ffprobe --enable-indevs --enable-indev='pulse,v4l2,kmsgrab,alsa' \
-  --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && \
-make -j$(nproc)
+  --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && make -j$(nproc)
+Verwende Code mit Vorsicht.
+
