@@ -522,6 +522,9 @@ sudo apt update && sudo apt install -y \
   libepoxy-dev glslang-dev libshaderc-dev libsdl2-dev linux-headers-$(uname -r)
 Verwende Code mit Vorsicht.
 
+
+--enable-muxer=rtsp --enable-demuxer=rtsp --enable-demuxer=sdp
+
 1. Raspberry Pi 5 (64-Bit / aarch64)
 Optimiert für Cortex-A76, V4L2-M2M (HEVC/H264) & Vulkan.
 bash
