@@ -18,7 +18,7 @@ bash
   --enable-avcodec --enable-avformat --enable-avfilter --enable-avdevice \
   --enable-swresample --enable-swscale --enable-libdrm --enable-v4l2-m2m \
   --enable-vulkan --enable-libplacebo --enable-gnutls --enable-network \
-  --enable-libpulse --enable-libudev --enable-libssh \
+  --enable-libpulse --enable-libudev --enable-libssh- -enable-protocol=rtsp  \
   --enable-protocol='file,http,https,tcp,udp,rtp,rtsp,rtmp,tls,pipe' \
   --enable-encoder='libx264,libx265,libmp3lame,libopus,libfdk_aac,libwebp,h264_v4l2m2m' \
   --enable-decoder='h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,mpeg2video,mpeg2_v4l2m2m,vp9,av1,aac,mp3,opus,webp' \
@@ -35,7 +35,7 @@ Verwende Code mit Vorsicht.
 bash
 ./configure \
   --prefix=/usr \
-  --extra-version=ultra-2026-pi4-final-clean \
+  --extra-version=ultra-clean \
   --libdir=/usr/lib/aarch64-linux-gnu \
   --incdir=/usr/include/aarch64-linux-gnu \
   --arch=aarch64 \
@@ -97,3 +97,75 @@ bash
   --enable-outdevs --enable-outdev='pulse,v4l2,alsa' && make -j$(nproc)
 Verwende Code mit Vorsicht.
 
+./configure \
+  --prefix=/usr \
+  --extra-version=ultra-clean \
+  --libdir=/usr/lib/aarch64-linux-gnu \
+  --incdir=/usr/include/aarch64-linux-gnu \
+  --arch=aarch64 \
+  --cpu=cortex-a72 \
+  --extra-cflags='-mcpu=cortex-a72 -O2 -pipe -ftree-vectorize' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed' \
+  --extra-libs='-ludev -lstdc++' \
+  --prefix=/usr \
+  --enable-gpl \
+  --enable-nonfree \
+  --disable-everything \
+  --enable-network \
+  --enable-protocol=rtsp,rtp,tcp,udp,file,pipe \
+  --enable-demuxer=rtsp,h264,pulse,mpegts,mov \
+  --enable-muxer=rtsp,mp4,h264,mpegts,adts \
+  --enable-decoder=h264,h264_v4l2m2m,aac \
+  --enable-encoder=libfdk_aac,h264_v4l2m2m,copy \
+  --enable-parser=h264,aac \
+  --enable-filter=aresample,format,fps \
+  --enable-libfdk-aac \
+  --enable-libpulse \
+  --enable-v4l2-m2m \
+  --enable-v4l2-request \
+  --enable-libdrm \
+  --enable-libudev \
+  --enable-hwaccel=h264_v4l2request \
+  --enable-indev=pulse \
+  --enable-outdev=pulse
+  --disable-static --enable-shared \
+
+
+
+vulkan
+
+ ./configure \
+  --prefix=/usr \
+  --extra-version=ultra-clean \
+  --libdir=/usr/lib/aarch64-linux-gnu \
+  --incdir=/usr/include/aarch64-linux-gnu \
+  --arch=aarch64 \
+  --cpu=cortex-a72 \
+  --extra-cflags='-mcpu=cortex-a72 -O2 -pipe -ftree-vectorize' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed' \
+  --extra-libs='-ludev -lstdc++' \
+  --enable-gpl \
+  --enable-nonfree \
+  --disable-static \
+  --enable-shared \
+  --disable-everything \
+  --enable-network \
+  --enable-protocol=rtsp,rtp,tcp,udp,file,pipe \
+  --enable-demuxer=rtsp,h264,pulse,alsa,mpegts,mov,opus \
+  --enable-muxer=rtsp,mp4,h264,mpegts,adts,opus \
+  --enable-decoder=h264,h264_v4l2m2m,aac,opus \
+  --enable-encoder=libfdk_aac,libopus,h264_v4l2m2m,copy \
+  --enable-parser=h264,aac,opus \
+  --enable-libfdk-aac \
+  --enable-libopus \
+  --enable-libpulse \
+  --enable-alsa \
+  --enable-v4l2-m2m \
+  --enable-v4l2-request \
+  --enable-libdrm \
+  --enable-libudev \
+  --enable-vulkan \
+  --enable-hwaccel=h264_v4l2request \
+  --enable-indev=pulse,alsa \
+  --enable-outdev=pulse,alsa \
+  --enable-filter=scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume,libplacebo,hwmap,hwupload
