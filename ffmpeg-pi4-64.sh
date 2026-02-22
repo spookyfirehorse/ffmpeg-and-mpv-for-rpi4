@@ -134,7 +134,7 @@ Verwende Code mit Vorsicht.
 
 vulkan
 
- ./configure \
+./configure \
   --prefix=/usr \
   --extra-version=ultra-clean \
   --libdir=/usr/lib/aarch64-linux-gnu \
@@ -149,23 +149,29 @@ vulkan
   --disable-static \
   --enable-shared \
   --disable-everything \
+  --disable-vaapi \
+  --disable-vdpau \
   --enable-network \
-  --enable-protocol=rtsp,rtp,tcp,udp,file,pipe \
-  --enable-demuxer=rtsp,h264,pulse,alsa,mpegts,mov,opus \
-  --enable-muxer=rtsp,mp4,h264,mpegts,adts,opus \
-  --enable-decoder=h264,h264_v4l2m2m,aac,opus \
+  --enable-libplacebo \
+  --enable-libshaderc \
+  --enable-vulkan \
+  --enable-libdrm \
+  --enable-libudev \
+  --enable-libepoxy \
+  --enable-v4l2-m2m \
+  --enable-v4l2-request \
+  --enable-libass \
+  --enable-openssl \
+  --enable-protocol=rtsp,rtp,tcp,udp,file,pipe,sdp,http,https,tls,hls \
+  --enable-demuxer=rtsp,h264,pulse,alsa,mpegts,mov,opus,matroska,sdp,image2,asf,hls \
+  --enable-muxer=rtsp,mp4,h264,mpegts,adts,opus,matroska,rtp,hls \
+  --enable-decoder=h264,h264_v4l2m2m,aac,opus,ass,subrip,mov_text,mjpeg \
   --enable-encoder=libfdk_aac,libopus,h264_v4l2m2m,copy \
   --enable-parser=h264,aac,opus \
   --enable-libfdk-aac \
   --enable-libopus \
   --enable-libpulse \
   --enable-alsa \
-  --enable-v4l2-m2m \
-  --enable-v4l2-request \
-  --enable-libdrm \
-  --enable-libudev \
-  --enable-vulkan \
-  --enable-hwaccel=h264_v4l2request \
   --enable-indev=pulse,alsa \
   --enable-outdev=pulse,alsa \
-  --enable-filter=scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume,libplacebo,hwmap,hwupload
+  --enable-filter='scale,copy,format,aresample,fps,crystalizer,bass,scaletempo,volume,libplacebo,hwmap,hwupload'
