@@ -364,26 +364,39 @@ pw-cli
 
 
      
-##   pi 5 64 bit
+##   pi 3 32 bit
 
 ```bash
 git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
-./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 --toolchain=hardened \
---incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
---enable-gpl --enable-nonfree --enable-shared --disable-static \
---arch=aarch64 --cpu=cortex-a76 --extra-cflags="-mcpu=cortex-a76 -mtune=cortex-a76" --extra-ldflags="-latomic" --enable-neon \
---enable-gnutls --enable-libxml2 --enable-libudev --enable-v4l2-m2m --enable-sand --enable-v4l2-request \
---enable-libx264 --enable-libx265 --enable-libopus --enable-libfdk-aac --enable-libmp3lame \
---enable-libvorbis --enable-libvpx --enable-libdav1d --enable-libaom --enable-libwebp --enable-libzimg \
---enable-libass --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libharfbuzz \
---enable-libpulse --enable-libjack --enable-libssh --enable-libsrt --enable-libzmq \
---enable-opengl --enable-vulkan --enable-epoxy --enable-libdrm  --enable-vout-drm  --enable-sdl2 \
---disable-v4l2-request --disable-mmal --disable-omx --disable-libmfx --disable-libvpl \
---disable-libbluray --disable-libmysofa --disable-libcaca --disable-pocketsphinx --disable-libjxl \
---disable-chromaprint --disable-libdvdnav --disable-libdvdread --disable-libcodec2 --disable-libgsm --disable-libgme --disable-libopenmpt \
---disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-vaapi --disable-vdpau \
---disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-vfp --disable-thumb --enable-hardcoded-tables  && \
-make -j$(nproc) && sudo make install
+./configure \
+  --prefix=/usr \
+  --extra-version=ultra-clean \
+  --libdir=/usr/lib/arm-linux-gnueabihf \
+  --incdir=/usr/include/arm-linux-gnueabihf \
+  --arch=armv7l \
+  --cpu=cortex-a53 \
+  --extra-cflags='-mcpu=cortex-a53 -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-ludev -lstdc++' \
+  --disable-doc --disable-manpages --disable-htmlpages --disable-podpages --disable-txtpages \
+  --enable-lto --enable-gpl --enable-nonfree --disable-static --enable-shared \
+  --disable-everything \
+  --enable-libjack \
+  --enable-libpulse \
+  --enable-swresample \
+  --enable-network --enable-libplacebo --enable-libshaderc \
+ --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
+ --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-openssl --enable-sdl2 --enable-opengl \
+  --enable-indev=alsa,pulse,jack \
+  --enable-outdev=alsa,pulse,jack \
+  --enable-protocol=rtsp,rtp,tcp,udp,file,pipe,sdp,http,https,tls,hls \
+  --enable-demuxer=rtsp,h264,hevc,av1,m4v,mp3,pulse,alsa,mpegts,mov,opus,matroska,sdp,image2,asf,hls \
+  --enable-muxer=rtsp,mp4,h264,hevc,mp3,mpegts,adts,opus,matroska,rtp,hls,ipod \
+  --enable-decoder=h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,av1,aac,mp3,mp3float,opus,ass,subrip,mov_text,mjpeg,pcm_s16le,pcm_f32le \
+  --enable-encoder=libfdk_aac,libmp3lame,libopus,h264_v4l2m2m,hevc_v4l2m2m,copy \
+  --enable-parser=h264,hevc,av1,mpegaudio,aac,opus \
+  --enable-filter=vulkan,placebo,format,hwupload,scale,v4l2_request,v4l2m2m,aresample,aformat \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus && make -j3
 ```
 
             
@@ -392,48 +405,69 @@ make -j$(nproc) && sudo make install
 
 ```bash
 sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
-./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 \
---toolchain=hardened --enable-gpl --enable-nonfree \
---enable-shared --disable-static --incdir=/usr/include/aarch64-linux-gnu --libdir=/usr/lib/aarch64-linux-gnu \
---disable-doc --disable-debug --disable-stripping \
---arch=aarch64 --cpu=cortex-a72 --extra-cflags="-mcpu=cortex-a72 -mtune=cortex-a72" --extra-ldflags="-latomic" \
---enable-neon --disable-vfp --disable-thumb --enable-epoxy --enable-v4l2-request \
---enable-libssh --enable-gnutls --enable-network \
---enable-v4l2-m2m --disable-v4l2-request --enable-libdrm --enable-libudev \
---enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d \
---enable-libopus --enable-libfdk-aac --enable-libmp3lame --enable-libvorbis \
---enable-libpulse --enable-libxml2  \
---enable-libass --enable-libfreetype --enable-libfontconfig \
---enable-libwebp --enable-libzimg \
---enable-opengl --enable-sand --enable-vout-drm \
---disable-vaapi --disable-vdpau --disable-vulkan \
---disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec \
---disable-appkit --disable-avfoundation --disable-coreimage --disable-audiotoolbox \
---disable-videotoolbox --disable-amf --disable-d3d11va --disable-dxva2 \
---disable-mediafoundation --disable-libmfx --disable-libvpl --disable-libnpp \
---disable-mmal --disable-omx --disable-vfp --disable-thumb \
---disable-libcaca --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --enable-hardcoded-tables   && \
+./configure \
+  --prefix=/usr \
+  --extra-version=ultra-clean \
+  --libdir=/usr/lib/aarch64-linux-gnu \
+  --incdir=/usr/include/aarch64-linux-gnu \
+  --arch=aarch64 \
+  --cpu=cortex-a72 \
+  --extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-ludev -lstdc++' \
+  --disable-doc --disable-manpages --disable-htmlpages --disable-podpages --disable-txtpages \
+  --enable-lto --enable-gpl --enable-nonfree --disable-static --enable-shared \
+  --disable-everything \
+  --enable-libjack \
+  --enable-libpulse \
+  --enable-swresample \
+  --enable-network --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm \
+  --enable-libudev --enable-epoxy --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-openssl --enable-sdl2 --enable-opengl \
+  --enable-indev=alsa,pulse,jack \
+  --enable-outdev=alsa,pulse,jack \
+  --enable-protocol=rtsp,rtp,tcp,udp,file,pipe,sdp,http,https,tls,hls \
+  --enable-demuxer=rtsp,h264,hevc,av1,m4v,mp3,pulse,alsa,mpegts,mov,opus,matroska,sdp,image2,asf,hls \
+  --enable-muxer=rtsp,mp4,h264,hevc,mp3,mpegts,adts,opus,matroska,rtp,hls,ipod \
+  --enable-decoder=h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,av1,aac,mp3,mp3float,opus,ass,subrip,mov_text,mjpeg,pcm_s16le,pcm_f32le \
+  --enable-encoder=libfdk_aac,libmp3lame,libopus,h264_v4l2m2m,hevc_v4l2m2m,copy \
+  --enable-parser=h264,hevc,av1,mpegaudio,aac,opus \
+  --enable-filter=vulkan,placebo,format,hwupload,scale,v4l2_request,v4l2m2m,aresample,aformat \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus   && \
 make -j$(nproc) && \
 sudo make install
 ```
 
-## pi3 armhf new      
+## pi5 new      
 
 ```bash
 sudo apt build-dep ffmpeg -y && git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git && cd rpi-ffmpeg/ && \
-./configure --prefix=/usr --extra-version=0+deb13u1+rpt2 --toolchain=hardened --enable-gpl --enable-nonfree --enable-shared \
---disable-static --disable-doc --disable-debug --disable-stripping --enable-epoxy --enable-neon --enable-libssh --enable-v4l2-m2m --enable-v4l2-request \
---disable-v4l2-request --enable-libdrm --enable-libudev --enable-libx264 --enable-libx265 --enable-libvpx --enable-libdav1d --enable-libopus \
---enable-libfdk-aac --enable-libmp3lame --enable-libssh --enable-libvorbis --enable-libpulse --enable-libxml2 --enable-gnutls --enable-libass --enable-libfreetype \
---enable-libfontconfig --enable-libwebp --enable-libzimg --enable-opengl --enable-sand --enable-vout-drm  --enable-network --enable-hardcoded-tables \
---disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-libcaca \
---disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --disable-doc --disable-htmlpages  --disable-manpages \
---disable-podpages --disable-txtpages --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec \
---disable-ffnvcodec --disable-libcaca --disable-libbluray --disable-libmysofa --disable-pocketsphinx --disable-libjxl --disable-appkit \
---disable-avfoundation --disable-coreimage --disable-audiotoolbox --disable-videotoolbox --disable-amf --disable-d3d11va --disable-dxva2 \
---disable-mediafoundation --disable-vulkan --disable-libmfx --disable-libvpl --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
---disable-libnpp --disable-mmal --disable-omx --enable-vfp --enable-thumb --arch=armhf --cpu=cortex-a53 --disable-armv5te --disable-armv6 --disable-armv6t2 \
---extra-cflags="-mcpu=cortex-a53 -mtune=cortex-a53" --extra-ldflags="-latomic" && make -j$(nproc) && sudo make install
+./configure \
+  --prefix=/usr \
+  --extra-version=ultra-clean \
+  --libdir=/usr/lib/aarch64-linux-gnu \
+  --incdir=/usr/include/aarch64-linux-gnu \
+  --arch=aarch64 \
+  --cpu=cortex-a76 \
+  --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-ludev -lstdc++' \
+  --disable-doc --disable-manpages --disable-htmlpages --disable-podpages --disable-txtpages \
+  --enable-lto --enable-gpl --enable-nonfree --disable-static --enable-shared \
+  --disable-everything \
+  --enable-libjack \
+  --enable-libpulse \
+  --enable-swresample \
+  --enable-network --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-openssl --enable-sdl2 --enable-opengl \
+  --enable-indev=alsa,pulse,jack \
+  --enable-outdev=alsa,pulse,jack \
+  --enable-protocol=rtsp,rtp,tcp,udp,file,pipe,sdp,http,https,tls,hls \
+  --enable-demuxer=rtsp,h264,hevc,av1,m4v,mp3,pulse,alsa,mpegts,mov,opus,matroska,sdp,image2,asf,hls \
+  --enable-muxer=rtsp,mp4,h264,hevc,mp3,mpegts,adts,opus,matroska,rtp,hls,ipod \
+  --enable-decoder=h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,av1,aac,mp3,mp3float,opus,ass,subrip,mov_text,mjpeg,pcm_s16le,pcm_f32le \
+  --enable-encoder=libfdk_aac,libmp3lame,libopus,h264_v4l2m2m,hevc_v4l2m2m,copy \
+  --enable-parser=h264,hevc,av1,mpegaudio,aac,opus \
+  --enable-filter=vulkan,placebo,format,hwupload,scale,v4l2_request,v4l2m2m,aresample,aformat \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus && make -j$(nproc) && sudo make install
 ```
 
 
