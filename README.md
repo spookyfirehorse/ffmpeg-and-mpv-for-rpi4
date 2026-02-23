@@ -390,7 +390,7 @@ libssl-dev libvulkan-dev atomic-binaries
   --disable-cuda-llvm --disable-cuvid --disable-nvdec --disable-nvenc --disable-ffnvcodec \
   --disable-amf --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-libvpl \
   --disable-mmal --disable-omx --disable-omx-rpi --disable-vout-egl --disable-opengl \
-  --disable-runtime-cpudetect
+  --disable-runtime-cpudetect --enable-xlib --enable-libx264
 ```
 
 ```bash
@@ -406,7 +406,12 @@ libssl-dev libvulkan-dev atomic-binaries
   --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr --enable-libplacebo \
   --enable-epoxy --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
   --enable-sdl2 --enable-opengl --enable-libfdk-aac --enable-libmp3lame --enable-libopus \
-  --enable-vout-egl --enable-xlib --enable-libx264 --enable-libshaderc --enable-vulkan
+  --enable-vout-egl --enable-xlib --enable-libx264 --enable-libshaderc --enable-vulkan \
+  --disable-vaapi --disable-vdpau --disable-cuda --disable-cuda-llvm --disable-cuvid \
+  --disable-nvdec --disable-nvenc --disable-ffnvcodec --disable-amf --disable-d3d11va \
+  --disable-dxva2 --disable-libmfx --disable-libvpl --disable-mmal --disable-omx \
+  --disable-omx-rpi --disable-vout-egl --enable-libdrm \
+  --enable-libudev
 ```
 ```bash
 ./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
@@ -459,7 +464,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
-  --enable-stripping --enable-hardcoded-tables
+  --enable-stripping --enable-hardcoded-tables --enable-bsf=h264_mp4toannexb,hevc_mp4toannexb
 ```
 ```bash
 ./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
@@ -485,7 +490,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
-  --enable-stripping --enable-hardcoded-tables
+  --enable-stripping --enable-hardcoded-tables --enable-bsf=h264_mp4toannexb,hevc_mp4toannexb
 ```
 
 ```bash
@@ -512,7 +517,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
-  --enable-stripping --enable-hardcoded-tables
+  --enable-stripping --enable-hardcoded-tables --enable-bsf=h264_mp4toannexb,hevc_mp4toannexb
 ```
 
 
