@@ -440,7 +440,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --extra-version=ultra-clean-kynesim-rpi-5 --arch=aarch64 --cpu=cortex-a76 \
   --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
   --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' --extra-libs='-ludev -lstdc++' \
-  --enable-shared --disable-static --disable-autodetect --enable-gpl --enable-nonfree --enable-lto \
+   --enable-shared --disable-static --disable-autodetect --enable-gpl --enable-nonfree --enable-lto \
   --enable-ffmpeg --enable-ffprobe --enable-ffplay --enable-avcodec --enable-avformat --enable-avfilter \
   --enable-avdevice --enable-swresample --enable-swscale --enable-postproc --enable-pthreads \
   --enable-network --enable-openssl --enable-runtime-cpudetect --enable-muxers --enable-demuxers \
@@ -457,8 +457,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --disable-w32threads --disable-jni --disable-mediacodec \
   --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
   --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
-  --disable
-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
   --enable-stripping --enable-hardcoded-tables
 ```
