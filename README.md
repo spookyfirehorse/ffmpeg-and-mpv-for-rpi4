@@ -540,8 +540,8 @@ nano .config/mpv/mpv.conf
 ```bash
 gpu-dumb-mode=yes
 opengl-glfinish=yes
-#gpu-context=x11egl   ###x11
-gpu-context=wayland   ##wayland
+#gpu-context=waylandvk
+gpu-context=x11egl
 gpu-api=opengl
 vo=gpu
 hwdec=drm
@@ -554,11 +554,12 @@ scale=bilinear
  ```
     
 # without x build ffmpeg ! pure wayland vulkan drm 
+# hwaacel drm wayland
 
 ```bash
 gpu-dumb-mode=yes
 opengl-glfinish=yes
-gpu-context=wayland   ##wayland
+gpu-context=waylandvk  
 gpu-api=vulkan
 vo=gpu-next
 hwdec=drm
