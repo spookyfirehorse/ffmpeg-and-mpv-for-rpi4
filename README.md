@@ -451,11 +451,16 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libflite --disable-libtesseract --disable-libzvbi \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
-  --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-cuvid --disable-nvenc --disable-nvdec \
-  --disable-libmfx   --disable-w32threads --disable-jni --disable-mediacodec \
+  --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-libmfx \
+  --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-hwaccels  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-w32threads --disable-jni --disable-mediacodec \
   --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
   --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
-  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd
+  --disable
+decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables
 ```
 ```bash
 ./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
@@ -473,11 +478,15 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libflite --disable-libtesseract --disable-libzvbi \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
-  --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-cuvid --disable-nvenc --disable-nvdec \
-  --disable-libmfx   --disable-w32threads --disable-jni --disable-mediacodec \
+  --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-libmfx \
+  --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-hwaccels  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-w32threads --disable-jni --disable-mediacodec \
   --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
   --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
-  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables
 ```
 
 ```bash
@@ -492,15 +501,19 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --enable-parsers --enable-protocols --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
   --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
   --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --disable-opengl \
-  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --disable-opengl \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm \
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libflite --disable-libtesseract --disable-libzvbi \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
-  --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-cuvid --disable-nvenc --disable-nvdec \
-  --disable-libmfx   --disable-w32threads --disable-jni --disable-mediacodec \
+  --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-libmfx \
+  --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-hwaccels  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-w32threads --disable-jni --disable-mediacodec \
   --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
   --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
-  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables
 ```
 
 
