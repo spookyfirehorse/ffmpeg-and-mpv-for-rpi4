@@ -445,7 +445,7 @@ libssl-dev libvulkan-dev atomic-binaries
   --disable-libflite --disable-libtesseract --disable-libzvbi \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
   --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-cuvid --disable-nvenc --disable-nvdec \
-  --disable-libmfx --disable-qsv --disable-dshow --disable-w32threads --disable-jni --disable-mediacodec \
+  --disable-libmfx   --disable-w32threads --disable-jni --disable-mediacodec \
   --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
   --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd
@@ -467,7 +467,7 @@ libssl-dev libvulkan-dev atomic-binaries
   --disable-libflite --disable-libtesseract --disable-libzvbi \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
   --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-cuvid --disable-nvenc --disable-nvdec \
-  --disable-libmfx --disable-qsv --disable-dshow --disable-w32threads --disable-jni --disable-mediacodec \
+  --disable-libmfx   --disable-w32threads --disable-jni --disable-mediacodec \
   --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
   --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd
@@ -490,7 +490,7 @@ libssl-dev libvulkan-dev atomic-binaries
   --disable-libflite --disable-libtesseract --disable-libzvbi \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
   --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-cuvid --disable-nvenc --disable-nvdec \
-  --disable-libmfx --disable-qsv --disable-dshow --disable-w32threads --disable-jni --disable-mediacodec \
+  --disable-libmfx   --disable-w32threads --disable-jni --disable-mediacodec \
   --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
   --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd
