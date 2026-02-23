@@ -428,7 +428,7 @@ libssl-dev libvulkan-dev atomic-binaries
 
 # without any x  only wayland 
 
-``bash
+```bash
 ./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
   --extra-version=ultra-clean-kynesim-rpi-5 --arch=aarch64 --cpu=cortex-a76 \
   --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
