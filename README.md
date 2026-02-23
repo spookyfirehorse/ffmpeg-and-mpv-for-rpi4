@@ -428,6 +428,13 @@ libssl-dev libvulkan-dev atomic-binaries
 
 # without any x  only wayland 
 
+
+# chromium line to start
+
+```bash
+chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANGLE,DefaultANGLEVulkan,SkiaGraphite --ignore-gpu-blocklist --enable-gpu-rasterization
+```
+
 ```bash
 ./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
   --extra-version=ultra-clean-kynesim-rpi-5 --arch=aarch64 --cpu=cortex-a76 \
