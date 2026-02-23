@@ -426,6 +426,78 @@ libssl-dev libvulkan-dev atomic-binaries
   --disable-omx-rpi --disable-vout-egl
 ```
 
+# without any x  only wayland 
+
+``bash
+./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+  --extra-version=ultra-clean-kynesim-rpi-5 --arch=aarch64 --cpu=cortex-a76 \
+  --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' --extra-libs='-ludev -lstdc++' \
+  --enable-shared --disable-static --disable-autodetect --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --enable-ffplay --enable-avcodec --enable-avformat --enable-avfilter \
+  --enable-avdevice --enable-swresample --enable-swscale --enable-postproc --enable-pthreads \
+  --enable-network --enable-openssl --enable-runtime-cpudetect --enable-muxers --enable-demuxers \
+  --enable-parsers --enable-protocols --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
+  --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --enable-opengl \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-egl \
+  --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
+  --disable-libflite --disable-libtesseract --disable-libzvbi \
+  --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
+  --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-cuvid --disable-nvenc --disable-nvdec \
+  --disable-libmfx --disable-qsv --disable-dshow --disable-w32threads --disable-jni --disable-mediacodec \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd
+```
+```bash
+./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+  --extra-version=ultra-clean-kynesim-rpi-4 --arch=aarch64 --cpu=cortex-a76 \
+  --extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' --extra-libs='-ludev -lstdc++' \
+  --enable-shared --disable-static --disable-autodetect --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --enable-ffplay --enable-avcodec --enable-avformat --enable-avfilter \
+  --enable-avdevice --enable-swresample --enable-swscale --enable-postproc --enable-pthreads \
+  --enable-network --enable-openssl --enable-runtime-cpudetect --enable-muxers --enable-demuxers \
+  --enable-parsers --enable-protocols --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
+  --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --enable-opengl \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-egl \
+  --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
+  --disable-libflite --disable-libtesseract --disable-libzvbi \
+  --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
+  --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-cuvid --disable-nvenc --disable-nvdec \
+  --disable-libmfx --disable-qsv --disable-dshow --disable-w32threads --disable-jni --disable-mediacodec \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd
+```
+
+```bash
+./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+  --extra-version=ultra-clean-pi3 --arch=armv7l --cpu=cortex-a53 \
+  --extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --enable-shared --disable-static --disable-autodetect --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --enable-ffplay --enable-avcodec --enable-avformat --enable-avfilter \
+  --enable-avdevice --enable-swresample --enable-swscale --enable-postproc --enable-pthreads \
+  --enable-network --enable-openssl --enable-runtime-cpudetect --enable-muxers --enable-demuxers \
+  --enable-parsers --enable-protocols --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
+  --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --enable-opengl \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-egl \
+  --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
+  --disable-libflite --disable-libtesseract --disable-libzvbi \
+  --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
+  --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-cuvid --disable-nvenc --disable-nvdec \
+  --disable-libmfx --disable-qsv --disable-dshow --disable-w32threads --disable-jni --disable-mediacodec \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd
+```
+
+
+
 # MPV
 ```bash
 sudo apt build-dep mpv -y && \
