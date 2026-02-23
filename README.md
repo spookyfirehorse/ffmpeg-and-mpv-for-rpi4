@@ -440,7 +440,7 @@ libssl-dev libvulkan-dev atomic-binaries
   --enable-parsers --enable-protocols --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
   --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
   --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --enable-opengl \
-  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-egl \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm \
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libflite --disable-libtesseract --disable-libzvbi \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
@@ -462,7 +462,7 @@ libssl-dev libvulkan-dev atomic-binaries
   --enable-parsers --enable-protocols --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
   --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
   --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --enable-opengl \
-  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-egl \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm \
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libflite --disable-libtesseract --disable-libzvbi \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
@@ -485,7 +485,7 @@ libssl-dev libvulkan-dev atomic-binaries
   --enable-parsers --enable-protocols --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
   --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
   --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --enable-opengl \
-  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-egl \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --disable-opengl \
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libflite --disable-libtesseract --disable-libzvbi \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va \
@@ -553,6 +553,23 @@ dither=no
 scale=bilinear
  ```
     
+# without x build ffmpeg ! pure wayland vulkan drm 
+
+```bash
+gpu-dumb-mode=yes
+opengl-glfinish=yes
+gpu-context=wayland   ##wayland
+gpu-api=vulkan
+vo=gpu-next
+hwdec=drm
+hwdec-codecs=hevc
+hwdec-image-format=drm_prime
+gpu-hwdec-interop=drmprime
+drm-vrr-enabled=auto
+dither=no
+scale=bilinear
+ ```
+
 
 #################################
 
