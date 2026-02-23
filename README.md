@@ -439,7 +439,7 @@ libssl-dev libvulkan-dev atomic-binaries
   --enable-network --enable-openssl --enable-runtime-cpudetect --enable-muxers --enable-demuxers \
   --enable-parsers --enable-protocols --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
   --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
-  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --enable-opengl \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --disable-opengl \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm \
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libflite --disable-libtesseract --disable-libzvbi \
@@ -461,7 +461,7 @@ libssl-dev libvulkan-dev atomic-binaries
   --enable-network --enable-openssl --enable-runtime-cpudetect --enable-muxers --enable-demuxers \
   --enable-parsers --enable-protocols --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
   --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
-  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --enable-opengl \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --disable-opengl \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm \
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libflite --disable-libtesseract --disable-libzvbi \
@@ -484,7 +484,7 @@ libssl-dev libvulkan-dev atomic-binaries
   --enable-network --enable-openssl --enable-runtime-cpudetect --enable-muxers --enable-demuxers \
   --enable-parsers --enable-protocols --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
   --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
-  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --enable-opengl \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass --enable-sdl2 --disable-opengl \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --disable-opengl \
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libflite --disable-libtesseract --disable-libzvbi \
