@@ -353,8 +353,17 @@ pw-cli
 
 
      sudo apt install libopenh264-dev
-     
-# for latest ffmpeg
+```bash     
+sudo apt update && sudo apt install -y \
+build-essential pkg-config git \
+libasound2-dev libpulse-dev libsdl2-dev \
+libfdk-aac-dev libmp3lame-dev libopus-dev libx264-dev libdav1d-dev \
+libdrm-dev libudev-dev libepoxy-dev libshaderc-dev \
+libssl-dev libvulkan-dev atomic-binaries
+```
+
+
+
 
      git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git 
 
