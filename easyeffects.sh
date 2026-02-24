@@ -10,9 +10,10 @@ CXXFLAGS="-march=goldmont -O3 -pipe" meson setup build --prefix /usr --buildtype
 
 
 
-rm -rf build
-CXXFLAGS="-march=goldmont -O3 -pipe" meson setup build --prefix /usr --buildtype release -Db_lto=true -Denable-rnnoise=false
 
+
+
+sudo apt install libspa-0.2-bluetooth libspa-0.2-jack pipewire-audio-client-libraries lsp-plugins-lv2 calf-plugins
 
 
 
@@ -43,6 +44,16 @@ systemctl --user restart pipewire.service pipewire-pulse.service
 
   
   
+meson setup builddir \
+  -Doptimization=3 \
+  -Db_lto=true \
+  -Dcpp_args="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize" \
+  -Dc_args="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize" \
+  -Dffmpeg=enabled \
+  -Dbluez5-codec-lc3=enabled \
+  -Ddocs=disabled \
+  -Dvulkan=disabled \
+  -Dsystemd-user-service=enabled
 
 
 
@@ -58,7 +69,15 @@ systemctl --user restart pipewire.service pipewire-pulse.service
   -Dvulkan=enabled
 
 
-
+meson setup builddir \
+  -Doptimization=3 \
+  -Db_lto=true \
+  -Dcpp_args="-mcpu=cortex-a72 -pipe -ftree-vectorize" \
+  -Dc_args="-mcpu=cortex-a72 -pipe -ftree-vectorize" \
+  -Dffmpeg=enabled \
+  -Dbluez5-codec-lc3=enabled \
+  -Ddocs=disabled
+  -Dvulkan=enabled
 
   ninja -C builddir -j4
 
@@ -83,4 +102,30 @@ meson setup build --prefix /usr --buildtype release \
 -Db_lto=true \
 -Denable-rnnoise=false
   
+# In den EasyEffects Quellordner wechseln
+meson setup builddir \
+  --buildtype=release \
+  -Doptimization=3 \
+  -Db_lto=true \
+  -Dcpp_args="-mcpu=cortex-a72 -pipe -ftree-vectorize -flto" \
+  -Dc_args="-mcpu=cortex-a72 -pipe -ftree-vectorize -flto" \
+  -Dcpp_link_args="-latomic -Wl,-O1" \
+  -Dc_link_args="-latomic -Wl,-O1"  -Denable-rnnoise=false
+  
+ninja -C builddir -j4
+
+sudo ninja -C builddir install
+
+
+# Für Raspberry Pi 3 (Cortex-A53)
+meson setup builddir \
+  --buildtype=release \
+  --prefix=/usr \
+  -Doptimization=3 \
+  -Db_lto=true \
+  -Dcpp_args="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize -flto" \
+  -Dc_args="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize -flto" \
+  -Dcpp_link_args="-latomic -Wl,-O1" \
+  -Dc_link_args="-latomic -Wl,-O1" \
+  -Denable-rnnoise=false
 
