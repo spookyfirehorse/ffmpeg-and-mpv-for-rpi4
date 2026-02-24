@@ -16,11 +16,30 @@ CXXFLAGS="-march=goldmont -O3 -pipe" meson setup build --prefix /usr --buildtype
 
 
 
-# In den PipeWire-Quellordner wechseln
 meson setup builddir \
-  -Dprefix=/usr \
   -Doptimization=3 \
+  -Db_lto=true \
   -Dcpp_args="-march=goldmont -mtune=goldmont" \
   -Dc_args="-march=goldmont -mtune=goldmont" \
-  -Dbluez5-codec-lc3=enabled \
-  -Dsession-manager=wireplumber
+  -Ddocs=disabled \
+  -Dman=disabled \
+  -Dtests=disabled \
+  -Dinstalled_tests=disabled \
+  -Dexamples=disabled \
+  -Dffmpeg=disabled \
+  -Dvulkan=disabled \
+
+
+ninja -C builddir -j4
+
+sudo ninja -C builddir install
+
+systemctl --user daemon-reload
+systemctl --user restart pipewire.service pipewire-pulse.service
+
+
+  
+  -Dvolume=disabled \
+  -Dsystemd-user-service=enabled \
+  -Dbluez5-codec-lc3=enabled
+
