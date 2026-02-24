@@ -12,3 +12,15 @@ CXXFLAGS="-march=goldmont -O3 -pipe" meson setup build --prefix /usr --buildtype
 
 rm -rf build
 CXXFLAGS="-march=goldmont -O3 -pipe" meson setup build --prefix /usr --buildtype release -Db_lto=true -Denable-rnnoise=false
+
+
+
+
+# In den PipeWire-Quellordner wechseln
+meson setup builddir \
+  -Dprefix=/usr \
+  -Doptimization=3 \
+  -Dcpp_args="-march=goldmont -mtune=goldmont" \
+  -Dc_args="-march=goldmont -mtune=goldmont" \
+  -Dbluez5-codec-lc3=enabled \
+  -Dsession-manager=wireplumber
