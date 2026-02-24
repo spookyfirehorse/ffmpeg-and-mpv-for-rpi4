@@ -538,11 +538,11 @@ Optimiert für maximale Rechenpower ohne 3D-Desktop-Ballast.
   --extra-libs='-ldrm -ludev -lvulkan -lstdc++' \
   --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
   --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-openssl \
-  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr --enable-libplacebo \
-  --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev \
-  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
+  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
+  --enable-libdrm --enable-libudev --enable-v4l2-m2m --enable-libass \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm \
-  --disable-sdl2 --disable-opengl --disable-vout-egl --disable-epoxy \
+  --enable-vulkan --disable-opengl --disable-vout-egl --disable-gbm --disable-epoxy \
+  --disable-sdl2 --disable-libplacebo --disable-libshaderc \
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
   --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
