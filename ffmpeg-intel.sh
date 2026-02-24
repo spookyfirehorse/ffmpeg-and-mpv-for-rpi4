@@ -1,0 +1,27 @@
+./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib/x86_64-linux-gnu \
+    --incdir=/usr/include/x86_64-linux-gnu \
+    --arch=x86_64 \
+    --cpu=goldmont \
+    --extra-cflags='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2' \
+    --extra-ldflags='-Wl,-O1,--as-needed' \
+    --extra-libs='-lvulkan -lshaderc_combined -ldrm -lva -lva-drm -lvdpau -lasound -lstdc++' \
+    --disable-all \
+    --enable-pthreads --enable-x86asm \
+    --enable-avcodec --enable-avformat --enable-avfilter --enable-avdevice --enable-swresample --enable-swscale \
+    --enable-ffmpeg --enable-ffprobe --enable-shared \
+    --enable-gpl --enable-version3 --enable-nonfree \
+    --enable-vulkan --enable-libshaderc \
+    --enable-vaapi --enable-vdpau --enable-libdrm \
+    --enable-hwaccel='h264_vaapi,hevc_vaapi,vp9_vaapi,h264_vulkan,hevc_vulkan,h264_vdpau,hevc_vdpau,vp9_vdpau' \
+    --enable-indevs --enable-outdevs \
+    --enable-encoders --enable-decoders \
+    --enable-muxers --enable-demuxers \
+    --enable-parsers --enable-bsfs --enable-protocols \
+    --enable-alsa --enable-libpulse --enable-libjack \
+    --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libmp3lame --enable-libopus \
+    --enable-gnutls --enable-network --enable-libssh \
+    --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
+    --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec --disable-cuda-llvm \
+    --disable-debug --enable-stripping
