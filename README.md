@@ -406,7 +406,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
-  --enable-stripping --enable-hardcoded-tables --disable-libvpx
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug
 ```
 # pi4 mit egl
 
@@ -433,7 +433,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
-  --enable-stripping --enable-hardcoded-tables --disable-libvpx
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug
 ```
 
 # pi3 mit egl
@@ -461,7 +461,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
-  --enable-stripping --enable-hardcoded-tables --disable-libvpx
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug
 ```
 
 
@@ -493,7 +493,7 @@ Optimiert für maximale Rechenpower ohne 3D-Desktop-Ballast.
   --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
-  --enable-stripping --enable-hardcoded-tables --disable-libvpx
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug
 
 ```
 #  pi 4 ohne egl
@@ -523,7 +523,7 @@ Optimiert für maximale Rechenpower ohne 3D-Desktop-Ballast.
   --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
-  --enable-stripping --enable-hardcoded-tables --disable-libvpx
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug
 ```
 #  pi 3 ohne egl
 
@@ -553,7 +553,7 @@ Optimiert für maximale Rechenpower ohne 3D-Desktop-Ballast.
   --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
-  --enable-stripping --enable-hardcoded-tables --disable-libvpx
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug
 ```
 
 
