@@ -1,0 +1,24 @@
+./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib/aarch64-linux-gnu \
+    --incdir=/usr/include/aarch64-linux-gnu \
+    --extra-version=ultra-clean-pi5-vulkan-v4l2 \
+    --arch=aarch64 \
+    --cpu=cortex-a76 \
+    --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto' \
+    --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+    --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lstdc++' \
+    --disable-all \
+    --enable-shared --enable-pthreads --enable-x86asm \
+    --enable-avcodec --enable-avformat --enable-avfilter --enable-avdevice --enable-swresample --enable-swscale \
+    --enable-ffmpeg --enable-ffprobe --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
+    --enable-vulkan --enable-libshaderc --enable-libplacebo \
+    --enable-libdrm --enable-libudev --enable-epoxy --enable-vout-drm --enable-vout-egl --enable-opengl \
+    --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
+    --enable-hwaccel='h264_v4l2m2m,hevc_v4l2m2m,vp9_v4l2m2m,h264_vulkan,hevc_vulkan' \
+    --enable-indevs --enable-outdevs --enable-encoders --enable-decoders \
+    --enable-muxers --enable-demuxers --enable-parsers --enable-bsfs --enable-protocols \
+    --enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
+    --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
+    --enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
+    --disable-debug --enable-stripping --enable-hardcoded-tables
