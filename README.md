@@ -395,7 +395,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
   --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --enable-vout-egl \
-  --enable-opengl  --disable-sdl2 --disable-xlib --disable-libxcb --disable-libxcb-shm \
+  --enable-opengl --disable-sdl2 --enable-xlib --disable-libxcb --disable-libxcb-shm \
   --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 \
   --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
   --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
@@ -422,7 +422,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
   --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --enable-vout-egl \
-  --enable-opengl  --disable-sdl2 --disable-xlib --disable-libxcb --disable-libxcb-shm \
+  --enable-opengl --disable-sdl2 --enable-xlib --disable-libxcb --disable-libxcb-shm \
   --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 \
   --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
   --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
@@ -435,6 +435,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
   --enable-stripping --enable-hardcoded-tables --disable-libvpx
 ```
+
 # pi3 mit egl
 
 ```bash
@@ -449,7 +450,7 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
   --enable-libdrm --enable-libudev --enable-v4l2-m2m --enable-libass \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus \
   --enable-vulkan --enable-opengl --enable-vout-drm --enable-vout-egl --enable-gbm --enable-sdl2 \
-  --disable-libplacebo --disable-libshaderc --disable-xlib --disable-libxcb --disable-libxcb-shm \
+  --disable-libplacebo --disable-libshaderc --enable-xlib --disable-libxcb --disable-libxcb-shm \
   --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 \
   --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
   --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
