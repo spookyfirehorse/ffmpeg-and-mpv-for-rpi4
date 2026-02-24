@@ -4,45 +4,18 @@
     --incdir=/usr/include/x86_64-linux-gnu \
     --arch=x86_64 \
     --cpu=goldmont \
-    --extra-cflags='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2' \
-    --extra-ldflags='-Wl,-O1,--as-needed' \
-    --extra-libs='-lvulkan -lshaderc_combined -ldrm -lva -lva-drm -lvdpau -lasound -lstdc++' \
-    --disable-all \
-    --enable-pthreads --enable-x86asm \
-    --enable-avcodec --enable-avformat --enable-avfilter --enable-avdevice --enable-swresample --enable-swscale \
-    --enable-ffmpeg --enable-ffprobe --enable-shared --disable-static \
-    --enable-gpl --enable-version3 --enable-nonfree \
-    --enable-vulkan --enable-libshaderc \
-    --enable-vaapi --enable-vdpau --enable-libdrm \
-    --enable-hwaccel='h264_vaapi,hevc_vaapi,vp9_vaapi,h264_vulkan,hevc_vulkan,h264_vdpau,hevc_vdpau,vp9_vdpau' \
-    --enable-indevs --enable-outdevs \
-    --enable-encoders --enable-decoders \
-    --enable-muxers --enable-demuxers \
-    --enable-parsers --enable-bsfs --enable-protocols \
-    --enable-alsa --enable-libpulse --enable-libjack \
-    --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libmp3lame --enable-libopus \
-    --enable-gnutls --enable-network --enable-libssh \
-    --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
-    --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec --disable-cuda-llvm \
-    --disable-debug --enable-stripping
-
-
-
-make distclean || true
-vdpau no
-
-./configure \
-    --prefix=/usr \
-    --libdir=/usr/lib/x86_64-linux-gnu \
-    --incdir=/usr/include/x86_64-linux-gnu \
-    --arch=x86_64 \
-    --cpu=goldmont \
-    --extra-cflags='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -flto' \
-    --extra-ldflags='-Wl,-O1,--as-needed -flto' \
-    --extra-libs='-lvulkan -lshaderc_combined -ldrm -lva -lva-drm -lasound -lm -lpthread -lstdc++' \
-    --disable-static \
+    --extra-cflags='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -fPIC' \
+    --extra-ldflags='-Wl,-O1,--as-needed -fPIC' \
+    --extra-libs='-lstdc++ -lm -lpthread' \
+    --enable-pic \
     --enable-shared \
-    --disable-all \
+    --disable-static \
+    --disable-autodetect \
+    --disable-debug \
+    --enable-stripping \
+    --enable-gpl \
+    --enable-version3 \
+    --enable-nonfree \
     --enable-pthreads \
     --enable-x86asm \
     --enable-avcodec \
@@ -53,26 +26,15 @@ vdpau no
     --enable-swscale \
     --enable-ffmpeg \
     --enable-ffprobe \
-    --enable-gpl \
-    --enable-version3 \
-    --enable-nonfree \
+    --disable-encoders \
+    --disable-decoders \
+    --enable-encoder='libx264,libx265,libfdk_aac,libmp3lame,libopus,vaapi_h264,vaapi_hevc,vaapi_vp9' \
+    --enable-decoder='h264,hevc,vp9,av1,aac,mp3,opus,mjpeg,h264_vaapi,hevc_vaapi,vp9_vaapi' \
     --enable-vulkan \
     --enable-libshaderc \
     --enable-vaapi \
     --enable-libdrm \
     --enable-hwaccel='h264_vaapi,hevc_vaapi,vp9_vaapi,h264_vulkan,hevc_vulkan' \
-    --enable-indevs \
-    --enable-outdevs \
-    --enable-encoders \
-    --enable-decoders \
-    --enable-muxers \
-    --enable-demuxers \
-    --enable-parsers \
-    --enable-bsfs \
-    --enable-protocols \
-    --enable-alsa \
-    --enable-libpulse \
-    --enable-libjack \
     --enable-libx264 \
     --enable-libx265 \
     --enable-libfdk-aac \
@@ -80,20 +42,20 @@ vdpau no
     --enable-libopus \
     --enable-gnutls \
     --enable-network \
+    --enable-libpulse \
     --enable-libssh \
+    --enable-alsa \
     --enable-ladspa \
     --enable-lv2 \
     --enable-librubberband \
     --enable-libsoxr \
     --enable-libbs2b \
     --enable-libmysofa \
+    --disable-vdpau \
     --disable-cuda \
     --disable-cuvid \
     --disable-nvenc \
     --disable-nvdec \
     --disable-libnpp \
     --disable-ffnvcodec \
-    --disable-cuda-llvm \
-    --disable-debug \
-    --enable-stripping && \
-make -j$(nproc)
+    --disable-cuda-llvm
