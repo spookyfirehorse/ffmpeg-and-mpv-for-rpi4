@@ -118,14 +118,24 @@ sudo ninja -C builddir install
 
 
 # Für Raspberry Pi 3 (Cortex-A53)
+# Vorher den alten Cache löschen!
+rm -rf builddir
+
 meson setup builddir \
   --buildtype=release \
-  --prefix=/usr \
   -Doptimization=3 \
-  -Db_lto=true \
-  -Dcpp_args="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize -flto" \
-  -Dc_args="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize -flto" \
-  -Dcpp_link_args="-latomic -Wl,-O1" \
-  -Dc_link_args="-latomic -Wl,-O1" \
-  -Denable-rnnoise=false
+  -Db_lto=false \
+  -Dcpp_args="-march=armv8-a -mtune=cortex-a53 -mfloat-abi=hard -mfpu=neon-fp-armv8 -pipe -ftree-vectorize" \
+  -Dc_args="-march=armv8-a -mtune=cortex-a53 -mfloat-abi=hard -mfpu=neon-fp-armv8 -pipe -ftree-vectorize" \
+  -Dffmpeg=enabled \
+  -Dpw-cat-ffmpeg=enabled \
+  -Dvulkan=enabled \
+  -Dbluez5-codec-lc3=enabled \
+  -Ddocs=disabled \
+  -Dman=disabled \
+  -Dtests=disabled \
+  -Dsystemd-user-service=enabled
+
+
+
 
