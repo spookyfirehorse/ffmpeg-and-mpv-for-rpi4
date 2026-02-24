@@ -20,4 +20,4 @@
   --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
-  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug  --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa
