@@ -570,20 +570,26 @@ sudo dpkg -i lib*mpv*.deb mpv*.deb
 ```bash
 apt source mpv
 cd mpv
-meson setup build
 meson setup build \
---prefix=/usr \
---buildtype=release \
--Dlibmpv=true \
--Dwayland=enabled \
--Ddmabuf-wayland=enabled \
--Dpipewire=enabled \
--Dvulkan=enabled \
--Ddrm=enabled \
--Dgbm=enabled \
--Dvaapi=disabled \
--Dvdpau=disabled \
--Dcuda-hwaccel=disabled 
+  --prefix=/usr \
+  --buildtype=release \
+  -Dlibmpv=true \
+  -Dwayland=enabled \
+  -Ddmabuf-wayland=enabled \
+  -Dpipewire=enabled \
+  -Dalsa=enabled \
+  -Dvulkan=enabled \
+  -Dshaderc=enabled \
+  -Ddrm=enabled \
+  -Dgbm=enabled \
+  -Degl-drm=enabled \
+  -Degl-wayland=enabled \
+  -Dgles2=enabled \
+  -Drpi-mmal=disabled \
+  -Dvaapi=disabled \
+  -Dvdpau=disabled \
+  -Dcuda-hwaccel=disabled \
+  -Dmanpages=disabled
 sudo meson install -C build
 ```
 
