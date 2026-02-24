@@ -471,8 +471,8 @@ Optimiert für maximale Rechenpower ohne 3D-Desktop-Ballast.
 
 ```bash
 ./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
-  --extra-version=ultra-clean-pi4-vulkan-headless --arch=aarch64 --cpu=cortex-a72 \
-  --extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
+  --extra-version=ultra-clean-pi5-vulkan-headless --arch=aarch64 --cpu=cortex-a76 \
+  --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto' \
   --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
   --extra-libs='-ldrm -ludev -lvulkan -lstdc++' \
   --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
@@ -481,7 +481,7 @@ Optimiert für maximale Rechenpower ohne 3D-Desktop-Ballast.
   --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev \
   --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm \
-  --disable-sdl2 --disable-opengl --disable-vout-egl --disable-epoxy \
+  --disable-sdl2 --disable-opengl --disable-vout-egl --disable-gbm --disable-epoxy \
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
   --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
@@ -493,6 +493,7 @@ Optimiert für maximale Rechenpower ohne 3D-Desktop-Ballast.
   --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
   --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
   --enable-stripping --enable-hardcoded-tables --disable-libvpx
+
 ```
 #  pi 4 ohne egl
 
@@ -510,7 +511,7 @@ Optimiert für maximale Rechenpower ohne 3D-Desktop-Ballast.
   --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev \
   --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm \
-  --disable-sdl2 --disable-opengl --disable-vout-egl --disable-epoxy \
+  --disable-sdl2 --disable-opengl --disable-vout-egl --disable-gbm --disable-epoxy \
   --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
   --disable-libx264 --disable-libx265 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
   --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
