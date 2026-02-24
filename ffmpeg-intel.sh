@@ -29,7 +29,7 @@
 
 
 make distclean || true
-
+vdpau no
 
 ./configure \
     --prefix=/usr \
