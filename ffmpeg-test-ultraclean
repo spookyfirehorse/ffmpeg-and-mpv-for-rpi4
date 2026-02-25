@@ -1,3 +1,12 @@
+
+
+
+
+
+##############################################
+pi 5
+
+
 ./configure \
     --prefix=/usr \
     --libdir=/usr/lib/aarch64-linux-gnu \
@@ -18,26 +27,12 @@
     --enable-hardcoded-tables \
     --enable-stripping \
     --disable-debug \
-    \
-    # DOKUMENTATION ENTFERNEN
     --disable-doc \
     --disable-htmlpages \
     --disable-manpages \
     --disable-podpages \
     --disable-txtpages \
-    \
-    # ARCHITEKTUR & OPTIMIERUNG
     --disable-x86asm \
-    --disable-altivec \
-    --disable-ppc \
-    --disable-alpha \
-    --disable-vis \
-    --disable-mipsdsp \
-    --disable-mipsdspr2 \
-    --disable-loongson2f \
-    --disable-loongson3 \
-    \
-    # HARDWARE-BESCHLEUNIGUNG (PI 5 OPTIMIERT)
     --enable-vulkan \
     --enable-libshaderc \
     --enable-libplacebo \
@@ -50,9 +45,6 @@
     --enable-v4l2-m2m \
     --enable-v4l2-request \
     --enable-sand \
-    --enable-hwaccel \
-    \
-    # AUDIO & EXTERNE LIBS
     --enable-libass \
     --enable-libfdk-aac \
     --enable-libmp3lame \
@@ -69,44 +61,25 @@
     --enable-libpulse \
     --enable-libjack \
     \
-    # DISABLE ALTE/FREMDE HARDWARE
-    --disable-omx \
-    --disable-omx-rpi \
-    --disable-mmal \
-    --disable-vdpau \
-    --disable-vaapi \
-    --disable-dxva2 \
-    --disable-d3d11va \
-    --disable-videotoolbox \
-    --disable-audiotoolbox \
-    --disable-amf \
-    --disable-libmfx \
-    --disable-cuda \
-    --disable-cuda-llvm \
-    --disable-cuvid \
-    --disable-nvenc \
-    --disable-nvdec \
-    --disable-libnpp \
-    --disable-ffnvcodec \
-    --disable-crystalhd \
-    --disable-mediacodec \
-    --disable-v4l2-m2m-v4l2-m2m \
+    # KOMPLETTE HARDWARE-BLOCKADE (Sicherheits-Check)
+    --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec \
+    --disable-libnpp --disable-ffnvcodec --disable-vaapi --disable-vdpau \
+    --disable-dxva2 --disable-d3d11va --disable-amf --disable-libmfx \
+    --disable-qsv --disable-v4l2-m2m-v4l2-m2m --disable-mediacodec \
+    --disable-videotoolbox --disable-audiotoolbox \
     \
-    # DISABLE GUI & X11 RESTE
-    --disable-sdl2 \
-    --disable-xlib \
-    --disable-libxcb \
-    --disable-libxcb-shm \
-    --disable-libxcb-xfixes \
-    --disable-libxcb-shape \
-    --disable-libxcb-event-rules \
-    --disable-libxcb-sync \
+    # DESKTOP-RESTE BLOCKIEREN
+    --disable-sdl2 --disable-xlib --disable-libxcb --disable-libxcb-shm \
+    --disable-libxcb-shape --disable-libxcb-xfixes \
     \
-    # CODEC BEREINIGUNG
+    # CODEC-FILTERUNG
     --disable-decoder='gsm,h261,h263,h263i,h263p,msmpeg4v1,msmpeg4v2,msmpeg4v3,vc1,wmv1,wmv2,wmv3,indeo2,indeo3,indeo4,indeo5,cinepak,real_144,real_288,roq,rv10,rv20,rv30,rv40' \
     --disable-encoder='gsm,h261,h263,h263p,msmpeg4v2,msmpeg4v3,wmv1,wmv2,roq,rv10,rv20'
 
-pi 4
+
+
+pi4
+
 
 
 ./configure \
@@ -129,26 +102,12 @@ pi 4
     --enable-hardcoded-tables \
     --enable-stripping \
     --disable-debug \
-    \
-    # DOKUMENTATION ENTFERNEN
     --disable-doc \
     --disable-htmlpages \
     --disable-manpages \
     --disable-podpages \
     --disable-txtpages \
-    \
-    # ARCHITEKTUR & OPTIMIERUNG
     --disable-x86asm \
-    --disable-altivec \
-    --disable-ppc \
-    --disable-alpha \
-    --disable-vis \
-    --disable-mipsdsp \
-    --disable-mipsdspr2 \
-    --disable-loongson2f \
-    --disable-loongson3 \
-    \
-    # HARDWARE-BESCHLEUNIGUNG (PI 5 OPTIMIERT)
     --enable-vulkan \
     --enable-libshaderc \
     --enable-libplacebo \
@@ -161,9 +120,6 @@ pi 4
     --enable-v4l2-m2m \
     --enable-v4l2-request \
     --enable-sand \
-    --enable-hwaccel \
-    \
-    # AUDIO & EXTERNE LIBS
     --enable-libass \
     --enable-libfdk-aac \
     --enable-libmp3lame \
@@ -180,40 +136,18 @@ pi 4
     --enable-libpulse \
     --enable-libjack \
     \
-    # DISABLE ALTE/FREMDE HARDWARE
-    --disable-omx \
-    --disable-omx-rpi \
-    --disable-mmal \
-    --disable-vdpau \
-    --disable-vaapi \
-    --disable-dxva2 \
-    --disable-d3d11va \
-    --disable-videotoolbox \
-    --disable-audiotoolbox \
-    --disable-amf \
-    --disable-libmfx \
-    --disable-cuda \
-    --disable-cuda-llvm \
-    --disable-cuvid \
-    --disable-nvenc \
-    --disable-nvdec \
-    --disable-libnpp \
-    --disable-ffnvcodec \
-    --disable-crystalhd \
-    --disable-mediacodec \
-    --disable-v4l2-m2m-v4l2-m2m \
+    # KOMPLETTE HARDWARE-BLOCKADE (Sicherheits-Check)
+    --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec \
+    --disable-libnpp --disable-ffnvcodec --disable-vaapi --disable-vdpau \
+    --disable-dxva2 --disable-d3d11va --disable-amf --disable-libmfx \
+    --disable-qsv --disable-v4l2-m2m-v4l2-m2m --disable-mediacodec \
+    --disable-videotoolbox --disable-audiotoolbox \
     \
-    # DISABLE GUI & X11 RESTE
-    --disable-sdl2 \
-    --disable-xlib \
-    --disable-libxcb \
-    --disable-libxcb-shm \
-    --disable-libxcb-xfixes \
-    --disable-libxcb-shape \
-    --disable-libxcb-event-rules \
-    --disable-libxcb-sync \
+    # DESKTOP-RESTE BLOCKIEREN
+    --disable-sdl2 --disable-xlib --disable-libxcb --disable-libxcb-shm \
+    --disable-libxcb-shape --disable-libxcb-xfixes \
     \
-    # CODEC BEREINIGUNG
+    # CODEC-FILTERUNG
     --disable-decoder='gsm,h261,h263,h263i,h263p,msmpeg4v1,msmpeg4v2,msmpeg4v3,vc1,wmv1,wmv2,wmv3,indeo2,indeo3,indeo4,indeo5,cinepak,real_144,real_288,roq,rv10,rv20,rv30,rv40' \
     --disable-encoder='gsm,h261,h263,h263p,msmpeg4v2,msmpeg4v3,wmv1,wmv2,roq,rv10,rv20'
 
