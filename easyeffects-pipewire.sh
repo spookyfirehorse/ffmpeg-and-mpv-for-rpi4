@@ -17,22 +17,27 @@ systemctl --user restart pipewire.service pipewire-pulse.service wireplumber.ser
 
 sudo apt install libspa-0.2-bluetooth libspa-0.2-jack pipewire-audio-client-libraries lsp-plugins-lv2 calf-plugins
 
+# 1. Altes Build-Verzeichnis löschen
+rm -rf builddir
+
+# 2. Neu konfigurieren ohne Avahi
 meson setup builddir --prefix=/usr \
   --buildtype=release \
   -Doptimization=2 \
   -Db_lto=true \
   -Dcpp_args="-march=skylake -mtune=skylake -pipe" \
   -Dc_args="-march=skylake -mtune=skylake -pipe" \
+  -Davahi=disabled \
   -Ddocs=disabled \
   -Dman=disabled \
-  -Dtests=disabled \
-  -Dinstalled_tests=disabled \
-  -Dexamples=disabled \
   -Dffmpeg=disabled \
   -Dvulkan=enabled \
   -Dvolume=enabled \
   -Dsystemd-user-service=enabled \
   -Dbluez5-codec-lc3=enabled
+
+# 3. Bauen
+ninja -C builddir -j4
 
 
 
