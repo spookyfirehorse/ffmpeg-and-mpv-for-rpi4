@@ -27,19 +27,6 @@
   --enable-libshaderc \
   --enable-vaapi \
   --enable-libdrm \
-  --disable-vdpau \
-  --disable-cuda \
-  --disable-cuvid \
-  --disable-nvenc \
-  --disable-nvdec \
-  --disable-libnpp \
-  --disable-ffnvcodec \
-  --disable-cuda-llvm \
-  --disable-libgsm \
-  --disable-encoders \
-  --disable-decoders \
-  --disable-hwaccels \
-  --disable-parsers \
   --enable-alsa \
   --enable-indev=alsa \
   --enable-outdev=alsa \
@@ -53,7 +40,16 @@
   --enable-libmp3lame \
   --enable-libopus \
   --enable-libvorbis \
-  --enable-encoder=h264_vaapi,hevc_vaapi,vp9_vaapi,libx264,libx265,libfdk_aac,libmp3lame,libopus,libvorbis,flac,mjpeg \
-  --enable-decoder=h264,hevc,vp9,av1,mjpeg,mp3,aac,opus,flac,vorbis,h264_vaapi,hevc_vaapi,vp9_vaapi \
-  --enable-hwaccel=h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi,h264_vulkan,hevc_vulkan,av1_vulkan \
-  --enable-parser=h264,hevc,vp9,av1,aac,mpegaudio,opus,flac,vorbis,mjpeg
+  --disable-vdpau \
+  --disable-cuda \
+  --disable-cuvid \
+  --disable-nvenc \
+  --disable-nvdec \
+  --disable-libnpp \
+  --disable-ffnvcodec \
+  --disable-cuda-llvm \
+  --disable-libgsm \
+  --disable-decoder=gsm,h261,h263,h263i,h263p,msmpeg4v1,msmpeg4v2,msmpeg4v3,vc1,wmv1,wmv2,wmv3,indeo2,indeo3,indeo4,indeo5,cinepak,real_144,real_288,roq,rv10,rv20,rv30,rv40 \
+  --disable-encoder=gsm,h261,h263,h263p,msmpeg4v2,msmpeg4v3,wmv1,wmv2,roq,rv10,rv20 \
+  --disable-parser=gsm,h261,h263,vc1 \
+  --disable-hwaccel=h263_vaapi,vc1_vaapi,wmv3_vaapi
