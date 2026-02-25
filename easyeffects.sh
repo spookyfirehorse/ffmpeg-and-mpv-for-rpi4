@@ -44,10 +44,6 @@ systemctl --user restart pipewire.service pipewire-pulse.service
 
   
   
-# Alten Build-Ordner entfernen, um Konflikte zu vermeiden
-rm -rf builddir
-
-# Meson Setup für RPi 3 (armhf / armv8-a)
 meson setup builddir --prefix=/usr \
   --buildtype=release \
   -Doptimization=3 \
@@ -62,6 +58,7 @@ meson setup builddir --prefix=/usr \
   -Dman=disabled \
   -Dtests=disabled \
   -Dsystemd-user-service=enabled
+
 
 
 
