@@ -17,6 +17,21 @@ systemctl --user restart pipewire.service pipewire-pulse.service wireplumber.ser
 
 sudo apt install libspa-0.2-bluetooth libspa-0.2-jack pipewire-audio-client-libraries lsp-plugins-lv2 calf-plugins
 
+meson setup builddir --prefix=/usr \
+  -Doptimization=3 \
+  -Db_lto=true \
+  -Dcpp_args="-march=skylake -mtune=skylake -O3 -pipe" \
+  -Dc_args="-march=skylake -mtune=skylake -O3 -pipe" \
+  -Ddocs=disabled \
+  -Dman=disabled \
+  -Dtests=disabled \
+  -Dinstalled_tests=disabled \
+  -Dexamples=disabled \
+  -Dffmpeg=disabled \
+  -Dvulkan=enabled \
+  -Dvolume=enabled \
+  -Dsystemd-user-service=enabled \
+  -Dbluez5-codec-lc3=enabled
 
 
 meson setup builddir --prefix=/usr \
