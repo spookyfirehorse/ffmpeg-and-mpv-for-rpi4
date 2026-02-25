@@ -1,0 +1,63 @@
+⚠️ Warnung für Goldmont-Hardware
+Der Build auf einer Goldmont-CPU wird sehr lange (evtl. 15+ Stunden) dauern und dein System voll auslasten. Stelle sicher, dass du mindestens 8GB RAM + 16GB Swap hast.
+Schritt 1: Die Infrastruktur vorbereiten
+Zuerst brauchst du die depot_tools von Google, da Chromium sein eigenes Build-System nutzt:
+bash
+git clone https://chromium.googlesource.com
+export PATH="$PATH:$(pwd)/depot_tools"
+Verwende Code mit Vorsicht.
+
+Schritt 2: Code holen & ungoogled-Patches anwenden
+Anstatt das riesige Google-Repo direkt zu nutzen, verwenden wir das ungoogled-chromium GitHub Repo als Basis für die Skripte:
+Quellcode laden: fetch --nohistory chromium (Das sind ca. 30-40 GB).
+Patches anwenden: Die ungoogled-Skripte entfernen alle Google-Binaries und ersetzen sie durch Open-Source-Alternativen.
+Schritt 3: Die "Goldmont-Minimal" Konfiguration
+Wenn du das Konfigurations-Tool aufrufst (gn args out/Default), nutze diese Flags, um den Build so schlank wie möglich zu halten (ähnlich wie dein FFmpeg-Build):
+python
+# In die Textdatei kopieren, die sich öffnet:
+is_debug = false
+symbol_level = 0
+blink_symbol_level = 0
+is_official_build = true
+# Hardware-Beschleunigung optimieren:
+use_vaapi = true
+use_vulkan = true
+# Unnötiges entfernen:
+enable_nacl = false
+enable_remoting = false
+enable_google_now = false
+# Goldmont-Spezifisch:
+is_component_build = false
+Verwende Code mit Vorsicht.
+
+Schritt 4: Der Marathon-Build
+Starte den Build mit ninja. Auf deiner CPU solltest du die Threads limitieren, damit das System nicht einfriert:
+bash
+# Nutze n-1 Kerne deines Goldmont-Chips
+ninja -C out/Default chrome -j $(nproc --ignore=1)
+Verwende Code mit Vorsicht.
+
+Warum ungoogled-chromium für dich?
+Kein Tracking: Alle Google-URLs sind durch http://no-thanks.invalid ersetzt.
+Performance: Ohne die Hintergrund-Synchronisierung läuft Chromium auf schwächerer Hardware wie Goldmont spürbar flüssiger.
+Binaries: Es werden keine vorkompilierten Google-Blobs verwendet; alles wird aus dem Quellcode gebaut.
+Soll ich dir die Anleitung für den Portable-Build zeigen, falls der volle Compile-Vorgang deine Hardware zu sehr quält?
+KI-Antworten können Fehler enthalten. Weitere Informationen
+
+
+
+wieviel platten speicher
+Wenn du Chromium (egal ob Google oder ungoogled) selbst baust, ist der Speicherbedarf absolut brutal. Dein Goldmont-System wird hier an seine Grenzen stoßen.
+Hier ist die Kalkulation für den Platzbedarf:
+1. Der Quellcode (Source Tree)
+Ca. 35 - 45 GB: Allein das Herunterladen des Repositories (fetch chromium) belegt diesen Platz.
+Zusätzlich ca. 10 - 15 GB: Für die depot_tools und die ungoogled-Patches.
+2. Der Build-Prozess (Objekt-Dateien)
+Während des Kompilierens entstehen tausende temporäre .o Dateien.
+Ohne Symbole (symbol_level=0): Ca. 40 - 60 GB.
+Mit Symbolen (is_debug=true): Bis zu 150 GB (Solltest du auf Goldmont auf keinen Fall machen!).
+3. Das Endergebnis (Binaries)
+Ca. 200 - 400 MB: Nur der fertige Browser am Ende.
+📉 Fazit: Was du frei haben MUSST
+Du solltest mindestens 100 GB bis 120 GB freien Speicher auf einer schnellen SSD haben.
+Auf einer HDD dauert der Build wegen der Millionen kleinen Lese-/Schreibzugriffe Tage statt Stunden.
