@@ -4,7 +4,7 @@
   --incdir=/usr/include/x86_64-linux-gnu \
   --arch=x86_64 \
   --cpu=goldmont \
-  --extra-cflags='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -fPIC' \
+  --extra-cflags='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -ftree-vectorize -ffast-math -fno-semantic-interposition -fPIC' \
   --extra-ldflags='-Wl,-O1,--as-needed -fPIC' \
   --extra-libs='-lstdc++ -lm -lpthread' \
   --enable-pic \
@@ -53,6 +53,26 @@
   --disable-encoder=gsm,h261,h263,h263p,msmpeg4v2,msmpeg4v3,wmv1,wmv2,roq,rv10,rv20 \
   --disable-parser=gsm,h261,h263,vc1 \
   --disable-hwaccel=h263_vaapi,vc1_vaapi,wmv3_vaapi
+
+
+meson setup build \
+  --prefix=/usr \
+  --libdir=/usr/lib/x86_64-linux-gnu \
+  -Dbuildtype=release \
+  -Doptimization=3 \
+  -Db_pie=true \
+  -Dc_args='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -ftree-vectorize -ffast-math -fno-semantic-interposition -fPIC' \
+  -Dcpp_args='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -ftree-vectorize -ffast-math -fno-semantic-interposition -fPIC' \
+  -Dc_link_args='-Wl,-O1,--as-needed -lstdc++ -lm -lpthread' \
+  -Dcpp_link_args='-Wl,-O1,--as-needed -lstdc++ -lm -lpthread' \
+  -Dpipewire=enabled \
+  -Dvulkan=enabled \
+  -Dshaderc=enabled \
+  -Dvaapi=enabled \
+  -Dalsa=enabled \
+  -Dlibmpv=true
+
+
 
 ./configure \
   --prefix=/usr \
