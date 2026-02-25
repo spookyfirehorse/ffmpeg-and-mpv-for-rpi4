@@ -55,22 +55,28 @@
   --disable-hwaccel=h263_vaapi,vc1_vaapi,wmv3_vaapi
 
 
-meson setup build \
+rm -rf build && meson setup build \
   --prefix=/usr \
   --libdir=/usr/lib/x86_64-linux-gnu \
   -Dbuildtype=release \
   -Doptimization=3 \
+  -Db_lto=true \
   -Db_pie=true \
   -Dc_args='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -ftree-vectorize -ffast-math -fno-semantic-interposition -fPIC' \
   -Dcpp_args='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -ftree-vectorize -ffast-math -fno-semantic-interposition -fPIC' \
-  -Dc_link_args='-Wl,-O1,--as-needed -lstdc++ -lm -lpthread' \
-  -Dcpp_link_args='-Wl,-O1,--as-needed -lstdc++ -lm -lpthread' \
+  -Dc_link_args='-Wl,-O1,--as-needed -fPIC -lstdc++ -lm -lpthread' \
+  -Dcpp_link_args='-Wl,-O1,--as-needed -fPIC -lstdc++ -lm -lpthread' \
   -Dpipewire=enabled \
   -Dvulkan=enabled \
-  -Dshaderc=enabled \
+  -Dshaderc=disabled \
   -Dvaapi=enabled \
   -Dalsa=enabled \
-  -Dlibmpv=true
+  -Dwayland=enabled \
+  -Dx11=enabled \
+  -Dlibmpv=true \
+  -Dbuild-date=false \
+  -Dpython.bytecompile=-1
+
 
 
 
