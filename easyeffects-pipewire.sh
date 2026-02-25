@@ -13,6 +13,12 @@ CXXFLAGS="-march=goldmont -O3 -pipe" meson setup build --prefix /usr --buildtype
 systemctl --user daemon-reload
 systemctl --user restart pipewire.service pipewire-pulse.service wireplumber.service
 
+systemctl --user edit pipewire.service
+[Service]
+LimitRTPRIO=99
+LimitNICE=-19
+LimitMEMLOCK=infinity
+
 
 
 sudo apt install libspa-0.2-bluetooth libspa-0.2-jack pipewire-audio-client-libraries lsp-plugins-lv2 calf-plugins
