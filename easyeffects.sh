@@ -10,6 +10,8 @@ CXXFLAGS="-march=goldmont -O3 -pipe" meson setup build --prefix /usr --buildtype
 
 
 
+systemctl --user daemon-reload
+systemctl --user restart pipewire.service pipewire-pulse.service wireplumber.service
 
 
 
