@@ -19,7 +19,7 @@ sudo apt install libspa-0.2-bluetooth libspa-0.2-jack pipewire-audio-client-libr
 
 
 
-meson setup builddir --prefix /usr \
+meson setup builddir --prefix=/usr \
   -Doptimization=3 \
   -Db_lto=true \
   -Dcpp_args="-march=goldmont -mtune=goldmont" \
