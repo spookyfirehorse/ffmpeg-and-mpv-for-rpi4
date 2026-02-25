@@ -30,10 +30,10 @@ make clean
   --enable-lto
 
 
-# 1. Altes Build-Verzeichnis löschen
+# 1. Radikal aufräumen
 rm -rf builddir
 
-# 2. Meson Setup mit Skylake-AVX2 Optimierung
+# 2. Setup mit deaktiviertem Shaderc (Vulkan bleibt an!)
 meson setup builddir --prefix=/usr \
   --buildtype=release \
   -Doptimization=3 \
@@ -46,11 +46,6 @@ meson setup builddir --prefix=/usr \
   -Dvaapi=disabled \
   -Dvdpau=disabled \
   -Dvulkan=enabled \
-  -Dcuda-hwaccel=enabled \
-  -Dnvdec=enabled \
-  -Dlibplacebo=enabled \
-  -Dshaderc=enabled \
-  -Dmanpage-build=disabled \
-  -Ddvbin=disabled
-
+  -Dshaderc=disabled \
+  -Dmanpage-build=disabled
 
