@@ -53,3 +53,64 @@
   --disable-encoder=gsm,h261,h263,h263p,msmpeg4v2,msmpeg4v3,wmv1,wmv2,roq,rv10,rv20 \
   --disable-parser=gsm,h261,h263,vc1 \
   --disable-hwaccel=h263_vaapi,vc1_vaapi,wmv3_vaapi
+
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib/x86_64-linux-gnu \
+  --incdir=/usr/include/x86_64-linux-gnu \
+  --arch=x86_64 \
+  --cpu=goldmont \
+  --extra-cflags='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -fPIC' \
+  --extra-ldflags='-Wl,-O1,--as-needed -fPIC' \
+  --extra-libs='-lstdc++ -lm -lpthread' \
+  --enable-pic \
+  --enable-shared \
+  --disable-static \
+  --disable-debug \
+  --enable-stripping \
+  --enable-gpl \
+  --enable-version3 \
+  --enable-nonfree \
+  --disable-doc \
+  --disable-manpages \
+  --disable-htmlpages \
+  --disable-podpages \
+  --disable-txtpages \
+  --enable-pthreads \
+  --enable-x86asm \
+  --enable-gnutls \
+  --enable-vulkan \
+  --enable-libshaderc \
+  --enable-vaapi \
+  --enable-libdrm \
+  --disable-vdpau \
+  --disable-cuda \
+  --disable-cuvid \
+  --disable-nvenc \
+  --disable-nvdec \
+  --disable-libnpp \
+  --disable-ffnvcodec \
+  --disable-cuda-llvm \
+  --disable-libgsm \
+  --disable-encoders \
+  --disable-decoders \
+  --disable-hwaccels \
+  --enable-alsa \
+  --enable-indev=alsa \
+  --enable-outdev=alsa \
+  --enable-ladspa \
+  --enable-librubberband \
+  --enable-libsoxr \
+  --enable-libpulse \
+  --enable-libx264 \
+  --enable-libx265 \
+  --enable-libfdk-aac \
+  --enable-libmp3lame \
+  --enable-libopus \
+  --enable-libvorbis \
+  --enable-encoder=h264_vaapi,hevc_vaapi,vp9_vaapi,libx264,libx265,libfdk_aac,libmp3lame,libopus,libvorbis,flac,mjpeg \
+  --enable-decoder=h264,hevc,vp9,av1,mjpeg,mp3,aac,opus,flac,vorbis,h264_vaapi,hevc_vaapi,vp9_vaapi \
+  --enable-hwaccel=h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi,h264_vulkan,hevc_vulkan,av1_vulkan \
+  --enable-filter=hwupload,hwdownload,scale_vaapi,format,fps,aresample,rubberband,ladspa,volume,scale
+
+  
