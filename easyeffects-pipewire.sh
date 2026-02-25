@@ -18,10 +18,11 @@ systemctl --user restart pipewire.service pipewire-pulse.service wireplumber.ser
 sudo apt install libspa-0.2-bluetooth libspa-0.2-jack pipewire-audio-client-libraries lsp-plugins-lv2 calf-plugins
 
 meson setup builddir --prefix=/usr \
-  -Doptimization=3 \
+  --buildtype=release \
+  -Doptimization=2 \
   -Db_lto=true \
-  -Dcpp_args="-march=skylake -mtune=skylake -O3 -pipe" \
-  -Dc_args="-march=skylake -mtune=skylake -O3 -pipe" \
+  -Dcpp_args="-march=skylake -mtune=skylake -pipe" \
+  -Dc_args="-march=skylake -mtune=skylake -pipe" \
   -Ddocs=disabled \
   -Dman=disabled \
   -Dtests=disabled \
@@ -32,6 +33,7 @@ meson setup builddir --prefix=/usr \
   -Dvolume=enabled \
   -Dsystemd-user-service=enabled \
   -Dbluez5-codec-lc3=enabled
+
 
 
 meson setup builddir --prefix=/usr \
@@ -77,6 +79,19 @@ meson setup builddir --prefix=/usr \
   -Dtests=disabled \
   -Dsystemd-user-service=enabled
 
+
+# Vorher altes Build-Verzeichnis löschen!
+rm -rf builddir
+
+meson setup builddir --prefix=/usr \
+  --buildtype=release \
+  -Doptimization=2 \
+  -Db_lto=true \
+  -Dcpp_args="-march=skylake -mtune=skylake -pipe -ftree-vectorize" \
+  -Dc_args="-march=skylake -mtune=skylake -pipe -ftree-vectorize" \
+  -Dcpp_link_args="-Wl,-O1 -Wl,--as-needed" \
+  -Dc_link_args="-Wl,-O1 -Wl,--as-needed" \
+  -Denable-rnnoise=false
 
 
 
