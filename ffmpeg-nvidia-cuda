@@ -1,0 +1,17 @@
+./configure --prefix=/usr \
+  --extra-cflags="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize" \
+  --extra-cxxflags="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize" \
+  --extra-ldflags="-Wl,-O1 -Wl,--as-needed" \
+  --enable-shared \
+  --enable-gpl \
+  --enable-version3 \
+  --enable-libx264 \
+  --enable-libx265 \
+  --disable-cuda \
+  --disable-cuvid \
+  --disable-nvenc \
+  --disable-vaapi \
+  --disable-vdpau \
+  --disable-doc \
+  --disable-debug \
+  --enable-lto
