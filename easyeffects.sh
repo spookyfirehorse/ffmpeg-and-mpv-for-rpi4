@@ -64,27 +64,40 @@ meson setup builddir --prefix=/usr \
 
 
 
-  meson setup builddir --prefix /usr  \
+  # Alten Ordner löschen, um Fehler zu vermeiden
+rm -rf builddir
+
+meson setup builddir --prefix=/usr \
+  --buildtype=release \
   -Doptimization=3 \
   -Db_lto=true \
   -Dcpp_args="-mcpu=cortex-a76 -pipe -ftree-vectorize" \
   -Dc_args="-mcpu=cortex-a76 -pipe -ftree-vectorize" \
   -Dffmpeg=enabled \
+  -Dpw-cat-ffmpeg=enabled \
   -Dbluez5-codec-lc3=enabled \
-  -Ddocs=disabled
-  -Dvulkan=enabled
+  -Dvulkan=enabled \
+  -Ddocs=disabled \
+  -Dman=disabled \
+  -Dtests=disabled \
+  -Dsystemd-user-service=enabled
 
 
-meson setup builddir --prefix /usr  \
+
+meson setup builddir --prefix=/usr \
+  --buildtype=release \
   -Doptimization=3 \
   -Db_lto=true \
   -Dcpp_args="-mcpu=cortex-a72 -pipe -ftree-vectorize" \
   -Dc_args="-mcpu=cortex-a72 -pipe -ftree-vectorize" \
   -Dffmpeg=enabled \
+  -Dpw-cat-ffmpeg=enabled \
   -Dbluez5-codec-lc3=enabled \
-  -Ddocs=disabled
-  -Dvulkan=enabled
-
+  -Dvulkan=enabled \
+  -Ddocs=disabled \
+  -Dman=disabled \
+  -Dtests=disabled \
+  -Dsystemd-user-service=enabled
   ninja -C builddir -j4
 
 sudo ninja -C builddir install
