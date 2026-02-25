@@ -20,6 +20,13 @@ LimitNICE=-19
 LimitMEMLOCK=infinity
 
 
+sudo nano  /etc/security/limits.d/10-coredump-debian.conf 
+root            soft    core            0
+*               hard    core            infinity
+root            hard    core            infinity
+
+
+
 
 sudo apt install libspa-0.2-bluetooth libspa-0.2-jack pipewire-audio-client-libraries lsp-plugins-lv2 calf-plugins
 
