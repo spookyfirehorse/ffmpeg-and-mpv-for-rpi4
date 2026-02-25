@@ -147,6 +147,32 @@ meson setup builddir   --buildtype=release   -Doptimization=3   -Db_lto=true   -
 
   ninja -C builddir -j4
 
+sudo nano /etc/pipewire/pipewire.conf.d/10-low-latency.conf 
 
 
+context.properties = {
+    default.clock.rate          = 48000
+    default.clock.quantum       = 512
+    default.clock.min-quantum   = 512
+    default.clock.max-quantum   = 512
+    default.clock.allowed-rates = [ 44100 48000 88200 96000 ]
+    mem.allow-mlock             = true
+}
+
+stream.properties = {
+    audio.format = "F32LE"
+    resample.quality = 4
+}
+
+context.modules = [
+    { name = libpipewire-module-rt
+        args = {
+            nice.level   = -20
+            rt.prio      = 95
+            uclimit      = true
+            rt.time.soft = 200000
+            rt.time.hard = 200000
+        }
+    }
+]
 
