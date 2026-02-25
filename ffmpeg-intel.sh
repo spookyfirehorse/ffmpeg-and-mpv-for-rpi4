@@ -54,6 +54,10 @@
   --disable-parser='gsm,h261,h263,vc1' \
   --disable-hwaccel='h263_vaapi,vc1_vaapi,wmv3_vaapi'
 
+better ldflags
+  
+  --extra-ldflags="-L/usr/lib/x86_64-linux-gnu -Wl,-O1 -Wl,--as-needed" \
+
 
 rm -rf build && meson setup build \
   --prefix=/usr \
