@@ -1,14 +1,8 @@
-apt source easyeffects
-CXXFLAGS="-march=goldmont -O3 -pipe" meson setup build --prefix /usr --buildtype release -Db_lto=true -Denable-rnnoise=false
-sudo ninja -C _build install
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh)"
 
 
-CXXFLAGS="-march=goldmont -O3 -pipe" meson setup build --prefix /usr --buildtype release -Db_lto=true
-
-
-
+ps -mo rtprio,cls,comm -p $(pgrep -x pipewire)
 
 systemctl --user daemon-reload
 systemctl --user restart pipewire.service pipewire-pulse.service wireplumber.service
