@@ -46,9 +46,10 @@ systemctl --user restart pipewire.service pipewire-pulse.service
 
   
   
+
+
 meson setup builddir --prefix=/usr \
   --buildtype=release \
-  -Doptimization=3 \
   -Db_lto=false \
   -Dcpp_args="-march=armv8-a+crc -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize" \
   -Dc_args="-march=armv8-a+crc -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize" \
@@ -60,8 +61,6 @@ meson setup builddir --prefix=/usr \
   -Dman=disabled \
   -Dtests=disabled \
   -Dsystemd-user-service=enabled
-
-
 
 
 
