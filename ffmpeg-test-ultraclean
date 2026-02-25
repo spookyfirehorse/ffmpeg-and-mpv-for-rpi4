@@ -9,54 +9,15 @@
 --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
 --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lstdc++' \
 --disable-all \
---enable-shared \
---disable-static \
---disable-debug \
---enable-stripping \
---enable-pic \
---enable-pthreads \
---enable-gpl \
---enable-version3 \
---enable-nonfree \
---enable-lto \
---enable-ffmpeg \
---enable-ffprobe \
---enable-avcodec \
---enable-avformat \
---enable-avfilter \
---enable-swresample \
---enable-swscale \
---enable-avdevice \
---enable-v4l2-m2m \
---enable-v4l2-request \
---enable-sand \
---enable-hwaccel=h264_v4l2m2m \
---enable-hwaccel=hevc_v4l2m2m \
---enable-hwaccel=mpeg2_v4l2m2m \
---enable-vulkan \
---enable-libshaderc \
---enable-libplacebo \
---enable-libdrm \
---enable-libudev \
---enable-epoxy \
---enable-vout-drm \
---enable-vout-egl \
---enable-opengl \
---enable-libass \
---enable-libfdk-aac \
---enable-libmp3lame \
---enable-libopus \
---enable-libsoxr \
---enable-ladspa \
---enable-lv2 \
---enable-librubberband \
---enable-libbs2b \
---enable-libmysofa \
---enable-alsa \
---enable-libpulse \
---enable-libjack \
---enable-openssl \
---enable-network \
+--enable-shared --disable-static --disable-debug --enable-stripping \
+--enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
+--enable-ffmpeg --enable-ffprobe --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
+--enable-v4l2-m2m --enable-v4l2-request --enable-sand \
+--enable-vulkan --enable-libshaderc --enable-libplacebo \
+--enable-libdrm --enable-libudev --enable-epoxy --enable-vout-drm --enable-vout-egl --enable-opengl \
+--enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
+--enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
+--enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
 --enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto \
 --enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf \
 --enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts \
@@ -67,6 +28,7 @@
 --enable-indevs \
 --enable-outdevs
 
+pi 4
 
 ./configure \
 --prefix=/usr \
@@ -79,54 +41,15 @@
 --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
 --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lstdc++' \
 --disable-all \
---enable-shared \
---disable-static \
---disable-debug \
---enable-stripping \
---enable-pic \
---enable-pthreads \
---enable-gpl \
---enable-version3 \
---enable-nonfree \
---enable-lto \
---enable-ffmpeg \
---enable-ffprobe \
---enable-avcodec \
---enable-avformat \
---enable-avfilter \
---enable-swresample \
---enable-swscale \
---enable-avdevice \
---enable-v4l2-m2m \
---enable-v4l2-request \
---enable-sand \
---enable-hwaccel=h264_v4l2m2m \
---enable-hwaccel=hevc_v4l2m2m \
---enable-hwaccel=mpeg2_v4l2m2m \
---enable-vulkan \
---enable-libshaderc \
---enable-libplacebo \
---enable-libdrm \
---enable-libudev \
---enable-epoxy \
---enable-vout-drm \
---enable-vout-egl \
---enable-opengl \
---enable-libass \
---enable-libfdk-aac \
---enable-libmp3lame \
---enable-libopus \
---enable-libsoxr \
---enable-ladspa \
---enable-lv2 \
---enable-librubberband \
---enable-libbs2b \
---enable-libmysofa \
---enable-alsa \
---enable-libpulse \
---enable-libjack \
---enable-openssl \
---enable-network \
+--enable-shared --disable-static --disable-debug --enable-stripping \
+--enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
+--enable-ffmpeg --enable-ffprobe --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
+--enable-v4l2-m2m --enable-v4l2-request --enable-sand \
+--enable-vulkan --enable-libshaderc --enable-libplacebo \
+--enable-libdrm --enable-libudev --enable-epoxy --enable-vout-drm --enable-vout-egl --enable-opengl \
+--enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
+--enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
+--enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
 --enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto \
 --enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf \
 --enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts \
