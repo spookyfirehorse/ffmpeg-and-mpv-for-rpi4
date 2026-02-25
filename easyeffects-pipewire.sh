@@ -88,6 +88,11 @@ meson setup builddir --prefix=/usr \
 # Vorher altes Build-Verzeichnis löschen!
 rm -rf builddir
 
+
+# 1. Altes Build-Verzeichnis löschen
+rm -rf builddir
+
+# 2. Neu konfigurieren (Option entfernt)
 meson setup builddir --prefix=/usr \
   --buildtype=release \
   -Doptimization=2 \
@@ -97,6 +102,7 @@ meson setup builddir --prefix=/usr \
   -Dcpp_link_args="-Wl,-O1 -Wl,--as-needed" \
   -Dc_link_args="-Wl,-O1 -Wl,--as-needed" \
   -Denable-rnnoise=false
+
 
 
 
