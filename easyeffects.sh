@@ -17,7 +17,7 @@ sudo apt install libspa-0.2-bluetooth libspa-0.2-jack pipewire-audio-client-libr
 
 
 
-meson setup builddir \
+meson setup builddir --prefix /usr \
   -Doptimization=3 \
   -Db_lto=true \
   -Dcpp_args="-march=goldmont -mtune=goldmont" \
@@ -44,21 +44,30 @@ systemctl --user restart pipewire.service pipewire-pulse.service
 
   
   
-meson setup builddir \
+# Alten Build-Ordner entfernen, um Konflikte zu vermeiden
+rm -rf builddir
+
+# Meson Setup für RPi 3 (armhf / armv8-a)
+meson setup builddir --prefix=/usr \
+  --buildtype=release \
   -Doptimization=3 \
-  -Db_lto=true \
-  -Dcpp_args="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize" \
-  -Dc_args="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize" \
+  -Db_lto=false \
+  -Dcpp_args="-march=armv8-a+crc -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize" \
+  -Dc_args="-march=armv8-a+crc -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize" \
   -Dffmpeg=enabled \
+  -Dpw-cat-ffmpeg=enabled \
+  -Dvulkan=enabled \
   -Dbluez5-codec-lc3=enabled \
   -Ddocs=disabled \
-  -Dvulkan=disabled \
+  -Dman=disabled \
+  -Dtests=disabled \
   -Dsystemd-user-service=enabled
 
 
 
 
-  meson setup builddir \
+
+  meson setup builddir --prefix /usr  \
   -Doptimization=3 \
   -Db_lto=true \
   -Dcpp_args="-mcpu=cortex-a76 -pipe -ftree-vectorize" \
@@ -69,7 +78,7 @@ meson setup builddir \
   -Dvulkan=enabled
 
 
-meson setup builddir \
+meson setup builddir --prefix /usr  \
   -Doptimization=3 \
   -Db_lto=true \
   -Dcpp_args="-mcpu=cortex-a72 -pipe -ftree-vectorize" \
@@ -88,7 +97,7 @@ systemctl --user restart pipewire.service pipewire-pulse.service
 
 
 # In den EasyEffects Quellordner wechseln
-meson setup builddir \
+meson setup builddir --prefix=/usr \
   --buildtype=release \
   -Doptimization=3 \
   -Db_lto=true \
@@ -103,7 +112,7 @@ meson setup build --prefix /usr --buildtype release \
 -Denable-rnnoise=false
   
 # In den EasyEffects Quellordner wechseln
-meson setup builddir \
+meson setup builddir --prefix /usr  \
   --buildtype=release \
   -Doptimization=3 \
   -Db_lto=true \
@@ -121,20 +130,11 @@ sudo ninja -C builddir install
 # Vorher den alten Cache löschen!
 rm -rf builddir
 
-meson setup builddir \
-  --buildtype=release \
-  -Doptimization=3 \
-  -Db_lto=false \
-  -Dcpp_args="-march=armv8-a -mtune=cortex-a53 -mfloat-abi=hard -mfpu=neon-fp-armv8 -pipe -ftree-vectorize" \
-  -Dc_args="-march=armv8-a -mtune=cortex-a53 -mfloat-abi=hard -mfpu=neon-fp-armv8 -pipe -ftree-vectorize" \
-  -Dffmpeg=enabled \
-  -Dpw-cat-ffmpeg=enabled \
-  -Dvulkan=enabled \
-  -Dbluez5-codec-lc3=enabled \
-  -Ddocs=disabled \
-  -Dman=disabled \
-  -Dtests=disabled \
-  -Dsystemd-user-service=enabled
+meson setup builddir   --buildtype=release   -Doptimization=3   -Db_lto=true   -Dcpp_args="-march=armv8-a+crc -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize"   -Dc_args="-march=armv8-a+crc -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize"   -Dffmpeg=enabled   -Dpw-cat-ffmpeg=enabled   -Dvulkan=enabled   -Dbluez5-codec-lc3=enabled   -Ddocs=disabled   -Dman=disabled   -Dtests=disabled   -Dsystemd-user-service=enabled --prefix /usr
+
+
+
+  ninja -C builddir -j4
 
 
 
