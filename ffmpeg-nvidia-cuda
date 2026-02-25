@@ -1,28 +1,10 @@
-./configure --prefix=/usr \
-  --extra-cflags="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize" \
-  --extra-cxxflags="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize" \
-  --extra-ldflags="-Wl,-O1 -Wl,--as-needed" \
-  --enable-shared \
-  --enable-gpl \
-  --enable-version3 \
-  --enable-libx264 \
-  --enable-libx265 \
-  --disable-cuda \
-  --disable-cuvid \
-  --disable-nvenc \
-  --disable-vaapi \
-  --disable-vdpau \
-  --disable-doc \
-  --disable-debug \
-  --enable-lto
-
-
+make clean
 
 ./configure --prefix=/usr \
   --libdir=/usr/lib/x86_64-linux-gnu \
   --incdir=/usr/include \
-  --extra-cflags="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize" \
-  --extra-cxxflags="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize" \
+  --extra-cflags="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize -mavx2 -mfma -ffast-math" \
+  --extra-cxxflags="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize -mavx2 -mfma -ffast-math" \
   --extra-ldflags="-L/usr/lib/x86_64-linux-gnu -Wl,-O1 -Wl,--as-needed" \
   --disable-all \
   --enable-ffmpeg --enable-ffprobe \
@@ -34,12 +16,41 @@
   --enable-cuda-nvcc --enable-libnpp --enable-ffnvcodec --enable-nvenc --enable-nvdec \
   --enable-hwaccel=h264_nvdec,hevc_nvdec,vp9_nvdec,av1_nvdec \
   --enable-vulkan --enable-libplacebo \
-  --disable-vaapi --disable-vdpau --disable-libx264 --disable-libx265 \
+  --disable-vaapi --disable-vdpau \
+  --disable-libx264 --disable-libx265 --disable-libxvid \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx \
   --enable-gnutls --enable-network \
   --enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,tls \
   --enable-muxers --enable-demuxers --enable-parsers --enable-bsfs \
   --enable-encoders --enable-decoders \
   --enable-filters \
+  --disable-encoder=libx264,libx264rgb,libx265,libxvid \
+  --disable-filter=scale_vaapi,procamp_vaapi,denoise_vaapi,sharpness_vaapi,vpp_vaapi,hwupload_vaapi,hwmap_vaapi,hwmap_vdpau \
   --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
   --enable-lto
+
+
+# 1. Altes Build-Verzeichnis löschen
+rm -rf builddir
+
+# 2. Meson Setup mit Skylake-AVX2 Optimierung
+meson setup builddir --prefix=/usr \
+  --buildtype=release \
+  -Doptimization=3 \
+  -Db_lto=true \
+  -Dcpp_args="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize" \
+  -Dc_args="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize" \
+  -Dpipewire=enabled \
+  -Dalsa=enabled \
+  -Djack=disabled \
+  -Dvaapi=disabled \
+  -Dvdpau=disabled \
+  -Dvulkan=enabled \
+  -Dcuda-hwaccel=enabled \
+  -Dnvdec=enabled \
+  -Dlibplacebo=enabled \
+  -Dshaderc=enabled \
+  -Dmanpage-build=disabled \
+  -Ddvbin=disabled
+
+
