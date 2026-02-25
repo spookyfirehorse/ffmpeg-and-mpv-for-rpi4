@@ -49,10 +49,10 @@
   --disable-ffnvcodec \
   --disable-cuda-llvm \
   --disable-libgsm \
-  --disable-decoder=gsm,h261,h263,h263i,h263p,msmpeg4v1,msmpeg4v2,msmpeg4v3,vc1,wmv1,wmv2,wmv3,indeo2,indeo3,indeo4,indeo5,cinepak,real_144,real_288,roq,rv10,rv20,rv30,rv40 \
-  --disable-encoder=gsm,h261,h263,h263p,msmpeg4v2,msmpeg4v3,wmv1,wmv2,roq,rv10,rv20 \
-  --disable-parser=gsm,h261,h263,vc1 \
-  --disable-hwaccel=h263_vaapi,vc1_vaapi,wmv3_vaapi
+  --disable-decoder='gsm,h261,h263,h263i,h263p,msmpeg4v1,msmpeg4v2,msmpeg4v3,vc1,wmv1,wmv2,wmv3,indeo2,indeo3,indeo4,indeo5,cinepak,real_144,real_288,roq,rv10,rv20,rv30,rv40' \
+  --disable-encoder='gsm,h261,h263,h263p,msmpeg4v2,msmpeg4v3,wmv1,wmv2,roq,rv10,rv20' \
+  --disable-parser='gsm,h261,h263,vc1' \
+  --disable-hwaccel='h263_vaapi,vc1_vaapi,wmv3_vaapi'
 
 
 rm -rf build && meson setup build \
