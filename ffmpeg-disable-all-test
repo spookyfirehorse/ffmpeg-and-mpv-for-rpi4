@@ -20,9 +20,9 @@
 --enable-vulkan --enable-libshaderc --enable-libplacebo \
 --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
 --enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
---enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
+--enable-alsa --enable-libpulse --enable-libjack --enable-network \
 --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
-  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-openssl --enable-libsoxr \
+  --enable-ffmpeg --enable-ffprobe --disable-ffplay  --enable-libsoxr \
   --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
   --enable-gnutls --enable-gcrypt --enable-network \
   --enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
