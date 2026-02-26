@@ -214,17 +214,59 @@ Soll ich dir noch sagen, wie du den Erfolg des Linkers am Ende mit tail -f über
 KI-Antworten können Fehler enthalten. Weitere Informationen
 
 
+1. Für den Raspberry Pi 5 (64-Bit, Cortex-A76)
+autoreconf -fiv && \
+./configure \
+  --prefix=/usr \
+  --enable-shared \
+  --disable-static \
+  --host=aarch64-linux-gnu \
+  CFLAGS="-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize" \
+  CXXFLAGS="-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize" \
+  LDFLAGS="-Wl,-O1,--as-needed" && \
+make -j$(nproc) && \
+sudo make install && sudo ldconfig
 
-Frage stellen
+1. Für den Raspberry Pi 5 (64-Bit, Cortex-A76)
+autoreconf -fiv && \
+./configure \
+  --prefix=/usr \
+  --enable-shared \
+  --disable-static \
+  --host=aarch64-linux-gnu \
+  CFLAGS="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
+  CXXFLAGS="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
+  LDFLAGS="-Wl,-O1,--as-needed" && \
+make -j$(nproc) && \
+sudo make install && sudo ldconfig
 
-
+2. Für den Raspberry Pi 3 (32-Bit, Cortex-A53)
+Hier aktivieren wir zusätzlich die NEON-Einheit (VFPv4), um Audio-Berechnungen in Hardware zu beschleunigen.
+bash
+sudo apt update && sudo apt install -y autoconf libtool [Debian Package Search](https://packages.debian.org) && \
+git clone https://github.com && \
+cd fdk-aac && \
+autoreconf -fiv && \
+./configure \
   --prefix=/usr \
   --enable-shared \
   --disable-static \
   --host=arm-linux-gnueabihf \
   CFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe" \
   CXXFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe" && \
+  LDFLAGS="-Wl,-O1,--as-needed" && \
 make -j4 && \
 sudo make install && sudo ldconfig
+Verwende Code mit Vorsicht.
+
+Warum diese Optimierung?
+Prefix /usr: Damit landet die Library direkt im Standardpfad. Dein FFmpeg-Build wird sie ohne zusätzliche Pfadangaben finden.
+Shared Only: Durch --disable-static verhinderst du, dass unnötige .a Dateien Platz wegnehmen.
+CPU-Target: -mcpu sorgt dafür, dass der Code exakt für deine ARM-Architektur "gebacken" wird, was die Encoding-Geschwindigkeit spürbar verbessert.
+Wichtiger Hinweis: Wenn du danach deinen großen FFmpeg-Build startest, achte darauf, dass in der Zusammenfassung bei den External Libraries nun libfdk_aac (oder fdk-aac) mit yes gelistet ist.
+Soll ich dir auch noch die optimierten Zeilen für libmp3lame oder libopus fertig machen, damit dein Audio-Setup komplett ist?
+KI-Antworten können Fehler enthalten. Weitere Informationen
+
+
 
 
