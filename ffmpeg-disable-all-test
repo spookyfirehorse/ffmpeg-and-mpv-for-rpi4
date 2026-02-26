@@ -2,7 +2,7 @@
 --prefix=/usr \
 --libdir=/usr/lib/aarch64-linux-gnu \
 --incdir=/usr/include/aarch64-linux-gnu \
---extra-version=ultra-pi5-drm-vulkan \
+--extra-version=ultra-pi4-drm-vulkan \
 --arch=aarch64 \
 --cpu=cortex-a72 \
 --extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
