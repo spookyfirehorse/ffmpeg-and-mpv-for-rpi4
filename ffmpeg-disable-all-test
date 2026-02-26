@@ -4,8 +4,8 @@
 --incdir=/usr/include/aarch64-linux-gnu \
 --extra-version=ultra-pi5-drm-vulkan \
 --arch=aarch64 \
---cpu=cortex-a76 \
---extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto' \
+--cpu=cortex-a72 \
+--extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
 --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
 --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lstdc++' \
 --disable-everything \
