@@ -6,6 +6,10 @@
   --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
   --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-openssl \
   --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr --enable-libplacebo \
+  --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
+  --enable-gnutls --enable-gcrypt --enable-network \
+  --enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
+  --enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
   --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev \
   --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm \
