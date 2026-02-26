@@ -51,7 +51,7 @@ ubuntu-26-04 debian trixie
   --enable-alsa \
   --enable-indev='v4l2,alsa,pulse,jack,fbdev,lavfi' \
   --enable-outdev='v4l2,alsa,pulse,jack,fbdev,drm' \
-  --enable-filter='afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,crop,overlay,drawtext,boxblur,unsharp,yadif,scale_vulkan,chromaber_vulkan,flip_vulkan' \
+  --enable-filter='scale_vulkan,chromaber_vulkan,flip_vulkan,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,crop,overlay,drawtext,boxblur,unsharp,yadif,scale_vulkan,chromaber_vulkan,flip_vulkan' \
   --enable-protocol='file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto,tls' \
   --enable-demuxer='mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg,vc1,wmv' \
   --enable-muxer='mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,pcm_s32le,adts,latm,null,matroska,ipod,ismv,dash' \
