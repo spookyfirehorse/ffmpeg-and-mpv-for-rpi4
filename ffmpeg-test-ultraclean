@@ -2,12 +2,12 @@
 --prefix=/usr \
 --libdir=/usr/lib/aarch64-linux-gnu \
 --incdir=/usr/include/aarch64-linux-gnu \
---extra-version=ultra-pi5-drm-vulkan \
+--extra-version=ultra-pi5-drm-vulkan-v2 \
 --arch=aarch64 \
 --cpu=cortex-a76 \
 --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto' \
 --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lstdc++' \
+--extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lOSDependent -lSPIRV -lpthread -lstdc++' \
 --disable-autodetect \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
@@ -39,17 +39,16 @@
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
 
 
-
 ./configure \
 --prefix=/usr \
 --libdir=/usr/lib/aarch64-linux-gnu \
 --incdir=/usr/include/aarch64-linux-gnu \
---extra-version=ultra-pi5-drm-vulkan \
+--extra-version=ultra-pi5-drm-vulkan-v2 \
 --arch=aarch64 \
 --cpu=cortex-a72 \
 --extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
 --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lstdc++' \
+--extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lOSDependent -lSPIRV -lpthread -lstdc++' \
 --disable-autodetect \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
