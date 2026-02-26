@@ -16,7 +16,8 @@
   --enable-vulkan --enable-libplacebo \
   --disable-vaapi --disable-vdpau \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx \
-  --enable-gnutls --enable-network \
+  --enable-gnutls --enable-gcrypt --enable-network \
+  --enable-libpulse --enable-libjack --enable-alsa \
   --enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
   --enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
   --enable-filter=afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
@@ -29,6 +30,8 @@
   --enable-bsf=h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc \
   --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
   --enable-lto
+
+
 
 
 
