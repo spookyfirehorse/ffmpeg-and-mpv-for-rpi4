@@ -211,7 +211,10 @@ Verwende Code mit Vorsicht.
 
 Profi-Tipp für den Start: Kopiere den Befehl in einen Texteditor (wie Notepad++) und entferne eventuelle Zeilenumbrüche, falls dein Terminal Probleme mit dem Backslash \ hat.
 Soll ich dir noch sagen, wie du den Erfolg des Linkers am Ende mit tail -f überwachst?
-KI-Antworten können Fehler enthalten. Weitere Informationen
+
+
+
+git clone https://github.com/mstorsjo/fdk-aac
 
 
 1. Für den Raspberry Pi 5 (64-Bit, Cortex-A76)
