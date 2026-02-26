@@ -79,3 +79,251 @@
 --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,aac,mp3,flac,opus \
 --enable-indevs --enable-outdevs
+
+
+
+
+rettung
+
+./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+  --extra-version=ultra-clean-pi5-egl --arch=aarch64 --cpu=cortex-a76 \
+  --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lstdc++' \
+  --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-openssl \
+  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr --enable-libplacebo \
+  --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --enable-vout-egl \
+  --enable-opengl --disable-sdl2 --enable-xlib --disable-libxcb --disable-libxcb-shm \
+  --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise,libgsm,libgsm_ms \
+  --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug
+
+./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+  --extra-version=ultra-clean-pi5-egl --arch=aarch64 --cpu=cortex-a72 \
+  --extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lstdc++' \
+  --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-openssl \
+  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr --enable-libplacebo \
+  --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --enable-vout-egl \
+  --enable-opengl --disable-sdl2 --enable-xlib --disable-libxcb --disable-libxcb-shm \
+  --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise,libgsm,libgsm_ms \
+  --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug
+
+./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+  --extra-version=ultra-clean-pi3-egl-sdl2 --arch=armv7l --target-os=linux --cpu=cortex-a53 \
+  --extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lSDL2 -lstdc++' \
+  --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --enable-ffplay --enable-openssl \
+  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
+  --enable-libdrm --enable-libudev --enable-v4l2-m2m --enable-libass \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus \
+  --enable-vulkan --enable-opengl --enable-vout-drm --enable-vout-egl --enable-gbm --enable-sdl2 \
+  --disable-libplacebo --disable-libshaderc --enable-xlib --disable-libxcb --disable-libxcb-shm \
+  --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise,libgsm,libgsm_ms \
+  --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx --disable-debug
+
+
+1. Pi 5 (Das Kraftpaket)
+Optimiert für den Cortex-A76 (BCM2712). Fokus auf Vulkan und libplacebo für High-End Video.
+bash
+./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+  --extra-version=ultra-clean-pi5-vulkan --arch=aarch64 --cpu=cortex-a76 \
+  --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lstdc++' \
+  --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-openssl \
+  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr --enable-libplacebo \
+  --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy --enable-gbm \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --enable-vout-egl \
+  --enable-opengl --disable-sdl2 --disable-xlib --disable-libxcb --disable-libxcb-shm \
+  --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise,libgsm,libgsm_ms \
+  --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx
+Verwende Code mit Vorsicht.
+
+2. Pi 4 (Der Allrounder)
+Optimiert für den Cortex-A72 (BCM2711). Identisch zum Pi 5, aber mit den passenden CPU-Befehlssätzen für den Pi 4.
+bash
+./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+  --extra-version=ultra-clean-pi4-vulkan --arch=aarch64 --cpu=cortex-a72 \
+  --extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lstdc++' \
+  --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-openssl \
+  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr --enable-libplacebo \
+  --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy --enable-gbm \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --enable-vout-egl \
+  --enable-opengl --disable-sdl2 --disable-xlib --disable-libxcb --disable-libxcb-shm \
+  --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise,libgsm,libgsm_ms \
+  --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx
+Verwende Code mit Vorsicht.
+
+3. Pi 3 (Die Spar-Version)
+Optimiert für 32-Bit Cortex-A53 (BCM2837). Wichtig: Vulkan ist hier deaktiviert (da Hardware-inkompatibel), dafür ist SDL2/FFplay für einfache Wiedergabe aktiv.
+bash
+./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+  --extra-version=ultra-clean-pi3-egl-sdl2 --arch=arm --target-os=linux --cpu=cortex-a53 \
+  --extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lSDL2 -lstdc++' \
+  --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --enable-ffplay --enable-openssl \
+  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
+  --enable-libdrm --enable-libudev --enable-v4l2-m2m --enable-libass --enable-gbm \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus \
+  --enable-opengl --enable-vout-drm --enable-vout-egl --enable-sdl2 \
+  --disable-vulkan --disable-libplacebo --disable-libshaderc \
+  --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
+  --disable-libx264 --disable-libx265 --disable-libvpx \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise,libgsm,libgsm_ms \
+  --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables
+
+
+1. Pi 5 (Das Kraftpaket)
+Optimiert für den Cortex-A76 (BCM2712). Fokus auf Vulkan und libplacebo für High-End Video.
+bash
+./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+  --extra-version=ultra-clean-pi5-vulkan --arch=aarch64 --cpu=cortex-a76 \
+  --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lstdc++' \
+  --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-openssl \
+  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr --enable-libplacebo \
+  --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy --enable-gbm \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --enable-vout-egl \
+  --enable-opengl --disable-sdl2 --disable-xlib --disable-libxcb --disable-libxcb-shm \
+  --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise,libgsm,libgsm_ms \
+  --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx
+Verwende Code mit Vorsicht.
+
+2. Pi 4 (Der Allrounder)
+Optimiert für den Cortex-A72 (BCM2711). Identisch zum Pi 5, aber mit den passenden CPU-Befehlssätzen für den Pi 4.
+bash
+./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+  --extra-version=ultra-clean-pi4-vulkan --arch=aarch64 --cpu=cortex-a72 \
+  --extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lstdc++' \
+  --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-openssl \
+  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr --enable-libplacebo \
+  --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev --enable-epoxy --enable-gbm \
+  --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm --enable-vout-egl \
+  --enable-opengl --disable-sdl2 --disable-xlib --disable-libxcb --disable-libxcb-shm \
+  --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise,libgsm,libgsm_ms \
+  --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables --disable-libvpx
+Verwende Code mit Vorsicht.
+
+3. Pi 3 (Die Spar-Version)
+Optimiert für 32-Bit Cortex-A53 (BCM2837). Wichtig: Vulkan ist hier deaktiviert (da Hardware-inkompatibel), dafür ist SDL2/FFplay für einfache Wiedergabe aktiv.
+bash
+./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+  --extra-version=ultra-clean-pi3-egl-sdl2 --arch=arm --target-os=linux --cpu=cortex-a53 \
+  --extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lSDL2 -lstdc++' \
+  --enable-shared --disable-static --enable-gpl --enable-nonfree --enable-lto \
+  --enable-ffmpeg --enable-ffprobe --enable-ffplay --enable-openssl \
+  --enable-libjack --enable-libpulse --enable-alsa --enable-libsoxr \
+  --enable-libdrm --enable-libudev --enable-v4l2-m2m --enable-libass --enable-gbm \
+  --enable-libfdk-aac --enable-libmp3lame --enable-libopus \
+  --enable-opengl --enable-vout-drm --enable-vout-egl --enable-sdl2 \
+  --disable-vulkan --disable-libplacebo --disable-libshaderc \
+  --disable-xlib --disable-libxcb --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape \
+  --disable-libx264 --disable-libx265 --disable-libvpx \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
+  --disable-omx --disable-omx-rpi --disable-mmal \
+  --disable-doc --disable-debug --disable-protocol=gopher,mmsh,mmst \
+  --disable-decoder=adpcm_g722,adpcm_g726,adpcm_g726le,g723_1,g729,gsm,gsm_ms,comfort_noise,libgsm,libgsm_ms \
+  --disable-encoder=gsm,gsm_ms,libgsm,libgsm_ms,g723_1,g726 \
+  --disable-decoder=interplay_video,vmdvideo,tiertexseqvideo,cinepak,msvideo1,msrle,idcin,vmnc,cpia,smush,xan_wc3,xan_wc4,ws_snd1,derf_dp,qcelp,crystalhd \
+  --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --enable-stripping --enable-hardcoded-tables
+
