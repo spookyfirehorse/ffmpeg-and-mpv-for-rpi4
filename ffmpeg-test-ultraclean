@@ -146,26 +146,7 @@ KI-Antworten können Fehler enthalten. Weitere Informationen
 
 
 
-git clone https://github.com/mstorsjo/fdk-aac && \
-cd fdk-aac && \
-autoreconf -fiv && \
-./configure \Finaler Pi 5 (Cortex-A76, 64-Bit)
---disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 --disable-libvpx \
---disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
---disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
---disable-omx --disable-omx-rpi --disable-mmal \
---disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
---enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---enable-filter=afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
---enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto,tls \
---enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
---enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
-Verwende Code mit Vorsicht.
+
 
 Finaler Pi 3 (Cortex-A53, 32-Bit)
 bash
