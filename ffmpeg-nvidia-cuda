@@ -33,8 +33,7 @@ ubuntu-26-04 debian trixie
   --enable-vulkan \
   --enable-libplacebo \
   --enable-libshaderc \
-  --enable-hwaccel='h264_vulkan,hevc_vulkan,vp9_vulkan,av1_vulkan,mpeg1_nvdec,mpeg2_nvdec,mpeg4_nvdec,h264_nvdec,hevc_nvdec,vp8_nvdec,vp9_nvdec,av1_nvdec,vc1_nvdec,wmv3_nvdec,mjpeg_nvdec' \
-  --disable-vaapi \
+  --enable-hwaccel='h264_vulkan,hevc_vulkan,vp9_vulkan,av1_vulkan,mpeg1_nvdec,mpeg2_nvdec,mpeg4_nvdec,h264_nvdec,hevc_nvdec,vp8_nvdec,vp9_nvdec,av1_nvdec,vc1_nvdec,wmv3_nvdec,mjpeg_nvdec'  --disable-vaapi \
   --disable-vdpau \
   --enable-libfdk-aac \
   --enable-libmp3lame \
