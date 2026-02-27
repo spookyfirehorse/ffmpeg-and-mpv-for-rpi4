@@ -35,12 +35,12 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --enable-gnutls --enable-gcrypt \
 --enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
 --enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---enable-filter=buffer,buffersink,abuffer,abuffersink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
+--enable-filter=testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
 --enable-protocol=pipe,file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,crypto,tls \
 --enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
 --enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=ac3,dca,h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,h264_vulkan,hevc_vulkan,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,h264_vulkan,hevc_vulkan,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
+--enable-decoder=h264,ac3,dca,h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,h264_vulkan,hevc_vulkan,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
+--enable-encoder=h264,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,h264_vulkan,hevc_vulkan,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus \
 --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
@@ -75,7 +75,7 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --enable-gnutls --enable-gcrypt \
 --enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
 --enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---enable-filter=buffer,buffersink,abuffer,abuffersink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
+--enable-filter=testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
 --enable-protocol=pipe,file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,crypto,tls \
 --enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
 --enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
@@ -129,7 +129,7 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
 --disable-omx --disable-omx-rpi --disable-mmal \
 --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---enable-filter=buffer,buffersink,abuffer,abuffersink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
+--enable-filter=testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
 --enable-protocol=pipe,file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,crypto,tls \
 --disable-protocol=gopher,mmsh,mmst \
 --enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
@@ -180,12 +180,12 @@ ohne vulkan
 --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
 --disable-omx --disable-omx-rpi --disable-mmal \
 --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---enable-filter=buffer,buffersink,abuffer,abuffersink,afifo,anull,asplit,aresample,aformat,amix,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
+--enable-filter=testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
 --enable-protocol=pipe,file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,crypto,tls \
 --enable-demuxer=mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg \
 --enable-muxer=mpegts,mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=ac3,dca,mpeg2_v4l2m2m,h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,aac,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-encoder=ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le \
+--enable-decoder=h264,ac3,dca,mpeg2_v4l2m2m,h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,aac,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
+--enable-encoder=h264,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le \
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,aac,mp3,flac,opus \
 --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
