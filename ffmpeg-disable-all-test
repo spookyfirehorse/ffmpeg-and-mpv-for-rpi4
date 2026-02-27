@@ -79,6 +79,7 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 
 
 
+
  git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git 
 
 
@@ -151,7 +152,7 @@ ohne vulkan
 --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
 --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
 --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=hevc_v4l2request \
+--enable-hwaccel=h264_v4l2m2m,hevc_v4l2request \
 --enable-libdrm --enable-epoxy --enable-libudev \
 --enable-vout-drm --enable-opengl \
 --disable-vulkan --disable-libshaderc --disable-libplacebo \
