@@ -21,7 +21,7 @@ bash
 --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
 --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
 --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=hevc_v4l2request \
+--enable-hwaccel=h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,h264_vulkan,hevc_vulkan \
 --enable-libdrm --enable-epoxy --enable-libudev \
 --enable-vout-drm --enable-opengl \
 --enable-vulkan --enable-libshaderc --enable-libplacebo \
@@ -66,7 +66,7 @@ bash
 --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
 --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
 --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=hevc_v4l2request \
+--enable-hwaccel=h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,h264_vulkan,hevc_vulkan \
 --enable-libdrm --enable-epoxy --enable-libudev \
 --enable-vout-drm --enable-opengl \
 --enable-vulkan --enable-libshaderc --enable-libplacebo \
