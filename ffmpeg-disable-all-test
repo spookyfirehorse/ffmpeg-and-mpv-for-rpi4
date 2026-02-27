@@ -51,7 +51,7 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --libdir=/usr/lib/aarch64-linux-gnu \
 --arch=aarch64 \
 --cpu=cortex-a76 \
---extra-version=ultra-clean-kynesim-pi4 \
+--extra-version=ultra-clean-kynesim-pi5 \
 --disable-x86asm \
 --extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/aarch64-linux-gnu' \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
@@ -110,7 +110,7 @@ mit vulkan
 --arch=armv7l \
 --target-os=linux \
 --cpu=cortex-a53 \
---extra-version=ultra-pi3-vulkan-kynesim-final \
+--extra-version=ultra-pi3-vulkan-kynesim-final-rpi3 \
 --disable-x86asm \
 --extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/arm-linux-gnueabihf' \
 --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
@@ -152,7 +152,7 @@ mit vulkan
 --arch=armv7l \
 --target-os=linux \
 --cpu=cortex-a53 \
---extra-version=ultra-pi3-v4l2-lto-final \
+--extra-version=ultra-pi3-v4l2-lto-finalrpi3 \
 --disable-x86asm \
 --enable-neon \
 --extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/arm-linux-gnueabihf' \
