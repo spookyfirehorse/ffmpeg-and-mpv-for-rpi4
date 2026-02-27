@@ -7,7 +7,7 @@
 --cpu=cortex-a72 \
 --extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
 --extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lstdc++' \
+--extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lOGLCompiler -lOSDependent -lSPIRV -lSPVRemapper -lSPIRV-Tools-opt -lSPIRV-Tools -lstdc++ -lpthread -lm -lrt' \
 --disable-everything \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
