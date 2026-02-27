@@ -27,7 +27,7 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
 --enable-hwaccel=h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,h264_vulkan,hevc_vulkan \
 --enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
+--enable-vout-drm  --enable-opengl \
 --enable-vulkan --enable-libshaderc --enable-libplacebo \
 --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
 --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
@@ -85,7 +85,7 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
 --enable-hwaccel=h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,h264_vulkan,hevc_vulkan \
 --enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
+--enable-vout-drm  --enable-opengl \
 --enable-vulkan --enable-libshaderc --enable-libplacebo \
 --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
 --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
