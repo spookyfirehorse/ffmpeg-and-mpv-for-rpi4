@@ -1,5 +1,6 @@
+git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git 
 
-vulkan
+
 
 ./configure \
 --prefix=/usr \
@@ -10,7 +11,7 @@ vulkan
 --disable-x86asm \
 --extra-cflags='-I/usr/include/aarch64-linux-gnu -mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lOGLCompiler -lOSDependent -lSPIRV -lSPVRemapper -lSPIRV-Tools-opt -lSPIRV-Tools -lstdc++ -lpthread -lm -lrt'
+--extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lstdc++ -lpthread -lm -lrt' \
 --disable-everything \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
@@ -44,12 +45,22 @@ vulkan
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
 
 
-vulkan
+
+
+
+
+
+
+
+
+ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git 
+
+
 
 ./configure \
 --prefix=/usr \
 --libdir=/usr/lib/aarch64-linux-gnu \
---extra-version=ultra-pi4-drm-vulkan \
+--extra-version=ultra-pi5-drm-vulkan \
 --arch=aarch64 \
 --cpu=cortex-a76 \
 --disable-x86asm \
@@ -88,7 +99,11 @@ vulkan
 --enable-encoder=h264_vulkan,hevc_vulkan,h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
 
-pi3 mit vulkan
+
+
+
+ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git 
+
 
 ./configure \
 --prefix=/usr \
@@ -134,7 +149,8 @@ pi3 mit vulkan
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
 
 
-pi 3 ohne vulkan
+ohne vulkan
+
 
 ./configure \
 --prefix=/usr \
@@ -179,8 +195,8 @@ pi 3 ohne vulkan
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
 
 
-cuda nvidia
 
+cuda
 
 ./configure --prefix=/usr \
  --libdir=/usr/lib/x86_64-linux-gnu \
@@ -197,7 +213,7 @@ cuda nvidia
  --enable-gpl --enable-version3 --enable-nonfree \
  --enable-cuda-nvcc --enable-libnpp --enable-ffnvcodec --enable-nvenc --enable-nvdec \
  --enable-hwaccel=h264_vulkan,hevc_vulkan,vp9_vulkan,av1_vulkan,mpeg1_nvdec,mpeg2_nvdec,mpeg4_nvdec,h264_nvdec,hevc_nvdec,vp8_nvdec,vp9_nvdec,av1_nvdec,vc1_nvdec,wmv3_nvdec,mjpeg_nvdec \
- --enable-vulkan --enable-libplacebo \
+ --enable-vulkan --enable-libplacebo --enable-libshaderc \
  --disable-vaapi --disable-vdpau \
  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx \
  --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
@@ -213,8 +229,7 @@ cuda nvidia
  --enable-encoder=h264_vulkan,hevc_vulkan,av1_vulkan,ffv1_vulkan,h264_nvenc,hevc_nvenc,av1_nvenc,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
  --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus,vc1 \
  --enable-bsf=h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,pgs_frame_merge,vp9_superframe,vp9_superframe_split \
- --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa --enable-libglslang \
+ --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa  \
  --enable-lto && \
 make -j$(nproc) && \
 sudo make install
-
