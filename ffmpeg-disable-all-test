@@ -193,6 +193,3 @@ ohne vulkan
 --enable-decoder=mpeg2_v4l2m2m,h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,aac,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
 --enable-encoder=h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le \
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,aac,mp3,flac,opus
- --enable-lto && \
-make -j$(nproc) && \
-sudo make install
