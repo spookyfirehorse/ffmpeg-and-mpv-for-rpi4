@@ -6,12 +6,12 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --prefix=/usr \
 --libdir=/usr/lib/aarch64-linux-gnu \
 --arch=aarch64 \
---cpu=cortex-a72 \
+--cpu=cortex-a76 \
 --extra-version=ultra-clean-kynesim \
 --disable-x86asm \
---extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/aarch64-linux-gnu' \
---extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lstdc++ -lpthread -lm -lrt' \
+--extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/aarch64-linux-gnu' \
+--extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+--extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lstdc++ -lpthread -lm -lrt' \
 --disable-everything \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
@@ -39,17 +39,19 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages
 
 
+--extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++'
+
 
 ./configure \
 --prefix=/usr \
 --libdir=/usr/lib/aarch64-linux-gnu \
 --arch=aarch64 \
---cpu=cortex-a76 \
+--cpu=cortex-a72 \
 --extra-version=ultra-clean-kynesim \
 --disable-x86asm \
---extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/aarch64-linux-gnu' \
---extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lstdc++ -lpthread -lm -lrt' \
+--extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/aarch64-linux-gnu' \
+--extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+--extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lstdc++ -lpthread -lm -lrt' \
 --disable-everything \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
@@ -99,7 +101,7 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --target-os=linux \
 --cpu=cortex-a53 \
 --extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
---extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
+--extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
 --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lstdc++ -lpthread -lm -lrt' \
 --disable-everything \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
@@ -146,7 +148,7 @@ ohne vulkan
 --cpu=cortex-a53 \
 --extra-version=ultra-pi3-v4l2-lto-final \
 --extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/arm-linux-gnueabihf' \
---extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto' \
+--extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++ ' \
 --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lstdc++ -lpthread -lm -lrt' \
 --disable-everything \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
