@@ -11,7 +11,7 @@
 --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
 --enable-hwaccel=hevc_v4l2request \
 --enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
+--enable-vout-drm --enable-opengl --disable-sdl2 \
 --enable-vulkan --enable-libshaderc --enable-libplacebo \
 --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
 --enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
