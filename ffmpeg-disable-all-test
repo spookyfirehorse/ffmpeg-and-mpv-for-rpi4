@@ -40,8 +40,8 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --disable-protocol=gopher,mmsh,mmst \
 --enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
 --enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264_vulkan,hevc_vulkan,h264,h264_v4l2m2m,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=h264_vulkan,hevc_vulkan,h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
+--enable-decoder=ac3,dca,h264_vulkan,hevc_vulkan,h264,h264_v4l2m2m,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
+--enable-encoder=ac3,dca,h264_vulkan,hevc_vulkan,h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
 
 
@@ -85,8 +85,8 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --disable-protocol=gopher,mmsh,mmst \
 --enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
 --enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264_vulkan,hevc_vulkan,h264,h264_v4l2m2m,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=h264_vulkan,hevc_vulkan,h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
+--enable-decoder=ac3,dca,h264_vulkan,hevc_vulkan,h264,h264_v4l2m2m,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
+--enable-encoder=ac3,dca,h264_vulkan,hevc_vulkan,h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
 
 
@@ -146,8 +146,8 @@ git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 --disable-protocol=gopher,mmsh,mmst \
 --enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
 --enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264_vulkan,hevc_vulkan,h264,h264_v4l2m2m,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=h264_vulkan,hevc_vulkan,h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
+--enable-decoder=ac3,dca,h264_vulkan,hevc_vulkan,h264,h264_v4l2m2m,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
+--enable-encoder=ac3,dca,h264_vulkan,hevc_vulkan,h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
 
 ohne vulkan
@@ -190,6 +190,6 @@ ohne vulkan
 --enable-protocol=pipe,file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,crypto,tls \
 --enable-demuxer=mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg \
 --enable-muxer=mpegts,mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=mpeg2_v4l2m2m,h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,aac,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-encoder=h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le \
+--enable-decoder=ac3,dca,mpeg2_v4l2m2m,h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,aac,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
+--enable-encoder=ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le \
 --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,aac,mp3,flac,opus
