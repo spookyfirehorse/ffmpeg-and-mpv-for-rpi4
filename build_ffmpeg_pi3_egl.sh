@@ -12,7 +12,7 @@
 --enable-hwaccel=hevc_v4l2request \
 --enable-libdrm --enable-epoxy --enable-libudev \
 --enable-vout-drm --enable-opengl --disable-sdl2 \
---enable-vulkan --enable-libshaderc --enable-libplacebo \
+--disable-vulkan --disable-libshaderc --disable-libplacebo \
 --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
 --enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
 --enable-alsa --enable-libpulse --enable-libjack --enable-network \
@@ -22,7 +22,6 @@
   --enable-gnutls --enable-gcrypt --enable-network --disable-x86asm \
   --enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
   --enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
-  --enable-libshaderc --enable-vulkan --enable-libdrm --enable-libudev \
   --enable-sand --enable-v4l2-m2m --enable-v4l2-request --enable-libass \
   --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-vout-drm \
 --disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 --disable-libvpx \
