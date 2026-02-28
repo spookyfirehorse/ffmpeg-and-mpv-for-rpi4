@@ -15,8 +15,8 @@ make distclean
 --enable-filter='deinterlace_v4l2m2m,scale,format,fps,aresample,aformat,vulkan,libplacebo,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
 --enable-decoder='opus,aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
 --enable-encoder='libopus,libfdk_aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
---enable-demuxer='mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mjpeg' \
---enable-muxer='rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,adts,latm,null' \
+--enable-demuxer='matroska,mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mjpeg' \
+--enable-muxer='matroska,rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,adts,latm,null' \
 --enable-parser='opus,aac,h264,hevc,mjpeg,mp3,flac,mpegvideo,mpeg4video,vp8,vp9' \
 --enable-indev='v4l2,alsa,pulse,jack,fbdev,lavfi,kmsgrab' --enable-outdev='v4l2,alsa,pulse,jack,fbdev,drm,kmsgrab' \
 --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec --disable-omx --disable-omx-rpi --disable-mmal
@@ -39,8 +39,8 @@ make distclean
 --enable-filter='deinterlace_v4l2m2m,scale,format,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
 --enable-decoder='opus,aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
 --enable-encoder='libopus,libfdk_aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
---enable-demuxer='mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mjpeg' \
---enable-muxer='rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,adts,latm,null' \
+--enable-demuxer='matroska,mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mjpeg' \
+--enable-muxer='matroska,rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,adts,latm,null' \
 --enable-parser='opus,aac,h264,hevc,mjpeg,mp3,flac,mpegvideo,mpeg4video,vp8,vp9' \
 --enable-indev='v4l2,alsa,pulse,jack,fbdev,lavfi,kmsgrab' --enable-outdev='v4l2,alsa,pulse,jack,fbdev,drm,kmsgrab' \
 --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec
@@ -64,8 +64,8 @@ make distclean
 --enable-filter='deinterlace_v4l2m2m,scale,format,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
 --enable-decoder='opus,aac,h264,h264_v4l2m2m,hevc,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
 --enable-encoder='libopus,libfdk_aac,h264_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
---enable-demuxer='mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg' \
---enable-muxer='rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,adts,latm,null' \
+--enable-demuxer='matroska,mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg' \
+--enable-muxer='matroska,rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,adts,latm,null' \
 --enable-parser='opus,aac,h264,hevc,mjpeg,mp3,flac,mpegvideo,mpeg4video' \
 --enable-indev='v4l2,alsa,pulse,jack,fbdev,lavfi,kmsgrab' --enable-outdev='v4l2,alsa,pulse,drm,kmsgrab' \
 --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec --disable-omx --disable-omx-rpi --disable-mmal
