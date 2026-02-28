@@ -59,27 +59,25 @@ better ldflags
   --extra-ldflags="-L/usr/lib/x86_64-linux-gnu -Wl,-O1 -Wl,--as-needed" \
 
 
-rm -rf build && meson setup build \
+rm -rf build
+
+meson setup build \
   --prefix=/usr \
   --libdir=/usr/lib/x86_64-linux-gnu \
   -Dbuildtype=release \
-  -Doptimization=3 \
   -Db_lto=true \
-  -Db_pie=true \
-  -Dc_args='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -ftree-vectorize -ffast-math -fno-semantic-interposition -fPIC' \
-  -Dcpp_args='-O3 -pipe -march=goldmont -mtune=goldmont -mfpmath=sse -msse4.2 -ftree-vectorize -ffast-math -fno-semantic-interposition -fPIC' \
-  -Dc_link_args='-Wl,-O1,--as-needed -fPIC -lstdc++ -lm -lpthread' \
-  -Dcpp_link_args='-Wl,-O1,--as-needed -fPIC -lstdc++ -lm -lpthread' \
+  -Dc_args='-O3 -pipe -march=goldmont -mtune=goldmont -fno-semantic-interposition -fPIC' \
+  -Dcpp_args='-O3 -pipe -march=goldmont -mtune=goldmont -fno-semantic-interposition -fPIC' \
   -Dpipewire=enabled \
   -Dvulkan=enabled \
   -Dshaderc=disabled \
   -Dvaapi=enabled \
-  -Dalsa=enabled \
   -Dwayland=enabled \
   -Dx11=enabled \
-  -Dlibmpv=true \
-  -Dbuild-date=false \
-  -Dpython.bytecompile=-1
+  -Dlibmpv=true
+
+ninja -C build
+sudo ninja -C build install
 
 
 
