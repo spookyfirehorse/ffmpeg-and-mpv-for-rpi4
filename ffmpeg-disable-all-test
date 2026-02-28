@@ -91,45 +91,7 @@ new test
 
 
 
-
-
-#####################################################################################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git 
-
-
-
-git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git 
-
-
-
-
-
-
  git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git 
-
-
-
-
 
 
 mit vulkan
@@ -177,7 +139,7 @@ mit vulkan
   --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
   --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec
 
-
+ohne
 
 ./configure \
   --prefix=/usr \
