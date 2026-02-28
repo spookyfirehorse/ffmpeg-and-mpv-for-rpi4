@@ -120,15 +120,16 @@ meson setup builddir --prefix=/usr \
   --buildtype=release \
   -Doptimization=3 \
   -Db_lto=true \
-  -Dcpp_args="-mcpu=cortex-a76 -pipe -ftree-vectorize" \
-  -Dc_args="-mcpu=cortex-a76 -pipe -ftree-vectorize" \
+  -Dcpp_args="-mcpu=cortex-a76 -pipe -ftree-vectorize -flto" \
+  -Dc_args="-mcpu=cortex-a76 -pipe -ftree-vectorize -flto" \
+  -Dcpp_link_args="-latomic -Wl,-O1" \
+  -Dc_link_args="-latomic -Wl,-O1" 
   -Dffmpeg=enabled \
   -Dpw-cat-ffmpeg=enabled \
   -Dbluez5-codec-lc3=enabled \
   -Dvulkan=enabled \
   -Ddocs=disabled \
   -Dman=disabled \
-  -Dtests=disabled \
   -Dsystemd-user-service=enabled
 
 
