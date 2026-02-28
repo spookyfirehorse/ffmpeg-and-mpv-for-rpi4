@@ -389,27 +389,27 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
 --libdir=/usr/lib/aarch64-linux-gnu \
 --arch=aarch64 \
 --cpu=cortex-a76 \
---extra-version=ultra-clean-kynesim-pi4 \
+--extra-version=ultra-clean-kynesim-pi5 \
 --disable-x86asm \
---extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/aarch64-linux-gnu' \
+--extra-cflags="-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/aarch64-linux-gnu -I/usr/src/linux-headers-$(uname -r)/include/uapi" \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
 --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lstdc++ -lpthread -lm -lrt' \
 --disable-everything \
---enable-protocol=pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto \
+--enable-hwaccel=hevc_v4l2request \
+--enable-protocol=pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto,subfile,dvdnav,dvdread,nfs \
 --enable-bsf=opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb \
---enable-filter=testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,sine,anullsrc \
---enable-decoder=opus,aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,h264_vulkan,hevc_vulkan,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=libopus,libfdk_aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,h264_vulkan,hevc_vulkan,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
+--enable-filter=deinterlace_v4l2m2m,yadif,yadif_vulkan,scale_vulkan,hwupload,hwdownload,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,sine,anullsrc \
+--enable-decoder=opus,aac,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,dvbsub,dvdsub,pgssub,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
+--enable-encoder=libopus,libfdk_aac,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,dvbsub,dvdsub,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
 --enable-demuxer=mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg \
 --enable-muxer=rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-parser=opus,aac,h264,hevc,mpegvideo,mpeg4video,vp8,vp9,mjpeg,mp3,flac \
+--enable-parser=opus,aac,h264,hevc,mpegvideo,mpeg4video,vp8,vp9,mjpeg,mp3,flac,dvdsub,dvd_nav \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
 --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
 --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
 --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,h264_vulkan,hevc_vulkan \
---enable-libdrm --enable-epoxy --enable-libudev \
+--enable-libdrm --enable-epoxy --enable-libudev --enable-v4l2-request --enable-hwaccel=hevc_v4l2request  \
 --enable-vout-drm  --enable-opengl \
 --enable-vulkan --enable-libshaderc --enable-libplacebo \
 --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
@@ -424,6 +424,8 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
 --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
 --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec
 ```
+
+
 # pi4 mit egl und vulkan no external
 
 ```bash
@@ -438,21 +440,21 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
 --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lstdc++ -lpthread -lm -lrt' \
 --disable-everything \
---enable-protocol=pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto \
+--enable-hwaccel=hevc_v4l2request \
+--enable-protocol=pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto,subfile,dvdnav,dvdread,nfs \
 --enable-bsf=opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb \
---enable-filter=testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,sine,anullsrc \
---enable-decoder=opus,aac,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,h264_vulkan,hevc_vulkan,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=libopus,libfdk_aac,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,h264_vulkan,hevc_vulkan,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
+--enable-filter=deinterlace_v4l2m2m,yadif_vulkan,scale_vulkan,yadif,hwupload,hwdownload,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,sine,anullsrc \
+--enable-decoder=opus,aac,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,dvbsub,dvdsub,pgssub,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
+--enable-encoder=libopus,libfdk_aac,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,dvbsub,dvdsub,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
 --enable-demuxer=mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg \
 --enable-muxer=rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-parser=opus,aac,h264,hevc,mpegvideo,mpeg4video,vp8,vp9,mjpeg,mp3,flac \
+--enable-parser=opus,aac,h264,hevc,mpegvideo,mpeg4video,vp8,vp9,mjpeg,mp3,flac,dvdsub,dvd_nav \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
 --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
 --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
 --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,h264_vulkan,hevc_vulkan \
---enable-libdrm --enable-epoxy --enable-libudev \
+--enable-libdrm --enable-epoxy --enable-libudev --enable-hwaccel=hevc_v4l2request  \
 --enable-vout-drm  --enable-opengl \
 --enable-vulkan --enable-libshaderc --enable-libplacebo \
 --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
@@ -465,52 +467,53 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
 --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
 --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
 --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec
+--disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec 
 ```
 
 # pi 3 mit vulkan disable external enable egl
 
 ```bash
 ./configure \
---prefix=/usr \
---libdir=/usr/lib/arm-linux-gnueabihf \
---arch=armv7l \
---target-os=linux \
---cpu=cortex-a53 \
---extra-version=ultra-pi3-vulkan-kynesim-final \
---disable-x86asm \
---extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/arm-linux-gnueabihf' \
---extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lstdc++ -lpthread -lm -lrt' \
---disable-everything \
---enable-protocol=pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto \
---enable-bsf=opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb \
---enable-filter=testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,sine,anullsrc \
---enable-decoder=opus,aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,h264_vulkan,hevc_vulkan,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=libopus,libfdk_aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,h264_vulkan,hevc_vulkan,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-demuxer=mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg \
---enable-muxer=rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-parser=opus,aac,h264,hevc,mpegvideo,mpeg4video,vp8,vp9,mjpeg,mp3,flac \
---enable-ffmpeg --enable-ffprobe --disable-ffplay \
---enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
---enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
---enable-neon --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
---enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,h264_vulkan,hevc_vulkan \
---enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
---enable-vulkan --enable-libshaderc --enable-libplacebo \
---enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
---enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
---enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
---enable-alsa --enable-libpulse --enable-libjack --enable-network \
---enable-gnutls --enable-gcrypt \
---enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
---enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
---disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec
+  --prefix=/usr \
+  --libdir=/usr/lib/arm-linux-gnueabihf \
+  --arch=armv7l \
+  --target-os=linux \
+  --cpu=cortex-a53 \
+  --extra-version=ultra-pi3-vulkan-kynesim-final-rpi3 \
+  --disable-x86asm \
+  --enable-neon \
+  --extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/arm-linux-gnueabihf" \
+  --extra-ldflags="-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++" \
+  --extra-libs="-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lstdc++ -lpthread -lm -lrt" \
+  --disable-everything \
+  --enable-ffmpeg --enable-ffprobe --disable-ffplay \
+  --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
+  --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
+  --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
+  --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
+  --enable-libdrm --enable-epoxy --enable-libudev \
+  --enable-hwaccel=hevc_v4l2request \
+  --enable-vout-drm --enable-opengl \
+  --enable-vulkan --enable-libshaderc --enable-libplacebo \
+  --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
+  --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
+  --enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
+  --enable-alsa --enable-libpulse --enable-libjack --enable-network \
+  --enable-gnutls --enable-gcrypt \
+  --enable-protocol=pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto,subfile,dvdnav,dvdread,nfs \
+  --enable-bsf=opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb \
+  --enable-filter=deinterlace_v4l2m2m,yadif,yadif_vulkan,scale_vulkan,hwupload,hwdownload,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,sine,anullsrc \
+  --enable-decoder=opus,aac,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,dvbsub,dvdsub,pgssub,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
+  --enable-encoder=libopus,libfdk_aac,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,dvbsub,dvdsub,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
+  --enable-demuxer=mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg \
+  --enable-muxer=rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
+  --enable-parser=opus,aac,h264,hevc,mpegvideo,mpeg4video,vp8,vp9,mjpeg,mp3,flac,dvdsub,dvd_nav \
+  --enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
+  --enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
+  --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec
 ```
 
 
@@ -518,46 +521,46 @@ chromium-browser --ozone-platform=wayland --enable-features=Vulkan,VulkanFromANG
 
 ```bash
 ./configure \
---prefix=/usr \
---libdir=/usr/lib/arm-linux-gnueabihf \
---arch=armv7l \
---target-os=linux \
---cpu=cortex-a53 \
---extra-version=ultra-pi3-v4l2-lto-final \
---disable-x86asm \
---enable-neon \
---extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/arm-linux-gnueabihf' \
---extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lstdc++ -lpthread -lm -lrt' \
---disable-everything \
---enable-protocol=pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto \
---enable-bsf=opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb \
---enable-filter=testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,sine,anullsrc \
---enable-decoder=opus,aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=libopus,libfdk_aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-demuxer=mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg \
---enable-muxer=rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-parser=opus,aac,h264,hevc,mpegvideo,mpeg4video,vp8,vp9,mjpeg,mp3,flac \
---enable-ffmpeg --enable-ffprobe --disable-ffplay \
---enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
---enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
---enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
---enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request \
---enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
---enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
---enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
---enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
---enable-alsa --enable-libpulse --enable-libjack --enable-network \
---enable-gnutls --enable-gcrypt \
---enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
---enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---disable-vulkan --disable-libshaderc --disable-libplacebo \
---disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
---disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec
+  --prefix=/usr \
+  --libdir=/usr/lib/arm-linux-gnueabihf \
+  --arch=armv7l \
+  --target-os=linux \
+  --cpu=cortex-a53 \
+  --extra-version=ultra-pi3-v4l2-lto-finalrpi3 \
+  --disable-x86asm \
+  --enable-neon \
+  --extra-cflags="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/arm-linux-gnueabihf" \
+  --extra-ldflags="-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++" \
+  --extra-libs="-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lstdc++ -lpthread -lm -lrt" \
+  --disable-everything \
+  --enable-ffmpeg --enable-ffprobe --disable-ffplay \
+  --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
+  --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
+  --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
+  --enable-v4l2-m2m --enable-v4l2-request --enable-sand \
+  --enable-libdrm --enable-epoxy --enable-libudev \
+  --enable-hwaccel=hevc_v4l2request \
+  --enable-vout-drm --enable-opengl \
+  --disable-vulkan --disable-libshaderc --disable-libplacebo \
+  --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
+  --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
+  --enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
+  --enable-alsa --enable-libpulse --enable-libjack --enable-network \
+  --enable-gnutls --enable-gcrypt \
+  --enable-protocol=pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto,subfile,bluray,dvdnav,dvdread,libsmbclient,nfs \
+  --enable-bsf=opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb,extract_extradata,mjpeg2jpeg \
+  --enable-filter=deinterlace_v4l2m2m,yadif,hwupload,hwdownload,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink,afifo,anull,asplit,aresample,aformat,amix,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,sine,anullsrc,overlay,scale2ref,pad,setsar,setdar,drawtext,subtitles,transpose,hflip,vflip,crop,pullup \
+  --enable-decoder=opus,aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,dvbsub,dvdsub,pgssub,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf,mov_text,mpeg2_v4l2request,h264_v4l2request,hevc_v4l2request \
+  --enable-encoder=libopus,libfdk_aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,dvbsub,dvdsub,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,mov_text \
+  --enable-demuxer=mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg,dvd,mpegps,image2 \
+  --enable-muxer=rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash,dvd \
+  --enable-parser=opus,aac,h264,hevc,mpegvideo,mpeg4video,vp8,vp9,mjpeg,mp3,flac,dvdsub,dvd_nav \
+  --enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
+  --enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
+  --disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
+  --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
+  --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
+  --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec
 ```
 
 
