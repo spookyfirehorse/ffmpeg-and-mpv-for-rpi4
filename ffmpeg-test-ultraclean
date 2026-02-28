@@ -1,403 +1,87 @@
-
-sudo apt update && sudo apt install -y libshaderc-dev glslang-dev libspirv-tools-dev libplacebo-dev libvulkan-dev libdrm-dev libgbm-dev libepoxy-dev
-Verwende Code mit Vorsicht.
-
-1. Finale für Raspberry Pi 5 (Cortex-A76)
-Optimiert auf maximale Power, Vulkan-Upscaling und HEVC-Hardware-Decoding.
-bash
-./configure \
---prefix=/usr \
---libdir=/usr/lib/aarch64-linux-gnu \
---incdir=/usr/include/aarch64-linux-gnu \
---extra-version=ultra-pi5-vulkan-v4l2-final \
---arch=aarch64 \
---cpu=cortex-a76 \
---extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto' \
---extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lOSDependent -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lpthread -lstdc++' \
---disable-autodetect \
---enable-ffmpeg --enable-ffprobe --disable-ffplay \
---enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
---enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
---enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
---enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,h264_vulkan,hevc_vulkan \
---enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
---enable-vulkan --enable-libshaderc --enable-libplacebo \
---enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
---enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
---enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
---disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 --disable-libvpx \
---disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
---disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
---disable-omx --disable-omx-rpi --disable-mmal \
---disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
---enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---enable-filter=afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
---enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto,tls \
---enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
---enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
-Verwende Code mit Vorsicht.
-
-2. Finale für Raspberry Pi 4 (Cortex-A72)
-Optimiert auf den Pi 4 Hardware-Encoder und stabilere Performance auf dem A72-Chip.
-bash
-
-
-./configure \
---prefix=/usr \
---libdir=/usr/lib/aarch64-linux-gnu \
---incdir=/usr/include/aarch64-linux-gnu \
---extra-version=ultra-pi4-vulkan-v4l2-final \
---arch=aarch64 \
---cpu=cortex-a72 \
---extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
---extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lOSDependent -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lpthread -lstdc++' \
---disable-autodetect \
---enable-ffmpeg --enable-ffprobe --disable-ffplay \
---enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
---enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
---enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
---enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,h264_vulkan,hevc_vulkan \
---enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
---enable-vulkan --enable-libshaderc --enable-libplacebo \
---enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
---enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
---enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
---disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 --disable-libvpx \
---disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
---disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
---disable-omx --disable-omx-rpi --disable-mmal \
---disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
---enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---enable-filter=afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
---enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto,tls \
---enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
---enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
-Verwende Code mit Vorsicht.
-
-
-
-
-
-2. Für den Raspberry Pi 3 (Clean & Modern)
-Besonderheit: Ohne Vulkan/libplacebo-Ballast, optimiert für den Cortex-A53 und 32-Bit.
-bash
-./configure \
---prefix=/usr \
---libdir=/usr/lib/arm-linux-gnueabihf \
---incdir=/usr/include/arm-linux-gnueabihf \
---extra-version=ultra-pi3-modern-v4l2-final \
---arch=armv7l \
---target-os=linux \
---cpu=cortex-a53 \
---extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
---extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lstdc++' \
---disable-autodetect \
---enable-ffmpeg --enable-ffprobe --disable-ffplay \
---enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
---enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
---enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
---enable-v4l2-m2m \
---enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
---enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
---enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
---enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
---disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 --disable-libvpx \
---disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
---disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
---disable-omx --disable-omx-rpi --disable-mmal --disable-vulkan \
---disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
---enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---enable-filter=afifo,anull,asplit,aresample,aformat,amix,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
---enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto,tls \
---disable-protocol=gopher,mmsh,mmst \
---enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
---enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264,h264_v4l2m2m,vp8,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=h264_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
-Verwende Code mit Vorsicht.
-
-Der goldene Weg zum Erfolg:
-Immer vorher make distclean ausführen.
-Für den Pi 5 alle Kerne nutzen: make -j$(nproc).
-Für den Pi 3 lieber vorsichtig: make -j2 (schont den RAM).
-Soll ich dir noch kurz erklären, wie du die Temperatur während des langen Pi 5-Builds im Auge behältst?
-KI-Antworten können Fehler enthalten. Weitere Informationen
-
-
-
-
-
-Finaler Pi 3 (Cortex-A53, 32-Bit)
-bash
-./configure \
---prefix=/usr \
---libdir=/usr/lib/arm-linux-gnueabihf \
---incdir=/usr/include/arm-linux-gnueabihf \
---extra-version=ultra-pi3-modern-v4l2-final \
---arch=armv7l \
---target-os=linux \
---cpu=cortex-a53 \
---extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
---extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lstdc++' \
---disable-autodetect \
---enable-ffmpeg --enable-ffprobe --disable-ffplay \
---enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
---enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
---enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
---enable-v4l2-m2m \
---enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
---enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
---enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
---enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
---disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 --disable-libvpx \
---disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
---disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
---disable-omx --disable-omx-rpi --disable-mmal --disable-vulkan \
---disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
---enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---enable-filter=afifo,anull,asplit,aresample,aformat,amix,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
---enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto,tls \
---disable-protocol=gopher,mmsh,mmst \
---enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
---enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264,h264_v4l2m2m,vp8,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf \
---enable-encoder=h264_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus
-Verwende Code mit Vorsicht.
-
-Profi-Tipp für den Start: Kopiere den Befehl in einen Texteditor (wie Notepad++) und entferne eventuelle Zeilenumbrüche, falls dein Terminal Probleme mit dem Backslash \ hat.
-Soll ich dir noch sagen, wie du den Erfolg des Linkers am Ende mit tail -f überwachst?
-
-
-
-git clone https://github.com/mstorsjo/fdk-aac
-
-
-1. Für den Raspberry Pi 5 (64-Bit, Cortex-A76)
-autoreconf -fiv && \
-./configure \
-  --prefix=/usr \
-  --enable-shared \
-  --disable-static \
-  --host=aarch64-linux-gnu \
-  CFLAGS="-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize" \
-  CXXFLAGS="-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize" \
-  LDFLAGS="-Wl,-O1,--as-needed" && \
-make -j$(nproc) && \
-sudo make install && sudo ldconfig
-
-1. Für den Raspberry Pi 5 (64-Bit, Cortex-A76)
-autoreconf -fiv && \
-./configure \
-  --prefix=/usr \
-  --enable-shared \
-  --disable-static \
-  --host=aarch64-linux-gnu \
-  CFLAGS="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
-  CXXFLAGS="-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize" \
-  LDFLAGS="-Wl,-O1,--as-needed" && \
-make -j$(nproc) && \
-sudo make install && sudo ldconfig
-
-2. Für den Raspberry Pi 3 (32-Bit, Cortex-A53)
-Hier aktivieren wir zusätzlich die NEON-Einheit (VFPv4), um Audio-Berechnungen in Hardware zu beschleunigen.
-bash
-sudo apt update && sudo apt install -y autoconf libtool [Debian Package Search](https://packages.debian.org) && \
-git clone https://github.com && \
-cd fdk-aac && \
-autoreconf -fiv && \
-./configure \
-  --prefix=/usr \
-  --enable-shared \
-  --disable-static \
-  --host=arm-linux-gnueabihf \
-  CFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe" \
-  CXXFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe" && \
-  LDFLAGS="-Wl,-O1,--as-needed" && \
-make -j4 && \
-sudo make install && sudo ldconfig
-Verwende Code mit Vorsicht.
-
-Warum diese Optimierung?
-Prefix /usr: Damit landet die Library direkt im Standardpfad. Dein FFmpeg-Build wird sie ohne zusätzliche Pfadangaben finden.
-Shared Only: Durch --disable-static verhinderst du, dass unnötige .a Dateien Platz wegnehmen.
-CPU-Target: -mcpu sorgt dafür, dass der Code exakt für deine ARM-Architektur "gebacken" wird, was die Encoding-Geschwindigkeit spürbar verbessert.
-Wichtiger Hinweis: Wenn du danach deinen großen FFmpeg-Build startest, achte darauf, dass in der Zusammenfassung bei den External Libraries nun libfdk_aac (oder fdk-aac) mit yes gelistet ist.
-Soll ich dir auch noch die optimierten Zeilen für libmp3lame oder libopus fertig machen, damit dein Audio-Setup komplett ist?
-KI-Antworten können Fehler enthalten. Weitere Informationen
-
-##################################################################
-
-
-
-
 1. Raspberry Pi 5 (Cortex-A76, 64-Bit)
-Fokus: Maximale Grafikpower mit Vulkan, Shader-Compiler-Fix und HEVC-Hardware-Decoding.
 bash
-make distclean
-./configure \
---prefix=/usr \
---libdir=/usr/lib/aarch64-linux-gnu \
---incdir=/usr/include/aarch64-linux-gnu \
---extra-version=ultra-pi5-vulkan-v4l2-final \
---arch=aarch64 \
---cpu=cortex-a76 \
---extra-cflags='-mcpu=cortex-a76 -O3 -pipe -ftree-vectorize -flto' \
---extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lOSDependent -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lpthread -lstdc++' \
---disable-autodetect \
---enable-ffmpeg --enable-ffprobe --disable-ffplay \
---enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
---enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
+./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+--extra-version=ultra-clean-pi-final --arch=aarch64 --target-os=linux --cpu=cortex-a76 \
+--extra-cflags='-mcpu=cortex-a76+crypto+dotprod -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/aarch64-linux-gnu' \
+--extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+--extra-libs='-lpthread -lm -lrt -lstdc++ -ldl -lasound -lpulse -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error' \
+--disable-everything --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
 --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
---enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=hevc_v4l2request \
---enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
---enable-vulkan --enable-libshaderc --enable-libplacebo \
---enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
---enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
---enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
---disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 --disable-libvpx \
---disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
---disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
---disable-omx --disable-omx-rpi --disable-mmal \
---disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
---enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---enable-filter=afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
---enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto,tls \
---enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
---enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf,ac3,dca,dvvideo \
---enable-encoder=h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus,ac3,vorbis \
---enable-bsf=h264_mp4toannexb,hevc_mp4toannexb,mpeg2_metadata,null,extract_extradata,vp9_superframe
+--enable-libfdk-aac --enable-libopus --enable-libmp3lame --enable-alsa --enable-libpulse --enable-libjack --enable-libsoxr --enable-libass --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
+--enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-hwaccel='h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request' --enable-libdrm --enable-epoxy --enable-libudev --enable-vout-drm --enable-opengl --enable-vulkan --enable-libshaderc --enable-libplacebo \
+--enable-ladspa --enable-lv2 --enable-librubberband --enable-network --enable-gnutls --enable-gcrypt \
+--enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto' \
+--enable-bsf='opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb,extract_extradata,null' \
+--enable-filter='deinterlace_v4l2m2m,scale,format,fps,aresample,aformat,vulkan,libplacebo,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
+--enable-decoder='opus,aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
+--enable-encoder='libopus,libfdk_aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
+--enable-demuxer='mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mjpeg' \
+--enable-muxer='rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,adts,latm,null' \
+--enable-parser='opus,aac,h264,hevc,mjpeg,mp3,flac,mpegvideo,mpeg4video,vp8,vp9' \
+--enable-indev='v4l2,alsa,pulse,jack,fbdev,lavfi,kmsgrab' --enable-outdev='v4l2,alsa,pulse,jack,fbdev,drm,kmsgrab' \
+--disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec --disable-omx --disable-omx-rpi --disable-mmal
 Verwende Code mit Vorsicht.
 
-1. Raspberry Pi 4 (Cortex-A76, 64-Bit)
-Fokus: Maximale Grafikpower mit Vulkan, Shader-Compiler-Fix und HEVC-Hardware-Decoding.
+2. Raspberry Pi 4 (Cortex-A72, 64-Bit)
 bash
-make distclean
-./configure \
---prefix=/usr \
---libdir=/usr/lib/aarch64-linux-gnu \
---incdir=/usr/include/aarch64-linux-gnu \
---extra-version=ultra-pi5-vulkan-v4l2-final \
---arch=aarch64 \
---cpu=cortex-a72 \
---extra-cflags='-mcpu=cortex-a72 -O3 -pipe -ftree-vectorize -flto' \
---extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lvulkan -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lOSDependent -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lpthread -lstdc++' \
---disable-autodetect \
---enable-ffmpeg --enable-ffprobe --disable-ffplay \
---enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
---enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
+./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
+--extra-version=ultra-clean-pi-final --arch=aarch64 --target-os=linux --cpu=cortex-a72 \
+--extra-cflags='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/aarch64-linux-gnu' \
+--extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+--extra-libs='-lpthread -lm -lrt -lstdc++ -ldl -lasound -lpulse -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error' \
+--disable-everything --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
 --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
---enable-v4l2-m2m --enable-v4l2-request --enable-sand \
---enable-hwaccel=hevc_v4l2request \
---enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
---enable-vulkan --enable-libshaderc --enable-libplacebo \
---enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
---enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
---enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
---disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 --disable-libvpx \
---disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
---disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
---disable-omx --disable-omx-rpi --disable-mmal \
---disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
---enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---enable-filter=afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
---enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto,tls \
---enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
---enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,vp9,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf,ac3,dca,dvvideo \
---enable-encoder=h264_v4l2m2m,hevc_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus,ac3,vorbis \
---enable-bsf=h264_mp4toannexb,hevc_mp4toannexb,mpeg2_metadata,null,extract_extradata,vp9_superframe
+--enable-libfdk-aac --enable-libopus --enable-libmp3lame --enable-alsa --enable-libpulse --enable-libjack --enable-libsoxr --enable-libass \
+--enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-hwaccel='h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request' --enable-libdrm --enable-epoxy --enable-libudev --enable-vout-drm --enable-opengl \
+--enable-ladspa --enable-lv2 --enable-librubberband --enable-network --enable-gnutls --enable-gcrypt \
+--enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto' \
+--enable-bsf='opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb,extract_extradata,null' \
+--enable-filter='deinterlace_v4l2m2m,scale,format,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
+--enable-decoder='opus,aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
+--enable-encoder='libopus,libfdk_aac,h264,hevc,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
+--enable-demuxer='mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mjpeg' \
+--enable-muxer='rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,adts,latm,null' \
+--enable-parser='opus,aac,h264,hevc,mjpeg,mp3,flac,mpegvideo,mpeg4video,vp8,vp9' \
+--enable-indev='v4l2,alsa,pulse,jack,fbdev,lavfi,kmsgrab' --enable-outdev='v4l2,alsa,pulse,jack,fbdev,drm,kmsgrab' \
+--disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec --disable-omx --disable-omx-rpi --disable-mmal
 Verwende Code mit Vorsicht.
 
-2. Raspberry Pi 3 (Cortex-A53, 32-Bit)
-Fokus: Stabilität mit LTO durch reparierte Abhängigkeiten (Parser/BSF) und Hardware-Optimierung.
+3. Raspberry Pi 3 / Zero 2W (32-Bit armhf)
 bash
-make distclean
-./configure \
---prefix=/usr \
---libdir=/usr/lib/arm-linux-gnueabihf \
---incdir=/usr/include/arm-linux-gnueabihf \
---extra-version=ultra-pi3-v4l2-lto-final \
---arch=armv7l \
---target-os=linux \
---cpu=cortex-a53 \
---extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
---extra-ldflags='-latomic -Wl,-O1,--as-needed -flto' \
---extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -ludev -lstdc++' \
---disable-autodetect \
---enable-ffmpeg --enable-ffprobe --disable-ffplay \
---enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables \
---enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
+./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+--extra-version=ultra-pi3-v4l2-lto-final --arch=armhf --target-os=linux --cpu=cortex-a53 \
+--extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/arm-linux-gnueabihf' \
+--extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+--extra-libs='-lpthread -lm -lrt -lstdc++ -ldl -lasound -lpulse -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error' \
+--disable-everything --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
 --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
---enable-v4l2-m2m \
---enable-libdrm --enable-epoxy --enable-libudev \
---enable-vout-drm --enable-opengl \
---enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr \
---enable-ladspa --enable-lv2 --enable-librubberband --enable-libbs2b --enable-libmysofa \
---enable-alsa --enable-libpulse --enable-libjack --enable-openssl --enable-network \
---disable-libxcb-xfixes --disable-libxcb-shape --disable-libx264 --disable-libx265 --disable-libvpx \
---disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox \
---disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm \
---disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
---disable-omx --disable-omx-rpi --disable-mmal --disable-vulkan \
---disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages \
---enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
---enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
---enable-filter=afifo,anull,asplit,aresample,aformat,amix,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband \
---enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto,tls \
---disable-protocol=gopher,mmsh,mmst \
---enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg \
---enable-muxer=mp4,mkv,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,adts,latm,null,matroska,ipod,ismv,dash \
---enable-decoder=h264,h264_v4l2m2m,hevc,hevc_v4l2m2m,vp8,mjpeg,mpeg2video,mpeg2_v4l2m2m,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf,ac3,dca,dvvideo \
---enable-encoder=h264_v4l2m2m,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
---enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus,ac3,vorbis \
---enable-bsf=h264_mp4toannexb,hevc_mp4toannexb,mpeg2_metadata,null,extract_extradata,vp9_superframe
+--enable-libfdk-aac --enable-libopus --enable-libmp3lame --enable-alsa --enable-libpulse --enable-libjack --enable-libsoxr --enable-libass \
+--enable-v4l2-m2m --enable-sand --enable-libdrm --enable-epoxy --enable-libudev --enable-vout-drm --enable-opengl \
+--enable-ladspa --enable-lv2 --enable-librubberband --enable-network --enable-gnutls --enable-gcrypt \
+--enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto' \
+--enable-bsf='opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb,extract_extradata,null' \
+--enable-filter='deinterlace_v4l2m2m,scale,format,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
+--enable-decoder='opus,aac,h264,h264_v4l2m2m,hevc,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le' \
+--enable-encoder='libopus,libfdk_aac,h264_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le' \
+--enable-demuxer='mpegts,mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegvideo,ape,dsf,mjpeg' \
+--enable-muxer='rtsp,mp4,mkv,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,adts,latm,null' \
+--enable-parser='opus,aac,h264,hevc,mjpeg,mp3,flac,mpegvideo,mpeg4video' \
+--enable-indev='v4l2,alsa,pulse,jack,fbdev,lavfi,kmsgrab' --enable-outdev='v4l2,alsa,pulse,drm,kmsgrab' \
+--disable-doc --disable-manpages --disable-htmlpages --disable-txtpages --disable-podpages --disable-vdpau --disable-vaapi --disable-dxva2 --disable-d3d11va --disable-videotoolbox --disable-audiotoolbox --disable-amf --disable-libmfx --disable-cuda --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec --disable-omx --disable-omx-rpi --disable-mmal
 Verwende Code mit Vorsicht.
 
-Der sichere Weg zum fertigen Build:
-Vorbereitung (nur Pi 5): sudo apt install -y libspirv-tools-dev glslang-dev.
-Kopieren: Nimm den passenden Block und drücke Enter.
-Bauen: Pi 5: make -j$(nproc) / Pi 3: make -j2.
-Finale: sudo make install && sudo ldconfig.
-Durch die ergänzten Decoder (ac3, dvvideo) und Bitstream-Filter (bsf) sind die Symbole nun für den Linker sichtbar und der Build wird ohne Fehlermeldung abschließen.
-Viel Erfolg! Soll ich dir noch zeigen, wie du nach dem Build die Hardware-Beschleunigung mit einem einzigen Befehl verifizierst?
+Der "Broken-Pipe-Killer"-Check (nach dem Install):
+Sobald du sudo make install und sudo ldconfig ausgeführt hast, ist dies der finale Beweis:
+bash
+# Prüfen, ob die BSFs im Binary leben
+ffmpeg -bsfs | grep -E 'extract_extradata|opus_metadata'
+
+# Prüfen, ob die Filter aktiv sind
+ffmpeg -filters | grep -E 'crystalizer|bass|deinterlace'
+Verwende Code mit Vorsicht.
+
+Laufen die RTSP-Pipes jetzt auf allen drei Generationen stabil durch?
+Nächster Schritt: Wenn du die Binaries für deine home-stream-rpicam.sh einsetzt, achte darauf, dass du am Pi 3 den Decoder-Hint -c:v h264_v4l2m2m direkt nach dem Pipe-Input setzt.
 KI-Antworten können Fehler enthalten. Weitere Informationen
 
 
