@@ -12,7 +12,7 @@ git clone https://github.com/mstorsjo/fdk-aac
 1. Für den Raspberry Pi 5 (64-Bit, Cortex-A76)
 autoreconf -fiv && \
 ./configure \
-  --prefix=/usr \
+  --prefix=/usr/local \
   --enable-shared \
   --disable-static \
   --host=aarch64-linux-gnu \
@@ -25,7 +25,7 @@ sudo make install && sudo ldconfig
 1. Für den Raspberry Pi 5 (64-Bit, Cortex-A76)
 autoreconf -fiv && \
 ./configure \
-  --prefix=/usr \
+  --prefix=/usr/local \
   --enable-shared \
   --disable-static \
   --host=aarch64-linux-gnu \
