@@ -74,4 +74,6 @@ bash
   --enable-indev='v4l2,alsa,pulse,jack,fbdev,lavfi,kmsgrab' \
   --enable-outdev='v4l2,alsa,pulse,jack,fbdev,drm,kmsgrab' \
   --disable-omx --disable-omx-rpi --disable-mmal --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
-  --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable
+  --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvdec --disable-nvenc --disable-ffnvcodec --disable-amf --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl
+Verwende Code mit Vorsicht.
+
