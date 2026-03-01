@@ -10,7 +10,7 @@ bash
   --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
   --enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-libdrm --enable-epoxy --enable-libudev \
   --enable-vout-drm --enable-opengl --enable-vulkan --enable-libshaderc --enable-libplacebo \
-  --enable-hwaccel='h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request' \
+  --enable-hwaccel=hevc_v4l2request \
   --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
   --enable-ladspa --enable-lv2 --enable-librubberband --enable-alsa --enable-libpulse --enable-libjack --enable-network --enable-gnutls --enable-gcrypt \
   --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto' \
