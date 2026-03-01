@@ -489,12 +489,19 @@ cd .. && \
 sudo dpkg -i lib*mpv*.deb mpv*.deb
 ```
 
+# rpi 5 
+
+
 ```bash
 apt source mpv
 cd mpv
 meson setup build \
   --prefix=/usr \
   --buildtype=release \
+  -Dc_args='-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dcpp_args='-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
   -Dlibmpv=true \
   -Dwayland=enabled \
   -Ddmabuf-wayland=enabled \
@@ -512,9 +519,68 @@ meson setup build \
   -Dvdpau=disabled \
   -Dcuda-hwaccel=disabled \
   -Dmanpages=disabled
+
 sudo meson install -C build
 ```
 
+# rpi 4
+
+```bash
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dc_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dcpp_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+  -Dlibmpv=true \
+  -Dwayland=enabled \
+  -Ddmabuf-wayland=enabled \
+  -Dpipewire=enabled \
+  -Dalsa=enabled \
+  -Dvulkan=enabled \
+  -Dshaderc=enabled \
+  -Ddrm=enabled \
+  -Dgbm=enabled \
+  -Degl-drm=enabled \
+  -Degl-wayland=enabled \
+  -Dgles2=enabled \
+  -Drpi-mmal=disabled \
+  -Dvaapi=disabled \
+  -Dvdpau=disabled \
+  -Dcuda-hwaccel=disabled \
+  -Dmanpages=disabled
+```
+
+
+# rpi 3
+
+```bash
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dc_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -fomit-frame-pointer -flto -Wno-stringop-overflow' \
+  -Dcpp_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -fomit-frame-pointer -flto -Wno-stringop-overflow' \
+  -Dc_link_args='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+  -Dlibmpv=true \
+  -Dwayland=enabled \
+  -Ddmabuf-wayland=enabled \
+  -Dpipewire=enabled \
+  -Dalsa=enabled \
+  -Dvulkan=enabled \
+  -Dshaderc=enabled \
+  -Ddrm=enabled \
+  -Dgbm=enabled \
+  -Degl-drm=enabled \
+  -Degl-wayland=enabled \
+  -Dgles2=enabled \
+  -Drpi-mmal=disabled \
+  -Dvaapi=disabled \
+  -Dvdpau=disabled \
+  -Dcuda-hwaccel=disabled \
+  -Dmanpages=disabled
+```
       
 #########################
 
