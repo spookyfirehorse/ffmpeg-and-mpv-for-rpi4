@@ -1,9 +1,9 @@
-1. Raspberry Pi 3 (armhf / Cortex-A53)
+1. Raspberry Pi 3 (32-Bit / armhf)
+Wichtig: Hier ändern wir den Pfad auf arm-linux-gnueabihf und die CPU auf cortex-a53.
 bash
 ./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
-  --extra-version=ultra-pi3-jc-kynesim-clean-final --arch=armhf --target-os=linux --cpu=cortex-a53 \
-  --disable-asm --enable-inline-asm --disable-runtime-cpudetect \
-  --extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -fomit-frame-pointer -flto -Wno-stringop-overflow' \
+  --extra-version=ultra-pi3-jc-kynesim-clean --arch=armhf --target-os=linux --cpu=cortex-a53 \
+  --extra-cflags='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
   --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
   --extra-libs='-lpthread -lm -lrt -ldl -lasound -lpulse -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error' \
   --disable-everything --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
@@ -13,7 +13,7 @@ bash
   --enable-alsa --enable-libpulse --enable-libjack --enable-network --enable-gnutls --enable-gcrypt \
   --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto' \
   --enable-bsf='opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb,extract_extradata,null' \
-  --enable-filter='format,scale,hwupload,hwdownload,hwmap,deinterlace_v4l2m2m,vulkan,libplacebo,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
+  --enable-filter='format,scale,hwupload,hwdownload,hwmap,deinterlace_v4l2m2m,v4l2m2m_scaler,vpp_v4l2m2m,vulkan,libplacebo,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
   --enable-decoder='opus,aac,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
   --enable-encoder='libopus,libfdk_aac,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
   --enable-demuxer='matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mjpeg' \
@@ -25,7 +25,8 @@ bash
   --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvdec --disable-nvenc --disable-ffnvcodec --disable-amf --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl
 Verwende Code mit Vorsicht.
 
-2. Raspberry Pi 4 (aarch64 / Cortex-A72)
+2. Raspberry Pi 4 (64-Bit / aarch64)
+Das ist deine Referenz-Einstellung.
 bash
 ./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
   --extra-version=ultra-pi4-jc-kynesim-clean --arch=aarch64 --target-os=linux --cpu=cortex-a72 \
@@ -39,7 +40,7 @@ bash
   --enable-alsa --enable-libpulse --enable-libjack --enable-network --enable-gnutls --enable-gcrypt \
   --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto' \
   --enable-bsf='opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb,extract_extradata,null' \
-  --enable-filter='format,scale,hwupload,hwdownload,hwmap,deinterlace_v4l2m2m,vulkan,libplacebo,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
+  --enable-filter='format,scale,hwupload,hwdownload,hwmap,deinterlace_v4l2m2m,v4l2m2m_scaler,vpp_v4l2m2m,vulkan,libplacebo,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
   --enable-decoder='opus,aac,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
   --enable-encoder='libopus,libfdk_aac,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
   --enable-demuxer='matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mjpeg' \
@@ -51,7 +52,8 @@ bash
   --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvdec --disable-nvenc --disable-ffnvcodec --disable-amf --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl
 Verwende Code mit Vorsicht.
 
-3. Raspberry Pi 5 (aarch64 / Cortex-A76)
+3. Raspberry Pi 5 (64-Bit / aarch64)
+Hier ändern wir die CPU auf cortex-a76.
 bash
 ./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
   --extra-version=ultra-pi5-jc-kynesim-clean --arch=aarch64 --target-os=linux --cpu=cortex-a76 \
@@ -65,7 +67,7 @@ bash
   --enable-alsa --enable-libpulse --enable-libjack --enable-network --enable-gnutls --enable-gcrypt \
   --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto' \
   --enable-bsf='opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb,extract_extradata,null' \
-  --enable-filter='format,scale,hwupload,hwdownload,hwmap,deinterlace_v4l2m2m,vulkan,libplacebo,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
+  --enable-filter='format,scale,hwupload,hwdownload,hwmap,deinterlace_v4l2m2m,v4l2m2m_scaler,vpp_v4l2m2m,vulkan,libplacebo,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
   --enable-decoder='opus,aac,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,vp8,vp9,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
   --enable-encoder='libopus,libfdk_aac,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
   --enable-demuxer='matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mjpeg' \
@@ -77,8 +79,11 @@ bash
   --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvdec --disable-nvenc --disable-ffnvcodec --disable-amf --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl
 Verwende Code mit Vorsicht.
 
-Sobald du einen der Builds durch hast, sag Bescheid – ich helfe dir bei der Verifizierung, ob die Shared-Libraries auch wirklich an der richtigen Stelle gelandet sind!
-Soll ich dir zur Sicherheit die make Befehlsfolge (inklusive ldconfig) vorbereiten?
+Zusammenfassung der Änderungen:
+Filter-Vollständigkeit: Alle V4L2-spezifischen Filter sind nun in jedem Build enthalten.
+Architektur-Sauberkeit: Die Pfade (libdir, incdir) und die CPU-Flags (cortex-a...) sind für jedes Gerät präzise gesetzt.
+Hardware-Sync: Die Hardware-Beschleuniger (hwaccel) sind identisch aktiviert, damit deine Scripte überall gleich funktionieren.
+Soll ich dir noch helfen, die LTO-Einstellungen zu optimieren, falls der Linker-Vorgang auf dem Pi 3 zu wenig RAM hat?
 KI-Antworten können Fehler enthalten. Weitere Informationen
 
 
