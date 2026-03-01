@@ -253,5 +253,42 @@ Wichtiger Hinweis: Mit hwdec=v4l2m2m-copy stellst du sicher, dass die Hardware-D
 Soll ich dir die Systemd-Units erstellen, damit PipeWire und EasyEffects beim Booten auf dem Pi automatisch in der richtigen Priorität starten?
 KI-Antworten können Fehler enthalten. Weitere Informationen
 
+1. PipeWire Build (Exakte Flags)
+Für Raspberry Pi 5 (Cortex-A76 / aarch64):
+bash
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dc_args='-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dcpp_args='-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+  -Dsession-managers=[] -Draop=enabled -Dbluez5=enabled -Dpipewire-v4l2=enabled -Dvulkan=enabled
+Verwende Code mit Vorsicht.
+
+Für Raspberry Pi 4 (Cortex-A72 / aarch64):
+bash
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dc_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dcpp_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+  -Dsession-managers=[] -Dbluez5=enabled -Dpipewire-v4l2=enabled
+Verwende Code mit Vorsicht.
+
+Für Raspberry Pi 3 (Cortex-A53 / armhf):
+bash
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dc_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -fomit-frame-pointer -flto -Wno-stringop-overflow' \
+  -Dcpp_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -fomit-frame-pointer -flto -Wno-stringop-overflow' \
+  -Dc_link_args='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+  -Dsession-managers=[] -Dbluez5=enabled -Dpipewire-v4l2=enabled
+Verwende Code mit Vorsicht.
+
 
 
