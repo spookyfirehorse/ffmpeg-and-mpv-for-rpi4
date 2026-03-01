@@ -176,3 +176,82 @@ sudo ninja install -C build
 sudo ldconfig
 Verwende Code mit Vorsicht.
 
+1. PipeWire Build (Shared & Optimized)
+Für Raspberry Pi 5 (Cortex-A76):
+bash
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dc_args='-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto' \
+  -Dcpp_args='-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto' \
+  -Dsession-managers=[] \
+  -Draop=enabled \
+  -Dbluez5=enabled \
+  -Dpipewire-v4l2=enabled \
+  -Dvulkan=enabled \
+  -Dlibjack-path=/usr/lib/aarch64-linux-gnu
+Verwende Code mit Vorsicht.
+
+Für Raspberry Pi 4 (Cortex-A72):
+bash
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dc_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto' \
+  -Dcpp_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto' \
+  -Dsession-managers=[] \
+  -Dbluez5=enabled \
+  -Dpipewire-v4l2=enabled \
+  -Dlibjack-path=/usr/lib/aarch64-linux-gnu
+Verwende Code mit Vorsicht.
+
+Für Raspberry Pi 3 (Cortex-A53 / armhf):
+bash
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dc_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto' \
+  -Dcpp_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto' \
+  -Dsession-managers=[] \
+  -Dbluez5=enabled \
+  -Dpipewire-v4l2=enabled \
+  -Dlibjack-path=/usr/lib/arm-linux-gnueabihf
+Verwende Code mit Vorsicht.
+
+2. EasyEffects Build (Der Audio-Polierer)
+EasyEffects profitiert massiv von SIMD (NEON). Da es in C++ geschrieben ist, sind die cpp_args hier entscheidend.
+Für alle (Pfade entsprechend anpassen):
+bash
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dcpp_args='-O3 -pipe -ftree-vectorize -flto' \
+  -Ddoc=disabled \
+  -Dtests=disabled
+Verwende Code mit Vorsicht.
+
+3. Die ultimative mpv.conf (ultra-pi-jc)
+Damit mpv deine FFmpeg-Hardware-Decoder und den DRM-Prime-Weg auch wirklich nutzt:
+ini
+# Video Output
+vo=dmabuf-wayland,gpu
+gpu-context=wayland
+hwdec=v4l2m2m-copy
+hwdec-codecs=h264,hevc,mpeg2
+
+# Buffers für Pi Stabilität
+vd-lavc-dr=yes
+vulkan-async-compute=yes
+vulkan-async-transfer=yes
+
+# Audio
+ao=pipewire
+audio-channels=stereo
+Verwende Code mit Vorsicht.
+
+Wichtiger Hinweis: Mit hwdec=v4l2m2m-copy stellst du sicher, dass die Hardware-Decoder genutzt werden, aber die Frames für Filter (wie EasyEffects via PipeWire) greifbar bleiben.
+Soll ich dir die Systemd-Units erstellen, damit PipeWire und EasyEffects beim Booten auf dem Pi automatisch in der richtigen Priorität starten?
+KI-Antworten können Fehler enthalten. Weitere Informationen
+
+
+
