@@ -80,10 +80,10 @@ KI-Antworten können Fehler enthalten. Weitere Informationen
 pi 3
 Hier ist der spezifisch optimierte Configure-Befehl für den Raspberry Pi 3 (Cortex-A53). Er berücksichtigt die geringere Leistung des Pi 3 und fokussiert sich auf die V4L2-M2M Schnittstellen, da die Request-API auf dem älteren Kernel/Hardware-Stack des Pi 3 oft instabil ist.
 bash
-./configure --prefix=/usr --libdir=/usr/lib/aarch64-linux-gnu --incdir=/usr/include/aarch64-linux-gnu \
-  --extra-version=ultra-pi3-jc-kynesim-clean --arch=aarch64 --target-os=linux --cpu=cortex-a53 \
-  --extra-cflags='-mcpu=cortex-a53+crypto -O3 -pipe -ftree-vectorize -flto' \
-  --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+./configure --prefix=/usr --libdir=/usr/lib/arm-linux-gnueabihf --incdir=/usr/include/arm-linux-gnueabihf \
+  --extra-version=ultra-pi3-armhf-jc-kynesim-clean --arch=arm --target-os=linux --cpu=cortex-a53 \
+  --extra-cflags='-mcpu=cortex-a53+crypto -mfpu=neon-vfpv4 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto' \
+  --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
   --extra-libs='-lpthread -lm -lrt -ldl -lasound -lpulse -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error' \
   --disable-everything --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-shared --disable-static --disable-debug --enable-stripping \
   --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
@@ -92,11 +92,11 @@ bash
   --enable-vout-drm --enable-opengl \
   --enable-hwaccel='h264_v4l2request' \
   --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsoxr --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
-  --enable-alsa --enable-libpulse --enable-libjack --enable-network --enable-gnutls --enable-gcrypt \
+  --enable-ladspa --enable-lv2 --enable-librubberband --enable-alsa --enable-libpulse --enable-libjack --enable-network --enable-gnutls --enable-gcrypt \
   --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,crypto' \
   --enable-bsf='opus_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb,extract_extradata,null' \
-  --enable-filter='format,scale,hwupload,hwdownload,hwmap,deinterlace_v4l2m2m,v4l2m2m_scaler,vpp_v4l2m2m,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
-  --enable-decoder='opus,aac,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
+  --enable-filter='format,scale,hwupload,hwdownload,hwmap,deinterlace_v4l2m2m,v4l2m2m_scaler,vpp_v4l2m2m,fps,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,sidechaincompress,testsrc,buffer,buffersink,abuffer,abuffersink,nullsink,anullsink' \
+  --enable-decoder='opus,aac,mpeg1video,mpeg2video,ac3,dca,h264_v4l2m2m,mpeg2_v4l2m2m,mjpeg,mp3,flac,alac,ape,wavpack,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
   --enable-encoder='libopus,libfdk_aac,h264_v4l2m2m,mpeg2_v4l2m2m,aac,libmp3lame,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le' \
   --enable-demuxer='matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mjpeg' \
   --enable-muxer='matroska,rtsp,mp4,flac,wav,mp3,opus,ogg,rtp,sdp,rtmp,flv,hls,mpegts,adts,latm,null' \
@@ -104,6 +104,7 @@ bash
   --enable-indev='v4l2,alsa,pulse,jack,fbdev,lavfi,kmsgrab' \
   --enable-outdev='v4l2,alsa,pulse,jack,fbdev,drm,kmsgrab' \
   --disable-omx --disable-omx-rpi --disable-mmal --disable-doc --disable-vaapi --disable-vdpau --disable-cuda --disable-cuvid --disable-nvdec --disable-nvenc --disable-ffnvcodec --disable-vulkan --disable-libplacebo --disable-libshaderc
+
 Verwende Code mit Vorsicht.
 
 Anpassungen für den Pi 3:
