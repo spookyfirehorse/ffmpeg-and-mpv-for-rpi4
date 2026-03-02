@@ -21,6 +21,17 @@ cd ~/rpicam-apps
 rm -rf build
 
 
+git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dcpp_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ffast-math -ftree-vectorize' \
+-Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
+-Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
+-Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
+sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
+
+
+
+
 meson setup build --buildtype=release -Dprefix=/usr -Dc_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' -Dcpp_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' -Denable_libav=enabled -Denable_drm=enabled -Denable_egl=enabled -Denable_qt=disabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled && meson compile -C build && sudo meson install -C build && sudo ldconfig
 
 
