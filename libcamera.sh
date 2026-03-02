@@ -13,6 +13,7 @@ libgstreamer1.0-dev \
 libgstreamer-plugins-base1.0-dev \
 libgstreamer-plugins-bad1.0-dev
 
+export TMPDIR=/home/spook/tmp
 
 sudo apt update && sudo apt install -y \
     libboost-dev \
