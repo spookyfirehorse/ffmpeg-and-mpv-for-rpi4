@@ -154,6 +154,9 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Denable_hailo=disabled && \
 meson compile -j 1 -C build && sudo meson install -C build && sudo ldconfig
 
+
+##########################################################################################
+
 git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
 meson setup build --buildtype=release -Dprefix=/usr \
 -Dcpp_args='-mcpu=cortex-a72 -O3 -ffast-math' \
@@ -161,6 +164,73 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
 sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
+
+
+
+git clone --depth 1 https://github.com && cd libcamera && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dcpp_args='-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe' \
+-Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
+-Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
+-Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
+sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
+
+
+git clone --depth 1 https://github.com && cd libcamera && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dcpp_args='-mcpu=cortex-a76 -O3 -ffast-math -ftree-vectorize' \
+-Dpipelines=rpi/pisp -Dipas=rpi/pisp \
+-Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
+-Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
+sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
+
+
+git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dc_args='-mcpu=cortex-a76+crypto+crc+dotprod -O3 -pipe -ftree-vectorize' \
+-Dcpp_args='-mcpu=cortex-a76+crypto+crc+dotprod -O3 -pipe -ftree-vectorize' \
+-Denable_libav=enabled \
+-Denable_drm=enabled \
+-Denable_egl=enabled \
+-Denable_qt=disabled \
+-Denable_opencv=disabled \
+-Denable_tflite=disabled \
+-Denable_hailo=disabled && \
+meson compile -j 4 -C build && sudo meson install -C build && sudo ldconfig
+
+
+
+git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dc_args='-mcpu=cortex-a72+crypto+crc+dotprod -O3 -pipe -ftree-vectorize' \
+-Dcpp_args='-mcpu=cortex-a72+crypto+crc+dotprod -O3 -pipe -ftree-vectorize' \
+-Denable_libav=enabled \
+-Denable_drm=enabled \
+-Denable_egl=enabled \
+-Denable_qt=disabled \
+-Denable_opencv=disabled \
+-Denable_tflite=disabled \
+-Denable_hailo=disabled && \
+meson compile -j 4 -C build && sudo meson install -C build && sudo ldconfig
+
+
+git clone --depth 1 https://github.com && cd rpicam-apps && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dc_args='-mcpu=cortex-a53+crypto+crc -O3 -pipe -ftree-vectorize' \
+-Dcpp_args='-mcpu=cortex-a53+crypto+crc -O3 -pipe -ftree-vectorize' \
+-Denable_libav=enabled \
+-Denable_drm=enabled \
+-Denable_egl=enabled \
+-Denable_qt=disabled \
+-Denable_opencv=disabled \
+-Denable_tflite=disabled \
+-Denable_hailo=disabled && \
+meson compile -j 2 -C build && sudo meson install -C build && sudo ldconfig
+
+
+
+
+################################################################################################################################
 
 
 rpicam-vid -t 10000 --codec libav --libav-format mp4 --libav-video-codec h264_v4l2m2m -o test.mp4
