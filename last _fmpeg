@@ -2,6 +2,11 @@ find /usr/lib/arm-linux-gnueabihf -name "libav*" -o -name "libsw*" -o -name "lib
 find /usr/lib/aarch64-linux-gnu -name "libav*" -o -name "libsw*" -o -name "libpostproc*"
 ls -l /usr/lib/aarch64-linux-gnu/libavcodec.so*
 
+sudo rm /usr/lib/libswresample.so*
+sudo rm /usr/lib/libswscale.so*
+sudo rm /usr/lib/libpostproc.so*
+
+
 5
 ffmpeg
 ffmpeg version 9e9bbb1-ultra-pi5-jc-kynesim-clean Copyright (c) 2000-2025 the FFmpeg developers
