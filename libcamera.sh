@@ -1,6 +1,6 @@
 sudo apt build-dep libcamera rpicam-apps 
 
-git clone https://github.com/raspberrypi/libcamera.git && \
+git clone --depth 1 https://github.com/raspberrypi/libcamera.git && \
 cd libcamera && \
 meson setup build --buildtype=release  -Dprefix=/usr  -Dpipelines=rpi/vc4,rpi/pisp -Dipas=rpi/vc4,rpi/pisp -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled &&\
 sudo  ninja -C build install && \
@@ -63,7 +63,7 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
 -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-ninja -C build && sudo ninja -C build install && cd ..
+sudo ninja -C build -j 1 && sudo ninja -C build install && cd ..
 
 # 2. rpicam-apps (Die App mit FFmpeg-Link zu deinem Kynesim-Build)
 git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
