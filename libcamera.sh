@@ -117,7 +117,39 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Denable_opencv=disabled \
 -Denable_tflite=disabled \
 -Denable_hailo=disabled && \
-meson compile -C build && sudo meson install -C build && sudo ldconfig
+meson compile -j 1 -C build && sudo meson install -C build && sudo ldconfig
+
+
+# 1. libcamera (Treiber-Ebene für Pi 3)
+git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dcpp_args='-mcpu=cortex-a53 -O2' \
+-Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
+-Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
+-Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
+sudo ninja -C build -j 1 && sudo ninja -C build install && cd ..
+
+# 2. rpicam-apps (Die App mit FFmpeg-Link zu deinem Kynesim-Build)
+git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dc_args='-mcpu=cortex-a72 -O2' \
+-Dcpp_args='-mcpu=cortex-a72 -O2' \
+-Denable_libav=enabled \
+-Denable_drm=enabled \
+-Denable_egl=enabled \
+-Denable_qt=disabled \
+-Denable_opencv=disabled \
+-Denable_tflite=disabled \
+-Denable_hailo=disabled && \
+meson compile -j 1 -C build && sudo meson install -C build && sudo ldconfig
+
+git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dcpp_args='-mcpu=cortex-a72 -O3 -ffast-math' \
+-Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
+-Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
+-Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
+sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
 
 
 rpicam-vid -t 10000 --codec libav --libav-format mp4 --libav-video-codec h264_v4l2m2m -o test.mp4
