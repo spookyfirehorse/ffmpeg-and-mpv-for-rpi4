@@ -10,6 +10,45 @@ sudo rm /usr/lib/libswscale.so*
 sudo rm /usr/lib/libpostproc.so*
 
 
+
+1. Linker-Cache radikal erneuern
+Nach deiner manuellen Installation muss das System die neuen Symlinks zwingend neu einlesen:
+bash
+sudo ldconfig -v | grep libavcodec
+Verwende Code mit Vorsicht.
+
+Prüfe hier, ob libavcodec.so.61 (oder deine Version) korrekt auf die Datei in /usr/lib/aarch64-linux-gnu zeigt.
+2. Fehlende Symlinks korrigieren
+Manchmal erstellt make install nicht alle nötigen generischen Symlinks, die Programme wie rpicam-apps suchen. Erstelle sie sicherheitshalber manuell (falls nicht vorhanden):
+bash
+sudo ln -sf /usr/lib/aarch64-linux-gnu/libavcodec.so.61 /usr/lib/aarch64-linux-gnu/libavcodec.so
+sudo ln -sf /usr/lib/aarch64-linux-gnu/libavformat.so.61 /usr/lib/aarch64-linux-gnu/libavformat.so
+sudo ldconfig
+Verwende Code mit Vorsicht.
+
+3. rpicam-apps Abhängigkeiten prüfen
+Prüfe mit ldd, welche FFmpeg-Lib rpicam-vid tatsächlich laden will:
+bash
+ldd $(which rpicam-vid) | grep libavcodec
+Verwende Code mit Vorsicht.
+
+Wenn dort "not found" steht oder ein Pfad wie /usr/local/lib auftaucht (obwohl du in /usr installiert hast), findet rpicam deine selbstgebaute Version nicht.
+Warum findet FFmpeg es, aber rpicam nicht?
+FFmpeg ist statisch gegen seine eigenen Header gebaut. rpicam-apps nutzt die GStreamer- oder Libav-Plugins des Systems. Da du h264_v4l2m2m in deinem ./configure aktiviert hast, ist es da – rpicam-apps braucht aber oft zusätzlich das Paket libavcodec-extra, das du durch dein make install teils überschrieben hast.
+Kurz-Fix:
+Versuche rpicam-apps zu zwingen, die Pfade neu zu scannen:
+bash
+export LD_LIBRARY_PATH=/usr/lib/aarch64-linux-gnu:$LD_LIBRARY_PATH
+rpicam-vid --codec libav -o test.h264
+Verwende Code mit Vorsicht.
+
+Soll ich dir zeigen, wie du die rpicam-apps neu gegen dein eigenes FFmpeg kompilierst, damit die Anbindung perfekt ist?
+KI-Antworten können Fehler enthalten. Weitere Informationen
+
+
+
+
+
 5
 ffmpeg
 ffmpeg version 9e9bbb1-ultra-pi5-jc-kynesim-clean Copyright (c) 2000-2025 the FFmpeg developers
