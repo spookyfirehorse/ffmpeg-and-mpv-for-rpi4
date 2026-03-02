@@ -1,5 +1,28 @@
 sudo apt build-dep libcamera rpicam-apps 
 
+
+bash
+# 1. Pfad zu deinen Kynesim-Libs setzen
+export PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig:$PKG_CONFIG_PATH
+
+# 2. Build-Ordner komplett löschen (WICHTIG!)
+cd ~/rpicam-apps
+rm -rf build
+
+# 3. Meson Setup mit explizitem libav-Zwang
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dcpp_args='-mcpu=cortex-a53 -O2' \
+-Denable_libav=enabled \
+-Denable_drm=enabled \
+-Denable_egl=enabled
+
+
+
+meson setup build --buildtype=release -Dprefix=/usr -Dc_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' -Dcpp_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' -Denable_libav=enabled -Denable_drm=enabled -Denable_egl=enabled -Denable_qt=disabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled && meson compile -C build && sudo meson install -C build && sudo ldconfig
+
+
+# 4. Prüfe die Meson-Ausgabe!
+
 git clone --depth 1 https://github.com/raspberrypi/libcamera.git && \
 cd libcamera && \
 meson setup build --buildtype=release  -Dprefix=/usr  -Dpipelines=rpi/vc4,rpi/pisp -Dipas=rpi/vc4,rpi/pisp -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled &&\
