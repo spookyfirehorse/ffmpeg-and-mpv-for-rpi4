@@ -16,6 +16,9 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Denable_drm=enabled \
 -Denable_egl=enabled
 
+export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+cd ~/rpicam-apps
+rm -rf build
 
 
 meson setup build --buildtype=release -Dprefix=/usr -Dc_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' -Dcpp_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' -Denable_libav=enabled -Denable_drm=enabled -Denable_egl=enabled -Denable_qt=disabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled && meson compile -C build && sudo meson install -C build && sudo ldconfig
