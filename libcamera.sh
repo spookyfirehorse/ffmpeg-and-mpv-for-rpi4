@@ -44,7 +44,7 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
 -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-sudo ninja -C build -j 3 && sudo ninja -C build install && cd ..
+sudo ninja -C build -j 2 && sudo ninja -C build install && cd ..
 
 
 git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
@@ -58,7 +58,7 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Denable_opencv=disabled \
 -Denable_tflite=disabled \
 -Denable_hailo=disabled && \
-meson compile -j 3 -C build && sudo meson install -C build && sudo ldconfig
+meson compile -j 2 -C build && sudo meson install -C build && sudo ldconfig
 
 pi 5
 
@@ -72,7 +72,7 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
 -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-sudo ninja -C build -j 3 && sudo ninja -C build install && cd ..
+sudo ninja -C build -j 2 && sudo ninja -C build install && cd ..
 
 
 git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
@@ -86,7 +86,7 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Denable_opencv=disabled \
 -Denable_tflite=disabled \
 -Denable_hailo=disabled && \
-meson compile -j 4 -C build && sudo meson install -C build && sudo ldconfig
+meson compile -j 2 -C build && sudo meson install -C build && sudo ldconfig
 
 
 sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
