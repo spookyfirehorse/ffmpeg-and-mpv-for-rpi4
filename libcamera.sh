@@ -95,8 +95,8 @@ cd ~/rpicam-apps && rm -rf build
 git pull
 # Wir aktivieren DRM, EGL und vor allem LIBAV (FFmpeg)
 meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a53 -O3 -ftree-vectorize' \
--Dcpp_args='-mcpu=cortex-a53 -O3 -ftree-vectorize' \
+-Dc_args='-mcpu=cortex-a72+crypto+crc+dotprod -O3 -pipe -ftree-vectorize' \
+-Dcpp_args='-mcpu=cortex-a72+crypto+crc+dotprod -O3 -pipe -ftree-vectorize' \
 -Denable_libav=enabled \
 -Denable_drm=enabled \
 -Denable_egl=enabled \
@@ -110,7 +110,7 @@ meson compile -C build && sudo meson install -C build && sudo ldconfig
 # 1. libcamera (Treiber-Ebene für Pi 3)
 git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
 meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a53 -O2' \
+-Dcpp_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' ' \
 -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
 -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
@@ -119,8 +119,8 @@ sudo ninja -C build -j 1 && sudo ninja -C build install && cd ..
 # 2. rpicam-apps (Die App mit FFmpeg-Link zu deinem Kynesim-Build)
 git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
 meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a53 -O2' \
--Dcpp_args='-mcpu=cortex-a53 -O2' \
+-Dc_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
+-Dcpp_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
 -Denable_libav=enabled \
 -Denable_drm=enabled \
 -Denable_egl=enabled \
@@ -149,9 +149,12 @@ meson compile -j 1 -C build && sudo meson install -C build && sudo ldconfig
 
 ##########################################################################################
 
+libcamera
+
+
 git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
 meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a72 -O3 -ffast-math' \
+-Dcpp_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow'\
 -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
 -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
@@ -170,19 +173,33 @@ sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
 
 git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
 meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a76 -O3 -ffast-math -ftree-vectorize' \
+-Dcpp_args='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
 -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \-Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
 sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
 
 
+###################################################################
 
 
+apps
 
 git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
 meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a72+crypto+crc+dotprod -O3 -pipe -ftree-vectorize' \
--Dcpp_args='-mcpu=cortex-a72+crypto+crc+dotprod -O3 -pipe -ftree-vectorize' \
+-Dc_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+-Dcpp_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+-Denable_libav=enabled \
+-Denable_drm=enabled \
+-Denable_egl=enabled \
+-Denable_qt=disabled \
+-Denable_opencv=disabled \
+-Denable_tflite=disabled \
+-Denable_hailo=disabled && \
+
+git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dc_args='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+-Dcpp_args='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
 -Denable_libav=enabled \
 -Denable_drm=enabled \
 -Denable_egl=enabled \
@@ -193,12 +210,16 @@ meson setup build --buildtype=release -Dprefix=/usr \
 meson compile -j 4 -C build && sudo meson install -C build && sudo ldconfig
 
 
+meson compile -j 4 -C build && sudo meson install -C build && sudo ldconfig
+
+
 # 1. Alten Versuch restlos entfernen
 rm -rf build
 
 # 2. Neu konfigurieren mit korrigierten Flags
 meson setup build --buildtype=release -Dprefix=/usr \
 -Dcpp_args='-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe' \
+-Dc_args='-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe'
 -Denable_libav=enabled \
 -Denable_drm=enabled \
 -Denable_egl=enabled \
