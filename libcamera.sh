@@ -6,8 +6,77 @@ meson setup build --buildtype=release  -Dprefix=/usr  -Dpipelines=rpi/vc4,rpi/pi
 sudo  ninja -C build install && \
 git clone https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
 meson setup build -Denable_libav=enabled  -Denable_drm=enabled -Denable_egl=enabled -Denable_qt=enabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled -Dprefix=/usr && \
-meson compile -C build && sudo meson install -C build
 
+meson compile -C build && sudo meson install -C build
+sudo apt update && sudo apt install -y \
+libgstreamer1.0-dev \
+libgstreamer-plugins-base1.0-dev \
+libgstreamer-plugins-bad1.0-dev
+
+
+sudo apt update && sudo apt install -y \
+    libboost-dev \
+    libgnutls28-dev openssl zlib1g-dev \
+    libtiff-dev libpng-dev libjpeg-dev \
+    libexif-dev libyaml-dev \
+    python3-yaml python3-ply \
+    libglib2.0-dev libudev-dev libpcre3-dev \
+    libevent-dev \
+    libdrm-dev libgbm-dev \
+    libegl1-mesa-dev libgles2-mesa-dev libepoxy-dev \
+    libqt5gui5 qtbase5-dev qtbase5-dev-tools \
+    libcamera-dev
+
+cd ~/libcamera && rm -rf build
+git pull # Sicherstellen, dass alles aktuell ist
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dcpp_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' \
+-Dpipelines=rpi/vc4,rpi/pisp -Dipas=rpi/vc4,rpi/pisp \
+-Dv4l2=enabled -Dgstreamer=disabled \
+-Dtest=false -Dlc-compliance=disabled \
+-Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
+ninja -C build && sudo ninja -C build install && cd ..
+
+
+cd ~/rpicam-apps && rm -rf build
+git pull
+# Wir aktivieren DRM, EGL und vor allem LIBAV (FFmpeg)
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dc_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' \
+-Dcpp_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' \
+-Denable_libav=enabled \
+-Denable_drm=enabled \
+-Denable_egl=enabled \
+-Denable_qt=disabled \
+-Denable_opencv=disabled \
+-Denable_tflite=disabled \
+-Denable_hailo=disabled && \
+meson compile -C build && sudo meson install -C build && sudo ldconfig
+
+
+
+# 1. libcamera (Treiber-Ebene für Pi 3)
+git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dcpp_args='-mcpu=cortex-a53 -O2' \
+-Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
+-Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
+-Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
+ninja -C build && sudo ninja -C build install && cd ..
+
+# 2. rpicam-apps (Die App mit FFmpeg-Link zu deinem Kynesim-Build)
+git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dc_args='-mcpu=cortex-a53 -O2' \
+-Dcpp_args='-mcpu=cortex-a53 -O2' \
+-Denable_libav=enabled \
+-Denable_drm=enabled \
+-Denable_egl=enabled \
+-Denable_qt=disabled \
+-Denable_opencv=disabled \
+-Denable_tflite=disabled \
+-Denable_hailo=disabled && \
+meson compile -C build && sudo meson install -C build && sudo ldconfig
 
 
 git clone https://github.com/PipeWire/pipewire.git
