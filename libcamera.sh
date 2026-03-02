@@ -80,6 +80,20 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Denable_hailo=disabled && \
 meson compile -C build && sudo meson install -C build && sudo ldconfig
 
+cd ~/rpicam-apps && rm -rf build
+git pull
+# Wir aktivieren DRM, EGL und vor allem LIBAV (FFmpeg)
+meson setup build --buildtype=release -Dprefix=/usr \
+-Dc_args='-mcpu=cortex-a53 -O3 -ftree-vectorize' \
+-Dcpp_args='-mcpu=cortex-a53 -O3 -ftree-vectorize' \
+-Denable_libav=enabled \
+-Denable_drm=enabled \
+-Denable_egl=enabled \
+-Denable_qt=disabled \
+-Denable_opencv=disabled \
+-Denable_tflite=disabled \
+-Denable_hailo=disabled && \
+meson compile -C build && sudo meson install -C build && sudo ldconfig
 
 
 # 1. libcamera (Treiber-Ebene für Pi 3)
@@ -104,6 +118,9 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Denable_tflite=disabled \
 -Denable_hailo=disabled && \
 meson compile -C build && sudo meson install -C build && sudo ldconfig
+
+
+rpicam-vid -t 10000 --codec libav --libav-format mp4 --libav-video-codec h264_v4l2m2m -o test.mp4
 
 
 git clone https://github.com/PipeWire/pipewire.git
