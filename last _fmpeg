@@ -1,3 +1,6 @@
+find /usr/lib/arm-linux-gnueabihf -name "libav*" -o -name "libsw*" -o -name "libpostproc*"
+find /usr/lib/aarch64-linux-gnu -name "libav*" -o -name "libsw*" -o -name "libpostproc*"
+ls -l /usr/lib/aarch64-linux-gnu/libavcodec.so*
 
 5
 ffmpeg
