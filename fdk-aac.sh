@@ -10,6 +10,7 @@ git clone https://github.com/mstorsjo/fdk-aac
 
 
 1. Für den Raspberry Pi 5 (64-Bit, Cortex-A76)
+git clone  https://github.com/mstorsjo/fdk-aac && cd fdk-aac && \
 autoreconf -fiv && \
 ./configure \
   --prefix=/usr/local \
@@ -23,6 +24,7 @@ make -j$(nproc) && \
 sudo make install && sudo ldconfig
 
 1. Für den Raspberry Pi 5 (64-Bit, Cortex-A76)
+git clone  https://github.com/mstorsjo/fdk-aac && cd fdk-aac && \
 autoreconf -fiv && \
 ./configure \
   --prefix=/usr/local \
@@ -39,11 +41,12 @@ sudo make install && sudo ldconfig
 Hier aktivieren wir zusätzlich die NEON-Einheit (VFPv4), um Audio-Berechnungen in Hardware zu beschleunigen.
 bash
 sudo apt update && sudo apt install -y autoconf libtool [Debian Package Search](https://packages.debian.org) && \
-git clone https://github.com && \
+git clone  https://github.com/mstorsjo/fdk-aac && cd fdk-aac && \
+autoreconf -fiv && \
 cd fdk-aac && \
 autoreconf -fiv && \
 ./configure \
-  --prefix=/usr \
+  --prefix=/usr/local \
   --enable-shared \
   --disable-static \
   --host=arm-linux-gnueabihf \
