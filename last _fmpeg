@@ -87,6 +87,17 @@ nice -n 19 ionice -c 3 make -j3
 
 sudo make install
 
+/usr/lib/arm-linux-gnueabihf
+
+sudo strip --strip-unneeded  /usr/lib/arm-linux-gnueabihf/libavcodec.so*
+sudo strip --strip-unneeded  /usr/lib/arm-linux-gnueabihf/libavformat.so*
+sudo strip --strip-unneeded  /usr/lib/arm-linux-gnueabihf/libavfilter.so*
+sudo strip --strip-unneeded  /usr/lib/arm-linux-gnueabihf/libavutil.so*
+sudo strip --strip-unneeded  /usr/lib/arm-linux-gnueabihf/libswresample.so*
+sudo strip --strip-unneeded  /usr/lib/arm-linux-gnueabihf/libswscale.so*
+sudo strip --strip-unneeded  /usr/lib/arm-linux-gnueabihf/libavdevice.so*
+
+
 sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcodec.so*
 sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavformat.so*
 sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilter.so*
