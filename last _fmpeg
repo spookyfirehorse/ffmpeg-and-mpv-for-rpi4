@@ -13,7 +13,7 @@ PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig ./configure \
 --cpu=cortex-a53 \
 --extra-cflags='-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
 --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -Wl,-rpath,/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/arm-linux-gnueabihf -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/arm-linux-gnueabihf -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -95,7 +95,7 @@ PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig ./configure \
 --cpu=cortex-a53 \
 --extra-cflags='-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
 --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -Wl,-rpath,/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/arm-linux-gnueabihf -lpthread -lm -lrt -ldl -lasound -ljack -lpulse -lpulse-simple -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/arm-linux-gnueabihf -lpthread -lm -lrt -ldl -lasound -ljack -lpulse -lpulse-simple -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -180,7 +180,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --cpu=cortex-a72 \
 --extra-cflags='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -lpulse -lpulse-simple -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -lpulse -lpulse-simple -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -262,7 +262,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --cpu=cortex-a72 \
 --extra-cflags='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -347,7 +347,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --cpu=cortex-a76 \
 --extra-cflags='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -lpulse -lpulse-simple -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -lpulse -lpulse-simple -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -427,7 +427,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --cpu=cortex-a76 \
 --extra-cflags='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
