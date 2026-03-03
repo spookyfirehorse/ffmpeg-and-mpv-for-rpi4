@@ -1,3 +1,5 @@
+
+
 ###############################  pi 3 ############################################
 
 alsa direct pipewire
@@ -12,7 +14,7 @@ PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig ./configure \
 --cpu=cortex-a53 \
 --extra-cflags='-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
 --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -Wl,-rpath,/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/arm-linux-gnueabihf -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/arm-linux-gnueabihf -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -80,7 +82,18 @@ PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig ./configure \
 
 
 
-nice -n 19 ionice -c 3 make -j3
+nice -n 19 ionice -c 3 make -j3 
+
+sudo make install
+
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcodec.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavformat.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilter.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresample.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevice.so*
+
 
 pulse
 
@@ -94,7 +107,7 @@ PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig ./configure \
 --cpu=cortex-a53 \
 --extra-cflags='-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
 --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -Wl,-rpath,/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/arm-linux-gnueabihf -lpthread -lm -lrt -ldl -lasound -ljack -lpulse -lpulse-simple -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/arm-linux-gnueabihf -lpthread -lm -lrt -ldl -lasound -ljack -lpulse -lpulse-simple -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -160,6 +173,16 @@ PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig ./configure \
 --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio --disable-outdev=xv --disable-cuda --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvdec --disable-nvenc --disable-amf --disable-vaapi --disable-vdpau --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl --disable-libvpx \
 --disable-decoder='vp8,vp9,svq1,svq3,rv10,rv20' --disable-encoder='vp8,vp9,h263,h263p' --disable-parser='vp8,vp9' --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal
 
+
+sudo make install
+
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcodec.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavformat.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilter.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresample.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevice.so*
 
 
 
@@ -179,7 +202,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --cpu=cortex-a72 \
 --extra-cflags='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -lpulse -lpulse-simple -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -lpulse -lpulse-simple -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -248,6 +271,18 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 
 nice -n 19 ionice -c 3 make -j3
 
+sudo make install
+
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcodec.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavformat.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilter.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresample.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevice.so*
+
+
+
 
 ohne pulse alsa  direct pipewire
 
@@ -261,7 +296,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --cpu=cortex-a72 \
 --extra-cflags='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -329,6 +364,17 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 
 
 nice -n 19 ionice -c 3 make -j3
+
+sudo make install
+
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcodec.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavformat.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilter.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresample.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevice.so*
+
 
 
 ################################# pi 5 ###################################################
@@ -346,7 +392,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --cpu=cortex-a76 \
 --extra-cflags='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -lpulse -lpulse-simple -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -lpulse -lpulse-simple -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -414,6 +460,18 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 
 nice -n 19 ionice -c 3 make -j3
 
+sudo make install
+
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcodec.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavformat.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilter.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresample.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevice.so*
+
+
+
 ohne pulse alsa direct pipewire
 
 PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
@@ -426,7 +484,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --cpu=cortex-a76 \
 --extra-cflags='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
 --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
---extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt' \
+--extra-libs='-L/usr/lib/aarch64-linux-gnu -lpthread -lm -lrt -ldl -lasound -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto' \
 --disable-everything \
 --enable-ffmpeg \
 --enable-ffprobe \
@@ -494,6 +552,12 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 
 
 nice -n 19 ionice -c 3 make -j3
+sudo make install
 
-
-
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcodec.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavformat.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilter.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresample.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevice.so*
