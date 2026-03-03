@@ -366,7 +366,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --enable-libsrt --enable-asm --enable-inline-asm --enable-neon --enable-vfp --enable-runtime-cpudetect \
 --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,dash,srt,unix,cache,crypto,concat' \
 --enable-bsf='h264_mp4toannexb,hevc_mp4toannexb,aac_adtstoasc,opus_metadata,extract_extradata,null' \
---enable-filter='v4l2_converter,vpp_v4l2m2m,deinterlace_v4l2m2m,hwmap,hwupload,hwdownload,format,scale,vulkan,libplacebo,fps,setdar,settb,setpts,aresample,volume,pad,crop,overlay,drawtext' \ 
+--enable-filter='v4l2_converter,vpp_v4l2m2m,deinterlace_v4l2m2m,hwmap,hwupload,hwdownload,format,scale,vulkan,libplacebo,fps,setdar,settb,setpts,aresample,volume,pad,crop,overlay,drawtext' \
 --enable-decoder='h264,hevc,mpeg2video,mpeg4,mjpeg,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,opus,aac,ac3,eac3,mp3,flac,vorbis,ass,srt,pcm_s16le,pcm_s24le,h263,h263dsp,mpegvideodec,qpeldsp,mov_text,dvdsub,dvbsub' \
 --enable-encoder='h264_v4l2m2m,hevc_v4l2m2m,mjpeg_v4l2m2m,mpeg4_v4l2m2m,libfdk_aac,aac,libmp3lame,libopus,mp3,flac,ass,srt,pcm_s16le,rawvideo,mov_text' \
 --enable-demuxer='matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo' \
@@ -463,7 +463,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --enable-libsrt --enable-asm --enable-inline-asm --enable-neon --enable-vfp --enable-runtime-cpudetect \
 --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,dash,srt,unix,cache,crypto,concat' \
 --enable-bsf='h264_mp4toannexb,hevc_mp4toannexb,aac_adtstoasc,opus_metadata,extract_extradata,null' \
---enable-filter='v4l2_converter,vpp_v4l2m2m,deinterlace_v4l2m2m,hwmap,hwupload,hwdownload,format,scale,vulkan,libplacebo,fps,setdar,settb,setpts,aresample,volume,pad,crop,overlay,drawtext' \ 
+--enable-filter='v4l2_converter,vpp_v4l2m2m,deinterlace_v4l2m2m,hwmap,hwupload,hwdownload,format,scale,vulkan,libplacebo,fps,setdar,settb,setpts,aresample,volume,pad,crop,overlay,drawtext' \
 --enable-decoder='h264,hevc,mpeg2video,mpeg4,mjpeg,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,opus,aac,ac3,eac3,mp3,flac,vorbis,ass,srt,pcm_s16le,pcm_s24le,h263,h263dsp,mpegvideodec,qpeldsp,mov_text,dvdsub,dvbsub' \
 --enable-encoder='h264_v4l2m2m,hevc_v4l2m2m,mjpeg_v4l2m2m,mpeg4_v4l2m2m,libfdk_aac,aac,libopus,mp3,flac,ass,srt,pcm_s16le,rawvideo,mov_text' \
 --enable-demuxer='matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo' \
@@ -554,7 +554,7 @@ PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig ./configure \
 --enable-libsrt --enable-asm --enable-inline-asm --enable-neon --enable-vfp --enable-runtime-cpudetect \
 --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,dash,srt,unix,cache,crypto,concat' \
 --enable-bsf='h264_mp4toannexb,hevc_mp4toannexb,aac_adtstoasc,opus_metadata,extract_extradata,null' \
---enable-filter='v4l2_converter,vpp_v4l2m2m,deinterlace_v4l2m2m,hwmap,hwupload,hwdownload,format,scale,vulkan,libplacebo,fps,setdar,settb,setpts,aresample,volume,pad,crop,overlay,drawtext' \ 
+--enable-filter='v4l2_converter,vpp_v4l2m2m,deinterlace_v4l2m2m,hwmap,hwupload,hwdownload,format,scale,vulkan,libplacebo,fps,setdar,settb,setpts,aresample,volume,pad,crop,overlay,drawtext' \
 --enable-decoder='h264,hevc,mpeg2video,mpeg4,mjpeg,h264_v4l2m2m,hevc_v4l2m2m,mpeg2_v4l2m2m,h264_v4l2request,hevc_v4l2request,mpeg2_v4l2request,opus,aac,ac3,eac3,mp3,flac,vorbis,ass,srt,pcm_s16le,pcm_s24le,h263,h263dsp,mpegvideodec,qpeldsp,mov_text,dvdsub,dvbsub' \
 --enable-encoder='h264_v4l2m2m,hevc_v4l2m2m,mjpeg_v4l2m2m,mpeg4_v4l2m2m,libfdk_aac,aac,libmp3lame,libopus,mp3,flac,ass,srt,pcm_s16le,rawvideo,mov_text' \
 --enable-demuxer='matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo' \
