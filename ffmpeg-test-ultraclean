@@ -561,3 +561,21 @@ sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil.so*
 sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresample.so*
 sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale.so*
 sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevice.so*
+
+
+for file in *.avi; do
+  [ -e "$file" ] || continue
+  echo "Konvertiere: $file mit NV12 Hardware-Pipeline..."
+
+  ffmpeg -hwaccel drm -hwaccel_output_format drm_prime -i "$file" \
+    -vf "v4l2_converter=deinterlace=1:w=1280:h=720:output_format=nv12,setdar=dar=16/9" \
+    -c:v h264_v4l2m2m \
+    -b:v 3M -maxrate 6M -bufsize 12M \
+    -g 250 \
+    -num_capture_buffers 16 \
+    -num_output_buffers 16 \
+    -c:a libfdk_aac -b:a 128k \
+    -f matroska "${file%.avi}_high.mkv"
+done
+
+
