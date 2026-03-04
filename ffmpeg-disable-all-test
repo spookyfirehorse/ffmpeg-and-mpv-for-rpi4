@@ -135,33 +135,3 @@ grep -A 20 "static const AVOption" libavcodec/v4l2_m2m_dec.c libavfilter/vf_dein
 
 
 
-./configure \
---prefix=/usr \
---libdir=/usr/lib/x86_64-linux-gnu \
---incdir=/usr/include \
---extra-version=ultra-skylake-cuda \
---arch=x86_64 \
---target-os=linux \
---cpu=skylake \
---extra-cflags='-I/usr/local/cuda/include -march=skylake -O3 -pipe -flto' \
---extra-ldflags='-L/usr/local/cuda/lib64 -latomic -Wl,-O1 -flto' \
---disable-everything \
---enable-ffmpeg --enable-ffprobe --disable-ffplay \
---enable-shared --disable-static --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
---enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
---enable-cuda-nvcc --enable-libnpp --enable-ffnvcodec --enable-nvenc --enable-nvdec \
---enable-hwaccel='h264_nvdec,hevc_nvdec,mpeg4_nvdec' \
---enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libass --enable-libfreetype \
---enable-gnutls --enable-network \
---enable-alsa --enable-libjack \
---enable-asm --enable-inline-asm --enable-runtime-cpudetect \
---enable-protocol='pipe,file,fd,tcp,udp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,hls,dash,srt,unix,cache,crypto,concat' \
---enable-bsf='h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,pgs_frame_merge,vp9_superframe,vp9_superframe_split' \
---enable-filter='scale_npp,scale_cuda,yadif_cuda,hwupload_cuda,hwdownload,format,scale,vulkan,libplacebo,fps,setdar,settb,setpts,asettb,asetpts,concat,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,overlay,drawtext,pad,crop,pan' \
---enable-decoder='h264,hevc,mpeg2video,mpeg4,mjpeg,h264_nvdec,hevc_nvdec,mpeg2_nvdec,mpeg4_nvdec,opus,aac,ac3,eac3,mp3,flac,vorbis,ass,srt,pcm_s16le,pcm_s24le,h263,h263dsp,mpegvideodec,qpeldsp,mov_text,dvdsub,dvbsub' \
---enable-encoder='h264_nvenc,hevc_nvenc,av1_nvenc,libfdk_aac,aac,libmp3lame,libopus,mp3,flac,ass,srt,pcm_s16le,rawvideo,mov_text' \
---enable-demuxer='matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo' \
---enable-muxer='matroska,mp4,mov,flac,wav,mp3,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,adts,image2,rawvideo,null' \
---enable-parser='h264,hevc,mjpeg,mpegvideo,mpeg4video,mp3,aac,opus,flac,vorbis,h263' \
---enable-indev='v4l2,alsa,jack,fbdev,pipe' --enable-outdev='v4l2,alsa,jack,fbdev,drm' \
---enable-xlib --disable-doc --disable-htmlpages --disable-libvpx --disable-libpulse --disable-vaapi --disable-vdpau
