@@ -1,10 +1,4 @@
-
- 
-full working vaapi
-
-
-./configure \
-  --prefix=/usr \
+./configure --prefix=/usr \
   --libdir=/usr/lib/x86_64-linux-gnu \
   --incdir=/usr/include/x86_64-linux-gnu \
   --extra-version="ultra-goldmont-stable-rt-jack" \
@@ -36,5 +30,5 @@ full working vaapi
   --enable-filter=hwupload,hwdownload,format,fps,scale,crop,overlay,drawtext,aresample,volume,loudnorm,equalizer,crystalizer,ladspa,lv2,rubberband,scale_vaapi,deinterlace_vaapi,denoise_vaapi,sharpness_vaapi,procamp_vaapi,tonemap_vaapi,yadif_vaapi,setdar,settb,setpts,asettb,asetpts,concat,aformat,bass,treble,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,pad,pan,yadif \
   --enable-parser=aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis \
   --enable-bsf=aac_adtstoasc,extract_extradata,h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,null,opus_metadata \
-  --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect ./configure --disable-cuda-nvcc --disable-libnpp --disable-cuvid --disable-nvenc --disable-nvdec --disable-ffnvcodec --disable-doc --disable-htmlpages --disable-txtpages --disable-manpages --disable-podpages \
+  --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect \
   && make clean && make -j$(nproc) && sudo make install && sudo ldconfig
