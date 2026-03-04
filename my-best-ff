@@ -82,7 +82,7 @@ grep -A 20 "static const AVOption" libavcodec/v4l2_m2m_dec.c libavfilter/vf_dein
 --prefix=/usr \
 --libdir=/usr/lib/aarch64-linux-gnu \
 --incdir=/usr/include/aarch64-linux-gnu \
---extra-version=ultra-pi4-64bit-jc-kynesim-final \
+--extra-version=ultra-pi5-64bit-jc-kynesim-final \
 --arch=aarch64 \
 --target-os=linux \
 --cpu=cortex-a76 \
