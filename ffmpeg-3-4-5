@@ -1,5 +1,10 @@
 grep -rnE "ff_.*_v4l2m2m_(decoder|encoder)|ff_.*_v4l2request_decoder" libavcodec/allcodecs.c
 grep -rnE "v4l2request" libavcodec/allcodecs.c
+grep -rn "scale_v4l2m2m" libavfilter/
+grep -rn "ff_h263_decoder" libavcodec/
+grep -n "OBJS-.*FILTER" libavfilter/allfilters.c | grep "v4l2"
+grep -rl "AVCodec ff_h263_encoder" libavcodec/
+
 
 ##################################### pi 5 ##########################################
 
