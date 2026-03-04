@@ -5,7 +5,7 @@ grep -rnE "v4l2request" libavcodec/allcodecs.c
 ./configure --prefix=/usr \
  --libdir=/usr/lib/aarch64-linux-gnu \
  --incdir=/usr/include/aarch64-linux-gnu \
- --extra-version="ultra-pi4-jc-kynesim-final" \
+ --extra-version="ultra-pi5-jc-kynesim-final" \
  --arch=aarch64 --target-os=linux --cpu=cortex-a72 \
  --fatal-warnings \
  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
