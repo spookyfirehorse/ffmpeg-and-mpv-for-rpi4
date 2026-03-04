@@ -1,3 +1,7 @@
+grep -A 20 "static const AVOption" libavcodec/v4l2_m2m_dec.c libavfilter/vf_deinterlace_v4l2m2m.c 2>/dev/null
+
+
+
 PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig ./configure \
 --prefix=/usr \
 --libdir=/usr/lib/arm-linux-gnueabihf \
