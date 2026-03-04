@@ -1,3 +1,10 @@
+grep -rnE "ff_.*_v4l2m2m_(decoder|encoder)|ff_.*_v4l2request_decoder" libavcodec/allcodecs.c
+grep -rnE "v4l2request" libavcodec/allcodecs.c
+
+##################################### pi 5 ##########################################
+
+403
+
 ./configure --prefix=/usr \
  --libdir=/usr/lib/aarch64-linux-gnu \
  --incdir=/usr/include/aarch64-linux-gnu \
@@ -88,3 +95,7 @@ make distclean && ./configure --prefix=/usr \
 
 
 
+
+
+
+#######################################################################
