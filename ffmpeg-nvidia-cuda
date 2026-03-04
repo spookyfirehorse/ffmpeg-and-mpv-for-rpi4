@@ -1,3 +1,53 @@
+1. Nach Hardware-Filtern suchen (CUDA/NPP)
+Die Nvidia-Filter liegen in libavfilter/. So findest du die Definitionen für das Hardware-Scaling oder Deinterlacing:
+bash
+grep -rn "cuda" libavfilter/ | grep ".c:"
+# Speziell für NPP-Filter:
+grep -rn "npp" libavfilter/
+Verwende Code mit Vorsicht.
+
+2. Nach Encodern suchen (NVENC)
+Die NVENC-Schnittstelle liegt in libavcodec/. So findest du den Code für den H.264/HEVC-Encoder:
+bash
+grep -rn "nvenc" libavcodec/ | grep ".c:"
+Verwende Code mit Vorsicht.
+
+3. Nach Decodern suchen (CUVID)
+Die Hardware-Decoder (früher CUVID) findest du so:
+bash
+grep -rn "cuvid" libavcodec/
+Verwende Code mit Vorsicht.
+
+4. Den "Einstiegspunkt" (Strukturen) finden
+Wenn du nur wissen willst, in welcher Datei der Encoder/Decoder-Einstieg (AVCodec) definiert ist:
+bash
+grep -rl "AVCodec ff_h264_nvenc_encoder" libavcodec/
+grep -rl "AVCodec ff_hevc_nvenc_encoder" libavcodec/
+Verwende Code mit Vorsicht.
+
+5. Nach Header-Dateien suchen
+Wenn du die Schnittstellen-Definitionen (.h-Dateien) suchst:
+bash
+find libavcodec -name "*nvenc*"
+find libavcodec -name "*cuda*"
+Verwende Code mit Vorsicht.
+
+Zusammenfassung der Nvidia-Pfade:
+NVENC (Encoder): libavcodec/nvenc.c, libavcodec/nvenc_h264.c, libavcodec/nvenc_hevc.c
+NVDEC/CUVID (Decoder): libavcodec/cuviddec.c
+CUDA-Filter: libavfilter/vf_scale_cuda.c, libavfilter/vf_yadif_cuda.c
+NPP-Filter: libavfilter/vf_scale_npp.c
+Soll ich dir zeigen, wie du mit grep prüfst, welche Nvidia-Kapazitäten dein aktuell installiertes FFmpeg-Binary unterstützt?Ja oder Nein?
+KI-Antworten können Fehler enthalten. Weitere Informationen
+
+
+
+
+
+
+
+
+
 
 sudo apt install libnpth0-dev
 
