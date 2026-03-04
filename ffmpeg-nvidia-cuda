@@ -1,35 +1,67 @@
-./configure --prefix=/usr \
+
+sudo apt install libnpth0-dev
+
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libcuda.so.1 /usr/lib/x86_64-linux-gnu/libcuda.so
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libnvidia-encode.so.1 /usr/lib/x86_64-linux-gnu/libnvidia-encode.so
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libnvcuvid.so.1 /usr/lib/x86_64-linux-gnu/libnvcuvid.so
+
+# NPP Symlinks für die Filter (wichtig für scale_npp)
+for lib in nppc nppig nppicc npps nppidei nppif nppim nppist nppisu nppitc nppial; do
+  sudo ln -sf /usr/lib/x86_64-linux-gnu/lib${lib}.so.12 /usr/lib/x86_64-linux-gnu/lib${lib}.so 2>/dev/null
+done
+
+
+# Für Ubuntu: Repositories sicherstellen
+sudo add-apt-repository -y multiverse && sudo apt update
+
+# Alle benötigten Entwickler-Tools und Libraries
+sudo apt install -y build-essential nasm pkg-config git \
+  nvidia-cuda-toolkit libnvcuvid1 libnvidia-encode1 \
+  libfdk-aac-dev libmp3lame-dev libopus-dev libvorbis-dev libvpx-dev \
+  libfreetype6-dev libharfbuzz-dev libfribidi-dev \
+  libjack-jackd2-dev libpulse-dev \
+  libgnutls28-dev libgmp-dev libgcrypt20-dev \
+  libass-dev libsoxr-dev librubberband-dev libmysofa-dev \
+  ladspa-sdk lv2-dev libbs2b-dev libva-dev
+
+
+
+
+
+
+
+
+make distclean && ./configure --prefix=/usr \
  --libdir=/usr/lib/x86_64-linux-gnu \
  --incdir=/usr/include \
- --extra-cflags="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize -mavx2 -mfma -ffast-math -I/usr/include" \
- --extra-cxxflags="-march=skylake -mtune=skylake -O3 -pipe -ftree-vectorize -mavx2 -mfma -ffast-math" \
- --extra-ldflags="-L/usr/lib/x86_64-linux-gnu -Wl,-O1 -Wl,--as-needed" \
- --nvcc=/usr/lib/nvidia-cuda-toolkit/bin/nvcc \
+ --extra-version="ultra-skylake-stable-rt-jack" \
+ --extra-cflags="-march=skylake -O3 -pipe" \
+ --extra-cxxflags="-march=skylake -O3 -pipe" \
+ --extra-ldflags="-L/usr/lib/x86_64-linux-gnu -Wl,-O1" \
+ --extra-libs="-lpthread -lm -lrt -ldl -lstdc++" \
+ --nvcc=/usr/bin/nvcc \
  --disable-everything \
- --enable-ffmpeg --enable-ffprobe \
- --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter \
- --enable-swresample --enable-swscale \
- --enable-pthreads --enable-shared --disable-static \
- --disable-debug --disable-doc \
+ --enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
+ --enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc \
  --enable-gpl --enable-version3 --enable-nonfree \
  --enable-cuda-nvcc --enable-libnpp --enable-ffnvcodec --enable-nvenc --enable-nvdec \
- --enable-vaapi --enable-hwaccel=h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi,mjpeg_vaapi,mpeg2_vaapi,h264_vulkan,hevc_vulkan,vp9_vulkan,av1_vulkan,mpeg1_nvdec,mpeg2_nvdec,mpeg4_nvdec,h264_nvdec,hevc_nvdec,vp8_nvdec,vp9_nvdec,av1_nvdec,vc1_nvdec,wmv3_nvdec,mjpeg_nvdec \
- --enable-vulkan --enable-libplacebo --enable-libshaderc \
- --disable-vdpau \
+ --enable-vaapi --disable-vulkan --disable-libplacebo --disable-libshaderc --disable-vdpau \
+ --enable-hwaccel=h264_nvdec,hevc_nvdec,vp9_nvdec,av1_nvdec,h264_vaapi,hevc_vaapi \
+ --enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx \
- --enable-libfreetype --enable-libharfbuzz --enable-libfribidi --enable-ladspa --enable-lv2 \
- --enable-gnutls --enable-gmp --enable-gcrypt --enable-network --enable-alsa --enable-libjack --enable-asm --enable-inline-asm --enable-runtime-cpudetect \
- --enable-libpulse --enable-libjack --enable-alsa \
- --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
- --enable-indev=v4l2,alsa,pulse,jack,fbdev,lavfi \
- --enable-outdev=v4l2,alsa,pulse,jack,fbdev,drm \
- --enable-filter=afifo,anull,asplit,aresample,aformat,amix,vulkan,libplacebo,scale,format,fps,crystalizer,bass,treble,equalizer,volume,loudnorm,anequalizer,surround,stereowiden,sidechaincompress,ladspa,lv2,rubberband,crop,overlay,drawtext,boxblur,unsharp,yadif,yadif_cuda,bwdif_cuda,hwupload_cuda,hwdownload,scale_npp,transpose_npp,deinterlace_vaapi,scale_vaapi \
- --enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,hls,pipe,crypto,tls \
- --enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,ape,dsf,mjpeg,vc1,wmv,image2 \
- --enable-muxer=mp4,mkv,avi,flac,wav,mp3,opus,ogg,rtsp,rtp,sdp,rtmp,flv,hls,mpegts,pcm_s16le,pcm_s24le,pcm_s32le,adts,latm,null,matroska,ipod,ismv,dash \
- --enable-decoder=h264,hevc,vp9,av1,ffv1,ffv1_vulkan,prores_vulkan,h264,hevc,vp8,vp9,mjpeg,mpeg1video,mpeg2video,mpeg4,h263,h263p,vc1,wmv3,aac,mp3,flac,alac,ape,wavpack,vorbis,dvdsub,pgssub,ass,srt,flv,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,dsd_lsbf,dsd_msbf,rawvideo,mpegaudio,mp3,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,adpcm_adx,adpcm_g726 \
- --enable-encoder=h264_vaapi,hevc_vaapi,vp9_vaapi,mjpeg_vaapi,h264_vulkan,hevc_vulkan,av1_vulkan,ffv1,ffv1_vulkan,h264_nvenc,hevc_nvenc,av1_nvenc,aac,libmp3lame,libopus,flac,alac,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le \
- --enable-parser=h264,hevc,vp8,vp9,mjpeg,mpegvideo,mpeg4video,h263,aac,mp3,mpegaudio,flac,opus,vc1 \
- --enable-bsf=h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,pgs_frame_merge,vp9_superframe,vp9_superframe_split,extract_extradata \
+ --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
  --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
- --enable-lto && make clean && make -j$(nproc) && sudo make install
+ --enable-alsa --enable-libjack --disable-libpulse \
+ --enable-indev=v4l2,alsa,jack,fbdev,lavfi \
+ --enable-outdev=v4l2,alsa,jack,fbdev,drm \
+ --enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,ffrtmpcrypt,hls,pipe,crypto,tls,unix,cache,concat,data,lavfi \
+ --enable-demuxer=mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,mjpeg,image2,lavfi \
+ --enable-muxer=mp4,mkv,mov,avi,flac,wav,mp3,opus,ogg,rtsp,rtp,rtmp,flv,hls,mpegts,adts,dash,matroska,image2,null \
+ --enable-decoder=h264,hevc,vp9,av1,mjpeg,mpeg1video,mpeg2video,mpeg4,aac,mp3,flac,vorbis,opus,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,adpcm_swf,ass,srt \
+ --enable-decoder=h264_cuvid,hevc_cuvid,vp9_cuvid \
+ --enable-encoder=h264_nvenc,hevc_nvenc,av1_nvenc,h264_vaapi,hevc_vaapi,aac,libfdk_aac,libmp3lame,libopus,flac \
+ --enable-filter=afifo,anull,asplit,amix,aresample,aformat,volume,loudnorm,equalizer,crystalizer,ladspa,lv2,rubberband,scale,format,fps,crop,overlay,drawtext,hwupload_cuda,hwdownload,scale_npp,yadif_cuda \
+ --enable-parser=h264,hevc,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus,vorbis \
+ --enable-bsf=h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,extract_extradata,null \
+ --enable-asm --enable-inline-asm --enable-runtime-cpudetect \
+ && make clean && make -j$(nproc) && sudo make install && sudo ldconfig
