@@ -125,8 +125,8 @@ grep -A 20 "static const AVOption" libavcodec/v4l2_m2m_dec.c libavfilter/vf_dein
 --arch=x86_64 \
 --target-os=linux \
 --cpu=skylake \
---extra-cflags='-I/usr/local/cuda/include -march=skylake -O3 -pipe -flto' \
---extra-ldflags='-L/usr/local/cuda/lib64 -latomic -Wl,-O1 -flto' \
+--extra-cflags='-I/usr/cuda/include -march=skylake -O3 -pipe -flto' \
+--extra-ldflags='-L/usr/cuda/lib64 -latomic -Wl,-O1 -flto' \
 --disable-everything \
 --enable-ffmpeg --enable-ffprobe --disable-ffplay \
 --enable-shared --disable-static --enable-gpl --enable-version3 --enable-nonfree --enable-lto \
