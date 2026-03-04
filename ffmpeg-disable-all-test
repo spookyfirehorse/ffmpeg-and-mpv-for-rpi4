@@ -7,13 +7,13 @@ sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale.so*
 sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevice.so*
 
 
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcodec.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavformat.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilter.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresample.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevice.so*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavcodec.so*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavformat.so*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavfilter.so*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavutil.so*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libswresample.so*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libswscale.so*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavdevice.so*
 
 
 grep -A 20 "static const AVOption" libavcodec/v4l2_m2m_dec.c libavfilter/vf_deinterlace_v4l2m2m.c 2>/dev/null
