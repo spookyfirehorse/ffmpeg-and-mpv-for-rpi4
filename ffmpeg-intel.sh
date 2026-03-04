@@ -28,7 +28,7 @@
   --enable-muxer=adts,avi,dash,flac,hls,image2,matroska,mov,mp3,mp4,mpegts,null,ogg,opus,rawvideo,rtmp,rtp,rtsp,wav \
   --enable-decoder=h263,h263i,h263p,h264,hevc,vp9,av1,mjpeg,mpeg1video,mpeg2video,mpeg4,aac,mp3,flac,vorbis,opus,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,adpcm_swf,ass,srt,h264_vaapi,hevc_vaapi,vp9_vaapi \
   --enable-encoder=aac,ac3,adpcm_ima_qt,adpcm_ima_wav,adpcm_ms,ass,dvbsub,dvdsub,eac3,flac,h263,h263p,h264_vaapi,hevc_vaapi,vp9_vaapi,libfdk_aac,libmp3lame,libopus,libvorbis,libx264,libx265,mjpeg,mov_text,mp3,opus,pcm_s16le,pcm_s24le,rawvideo,srt \
-  --enable-filter=hwupload,hwdownload,format,fps,scale,crop,overlay,drawtext,aresample,volume,loudnorm,equalizer,crystalizer,ladspa,lv2,rubberband,scale_vaapi,deinterlace_vaapi,denoise_vaapi,sharpness_vaapi,procamp_vaapi,tonemap_vaapi,yadif_vaapi,setdar,settb,setpts,asettb,asetpts,concat,aformat,bass,treble,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,pad,pan,yadif \
+  --enable-filter=hwupload,hwdownload,format,fps,scale,crop,overlay,drawtext,aresample,volume,loudnorm,equalizer,crystalizer,ladspa,lv2,rubberband,scale_vaapi,deinterlace_vaapi,denoise_vaapi,sharpness_vaapi,procamp_vaapi,tonemap_vaapi,yadif_vaapi,setdar,settb,setpts,asettb,asetpts,concat,aformat,bass,treble,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,pad,pan,yadif,asubboost,asubcut \
   --enable-parser=aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis \
   --enable-bsf=aac_adtstoasc,extract_extradata,h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,null,opus_metadata \
   --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --enable-lto \
