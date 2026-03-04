@@ -34,8 +34,7 @@ grep -A 20 "static const AVOption" libavcodec/v4l2_m2m_dec.c libavfilter/vf_dein
 --enable-parser='h264,hevc,mjpeg,mpegvideo,mpeg4video,mp3,aac,opus,flac,vorbis,h263' \
 --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe' \
 --enable-outdev='v4l2,alsa,jack,fbdev,drm,kmsgrab' \
---enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio --disable-outdev=xv --disable-cuda --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvdec --disable-nvenc --disable-amf --disable-vaapi --disable-vdpau --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl --disable-libvpx --disable-libpulse --disable-indev=pulse --disable-outdev=pulse --disable-decoder='vp8,vp9,svq1,svq3,rv10,rv20' --disable-encoder='vp8,vp9,h263,h263p' --disable-parser='vp8,vp9' --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal \
---disable-libpulse --disable-indev=pulse --disable-outdev=pulse 
+--enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio --disable-outdev=xv --disable-cuda --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvdec --disable-nvenc --disable-amf --disable-vaapi --disable-vdpau --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl --disable-libvpx --disable-libpulse --disable-indev=pulse --disable-outdev=pulse --disable-decoder='vp8,vp9,svq1,svq3,rv10,rv20' --disable-encoder='vp8,vp9,h263,h263p' --disable-parser='vp8,vp9' --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal --disable-libpulse --disable-indev=pulse --disable-outdev=pulse 
 
 
 
@@ -73,8 +72,7 @@ grep -A 20 "static const AVOption" libavcodec/v4l2_m2m_dec.c libavfilter/vf_dein
 --enable-parser='h264,hevc,mjpeg,mpegvideo,mpeg4video,mp3,aac,opus,flac,vorbis,h263' \
 --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe' \
 --enable-outdev='v4l2,alsa,jack,fbdev,drm,kmsgrab' \
---enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio --disable-outdev=xv --disable-cuda --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvdec --disable-nvenc --disable-amf --disable-vaapi --disable-vdpau --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl --disable-libvpx --disable-libpulse --disable-indev=pulse --disable-outdev=pulse --disable-decoder='vp8,vp9,svq1,svq3,rv10,rv20' --disable-encoder='vp8,vp9,h263,h263p' --disable-parser='vp8,vp9' --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal \
---disable-libpulse --disable-indev=pulse --disable-outdev=pulse 
+--enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio --disable-outdev=xv --disable-cuda --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvdec --disable-nvenc --disable-amf --disable-vaapi --disable-vdpau --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl --disable-libvpx --disable-libpulse --disable-indev=pulse --disable-outdev=pulse --disable-decoder='vp8,vp9,svq1,svq3,rv10,rv20' --disable-encoder='vp8,vp9,h263,h263p' --disable-parser='vp8,vp9' --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal --disable-libpulse --disable-indev=pulse --disable-outdev=pulse 
 
 
 
@@ -110,8 +108,7 @@ grep -A 20 "static const AVOption" libavcodec/v4l2_m2m_dec.c libavfilter/vf_dein
 --enable-parser='h264,hevc,mjpeg,mpegvideo,mpeg4video,mp3,aac,opus,flac,vorbis,h263' \
 --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe' \
 --enable-outdev='v4l2,alsa,jack,fbdev,drm,kmsgrab' \
---enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio --disable-outdev=xv --disable-cuda --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvdec --disable-nvenc --disable-amf --disable-vaapi --disable-vdpau --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl --disable-libvpx --disable-libpulse --disable-indev=pulse --disable-outdev=pulse --disable-decoder='vp8,vp9,svq1,svq3,rv10,rv20' --disable-encoder='vp8,vp9,h263,h263p' --disable-parser='vp8,vp9' --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal \
---disable-libpulse --disable-indev=pulse --disable-outdev=pulse 
+--enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio --disable-outdev=xv --disable-cuda --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvdec --disable-nvenc --disable-amf --disable-vaapi --disable-vdpau --disable-d3d11va --disable-dxva2 --disable-libmfx --disable-videotoolbox --disable-audiotoolbox --disable-opencl --disable-libvpx --disable-libpulse --disable-indev=pulse --disable-outdev=pulse --disable-decoder='vp8,vp9,svq1,svq3,rv10,rv20' --disable-encoder='vp8,vp9,h263,h263p' --disable-parser='vp8,vp9' --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal --disable-libpulse --disable-indev=pulse --disable-outdev=pulse 
 
 
 
