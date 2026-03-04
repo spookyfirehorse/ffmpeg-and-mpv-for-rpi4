@@ -13,7 +13,7 @@
   --enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc \
   --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping \
   --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
-  --disable-libpulse --enable-libxml2 \
+  --disable-libpulse --disable-indev=pulse --disable-outdev=pulse --enable-libxml2 \
   --enable-vaapi --disable-vulkan --disable-libshaderc --enable-libdrm --disable-vdpau \
   --enable-hwaccel=h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi \
   --enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
@@ -31,5 +31,5 @@
   --enable-filter=hwupload,hwdownload,format,fps,scale,crop,overlay,drawtext,aresample,volume,loudnorm,equalizer,crystalizer,ladspa,lv2,rubberband,scale_vaapi,deinterlace_vaapi,denoise_vaapi,sharpness_vaapi,procamp_vaapi,tonemap_vaapi,yadif_vaapi,setdar,settb,setpts,asettb,asetpts,concat,aformat,bass,treble,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,pad,pan,yadif \
   --enable-parser=aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis \
   --enable-bsf=aac_adtstoasc,extract_extradata,h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,null,opus_metadata \
-  --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect \
+  --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --enable-lto \
   && make clean && make -j$(nproc) && sudo make install && sudo ldconfig
