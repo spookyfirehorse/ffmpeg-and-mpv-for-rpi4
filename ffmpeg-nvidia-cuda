@@ -99,7 +99,7 @@ make distclean && ./configure --prefix=/usr \
  --enable-libvpx --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis \
  --enable-libfreetype --enable-libharfbuzz --enable-libfribidi  --enable-hardcoded-tables \
  --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa --enable-alsa --enable-libjack \
- --disable-libx264 --disable-libx265 --disable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-libpulse --disable-debug  \
+ --enable-libx264 --enable-libx265 --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-libpulse --disable-debug  \
  --enable-indev=v4l2,alsa,jack,fbdev,lavfi,pipe \
  --enable-outdev=v4l2,alsa,jack,fbdev,drm,pipe \
  --enable-protocol=file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,ffrtmpcrypt,hls,pipe,crypto,tls,unix,cache,concat,data,lavfi \
