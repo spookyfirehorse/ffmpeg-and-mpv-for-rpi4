@@ -79,7 +79,7 @@ test
 
 make distclean && ./configure --prefix=/usr \
  --libdir=/usr/lib/x86_64-linux-gnu \
- --incdir=/usr/include \
+ --incdir=/usr/include/x86_64-linux-gnu \
  --extra-version="ultra-skylake-stable-rt-jack" \
  --arch=x86_64 \
  --cpu=skylake \
@@ -121,7 +121,7 @@ working
 
 make distclean && ./configure --prefix=/usr \
  --libdir=/usr/lib/x86_64-linux-gnu \
- --incdir=/usr/include \
+ --incdir=/usr/include/x86_64-linux-gnu \
  --extra-version="ultra-skylake-stable-rt-jack" \
  --extra-cflags="-march=skylake -O3 -pipe" \
  --extra-cxxflags="-march=skylake -O3 -pipe" \
