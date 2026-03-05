@@ -219,3 +219,4 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux
  --enable-bsf='h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,extract_extradata,null,opus_metadata' \
  --enable-asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse,xv' \
  && make -j$(nproc) && sudo make install && sudo ldconfig
+
