@@ -21,8 +21,8 @@
   --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
   --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
   --enable-alsa --enable-libjack \
-  --enable-indev=alsa,fbdev,jack,kmsgrab,lavfi,pipe,v4l2,v4l2_m2m \
-  --enable-outdev=alsa,drm,fbdev,jack,kmsgrab,v4l2 \
+  --enable-indev=alsa,fbdev,jack,kmsgrab,lavfi,pipe,v4l2,pipe \
+  --enable-outdev=alsa,drm,fbdev,jack,kmsgrab,v4l2,pipe \
   --enable-protocol=cache,concat,crypto,dash,fd,ffrtmpcrypt,file,hls,http,https,pipe,rtmp,rtmpe,rtmps,rtmpt,rtp,rtsp,srt,tcp,tls,udp,unix \
   --enable-demuxer=aac,avi,concat,dash,flac,h264,hevc,hls,image2,lavfi,matroska,mjpeg,mov,mp3,mpegts,mpegvideo,ogg,rawvideo,rtmp,rtp,rtsp,sdp,wav \
   --enable-muxer=adts,avi,dash,flac,hls,image2,matroska,mov,mp3,mp4,mpegts,null,ogg,opus,rawvideo,rtmp,rtp,rtsp,wav \
