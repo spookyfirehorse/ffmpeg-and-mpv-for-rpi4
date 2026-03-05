@@ -13,14 +13,14 @@
   --enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc \
   --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping \
   --disable-cuda --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-ffnvcodec \
-  --disable-libpulse --disable-indev=pulse --disable-outdev=pulse --enable-libxml2 \
-  --enable-vaapi --disable-vulkan --disable-libshaderc --enable-libdrm --disable-vdpau \
+  --disable-libpulse --disable-indev=pulse --disable-outdev=pulse,xv --enable-libxml2 \
+  --enable-vaapi --enable-vulkan --enable-libshaderc --enable-libplacebo --enable-libdrm --disable-vdpau \
   --enable-hwaccel=h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi \
   --enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
   --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx \
   --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
   --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
-  --enable-alsa --enable-libjack \
+  --enable-alsa --enable-libjack  \
   --enable-indev=alsa,fbdev,jack,kmsgrab,lavfi,pipe,v4l2,pipe \
   --enable-outdev=alsa,drm,fbdev,jack,kmsgrab,v4l2,pipe \
   --enable-protocol=cache,concat,crypto,dash,fd,ffrtmpcrypt,file,hls,http,https,pipe,rtmp,rtmpe,rtmps,rtmpt,rtp,rtsp,srt,tcp,tls,udp,unix \
