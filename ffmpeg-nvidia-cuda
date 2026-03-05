@@ -78,9 +78,12 @@ sudo apt install -y build-essential nasm pkg-config git \
 test
 
 export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH"
+sudo apt install libgnutls28-dev libp11-kit-dev libzstd-dev libidn2-dev libunistring-dev
 
 
-make distclean && ./configure --prefix=/usr \
+make distclean && \
+PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
+./configure --prefix=/usr \
  --libdir=/usr/lib/x86_64-linux-gnu \
  --incdir=/usr/include/x86_64-linux-gnu \
  --extra-version="ultra-skylake-stable-rt-jack" \
@@ -89,7 +92,7 @@ make distclean && ./configure --prefix=/usr \
  --extra-cflags='-march=skylake -O3 -pipe -fPIC -I/usr/include/vulkan' \
  --extra-cxxflags='-march=skylake -O3 -pipe -fPIC' \
  --extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O1 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed' \
- --extra-libs='-lpthread -lm -lrt -ldl -lxml2 -lz' \
+ --extra-libs='-lpthread -lm -lrt -ldl -lstdc++ -lxml2 -lz -lgnutls -lnettle -lhogweed -lgmp -lidn2 -lunistring -lp11-kit' \
  --nvcc=/usr/bin/nvcc \
  --disable-everything --disable-hwaccels \
  --enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
@@ -115,3 +118,5 @@ make distclean && ./configure --prefix=/usr \
  --enable-bsf='h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,extract_extradata,null,opus_metadata' \
  --enable-asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse,xv' \
  && make -j$(nproc) && sudo make install && sudo ldconfig
+
+
