@@ -1,6 +1,9 @@
 grep -rnE "ff_.*_v4l2m2m_(decoder|encoder)|ff_.*_v4l2request_decoder" libavcodec/allcodecs.c
 grep -rnE "v4l2request" libavcodec/allcodecs.c
 
+
+ffprobe -v error -show_entries frame=pkt_size,pkt_pts_time -select_streams v:0 -f rtsp rtsp://"MshcUBHU8P:VPxfYXKRXw"@"lucy:8557"/mystream
+
 ##################################### pi 5 ##########################################
 
 403
