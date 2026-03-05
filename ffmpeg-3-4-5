@@ -5,7 +5,7 @@ grep -rn "ff_h263_decoder" libavcodec/
 grep -n "OBJS-.*FILTER" libavfilter/allfilters.c | grep "v4l2"
 grep -rl "AVCodec ff_h263_encoder" libavcodec/
 
-
+ffprobe -v error -show_entries frame=pkt_size,pkt_pts_time -select_streams v:0 -f rtsp rtsp://"MshcUBHU8P:VPxfYXKRXw"@"lucy:8557"/mystream
 ##################################### pi 5 ##########################################
 
 403
