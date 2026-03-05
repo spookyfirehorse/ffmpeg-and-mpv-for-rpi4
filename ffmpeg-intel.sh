@@ -2,6 +2,94 @@ sudo apt install libgnutls28-dev libp11-kit-dev libzstd-dev libidn2-dev libunist
 
 
 
+1. Nach Hardware-Filtern suchen (CUDA/NPP)
+Die Nvidia-Filter liegen in libavfilter/. So findest du die Definitionen für das Hardware-Scaling oder Deinterlacing:
+bash
+grep -rn "cuda" libavfilter/ | grep ".c:"
+# Speziell für NPP-Filter:
+grep -rn "npp" libavfilter/
+Verwende Code mit Vorsicht.
+
+2. Nach Encodern suchen (NVENC)
+Die NVENC-Schnittstelle liegt in libavcodec/. So findest du den Code für den H.264/HEVC-Encoder:
+bash
+grep -rn "nvenc" libavcodec/ | grep ".c:"
+Verwende Code mit Vorsicht.
+
+3. Nach Decodern suchen (CUVID)
+Die Hardware-Decoder (früher CUVID) findest du so:
+bash
+grep -rn "cuvid" libavcodec/
+Verwende Code mit Vorsicht.
+
+4. Den "Einstiegspunkt" (Strukturen) finden
+Wenn du nur wissen willst, in welcher Datei der Encoder/Decoder-Einstieg (AVCodec) definiert ist:
+bash
+grep -rl "AVCodec ff_h264_nvenc_encoder" libavcodec/
+grep -rl "AVCodec ff_hevc_nvenc_encoder" libavcodec/
+Verwende Code mit Vorsicht.
+
+5. Nach Header-Dateien suchen
+Wenn du die Schnittstellen-Definitionen (.h-Dateien) suchst:
+bash
+find libavcodec -name "*nvenc*"
+find libavcodec -name "*cuda*"
+Verwende Code mit Vorsicht.
+
+Zusammenfassung der Nvidia-Pfade:
+NVENC (Encoder): libavcodec/nvenc.c, libavcodec/nvenc_h264.c, libavcodec/nvenc_hevc.c
+NVDEC/CUVID (Decoder): libavcodec/cuviddec.c
+CUDA-Filter: libavfilter/vf_scale_cuda.c, libavfilter/vf_yadif_cuda.c
+NPP-Filter: libavfilter/vf_scale_npp.c
+Soll ich dir zeigen, wie du mit grep prüfst, welche Nvidia-Kapazitäten dein aktuell installiertes FFmpeg-Binary unterstützt?Ja oder Nein?
+KI-Antworten können Fehler enthalten. Weitere Informationen
+
+
+
+
+
+
+
+
+
+
+sudo apt install libnpth0-dev
+
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libcuda.so.1 /usr/lib/x86_64-linux-gnu/libcuda.so
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libnvidia-encode.so.1 /usr/lib/x86_64-linux-gnu/libnvidia-encode.so
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libnvcuvid.so.1 /usr/lib/x86_64-linux-gnu/libnvcuvid.so
+
+# NPP Symlinks für die Filter (wichtig für scale_npp)
+for lib in nppc nppig nppicc npps nppidei nppif nppim nppist nppisu nppitc nppial; do
+  sudo ln -sf /usr/lib/x86_64-linux-gnu/lib${lib}.so.12 /usr/lib/x86_64-linux-gnu/lib${lib}.so 2>/dev/null
+done
+
+
+# Für Ubuntu: Repositories sicherstellen
+sudo add-apt-repository -y multiverse && sudo apt update
+
+# Alle benötigten Entwickler-Tools und Libraries
+sudo apt install -y build-essential nasm pkg-config git \
+  nvidia-cuda-toolkit libnvcuvid1 libnvidia-encode1 \
+  libfdk-aac-dev libmp3lame-dev libopus-dev libvorbis-dev libvpx-dev \
+  libfreetype6-dev libharfbuzz-dev libfribidi-dev \
+  libjack-jackd2-dev libpulse-dev \
+  libgnutls28-dev libgmp-dev libgcrypt20-dev \
+  libass-dev libsoxr-dev librubberband-dev libmysofa-dev \
+  ladspa-sdk lv2-dev libbs2b-dev libva-dev
+
+
+test
+
+export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH"
+sudo apt install libgnutls28-dev libp11-kit-dev libzstd-dev libidn2-dev libunistring-dev
+
+Das "Universal-Nvidia-Skylake" Skript:
+Kopier dir das hier in eine Datei (z.B. build_ffmpeg.sh), mach sie mit chmod +x ausführbar und du hast ein Skript für beide Welten:
+bash
+
+nvidia
+
 #!/bin/bash
 make distclean && \
 PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
@@ -40,3 +128,52 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux
  --enable-bsf='h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,extract_extradata,null,opus_metadata' \
  --enable-asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse,xv' \
  && make -j$(nproc) && sudo make install && sudo ldconfig
+Verwende Code mit Vorsicht.
+
+
+intel 
+
+Das korrigierte Universal-Skript für Intel (Goldmont)
+Ich habe hier die VAAPI-Hardware-Konverter und die Vulkan-Interoperabilität so verzahnt, dass du auch auf dem Goldmont das „C“ bei libplacebo bekommst:
+bash
+make distclean && \
+PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
+./configure --prefix=/usr \
+  --libdir=/usr/lib/x86_64-linux-gnu \
+  --incdir=/usr/include/x86_64-linux-gnu \
+  --extra-version="ultra-goldmont-8.0.1-C-support" \
+  --arch=x86_64 \
+  --cpu=goldmont \
+  --extra-cflags="-march=goldmont -mtune=goldmont -O3 -pipe -fPIC -I/usr/include/vulkan" \
+  --extra-cxxflags="-march=goldmont -mtune=goldmont -O3 -pipe -fPIC" \
+  --extra-ldflags="-L/usr/lib/x86_64-linux-gnu -Wl,-O1 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed" \
+  --extra-libs="-lpthread -lm -lrt -ldl -lstdc++ -lxml2 -lz -lgnutls -lnettle -lhogweed -lgmp -lidn2 -lunistring -lp11-kit" \
+  --disable-everything --disable-hwaccels \
+  --enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
+  --enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc \
+  --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
+  --disable-cuda --disable-nvenc --enable-libxml2 \
+  --enable-vaapi --enable-vulkan --enable-libshaderc --enable-libplacebo --enable-libdrm --disable-vdpau \
+  --enable-hwaccel='h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi' \
+  --enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
+  --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx \
+  --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
+  --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
+  --enable-alsa --enable-libjack  \
+  --enable-indev='alsa,fbdev,jack,kmsgrab,lavfi,pipe,v4l2' \
+  --enable-outdev='alsa,drm,fbdev,jack,kmsgrab,v4l2,pipe' \
+  --enable-protocol='cache,concat,crypto,dash,fd,ffrtmpcrypt,file,hls,http,https,pipe,rtmp,rtmpt,rtmpe,rtmps,rtmpt,rtp,rtsp,srt,tcp,tls,udp,unix' \
+  --enable-demuxer='aac,avi,concat,dash,flac,h264,hevc,hls,image2,lavfi,matroska,mjpeg,mov,mp3,mpegts,mpegvideo,ogg,rawvideo,rtmp,rtp,rtsp,sdp,wav' \
+  --enable-muxer='adts,avi,dash,flac,hls,image2,matroska,mov,mp3,mp4,mpegts,null,ogg,opus,rawvideo,rtmp,rtp,rtsp,wav' \
+  --enable-decoder='mov_text,dvdsub,dvbsub,h263,h264,hevc,vp9,av1,mjpeg,mpeg1video,mpeg2video,mpeg4,aac,mp3,flac,vorbis,opus,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,ass,srt,h264_vaapi,hevc_vaapi,vp9_vaapi' \
+  --enable-encoder='mov_text,libfdk_aac,libmp3lame,libopus,libvorbis,libx264,libx265,h264_vaapi,hevc_vaapi,vp9_vaapi,ac3,eac3,flac,pcm_s16le,pcm_s24le,rawvideo,ass,srt' \
+  --enable-filter='hwupload,hwdownload,format,fps,scale,crop,overlay,drawtext,aresample,volume,loudnorm,equalizer,crystalizer,ladspa,lv2,rubberband,scale_vaapi,deinterlace_vaapi,denoise_vaapi,sharpness_vaapi,procamp_vaapi,tonemap_vaapi,yadif_vaapi,libplacebo,hwmap' \
+  --enable-parser='aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis' \
+  --enable-bsf='aac_adtstoasc,extract_extradata,h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,null,opus_metadata' \
+  --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect \
+  && make -j$(nproc) && sudo make install && sudo ldconfig
+Verwende Code mit Vorsicht.
+
+
+
+
