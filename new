@@ -6,7 +6,7 @@ ffprobe -v error -show_entries frame=pkt_size,pkt_pts_time -select_streams v:0 -
 
 ##################################### pi 5 ##########################################
 
-test 
+test new 05.03.2026 working
 
 ./configure --prefix=/usr \
  --libdir=/usr/lib/aarch64-linux-gnu \
