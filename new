@@ -31,7 +31,7 @@ test new 05.03.2026 working
  --enable-muxer='matroska,mp4,mov,avi,flac,wav,mp3,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,adts,image2,rawvideo,null,caf,aiff' \
  --enable-parser='h264,hevc,mjpeg,mpegvideo,mpeg4video,mp3,mpegaudio,aac,opus,flac,vorbis,h263' \
  --disable-indev=pulse --disable-outdev=pulse,xv \
- --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe' \
+ --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe,lavfi' \
  --enable-outdev='v4l2,alsa,jack,fbdev,drm,kmsgrab' \
  --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio  \
  --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-omx --disable-omx-rpi --disable-mmal
@@ -61,7 +61,7 @@ test new 05.03.2026 working
  --enable-muxer='matroska,mp4,mov,avi,flac,wav,mp3,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,adts,image2,rawvideo,null,caf,aiff' \
  --enable-parser='h264,hevc,mjpeg,mpegvideo,mpeg4video,mp3,mpegaudio,aac,opus,flac,vorbis,h263' \
  --disable-indev=pulse --disable-outdev=pulse,xv \
- --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe' \
+ --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe,lavfi' \
  --enable-outdev='v4l2,alsa,jack,fbdev,drm,kmsgrab' \
  --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio  \
  --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-omx --disable-omx-rpi --disable-mmal
@@ -89,7 +89,7 @@ make distclean && ./configure --prefix=/usr \
  --enable-muxer='matroska,mp4,mov,avi,flac,wav,mp3,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,adts,image2,rawvideo,null,caf,aiff' \
  --enable-parser='h264,hevc,mjpeg,mpegvideo,mpeg4video,mp3,mpegaudio,aac,opus,flac,vorbis,h263' \
  --disable-indev=pulse --disable-outdev=pulse,xv \
- --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe' \
+ --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe,lavfi' \
  --enable-outdev='v4l2,alsa,jack,fbdev,drm,kmsgrab' \
  --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio  \
  --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-omx --disable-omx-rpi --disable-mmal
