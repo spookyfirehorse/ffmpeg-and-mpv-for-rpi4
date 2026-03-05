@@ -1,3 +1,5 @@
+sudo apt install libgnutls28-dev libp11-kit-dev libzstd-dev libidn2-dev libunistring-dev
+
 
 make distclean && \
 PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux-gnu/pkgconfig" \
