@@ -47,7 +47,6 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig:/usr/local/lib/aarch64-lin
  --incdir=/usr/include/aarch64-linux-gnu \
  --extra-version="ultra-pi4-FINAL-C" \
  --arch=aarch64 --target-os=linux --cpu=cortex-a72 \
- --pkg-config-flags="--static" \
  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/vulkan' \
  --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
  --extra-libs='-lpthread -lm -lrt -ldl -lasound -ljack -lgnutls -lnettle -lhogweed -lgmp -lidn2 -lunistring -lp11-kit -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr' \
@@ -85,7 +84,6 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig:/usr/local/lib/aarch64-lin
  --incdir=/usr/include/aarch64-linux-gnu \
  --extra-version="ultra-pi5-FINAL-C" \
  --arch=aarch64 --target-os=linux --cpu=cortex-a76 \
- --pkg-config-flags="--static" \
  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -I/usr/include/vulkan' \
  --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
  --extra-libs='-lpthread -lm -lrt -ldl -lasound -ljack -lgnutls -lnettle -lhogweed -lgmp -lidn2 -lunistring -lp11-kit -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr' \
@@ -110,6 +108,53 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig:/usr/local/lib/aarch64-lin
  && make -j$(nproc) && sudo make install && sudo ldconfig
 
 skylake cuda
+
+
+sudo apt install libnpth0-dev
+
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libcuda.so.1 /usr/lib/x86_64-linux-gnu/libcuda.so
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libnvidia-encode.so.1 /usr/lib/x86_64-linux-gnu/libnvidia-encode.so
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libnvcuvid.so.1 /usr/lib/x86_64-linux-gnu/libnvcuvid.so
+
+# NPP Symlinks für die Filter (wichtig für scale_npp)
+for lib in nppc nppig nppicc npps nppidei nppif nppim nppist nppisu nppitc nppial; do
+  sudo ln -sf /usr/lib/x86_64-linux-gnu/lib${lib}.so.12 /usr/lib/x86_64-linux-gnu/lib${lib}.so 2>/dev/null
+done
+
+1. Nach Hardware-Filtern suchen (CUDA/NPP)
+Die Nvidia-Filter liegen in libavfilter/. So findest du die Definitionen für das Hardware-Scaling oder Deinterlacing:
+bash
+grep -rn "cuda" libavfilter/ | grep ".c:"
+# Speziell für NPP-Filter:
+grep -rn "npp" libavfilter/
+Verwende Code mit Vorsicht.
+
+2. Nach Encodern suchen (NVENC)
+Die NVENC-Schnittstelle liegt in libavcodec/. So findest du den Code für den H.264/HEVC-Encoder:
+bash
+grep -rn "nvenc" libavcodec/ | grep ".c:"
+Verwende Code mit Vorsicht.
+
+3. Nach Decodern suchen (CUVID)
+Die Hardware-Decoder (früher CUVID) findest du so:
+bash
+grep -rn "cuvid" libavcodec/
+Verwende Code mit Vorsicht.
+
+4. Den "Einstiegspunkt" (Strukturen) finden
+Wenn du nur wissen willst, in welcher Datei der Encoder/Decoder-Einstieg (AVCodec) definiert ist:
+bash
+grep -rl "AVCodec ff_h264_nvenc_encoder" libavcodec/
+grep -rl "AVCodec ff_hevc_nvenc_encoder" libavcodec/
+Verwende Code mit Vorsicht.
+
+5. Nach Header-Dateien suchen
+Wenn du die Schnittstellen-Definitionen (.h-Dateien) suchst:
+bash
+find libavcodec -name "*nvenc*"
+find libavcodec -name "*cuda*"
+Verwende Code mit Vorsicht.
+
 
 working c
 
