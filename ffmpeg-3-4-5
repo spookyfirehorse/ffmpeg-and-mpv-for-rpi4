@@ -29,6 +29,11 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio --disable-outdev=xv \
  --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-omx --disable-omx-rpi --disable-mmal && make -j$(nproc) && sudo make install
 
+ffmpeg -init_hw_device vulkan=vk:0 -filter_hw_device vk \
+  -i DEIN_INPUT_VIDEO.mp4 \
+  -filter_complex "hwupload,libplacebo=w=1280:h=720:format=nv12,hwdownload,format=nv12" \
+  -c:v h264_v4l2m2m -b:v 4M -c:a copy \
+  output_vulkan_test.mp4
 
 
 ################################################## pi 4 #########################################
