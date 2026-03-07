@@ -192,7 +192,8 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe,lavfi' \
  --enable-outdev='v4l2,alsa,jack,fbdev,vout_drm,vout_egl,kmsgrab' \
  --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio \
- --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-ffnvcodec --disable-cuda-sdk --disable-omx --disable-omx-rpi --disable-mmal \
+ --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-ffnvcodec --disable-cuda-sdk --disable-omx --disable-omx-rpi --disable-mmal 
+ 
  && make -j2 && sudo make install && sudo ldconfig
 
 
