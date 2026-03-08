@@ -77,7 +77,7 @@ systemctl --user restart pipewire.service pipewire-pulse.service
   
 
 
-meson setup builddir --prefix=/usr \
+TMPDIR=/home/spook/tmp meson setup builddir --prefix=/usr \
   --buildtype=release \
   -Db_lto=false \
   -Dcpp_args="-march=armv8-a+crc -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -pipe -ftree-vectorize" \
@@ -90,7 +90,7 @@ meson setup builddir --prefix=/usr \
   -Dman=disabled \
   -Dtests=disabled \
   -Dsystemd-user-service=enabled
-
+TMPDIR=/home/spook/tmp sudo ninja -j1 -C builddir install
 
 # Vorher altes Build-Verzeichnis löschen!
 rm -rf builddir
@@ -110,7 +110,7 @@ meson setup builddir --prefix=/usr \
   -Dc_link_args="-Wl,-O1 -Wl,--as-needed" \
   -Denable-rnnoise=false
 
-
+TMPDIR=/home/spook/tmp sudo ninja -j1 -C builddir install
 
 
   # Alten Ordner löschen, um Fehler zu vermeiden
@@ -132,7 +132,7 @@ meson setup builddir --prefix=/usr \
   -Dman=disabled \
   -Dsystemd-user-service=enabled
 
-
+TMPDIR=/home/spook/tmp sudo ninja -j1 -C builddir install
 
 meson setup builddir --prefix=/usr \
   --buildtype=release \
@@ -150,7 +150,7 @@ meson setup builddir --prefix=/usr \
   -Dsystemd-user-service=enabled
   ninja -C builddir -j4
 
-sudo ninja -C builddir install
+TMPDIR=/home/spook/tmp sudo ninja -j1 -C builddir install
 
 systemctl --user daemon-reload
 systemctl --user restart pipewire.service pipewire-pulse.service
@@ -181,8 +181,7 @@ meson setup builddir --prefix /usr  \
   -Dcpp_link_args="-latomic -Wl,-O1" \
   -Dc_link_args="-latomic -Wl,-O1"  -Denable-rnnoise=false
   
-ninja -C builddir -j4
-
+TMPDIR=/home/spook/tmp sudo ninja -j1 -C builddir install
 sudo ninja -C builddir install
 
 
