@@ -51,15 +51,6 @@ NPP-Filter: libavfilter/vf_scale_npp.c
 Soll ich dir zeigen, wie du mit grep prüfst, welche Nvidia-Kapazitäten dein aktuell installiertes FFmpeg-Binary unterstützt?Ja oder Nein?
 KI-Antworten können Fehler enthalten. Weitere Informationen
 
-
-
-
-
-
-
-
-
-
 sudo apt install libnpth0-dev
 
 sudo ln -sf /usr/lib/x86_64-linux-gnu/libcuda.so.1 /usr/lib/x86_64-linux-gnu/libcuda.so
