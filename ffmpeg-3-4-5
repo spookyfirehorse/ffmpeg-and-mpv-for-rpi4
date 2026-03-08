@@ -22,7 +22,7 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
  --arch=arm --target-os=linux --cpu=cortex-a53 \
  --fatal-warnings \
  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -mcpu=cortex-a53+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
- --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -lgbm -ldrm -latomic -Wl,-O2 -Wl,-rpath,/usr/lib/arm-linux-gnueabihf -Wl,--as-needed -flto -lstdc++' \
+ --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf  -lgbm -ldrm -latomic -Wl,-O2 -Wl,-rpath,/usr/lib/arm-linux-gnueabihf -Wl,--as-needed -flto -lstdc++' \
  --extra-libs='-L/usr/lib/arm-linux-gnueabihf -lpthread -Wl,-O2   -lm -lrt -ldl -lasound  -lstdc++ -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband -lsrt -lssl -lcrypto -lz ' \
   --disable-everything --disable-hwaccels \
  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
@@ -56,7 +56,7 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --extra-version="ultra-pi5-FINAL-C" \
  --arch=aarch64 --target-os=linux --cpu=cortex-a76 \
  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -I/usr/include/vulkan -mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
- --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -Wl,-O2 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto' \
+ --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -lgbm -ldrm -latomic -Wl,-O2 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto' \
  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lvulkan -lstdc++ -lpthread -lm -lrt -ldl -ldvdnav -lfftw3 -lgnutls -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lz' \
  --disable-everything --disable-hwaccels  \
  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
@@ -88,7 +88,7 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --extra-version="ultra-pi5-FINAL-C" \
  --arch=aarch64 --target-os=linux --cpu=cortex-a76 \
  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -I/usr/include/vulkan -mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
- --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -Wl,-O2 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto' \
+ --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -lgbm -ldrm -latomic -Wl,-O2 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto' \
  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lvulkan -lstdc++ -lpthread -lm -lrt -ldl -ldvdnav -lfftw3 -lgnutls -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lz' \
  --disable-everything --disable-hwaccels  \
  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
