@@ -123,7 +123,7 @@ meson setup builddir --prefix=/usr \
   -Dcpp_args="-mcpu=cortex-a76 -pipe -ftree-vectorize -flto" \
   -Dc_args="-mcpu=cortex-a76 -pipe -ftree-vectorize -flto" \
   -Dcpp_link_args="-latomic -Wl,-O1" \
-  -Dc_link_args="-latomic -Wl,-O1" 
+  -Dc_link_args="-latomic -Wl,-O1" \
   -Dffmpeg=enabled \
   -Dpw-cat-ffmpeg=enabled \
   -Dbluez5-codec-lc3=enabled \
