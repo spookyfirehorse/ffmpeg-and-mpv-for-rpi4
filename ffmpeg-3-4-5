@@ -35,7 +35,7 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
  --enable-muxer='mp3,adts,matroska,mp4,mov,avi,flac,wav,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,image2,rawvideo,null' \
  --enable-parser='vp8,vp9,dca,ac3,eac3,h264,hevc,mjpeg,mpegvideo,mpeg4video,mp3,mpegaudio,aac,opus,flac,vorbis,h263' \
  --enable-indev='v4l2,alsa,jack,fbdev,kmsgrab,v4l2_m2m,pipe,lavfi' \
- --enable-outdev='v4l2,alsa,jack,opengl,fbdev,drm,vout_drm,vout_egl,kmsgrab,pipe,v4l2_m2m' \
+ --enable-outdev='v4l2,alsa,jack,opengl,fbdev,drm,vout_drm,vout_egl,pipe,v4l2_m2m' \
  --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio --disable-outdev=xv \
  --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-ffnvcodec  --disable-libx264 --disable-libx265 --disable-cuvid --disable-nvenc \
  --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-omx --disable-omx-rpi --disable-mmal \
