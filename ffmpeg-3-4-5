@@ -60,8 +60,7 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --enable-indev='v4l2,alsa,jack,kmsgrab,v4l2_m2m,lavfi' \
  --enable-outdev='v4l2,alsa,jack,opengl,vout_drm,vout_egl,drm,kmsgrab,v4l2_m2m' \
  --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio \
- --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc  --disable-cuda-sdk --disable-ffnvcodec --disable-omx --disable-omx-rpi --disable-mmal --disable-indev=pulse --disable-outdev=pulse \
- --enable-libxml2 --enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-libdrm --enable-epoxy --enable-libudev --enable-vout-egl --enable-vout-drm --enable-opengl --enable-vulkan --enable-libshaderc --enable-libplacebo
+ --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc  --disable-cuda-sdk --disable-ffnvcodec --disable-omx --disable-omx-rpi --disable-mmal --disable-indev=pulse --disable-outdev=pulse 
 
 RPI 5
 
@@ -84,12 +83,14 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --enable-bsf='h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,opus_metadata,extract_extradata,null' \
  --enable-filter='colorspace,colormatrix,colorlevels,scale_v4l2m2m,deinterlace_v4l2m2m,hwmap,hwupload,hwdownload,format,scale,vulkan,libplacebo,fps,setdar,settb,setpts,asettb,asetpts,concat,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,overlay,drawtext,pad,pan,yadif,crop,null,aevalsrc,smptebars,testsrc,testsrc2' \
  --enable-decoder='wrapped_avframe,libfdk_aac,h264,hevc,vp8,vp9,mpeg1video,mpeg2video,mpeg4,mjpeg,h263,h263p,h264_v4l2m2m,hevc_v4l2m2m,mpeg1_v4l2m2m,mpeg2_v4l2m2m,mpeg4_v4l2m2m,h263_v4l2m2m,hevc_v4l2request,opus,aac,ac3,eac3,mp3,mpegaudio,flac,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,h263dsp,mpegvideodec,qpeldsp,mov_text,dvdsub,dvbsub,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
- --enable-encoder='wrapped_avframe,h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,mpeg4_v4l2m2m,vp8_v4l2m2m,libfdk_aac,libmp3lame,libopus,flac,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,mov_text,rawvideo' \
+ --enable-encoder='wrapped_avframe,h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,mpeg4_v4l2m2m,vp8_v4l2m2m,libfdk_aac,libmp3lame,libopus,aac,flac,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,mov_text,rawvideo,dvdsub,dvbsub' \
  --enable-demuxer='video4linux2,v4l2,kmsgrab,matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo,caf,aiff' \
  --enable-muxer='video4linux2,v4l2,vout_drm,vout_egl,matroska,mp4,mov,avi,flac,wav,mp3,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,adts,image2,rawvideo,null,caf,aiff' \
  --enable-parser='aac,ac3,eac3,dca,mpegaudio,mp3,vorbis,opus,flac,h264,hevc,vp9,mpegvideo,mpeg4video,mjpeg,h263' \
  --enable-indev='v4l2,alsa,jack,kmsgrab,v4l2_m2m,lavfi' \
  --enable-outdev='v4l2,alsa,jack,opengl,vout_drm,vout_egl,drm,kmsgrab,v4l2_m2m' \
  --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-sdl2 --disable-sndio \
- --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc  --disable-cuda-sdk --disable-ffnvcodec --disable-omx --disable-omx-rpi --disable-mmal --disable-indev=pulse --disable-outdev=pulse \
- --enable-libxml2 --enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-libdrm --enable-epoxy --enable-libudev --enable-vout-egl --enable-vout-drm --enable-opengl --enable-vulkan --enable-libshaderc --enable-libplacebo
+ --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc  --disable-cuda-sdk --disable-ffnvcodec --disable-omx --disable-omx-rpi --disable-mmal --disable-indev=pulse --disable-outdev=pulse 
+
+
+
