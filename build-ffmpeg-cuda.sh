@@ -1,10 +1,27 @@
 cat << 'EOF' > bin/build-ffmpeg-skylake.sh
 #!/bin/bash
-# FFmpeg Build-Skript für Skylake (NVENC, VAAPI, Vulkan) inkl. Stripping
+# FFmpeg Build-Skript für Skylake (NVENC, VAAPI, Vulkan)
+
+# 1. System-Abhängigkeiten installieren
+sudo apt update && sudo apt install -y libnpth0-dev
+# Optional: sudo apt build-dep ffmpeg (benötigt deb-src in sources.list)
+
+# Vor den Symlinks prüfen, ob die NVIDIA-Treiber überhaupt installiert sind
+if [ ! -f /usr/lib/x86_64-linux-gnu/libcuda.so.1 ]; then
+    echo "FEHLER: NVIDIA-Treiber (libcuda.so.1) nicht gefunden!"
+    echo "Bitte installiere die NVIDIA-Treiber (z.B. nvidia-driver-535) zuerst."
+    exit 1
+fi
+
+# 2. NVIDIA Symlinks sicherstellen (VOR dem Build für configure)
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libcuda.so.1 /usr/lib/x86_64-linux-gnu/libcuda.so
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libnvidia-encode.so.1 /usr/lib/x86_64-linux-gnu/libnvidia-encode.so
+sudo ln -sf /usr/lib/x86_64-linux-gnu/libnvcuvid.so.1 /usr/lib/x86_64-linux-gnu/libnvcuvid.so
 
 # Verzeichnisse definieren
 LIB_DIR="/usr/lib/x86_64-linux-gnu"
 
+# 3. FFmpeg Konfiguration
 PKG_CONFIG_PATH="$LIB_DIR/pkgconfig" \
 ./configure --prefix=/usr \
  --libdir=$LIB_DIR \
@@ -31,7 +48,7 @@ PKG_CONFIG_PATH="$LIB_DIR/pkgconfig" \
  --enable-outdev='v4l2,alsa,jack,fbdev,drm,pipe' \
  --enable-protocol='file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,ffrtmpcrypt,hls,dash,srt,unix,cache,crypto,concat,data,lavfi,pipe' \
  --enable-demuxer='mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,mjpeg,image2,lavfi,ac3,eac3,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
- --enable-muxer='mp4,matroska,mov,avi,flac,wav,mp3,opus,ogg,rtsp,rtp,rtmp,flv,hls,mpegts,adts,dash,image2,null,ac3,eac3,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
+ --enable-muxer='mp4,matroska,mov,avi,flac,wav,mp3,opus,ogg,rtsp,rtp,rtmp,flv,hls,mpegts,adts,dash,matroska,image2,null,ac3,eac3,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
  --enable-decoder='h264,hevc,vp9,av1,mjpeg,mpeg1video,mpeg2video,mpeg4,h264_cuvid,hevc_cuvid,vp9_cuvid,aac,mp3,flac,vorbis,opus,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,adpcm_swf,ass,srt' \
  --enable-encoder='h264_nvenc,hevc_nvenc,av1_nvenc,h264_vaapi,hevc_vaapi,libfdk_aac,libmp3lame,libopus,libvorbis,libx264,libx265,ac3,eac3,flac,vorbis,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,ass,srt' \
  --enable-filter='afifo,anull,asplit,amix,aresample,aformat,volume,loudnorm,equalizer,crystalizer,ladspa,lv2,rubberband,scale,format,fps,crop,overlay,drawtext,hwupload,hwdownload,hwmap,nullsrc,hwupload_cuda,hwdownload_cuda,scale_npp,yadif_cuda,libplacebo' \
@@ -43,18 +60,18 @@ if [ $? -eq 0 ]; then
     make -j$(nproc)
     sudo make install
     
-    # Stripping der Binaries und Libraries
+    # 4. Stripping
     echo "Stripping binaries and libraries..."
-    sudo strip --strip-unneeded /usr/bin/ffmpeg
-    sudo strip --strip-unneeded /usr/bin/ffprobe
-    sudo strip --strip-unneeded $LIB_DIR/libavcodec.so*
-    sudo strip --strip-unneeded $LIB_DIR/libavdevice.so*
-    sudo strip --strip-unneeded $LIB_DIR/libavfilter.so*
-    sudo strip --strip-unneeded $LIB_DIR/libavformat.so*
-    sudo strip --strip-unneeded $LIB_DIR/libavutil.so*
-    sudo strip --strip-unneeded $LIB_DIR/libswresample.so*
-    sudo strip --strip-unneeded $LIB_DIR/libswscale.so*
+    sudo strip --strip-unneeded /usr/bin/ffmpeg /usr/bin/ffprobe
+    sudo strip --strip-unneeded $LIB_DIR/libavcodec.so* $LIB_DIR/libavdevice.so* $LIB_DIR/libavfilter.so* \
+                                $LIB_DIR/libavformat.so* $LIB_DIR/libavutil.so* $LIB_DIR/libswresample.so* \
+                                $LIB_DIR/libswscale.so*
     
+    # 5. NVIDIA Symlinks final sicherstellen
+    sudo ln -sf $LIB_DIR/libcuda.so.1 $LIB_DIR/libcuda.so
+    sudo ln -sf $LIB_DIR/libnvidia-encode.so.1 $LIB_DIR/libnvidia-encode.so
+    sudo ln -sf $LIB_DIR/libnvcuvid.so.1 $LIB_DIR/libnvcuvid.so
+
     sudo ldconfig
     echo "Build & Stripping erfolgreich abgeschlossen!"
 else
