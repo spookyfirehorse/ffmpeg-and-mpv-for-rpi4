@@ -1,6 +1,8 @@
 
 #################################################################################################################
 
+#################################################################################################################
+
 pi 3
 
 
@@ -44,8 +46,8 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
   --enable-filter='firequalizer,realtime,latency,deinterlace_v4l2m2m,scale_v4l2m2m,format,scale,fps,setdar,settb,setpts,asettb,asetpts,concat,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afade' \
   --enable-decoder='libfdk_aac,h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,mpeg1_v4l2m2m,mpeg2_v4l2m2m,mpeg4_v4l2m2m,hevc_v4l2request,opus,aac,ac3,eac3,mpegaudio,flac,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,adpcm_ms,adpcm_ima_wav' \
   --enable-encoder='h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,libfdk_aac,aac,libopus,flac,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo' \
-  --enable-demuxer='id3v1,id3v2,matroska,mpegts,mov,flac,wav,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo' \
-  --enable-muxer='yuv4mpegpipe,adts,matroska,mp4,mov,avi,flac,wav,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,image2,rawvideo,null' \
+  --enable-demuxer='id3v1,id3v2,matroska,matroska_audio,mpegts,mov,flac,wav,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo' \
+  --enable-muxer='yuv4mpegpipe,adts,matroska,matroska_audio,mp4,mov,avi,flac,wav,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,image2,rawvideo,null,webm_dash_manifest' \
   --enable-parser='dca,ac3,eac3,h264,hevc,mjpeg,mpegvideo,mpeg4video,mpegaudio,aac,opus,flac,vorbis,h263' \
   --enable-indev='v4l2,alsa,jack,kmsgrab,v4l2_m2m,pipe,lavfi' \
   --enable-outdev='v4l2,alsa,jack,drm,kmsgrab,pipe,v4l2_m2m' \
@@ -109,8 +111,8 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --enable-filter='firequalizer,realtime,latency,colorspace,colormatrix,colorlevels,scale_v4l2m2m,deinterlace_v4l2m2m,vulkan,vulkan_filter,libplacebo,hwmap,hwupload,hwdownload,scale_vulkan,flip_vulkan,hflip_vulkan,vflip_vulkan,transpose_vulkan,chromaber_vulkan,color_vulkan,gblur_vulkan,nlmeans_vulkan,overlay_vulkan,xfade_vulkan,bwdif_vulkan,scale,fps,setdar,settb,setpts,asettb,asetpts,concat,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,overlay,drawtext,pad,pan,yadif,crop,null,aevalsrc,smptebars,testsrc,testsrc2' \
  --enable-decoder='h264_vulkan,hevc_vulkan,wrapped_avframe,libfdk_aac,h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,mpeg1_v4l2m2m,mpeg2_v4l2m2m,mpeg4_v4l2m2m,vc1_v4l2m2m,vp8_v4l2m2m,vp9_v4l2m2m,hevc_v4l2request,h264,hevc,vp8,vp9,mpeg1video,mpeg2video,mpeg4,mjpeg,h263,h263p,opus,aac,ac3,eac3,mp3,mpegaudio,flac,vorbis,ass,srt,pcm_bluray,pcm_dvd,pcm_f16le,pcm_f24le,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_lxf,pcm_mulaw,pcm_s16be,pcm_s16be_planar,pcm_s16le,pcm_s16le_planar,pcm_s24be,pcm_s24daud,pcm_s24le,pcm_s24le_planar,pcm_s32be,pcm_s32le,pcm_s32le_planar,pcm_s64be,pcm_s64le,pcm_s8,pcm_s8_planar,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc,h263dsp,mpegvideodec,qpeldsp,mov_text,dvdsub,dvbsub,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
  --enable-encoder='h264_vulkan,hevc_vulkan,wrapped_avframe,libfdk_aac,h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,mpeg1_v4l2m2m,mpeg2_v4l2m2m,mpeg4_v4l2m2m,vc1_v4l2m2m,vp8_v4l2m2m,vp9_v4l2m2m,libmp3lame,wavpack,libopus,flac,ass,srt,pcm_bluray,pcm_dvd,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16be_planar,pcm_s16le,pcm_s16le_planar,pcm_s24be,pcm_s24daud,pcm_s24le,pcm_s24le_planar,pcm_s32be,pcm_s32le,pcm_s32le_planar,pcm_s64be,pcm_s64le,pcm_s8,pcm_s8_planar,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc,mov_text,rawvideo' \
- --enable-demuxer='av1,vc1,dvdnav,dvdread,v4l2,kmsgrab,matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo,caf,aiff,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc' \
- --enable-muxer='yuv4mpegpipe,vc1,dvd,matroska,mp4,mov,avi,flac,wav,mp3,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,adts,image2,rawvideo,null,caf,aiff,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc' \
+ --enable-demuxer='av1,vc1,dvdnav,dvdread,v4l2,kmsgrab,matroska,matroska_audio,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo,caf,aiff,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc' \
+ --enable-muxer='yuv4mpegpipe,vc1,dvd,matroska,matroska_audio,mp4,mov,avi,flac,wav,mp3,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,adts,image2,rawvideo,null,caf,aiff,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidcwebm_dash_manifest,' \
  --enable-parser='dvd_nav,webp,vp8,vp9,vc1,aac_latm,aac,ac3,eac3,dca,mpegaudio,mp3,vorbis,opus,flac,h264,hevc,mpegvideo,mpeg4video,mjpeg,h263,matroska_audio,mpeg1video' \
  --enable-indev='v4l2,alsa,jack,kmsgrab,v4l2_m2m,lavfi' \
  --enable-outdev='v4l2,alsa,jack,opengl,vout_drm,vout_egl,drm,kmsgrab,v4l2_m2m' \
@@ -187,8 +189,8 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --enable-filter='firequalizer,realtime,latency,colorspace,colormatrix,colorlevels,scale_v4l2m2m,deinterlace_v4l2m2m,vulkan,vulkan_filter,libplacebo,hwmap,hwupload,hwdownload,scale_vulkan,flip_vulkan,hflip_vulkan,vflip_vulkan,transpose_vulkan,chromaber_vulkan,color_vulkan,gblur_vulkan,nlmeans_vulkan,overlay_vulkan,xfade_vulkan,bwdif_vulkan,scale,fps,setdar,settb,setpts,asettb,asetpts,concat,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afifo,anull,asplit,amix,anequalizer,surround,stereowiden,overlay,drawtext,pad,pan,yadif,crop,null,aevalsrc,smptebars,testsrc,testsrc2' \
  --enable-decoder='h264_vulkan,hevc_vulkan,wrapped_avframe,libfdk_aac,h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,mpeg1_v4l2m2m,mpeg2_v4l2m2m,mpeg4_v4l2m2m,vc1_v4l2m2m,vp8_v4l2m2m,vp9_v4l2m2m,hevc_v4l2request,h264,hevc,vp8,vp9,mpeg1video,mpeg2video,mpeg4,mjpeg,h263,h263p,opus,aac,ac3,eac3,mp3,mpegaudio,flac,vorbis,ass,srt,pcm_bluray,pcm_dvd,pcm_f16le,pcm_f24le,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_lxf,pcm_mulaw,pcm_s16be,pcm_s16be_planar,pcm_s16le,pcm_s16le_planar,pcm_s24be,pcm_s24daud,pcm_s24le,pcm_s24le_planar,pcm_s32be,pcm_s32le,pcm_s32le_planar,pcm_s64be,pcm_s64le,pcm_s8,pcm_s8_planar,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc,h263dsp,mpegvideodec,qpeldsp,mov_text,dvdsub,dvbsub,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
  --enable-encoder='h264_vulkan,hevc_vulkan,wrapped_avframe,libfdk_aac,h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,mpeg1_v4l2m2m,mpeg2_v4l2m2m,mpeg4_v4l2m2m,vc1_v4l2m2m,vp8_v4l2m2m,vp9_v4l2m2m,libmp3lame,wavpack,libopus,flac,ass,srt,pcm_bluray,pcm_dvd,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16be_planar,pcm_s16le,pcm_s16le_planar,pcm_s24be,pcm_s24daud,pcm_s24le,pcm_s24le_planar,pcm_s32be,pcm_s32le,pcm_s32le_planar,pcm_s64be,pcm_s64le,pcm_s8,pcm_s8_planar,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc,mov_text,rawvideo' \
- --enable-demuxer='av1,vc1,dvdnav,dvdread,v4l2,kmsgrab,matroska,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo,caf,aiff,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc' \
- --enable-muxer='yuv4mpegpipe,vc1,dvd,matroska,mp4,mov,avi,flac,wav,mp3,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,adts,image2,rawvideo,null,caf,aiff,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc' \
+ --enable-demuxer='av1,vc1,dvdnav,dvdread,v4l2,kmsgrab,matroska,matroska_audio,mpegts,mov,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo,caf,aiff,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc' \
+ --enable-muxer='yuv4mpegpipe,vc1,dvd,matroska,matroska_audio,mp4,mov,avi,flac,wav,mp3,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,adts,image2,rawvideo,null,caf,aiff,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc,webm_dash_manifest' \
  --enable-parser='dvd_nav,webp,vp8,vp9,vc1,aac_latm,aac,ac3,eac3,dca,mpegaudio,mp3,vorbis,opus,flac,h264,hevc,mpegvideo,mpeg4video,mjpeg,h263,matroska_audio,mpeg1video' \
  --enable-indev='v4l2,alsa,jack,kmsgrab,v4l2_m2m,lavfi' \
  --enable-outdev='v4l2,alsa,jack,opengl,vout_drm,vout_egl,drm,kmsgrab,v4l2_m2m' \
@@ -215,6 +217,21 @@ ls -l /usr/lib/aarch64-linux-gnu/libav* /usr/lib/aarch64-linux-gnu/libsw* /usr/l
 EOF
 
 chmod +x bin/build-ffmpeg-final.sh
+
+##################################################################################
+
+
+
+sudo rm -f /usr/lib/aarch64-linux-gnu/libavcodec.a \
+           /usr/lib/aarch64-linux-gnu/libavformat.a \
+           /usr/lib/aarch64-linux-gnu/libavutil.a \
+           /usr/lib/aarch64-linux-gnu/libavdevice.a \
+           /usr/lib/aarch64-linux-gnu/libavfilter.a \
+           /usr/lib/aarch64-linux-gnu/libswresample.a \
+           /usr/lib/aarch64-linux-gnu/libswscale.a \
+           /usr/lib/aarch64-linux-gnu/libpostproc.a
+
+
 
 ##################################################################################
 
