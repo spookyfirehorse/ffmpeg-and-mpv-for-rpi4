@@ -20,6 +20,26 @@ sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libpostpro*
 sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libswresamp*
 sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libswscal*
 
+sudo rm -v /usr/lib/arm-linux-gnueabihf/libavcodec.a \
+           /usr/lib/arm-linux-gnueabihf/libavformat.a \
+           /usr/lib/arm-linux-gnueabihf/libavutil.a \
+           /usr/lib/arm-linux-gnueabihf/libavdevice.a \
+           /usr/lib/arm-linux-gnueabihf/libavfilter.a \
+           /usr/lib/arm-linux-gnueabihf/libswresample.a \
+           /usr/lib/arm-linux-gnueabihf/libswscale.a \
+           /usr/lib/arm-linux-gnueabihf/libpostproc.a
+
+
+
+sudo rm -f /usr/lib/arm-linux-gnueabihf/libavcodec.a \
+           /usr/lib/arm-linux-gnueabihf/libavformat.a \
+           /usr/lib/arm-linux-gnueabihf/libavutil.a \
+           /usr/lib/arm-linux-gnueabihf/libavdevice.a \
+           /usr/lib/arm-linux-gnueabihf/libavfilter.a \
+           /usr/lib/arm-linux-gnueabihf/libswresample.a \
+           /usr/lib/arm-linux-gnueabihf/libswscale.a \
+           /usr/lib/arm-linux-gnueabihf/libpostproc.a
+
 
 
 ls -l /usr/lib/arm-linux-gnueabihf/libav* /usr/lib/arm-linux-gnueabihf/libsw* /usr/lib/arm-linux-gnueabihf/libpostproc* | awk '{sum += $5} END {print sum / 1024 / 1024 " MB"}'
