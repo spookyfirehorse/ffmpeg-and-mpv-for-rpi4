@@ -1,15 +1,18 @@
 cat << 'EOF' > bin/build-ffmpeg-skylake.sh
 #!/bin/bash
-# FFmpeg Build-Skript für Skylake (NVENC, VAAPI, Vulkan)
+# FFmpeg Build-Skript für Skylake (NVENC, VAAPI, Vulkan) inkl. Stripping
 
-PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig" \
+# Verzeichnisse definieren
+LIB_DIR="/usr/lib/x86_64-linux-gnu"
+
+PKG_CONFIG_PATH="$LIB_DIR/pkgconfig" \
 ./configure --prefix=/usr \
- --libdir=/usr/lib/x86_64-linux-gnu \
+ --libdir=$LIB_DIR \
  --incdir=/usr/include/x86_64-linux-gnu \
  --extra-version="ultra-skylake-8.0.1-FINAL-C" \
  --arch=x86_64 --cpu=skylake \
  --extra-cflags='-march=skylake -O3 -pipe -fPIC -I/usr/include/vulkan' \
- --extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed' \
+ --extra-ldflags="-L$LIB_DIR -Wl,-rpath,$LIB_DIR -Wl,--as-needed" \
  --extra-libs='-lpthread -lm -lrt -ldl -lstdc++ -lxml2 -lz -lgnutls -lnettle -lhogweed -lgmp -lidn2 -lunistring -lp11-kit' \
  --nvcc=/usr/bin/nvcc \
  --disable-everything --disable-hwaccels \
@@ -39,8 +42,21 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig" \
 if [ $? -eq 0 ]; then
     make -j$(nproc)
     sudo make install
+    
+    # Stripping der Binaries und Libraries
+    echo "Stripping binaries and libraries..."
+    sudo strip --strip-unneeded /usr/bin/ffmpeg
+    sudo strip --strip-unneeded /usr/bin/ffprobe
+    sudo strip --strip-unneeded $LIB_DIR/libavcodec.so*
+    sudo strip --strip-unneeded $LIB_DIR/libavdevice.so*
+    sudo strip --strip-unneeded $LIB_DIR/libavfilter.so*
+    sudo strip --strip-unneeded $LIB_DIR/libavformat.so*
+    sudo strip --strip-unneeded $LIB_DIR/libavutil.so*
+    sudo strip --strip-unneeded $LIB_DIR/libswresample.so*
+    sudo strip --strip-unneeded $LIB_DIR/libswscale.so*
+    
     sudo ldconfig
-    echo "Build erfolgreich abgeschlossen!"
+    echo "Build & Stripping erfolgreich abgeschlossen!"
 else
     echo "Fehler während der Konfiguration!"
     exit 1
