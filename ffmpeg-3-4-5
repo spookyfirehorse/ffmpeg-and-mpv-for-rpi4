@@ -2,23 +2,23 @@
 grep -r "v4l2" libavcodec/
 
 
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcodec.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevice.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilter.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavformat.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libpostproc.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresample.so*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale.so*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcode*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevic*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilte*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavforma*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libpostpro*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresampl*
+sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale*
 
-sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavcodec.so*
-sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavdevice.so*
-sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavfilter.so*
-sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavformat.so*
-sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavutil.so*
-sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libpostproc.so*
-sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libswresample.so*
-sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libswscale.so*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavcodec*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavdevic*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavfilt*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavform*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libavut*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libpostpro*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libswresamp*
+sudo strip --strip-unneeded /usr/lib/arm-linux-gnueabihf/libswscal*
 
 
 
