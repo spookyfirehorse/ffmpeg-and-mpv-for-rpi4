@@ -154,7 +154,9 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
 
 meine kleinste rpi 3
 
-
+#!/bin/bash
+#git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git  && \
+cd /home/spook/rpi-ffmpeg  &&  \
 TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" \
 ./configure  --prefix=/usr \
   --libdir=/usr/lib/arm-linux-gnueabihf \
