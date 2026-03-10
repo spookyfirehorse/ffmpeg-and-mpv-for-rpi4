@@ -52,6 +52,8 @@ sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavutil*
 sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libpostpro*
 sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswresampl*
 sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswscale*
+ls -l /usr/lib/x86_64-linux-gnu/libav* /usr/lib/x86_64-linux-gnu/libsw* /usr/lib/x86_64-linux-gnu/libpostproc* | awk '{sum += $5} END {print sum / 1024 / 1024 " MB"}'
+
    
     sudo ldconfig
     echo "Build & Stripping erfolgreich abgeschlossen!"
