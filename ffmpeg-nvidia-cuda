@@ -205,6 +205,13 @@ sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libpostpro*
 sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswresampl*
 sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswscale*
 
-
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavdevic*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavfilte*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavforma*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavutil*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libpostpro*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswresampl*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswscale*
+ls -l /usr/lib/x86_64-linux-gnu/libav* /usr/lib/x86_64-linux-gnu/libsw* /usr/lib/x86_64-linux-gnu/libpostproc* | awk '{sum += $5} END {print sum / 1024 / 1024 " MB"}'
 
 #######################################################################
