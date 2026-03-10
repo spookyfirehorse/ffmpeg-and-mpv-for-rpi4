@@ -42,8 +42,7 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --disable-cuda-nvcc  --disable-cuda-sdk --disable-ffnvcodec  --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal \
  --disable-indev=pulse --disable-outdev=pulse && make -j2 && sudo make install
 
-make -j2
-sudo make install
+
 
 # Strippen für minimale Dateigröße
 sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcode*
