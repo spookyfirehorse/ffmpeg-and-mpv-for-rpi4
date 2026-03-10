@@ -20,7 +20,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --disable-cuda --disable-nvenc --disable-nvdec --disable-cuvid --disable-vdpau --disable-libnpp --disable-ffnvcodec \
 --enable-vaapi --enable-vulkan --enable-libplacebo --enable-libshaderc --enable-opengl --enable-libdrm \
 --enable-libdvdnav --enable-libdvdread \
---enable-hwaccel='h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi,mjpeg_vaapi,mpeg2_vaapi,vc1_vaapi,vp8_vaapi,h264_vulkan,hevc_vulkan,av1_vulkan'\
+--enable-hwaccel='h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi,mjpeg_vaapi,mpeg2_vaapi,vc1_vaapi,vp8_vaapi,h263_vaapi,mpeg4_vaapi,h264_vulkan,hevc_vulkan,av1_vulkan'\
 --enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
 --enable-libvpx --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis \
 --enable-libfreetype --enable-libharfbuzz --enable-libfribidi --enable-hardcoded-tables \
