@@ -103,7 +103,7 @@ Protocols: ./configure --list-protocols
 
 #!/bin/bash
 make distclean && \
-PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
+PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 ./configure --prefix=/usr \
 --libdir=/usr/lib/x86_64-linux-gnu \
 --incdir=/usr/include/x86_64-linux-gnu \
@@ -112,7 +112,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux
 --cpu=skylake \
 --extra-cflags='-march=skylake -O3 -pipe -fPIC -I/usr/include/vulkan' \
 --extra-cxxflags='-march=skylake -O3 -pipe -fPIC' \
---extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O1 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed' \
+--extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O3 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed' \
 --extra-libs='-lpthread -lm -lrt -ldl -lstdc++ -lxml2 -lz' \
 --nvcc=/usr/bin/nvcc \
 --disable-everything --disable-hwaccels \
@@ -145,7 +145,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux
 
 intel 
 
-PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
+PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 ./configure --prefix=/usr \
 --libdir=/usr/lib/x86_64-linux-gnu \
 --incdir=/usr/include/x86_64-linux-gnu \
@@ -154,11 +154,11 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux
 --cpu=goldmont \
 --extra-cflags='-march=goldmont -O3 -pipe -fPIC -I/usr/include/vulkan' \
 --extra-cxxflags='-march=goldmont -O3 -pipe -fPIC' \
---extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O1 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed' \
+--extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O3 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed' \
 --extra-libs='-lpthread -lm -lrt -ldl -lstdc++ -lxml2 -lz' \
 --disable-everything --disable-hwaccels \
 --enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
---enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc \
+--enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
 --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
 --disable-cuda --disable-nvenc --disable-nvdec --disable-cuvid \
 --enable-vaapi --enable-vulkan --enable-libplacebo --enable-libshaderc --enable-opengl --enable-libdrm --enable-libjack --disable-vdpau \
