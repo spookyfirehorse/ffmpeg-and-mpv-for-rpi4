@@ -1,4 +1,4 @@
-cat << 'EOF' > bin/build-ffmpeg-skylake.sh
+cat << 'EOF' > bin/build-ffmpeg-goldmond.sh
 #!/bin/bash
 
 # 3. FFmpeg Konfiguration
