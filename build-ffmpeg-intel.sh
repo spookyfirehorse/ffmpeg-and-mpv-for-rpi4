@@ -1,25 +1,5 @@
 cat << 'EOF' > bin/build-ffmpeg-skylake.sh
 #!/bin/bash
-# FFmpeg Build-Skript für Skylake (NVENC, VAAPI, Vulkan)
-
-# 1. System-Abhängigkeiten installieren
-sudo apt update && sudo apt install -y libnpth0-dev
-# Optional: sudo apt build-dep ffmpeg (benötigt deb-src in sources.list)
-
-# Vor den Symlinks prüfen, ob die NVIDIA-Treiber überhaupt installiert sind
-if [ ! -f /usr/lib/x86_64-linux-gnu/libcuda.so.1 ]; then
-    echo "FEHLER: NVIDIA-Treiber (libcuda.so.1) nicht gefunden!"
-    echo "Bitte installiere die NVIDIA-Treiber (z.B. nvidia-driver-535) zuerst."
-    exit 1
-fi
-
-# 2. NVIDIA Symlinks sicherstellen (VOR dem Build für configure)
-sudo ln -sf /usr/lib/x86_64-linux-gnu/libcuda.so.1 /usr/lib/x86_64-linux-gnu/libcuda.so
-sudo ln -sf /usr/lib/x86_64-linux-gnu/libnvidia-encode.so.1 /usr/lib/x86_64-linux-gnu/libnvidia-encode.so
-sudo ln -sf /usr/lib/x86_64-linux-gnu/libnvcuvid.so.1 /usr/lib/x86_64-linux-gnu/libnvcuvid.so
-
-# Verzeichnisse definieren
-LIB_DIR="/usr/lib/x86_64-linux-gnu"
 
 # 3. FFmpeg Konfiguration
 PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
@@ -64,18 +44,15 @@ if [ $? -eq 0 ]; then
     make -j$(nproc)
     sudo make install
     
-    # 4. Stripping
-    echo "Stripping binaries and libraries..."
-    sudo strip --strip-unneeded /usr/bin/ffmpeg /usr/bin/ffprobe
-    sudo strip --strip-unneeded $LIB_DIR/libavcodec.so* $LIB_DIR/libavdevice.so* $LIB_DIR/libavfilter.so* \
-                                $LIB_DIR/libavformat.so* $LIB_DIR/libavutil.so* $LIB_DIR/libswresample.so* \
-                                $LIB_DIR/libswscale.so*
-    
-    # 5. NVIDIA Symlinks final sicherstellen
-    sudo ln -sf $LIB_DIR/libcuda.so.1 $LIB_DIR/libcuda.so
-    sudo ln -sf $LIB_DIR/libnvidia-encode.so.1 $LIB_DIR/libnvidia-encode.so
-    sudo ln -sf $LIB_DIR/libnvcuvid.so.1 $LIB_DIR/libnvcuvid.so
-
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavcode*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavdevic*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavfilte*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavforma*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavutil*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libpostpro*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswresampl*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswscale*
+   
     sudo ldconfig
     echo "Build & Stripping erfolgreich abgeschlossen!"
 else
