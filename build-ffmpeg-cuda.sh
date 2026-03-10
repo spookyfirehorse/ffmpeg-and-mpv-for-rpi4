@@ -66,18 +66,23 @@ if [ $? -eq 0 ]; then
     sudo make install
     
     # 4. Stripping
-    echo "Stripping binaries and libraries..."
-    sudo strip --strip-unneeded /usr/bin/ffmpeg /usr/bin/ffprobe
-    sudo strip --strip-unneeded $LIB_DIR/libavcodec.so* $LIB_DIR/libavdevice.so* $LIB_DIR/libavfilter.so* \
-                                $LIB_DIR/libavformat.so* $LIB_DIR/libavutil.so* $LIB_DIR/libswresample.so* \
-                                $LIB_DIR/libswscale.so*
-    
+   sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavcode*
+   sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavdevic*
+   sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavfilte*
+   sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavforma*
+   sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavutil*
+   sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libpostpro*
+   sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswresampl*
+   sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswscale*
+   
     # 5. NVIDIA Symlinks final sicherstellen
     sudo ln -sf $LIB_DIR/libcuda.so.1 $LIB_DIR/libcuda.so
     sudo ln -sf $LIB_DIR/libnvidia-encode.so.1 $LIB_DIR/libnvidia-encode.so
     sudo ln -sf $LIB_DIR/libnvcuvid.so.1 $LIB_DIR/libnvcuvid.so
 
     sudo ldconfig
+    ls -l /usr/lib/x86_64-linux-gnu/libav* /usr/lib/x86_64-linux-gnu/libsw* /usr/lib/x86_64-linux-gnu/libpostproc* | awk '{sum += $5} END {print sum / 1024 / 1024 " MB"}'
+
     echo "Build & Stripping erfolgreich abgeschlossen!"
 else
     echo "Fehler während der Konfiguration!"
