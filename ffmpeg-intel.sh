@@ -85,83 +85,96 @@ Kopier dir das hier in eine Datei (z.B. build_ffmpeg.sh), mach sie mit chmod +x 
 bash
 
 
-ubuntu shaderc test c true
-
-
-make distclean && \
-PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux-gnu/pkgconfig" \
+PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 ./configure --prefix=/usr \
- --libdir=/usr/lib/x86_64-linux-gnu \
- --incdir=/usr/include/x86_64-linux-gnu \
- --extra-version="ultra-skylake-8.0.1-FINAL-C" \
- --arch=x86_64 --cpu=skylake \
- --pkg-config-flags="--static" \
- --extra-cflags='-march=skylake -O3 -pipe -fPIC -I/usr/include/vulkan' \
- --extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed' \
- --extra-libs='-lpthread -lm -lrt -ldl -lstdc++ -lxml2 -lz -lgnutls -lnettle -lhogweed -lgmp -lidn2 -lunistring -lp11-kit' \
- --nvcc=/usr/bin/nvcc \
- --disable-everything --disable-hwaccels \
- --enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
- --enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc \
- --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
- --enable-cuda-nvcc --enable-libnpp --enable-ffnvcodec --enable-nvenc --enable-nvdec \
- --enable-vaapi --enable-vulkan --enable-libplacebo --enable-libshaderc --disable-vdpau \
- --enable-hwaccel='h264_nvdec,hevc_nvdec,vp9_nvdec,av1_nvdec,h264_vaapi,hevc_vaapi' \
- --enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
- --enable-libvpx --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis \
- --enable-libfreetype --enable-libharfbuzz --enable-libfribidi --enable-hardcoded-tables \
- --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa --enable-alsa --enable-libjack \
- --enable-libx264 --enable-libx265 --enable-xlib --disable-sdl2 --disable-libpulse \
- --enable-indev='v4l2,alsa,jack,fbdev,lavfi,pipe' \
- --enable-outdev='v4l2,alsa,jack,fbdev,drm,pipe' \
- --enable-protocol='file,http,https,tcp,udp,rtp,rtsp,rtmp,rtmpt,rtmpe,rtmps,ffrtmpcrypt,hls,dash,srt,unix,cache,crypto,concat,data,lavfi,pipe' \
- --enable-demuxer='mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,flv,mpegts,mpegvideo,mjpeg,image2,lavfi,ac3,eac3,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
- --enable-muxer='mp4,mkv,mov,avi,flac,wav,mp3,opus,ogg,rtsp,rtp,rtmp,flv,hls,mpegts,adts,dash,matroska,image2,null,ac3,eac3,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
- --enable-decoder='h264,hevc,vp9,av1,mjpeg,mpeg1video,mpeg2video,mpeg4,h264_cuvid,hevc_cuvid,vp9_cuvid,aac,mp3,flac,vorbis,opus,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,adpcm_swf,ass,srt' \
- --enable-encoder='h264_nvenc,hevc_nvenc,av1_nvenc,h264_vaapi,hevc_vaapi,libfdk_aac,libmp3lame,libopus,libvorbis,libx264,libx265,ac3,eac3,flac,vorbis,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,ass,srt' \
- --enable-filter='afifo,anull,asplit,amix,aresample,aformat,volume,loudnorm,equalizer,crystalizer,ladspa,lv2,rubberband,scale,format,fps,crop,overlay,drawtext,hwupload,hwdownload,hwmap,nullsrc,hwupload_cuda,hwdownload_cuda,scale_npp,yadif_cuda,libplacebo' \
- --enable-parser='h264,hevc,vp9,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus,vorbis,ac3,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
- --enable-bsf='h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,extract_extradata,null,opus_metadata' \
- --enable-asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse,xv' \
- && make -j$(nproc) && sudo make install && sudo ldconfig
+--libdir=/usr/lib/x86_64-linux-gnu \
+--incdir=/usr/include/x86_64-linux-gnu \
+--extra-version="ultra-goldmont-8.0.1-FINAL-C" \
+--arch=x86_64 \
+--cpu=goldmont \
+--extra-cflags='-march=goldmont -O3 -pipe -fPIC -I/usr/include/vulkan' \
+--extra-cxxflags='-march=goldmont -O3 -pipe -fPIC' \
+--extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O1 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed' \
+--extra-libs='-lpthread -lm -lrt -ldl -lstdc++ -lxml2 -lz' \
+--disable-everything --disable-hwaccels \
+--enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
+--enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc \
+--enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
+--disable-cuda --disable-nvenc --disable-nvdec --disable-cuvid --disable-vdpau \
+--enable-vaapi --enable-vulkan --enable-libplacebo --enable-libshaderc --enable-opengl --enable-libdrm --enable-libxml2 \
+--enable-libdvdnav --enable-libdvdread \
+--enable-hwaccel='h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi,h264_vulkan,hevc_vulkan,av1_vulkan' \
+--enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
+--enable-libvpx --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis \
+--enable-libfreetype --enable-libharfbuzz --enable-libfribidi --enable-hardcoded-tables \
+--enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa --enable-alsa --enable-libjack \
+--enable-libx264 --enable-libx265 --enable-xlib --disable-sdl2 --disable-libpulse \
+--enable-indev='v4l2,alsa,jack,lavfi,fbdev,xcbgrab,kmsgrab' \
+--enable-outdev='v4l2,alsa,fbdev,opengl' \
+--enable-protocol='async,bluray,cache,concat,crypto,data,ffrtmpcrypt,file,ftp,hls,http,https,httpproxy,icecast,md5,pipe,rtmp,rtmpe,rtmps,rtmpt,rtmpte,rtp,srtp,subfile,tcp,tls,udp,udplite,unix' \
+--enable-demuxer='aac,ac3,adpcm_ima_qt,adpcm_ima_wav,adpcm_ms,aiff,asf,avi,dash,dts,dtshd,eac3,flac,flv,h264,hevc,hls,image2,matroska,mjpeg,mov,mp3,mpegps,mpegts,mpegvideo,null,ogg,opus,pcm_alaw,pcm_f32be,pcm_f32le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,rawvideo,rm,rtp,rtsp,srt,truehd,vobsub,wav,webm_dash_manifest,dvdnav,dvdread' \
+--enable-muxer='aac,ac3,adpcm_ima_qt,adpcm_ima_wav,adpcm_ms,adts,av1,avi,dash,eac3,flac,flv,h264,hevc,hls,image2,matroska,mjpeg,mkv,mov,mp3,mp4,mpegts,null,ogg,opus,rtmp,rtp,rtsp,wav,dvdsub' \
+--enable-decoder='h264,hevc,vp9,av1,mjpeg,mpeg1video,mpeg2video,mpeg4,aac,mp3,flac,vorbis,opus,pcm_s16le,pcm_s16be,pcm_s24le,pcm_s24be,pcm_s32le,pcm_s32be,pcm_f32le,pcm_f32be,pcm_s64le,pcm_s64be,pcm_f64le,pcm_f64be,pcm_u8,pcm_alaw,pcm_mulaw,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,adpcm_swf,ass,srt,dvdsub,dvbsub' \
+--enable-encoder='h264_vaapi,hevc_vaapi,vp9_vaapi,libfdk_aac,libmp3lame,libopus,libvorbis,libx264,libx265,ac3,eac3,flac,vorbis,pcm_s16le,pcm_s16be,pcm_s24le,pcm_s24be,pcm_s32le,pcm_s32be,pcm_f32le,pcm_f32be,pcm_s64le,pcm_s64be,pcm_f64le,pcm_f64be,pcm_u8,pcm_alaw,pcm_mulaw,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,ass,srt,dvdsub' \
+--enable-filter='adelay,aecho,afifo,amix,anull,aresample,aformat,asetpts,asplit,colorspace,crystalizer,crop,drawtext,equalizer,firequalizer,format,fps,hwdownload,hwmap,hwupload,ladspa,lv2,rubberband,libplacebo,loudnorm,null,nullsrc,overlay,palettegen,paletteuse,pan,scale,setpts,transpose,volume,drawbox_vaapi,hstack_vaapi,vstack_vaapi' \
+--enable-parser='aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis,ac3,dca,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,dvdsub,dvd_pel' \
+--enable-bsf='aac_adtstoasc,av1_metadata,extract_extradata,h264_metadata,h264_mp4toannexb,hevc_metadata,hevc_mp4toannexb,mjpeg2jpeg,mpeg4_unpack_bframes,null,opus_metadata,pcm_rechunk,vp9_metadata,vp9_superframe' \
+--enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse,xv' \
+&& make -j$(nproc) && sudo make install && sudo ldconfig
 
+
+
+
+#!/bin/bash
 make distclean && \
-PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
+PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 ./configure --prefix=/usr \
-  --libdir=/usr/lib/x86_64-linux-gnu \
-  --incdir=/usr/include/x86_64-linux-gnu \
-  --extra-version="ultra-goldmont-8.0.1-FINAL-C" \
-  --arch=x86_64 \
-  --cpu=goldmont \
-  --pkg-config-flags="--static" \
-  --extra-cflags="-march=goldmont -mtune=goldmont -O3 -pipe -fPIC -I/usr/include/vulkan" \
-  --extra-cxxflags="-march=goldmont -mtune=goldmont -O3 -pipe -fPIC" \
-  --extra-ldflags="-L/usr/lib/x86_64-linux-gnu -Wl,-O1 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed" \
-  --extra-libs="-lpthread -lm -lrt -ldl -lstdc++ -lxml2 -lz -lgnutls -lnettle -lhogweed -lgmp -lidn2 -lunistring -lp11-kit" \
-  --disable-everything --disable-hwaccels \
-  --enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
-  --enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc \
-  --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
-  --disable-cuda --disable-nvenc --enable-libxml2 \
-  --enable-vaapi --enable-vulkan --enable-libshaderc --enable-libplacebo --enable-libdrm --disable-vdpau \
-  --enable-hwaccel='h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi' \
-  --enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
-  --enable-libx264 --enable-libx265 --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx \
-  --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
-  --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa \
-  --enable-alsa --enable-libjack  \
-  --enable-indev='alsa,fbdev,jack,kmsgrab,lavfi,pipe,v4l2' \
-  --enable-outdev='alsa,drm,fbdev,jack,kmsgrab,v4l2,pipe' \
-  --enable-protocol='cache,concat,crypto,dash,fd,ffrtmpcrypt,file,hls,http,https,pipe,rtmp,rtmpt,rtmpe,rtmps,rtmpt,rtp,rtsp,srt,tcp,tls,udp,unix' \
-  --enable-demuxer='mov,matroska,flac,wav,mp3,ogg,aac,avi,h264,hevc,hls,image2,lavfi,mpegts,mpegvideo,rawvideo,rtmp,rtp,rtsp,sdp,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
-  --enable-muxer='adts,avi,dash,flac,hls,image2,matroska,mov,mp3,mp4,mpegts,null,ogg,opus,rawvideo,rtmp,rtp,rtsp,wav,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
-  --enable-decoder='mov_text,dvdsub,dvbsub,h263,h264,hevc,vp9,av1,mjpeg,mpeg1video,mpeg2video,mpeg4,aac,mp3,flac,vorbis,opus,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,ass,srt,h264_vaapi,hevc_vaapi,vp9_vaapi,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
-  --enable-encoder='mov_text,libfdk_aac,libmp3lame,libopus,libvorbis,libx264,libx265,h264_vaapi,hevc_vaapi,vp9_vaapi,ac3,eac3,flac,pcm_s16le,pcm_s24le,rawvideo,ass,srt,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt' \
-  --enable-filter='afifo,anull,asplit,amix,aresample,aformat,volume,loudnorm,equalizer,crystalizer,ladspa,lv2,rubberband,scale,format,fps,crop,overlay,drawtext,hwupload,hwdownload,hwmap,nullsrc,scale_vaapi,deinterlace_vaapi,denoise_vaapi,sharpness_vaapi,procamp_vaapi,tonemap_vaapi,yadif_vaapi,setdar,settb,setpts,asettb,asetpts,concat,pad,pan,yadif,asubboost,asubcut,libplacebo' \
-  --enable-parser='aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis' \
-  --enable-bsf='aac_adtstoasc,extract_extradata,h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,null,opus_metadata' \
-  --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect \
-  && make -j$(nproc) && sudo make install && sudo ldconfig
+--libdir=/usr/lib/x86_64-linux-gnu \
+--incdir=/usr/include/x86_64-linux-gnu \
+--extra-version="ultra-skylake-universal-C-support" \
+--arch=x86_64 \
+--cpu=skylake \
+--extra-cflags='-march=skylake -O3 -pipe -fPIC -I/usr/include/vulkan' \
+--extra-cxxflags='-march=skylake -O3 -pipe -fPIC' \
+--extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O3 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed' \
+--extra-libs='-lpthread -lm -lrt -ldl -lstdc++ -lxml2 -lz' \
+--nvcc=/usr/bin/nvcc \
+--disable-everything --disable-hwaccels \
+--enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
+--enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
+--enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
+--enable-cuda-nvcc --enable-libnpp --enable-ffnvcodec --enable-nvenc --enable-nvdec \
+--enable-vaapi --enable-vulkan --enable-libplacebo --enable-libshaderc --enable-opengl --enable-libdrm --enable-libjack --disable-vdpau \
+--enable-libdvdnav --enable-libdvdread \
+--enable-hwaccel='h264_nvdec,hevc_nvdec,vp9_nvdec,av1_nvdec,mjpeg_nvdec,mpeg1_nvdec,mpeg2_nvdec,mpeg4_nvdec,vc1_nvdec,h264_vaapi,hevc_vaapi,h264_vulkan,hevc_vulkan,av1_vulkan' \
+--enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
+--enable-libvpx --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis \
+--enable-libfreetype --enable-libharfbuzz --enable-libfribidi --enable-hardcoded-tables \
+--enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa --enable-alsa --enable-libjack \
+--enable-libx264 --enable-libx265 --enable-xlib --disable-sdl2 --disable-libpulse \
+--enable-indev='v4l2,alsa,jack,lavfi,fbdev,xcbgrab,kmsgrab' \
+--enable-outdev='v4l2,alsa,fbdev' \
+--enable-protocol='async,bluray,cache,concat,crypto,data,ffrtmpcrypt,file,ftp,hls,http,https,httpproxy,icecast,md5,pipe,rtmp,rtmpe,rtmps,rtmpt,rtmpte,rtp,srtp,subfile,tcp,tls,udp,udplite,unix' \
+--enable-demuxer='aac,ac3,adpcm_ima_qt,adpcm_ima_wav,adpcm_ms,aiff,asf,avi,dash,dts,dtshd,eac3,flac,flv,h264,hevc,hls,image2,matroska,mjpeg,mov,mp3,mpegps,mpegts,mpegvideo,null,ogg,opus,pcm_alaw,pcm_f32be,pcm_f32le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,rawvideo,rm,rtp,rtsp,srt,truehd,vobsub,wav,webm_dash_manifest,dvdnav,dvdread' \
+--enable-muxer='aac,ac3,adpcm_ima_qt,adpcm_ima_wav,adpcm_ms,adts,av1,avi,dash,eac3,flac,flv,h264,hevc,hls,image2,matroska,mjpeg,mkv,mov,mp3,mp4,mpegts,null,ogg,opus,rtmp,rtp,rtsp,wav,dvdsub' \
+--enable-decoder='h264,hevc,vp9,av1,mjpeg,mpeg1video,mpeg2video,mpeg4,h264_cuvid,hevc_cuvid,vp9_cuvid,av1_cuvid,mjpeg_cuvid,mpeg2_cuvid,mpeg4_cuvid,aac,mp3,flac,vorbis,opus,pcm_s16le,pcm_s16be,pcm_s24le,pcm_s24be,pcm_s32le,pcm_s32be,pcm_f32le,pcm_f32be,pcm_s64le,pcm_s64be,pcm_f64le,pcm_f64be,pcm_u8,pcm_alaw,pcm_mulaw,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,adpcm_swf,ass,srt,dvdsub,dvbsub,mov_text' \
+--enable-encoder='h264_nvenc,hevc_nvenc,av1_nvenc,h264_vaapi,hevc_vaapi,libfdk_aac,libmp3lame,libopus,libvorbis,libx264,libx265,ac3,eac3,flac,vorbis,pcm_s16le,pcm_s16be,pcm_s24le,pcm_s24be,pcm_s32le,pcm_s32be,pcm_f32le,pcm_f32be,pcm_s64le,pcm_s64be,pcm_f64le,pcm_f64be,pcm_u8,pcm_alaw,pcm_mulaw,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,ass,srt,dvdsub,mov_text' \
+--enable-filter='adelay,aecho,afifo,amix,anull,aresample,aformat,asetpts,asplit,colorspace,crystalizer,crop,drawtext,equalizer,firequalizer,format,format_cuda,fps,hwdownload,hwdownload_cuda,hwdownload_vaapi,hwmap,hwupload,hwupload_cuda,hwupload_vaapi,ladspa,libplacebo,loudnorm,lv2,null,nullsrc,overlay,palettegen,paletteuse,pan,rubberband,scale,scale_cuda,scale_npp,setpts,transpose,volume,yadif_cuda' \
+--enable-parser='h264,hevc,vp9,av1,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus,vorbis,ac3,dca,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,dvdsub,dvd_pel' \
+--enable-bsf='aac_adtstoasc,av1_metadata,extract_extradata,h264_metadata,h264_mp4toannexb,hevc_metadata,hevc_mp4toannexb,mjpeg2jpeg,mpeg4_unpack_bframes,null,opus_metadata,pcm_rechunk,vp9_metadata,vp9_superframe' \
+--enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse,xv' \
+&& make -j$(nproc) && sudo make install && sudo ldconfig
+
+
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavcode*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavdevic*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavfilte*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavforma*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libavutil*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libpostpro*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswresampl*
+sudo strip --strip-unneeded /usr/lib/x86_64-linux-gnu/libswscale*
+
 
 
 
