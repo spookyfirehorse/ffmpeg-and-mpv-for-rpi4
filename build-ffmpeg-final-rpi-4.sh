@@ -20,7 +20,7 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --extra-version="ultra-pi4-ULTIMATE-VULKAN" \
  --arch=aarch64 --target-os=linux --cpu=cortex-a72 \
  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -I/usr/include/vulkan -mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
- --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -lgbm -ldrm -latomic -Wl,-O2 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto' \
+ --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -lgbm -ldrm -latomic -Wl,-O3 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto' \
  --extra-libs='-lgbm -ldrm -lepoxy -lEGL -lGLESv2 -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -lvulkan -lstdc++ -lpthread -lm -lrt -ldl -ldvdnav -lfftw3 -lgnutls -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lz -lsrt' \
  --disable-everything --disable-hwaccels --enable-libdvdnav --enable-libdvdread \
  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
