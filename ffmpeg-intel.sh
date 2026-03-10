@@ -100,7 +100,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
 --enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc \
 --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
---disable-cuda --disable-nvenc --disable-nvdec --disable-cuvid --disable-vdpau \
+--disable-cuda --disable-nvenc --disable-nvdec --disable-cuvid --disable-vdpau -enable-libbluray \
 --enable-vaapi --enable-vulkan --enable-libplacebo --enable-libshaderc --enable-opengl --enable-libdrm --enable-libxml2 \
 --enable-libdvdnav --enable-libdvdread \
 --enable-hwaccel='h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi,h264_vulkan,hevc_vulkan,av1_vulkan' \
