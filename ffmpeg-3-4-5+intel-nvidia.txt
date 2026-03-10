@@ -327,6 +327,8 @@ Protocols: ./configure --list-protocols
 
 #!/bin/bash
 make distclean && \
+#!/bin/bash
+make distclean && \
 PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 ./configure --prefix=/usr \
 --libdir=/usr/lib/x86_64-linux-gnu \
@@ -366,7 +368,6 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 && make -j$(nproc) && sudo make install && sudo ldconfig
 
 
-
 ##########################
 
 intel 
@@ -384,7 +385,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --extra-libs='-lpthread -lm -lrt -ldl -lstdc++ -lxml2 -lz' \
 --disable-everything --disable-hwaccels \
 --enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
---enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc \
+--enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc  --enable-libbluray --enable-libxml2 \
 --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
 --disable-cuda --disable-nvenc --disable-nvdec --disable-cuvid --disable-vdpau \
 --enable-vaapi --enable-vulkan --enable-libplacebo --enable-libshaderc --enable-opengl --enable-libdrm --enable-libxml2 \
@@ -407,6 +408,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-bsf='aac_adtstoasc,av1_metadata,extract_extradata,h264_metadata,h264_mp4toannexb,hevc_metadata,hevc_mp4toannexb,mjpeg2jpeg,mpeg4_unpack_bframes,null,opus_metadata,pcm_rechunk,vp9_metadata,vp9_superframe' \
 --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse,xv' \
 && make -j$(nproc) && sudo make install && sudo ldconfig
+
 
 
 #######################################################################
