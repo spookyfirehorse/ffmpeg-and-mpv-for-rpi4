@@ -14,8 +14,8 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O3 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--gc-sections' \
 --extra-libs='-lpthread -lm -lrt -ldl' \
 --disable-everything --disable-hwaccels \
---enable-ffmpeg --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
---enable-pthreads --enable-shared --disable-static --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
+--enable-ffmpeg --enable-ffplay --enable-sdl2 --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
+--enable-pthreads --enable-shared --disable-static --enable-openssl --enable-gnutls --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
 --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
 --disable-cuda --disable-nvenc --disable-nvdec --disable-cuvid --disable-vdpau --disable-libnpp --disable-ffnvcodec \
 --enable-vaapi --enable-vulkan --enable-libplacebo --enable-libshaderc --enable-opengl --enable-libdrm \
