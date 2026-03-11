@@ -55,6 +55,7 @@ sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale*
 
 echo "Fertig! Installierte Größe:"
 ls -l /usr/lib/aarch64-linux-gnu/libav* /usr/lib/aarch64-linux-gnu/libsw* /usr/lib/aarch64-linux-gnu/libpostproc* | awk '{sum += $5} END {print sum / 1024 / 1024 " MB"}'
+chmod +x bin/build-ffmpeg-final-rpi-5.sh
 EOF
 
 git clone --depth 1 https://github.com/mpv-player/mpv.git
