@@ -38,7 +38,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-ffmpeg --enable-ffplay --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
 --enable-pthreads --enable-shared --disable-static --enable-sdl2 --enable-gnutls   --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
 --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
---enable-cuda-nvcc --enable-libnpp --enable-ffnvcodec --enable-nvenc --enable-nvdec \
+--disable-cuda --enable-nvenc --enable-cuda-llvm --enable-nvdec --enable-cuvid  --enable-libnpp --enable-ffnvcodec --enable-cuda-nvcc --enable-libnpp --enable-ffnvcodec  \
 --enable-vaapi --enable-vulkan --enable-libplacebo --enable-libshaderc --enable-opengl --enable-libdrm --enable-libjack --disable-vdpau \
 --enable-libdvdnav --enable-libdvdread \
 --enable-hwaccel='vp9_vaapi,mjpeg_vaapi,vp9_vulkan,h264_nvdec,hevc_nvdec,vp9_nvdec,av1_nvdec,mjpeg_nvdec,mpeg1_nvdec,mpeg2_nvdec,mpeg4_nvdec,vc1_nvdec,h264_vaapi,hevc_vaapi,h264_vulkan,hevc_vulkan,av1_vulkan' \
