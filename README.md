@@ -352,14 +352,16 @@ pw-cli
 ##############################################################################################
 
 
-     sudo apt install libopenh264-dev
+    
 ```bash     
 sudo apt update && sudo apt install -y \
 build-essential pkg-config git \
-libasound2-dev libpulse-dev libsdl2-dev \
+libasound2-dev  libsdl2-dev \
 libfdk-aac-dev libmp3lame-dev libopus-dev libx264-dev libdav1d-dev \
 libdrm-dev libudev-dev libepoxy-dev libshaderc-dev \
-libssl-dev libvulkan-dev atomic-binaries
+libssl-dev libvulkan-dev libatomic1  vulkan-validationlayers  vulkan-tools
+
+sudo apt build-dep mpv ffmpeg
 ```
 
 
