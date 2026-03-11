@@ -572,8 +572,8 @@ chmod +x bin/build-ffmpeg-final-rpi-3.sh
 
 
 ```bash
-apt source mpv
-cd mpv
+git clone --depth 1 https://github.com/mpv-player/mpv.git
+cd mpv 
 meson setup build \
   --prefix=/usr \
   --buildtype=release \
@@ -617,6 +617,8 @@ sudo meson install -C build
 # rpi 4
 
 ```bash
+git clone --depth 1 https://github.com/mpv-player/mpv.git
+cd mpv 
 meson setup build \
   --prefix=/usr \
   --buildtype=release \
@@ -659,6 +661,8 @@ meson setup build \
 # rpi 3
 
 ```bash
+git clone --depth 1 https://github.com/mpv-player/mpv.git
+cd mpv 
 meson setup build \
   --prefix=/usr \
   --buildtype=release \
@@ -694,19 +698,55 @@ nano .config/mpv/mpv.conf
 ```
 
 ```bash
-gpu-dumb-mode=no
-opengl-glfinish=yes
-#gpu-context=waylandvk
-gpu-context=x11egl
+
+#  opengl
+
+gpu-context=wayland
 gpu-api=opengl
+opengl-glfinish=yes
 vo=gpu
+
+# vulkan  
+
+#gpu-context=waylandvk
+#gpu-api=vulkan
+#vo=gpu-next
+#wayland-configure-bounds=yes
+
 hwdec=drm
 hwdec-codecs=hevc
 hwdec-image-format=drm_prime
 gpu-hwdec-interop=drmprime
-drm-vrr-enabled=auto
-dither=no
-scale=bilinear
+hwdec-extra-frames=2
+glsl-shader="~~/shaders/FSR.glsl"
+# Hochwertiges Upscaling für den Pi 5 (Cortex-A76)
+#scale=ewa_lanczos
+#cscale=mitchell  
+framedrop=decoder+vo
+keep-open=no
+cache=no
+volume=80
+ao=pipewire
+af=lavfi=[crystalizer=i=1,bass=g=3],scaletempo2
+volume-max=150
+audio-channels=stereo
+#autofit=1910
+no-border
+no-border
+autofit=50%x50%
+background=none   #very important for vulkan fullscreen
+#geometry=1920x1080+0+0
+vulkan-swap-mode=fifo
+swapchain-depth=3
+#vulkan-async-compute=no
+#vulkan-async-transfer=no
+gpu-shader-cache=yes
+wayland-app-id=mpv-fullscreen
+alang=de,deu,ger,en,eng
+slang=de,deu,ger,en,eng
+sid=1
+aid=1
+
  ```
     
 # without x build ffmpeg ! pure wayland vulkan drm 
