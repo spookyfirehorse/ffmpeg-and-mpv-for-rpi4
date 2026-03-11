@@ -911,60 +911,28 @@ demuxer-readahead-secs=0
 
 ########################### 
 
-# rtmp camera  spezial for rpi 4 !  audio drifft ! works on all rpi ! cpu 30 % zero2w
+# rtmp camera  spezial for rpi 4 !  no audio drifft ! works on all rpi ! cpu 30 % zero2w
+
+
+     PIPEWIRE_LATENCY="1024/48000" change PULSE_LATENCY_MSEC=21
+
+# imx708 all rpi 
+
+    PIPEWIRE_LATENCY="1024/48000" 
 
 ```bash
-nice -n -11 stdbuf -oL -eL taskset -c 3 rpicam-vid --denoise cdn_off -t 0 --width 1280 --height 720 --framerate 24 \
---libav-video-codec h264_v4l2m2m --libav-format flv --codec libav --inline \
---autofocus-mode manual --autofocus-range normal --autofocus-window 0.25,0.25,0.5,0.5 \
---awb indoor --profile baseline --hdr off --intra 25 --level 4.1 -b 1000000 \
---flush -n -o - | \
-nice -n -11 taskset -c 0 ffmpeg -y \
--use_wallclock_as_timestamps 1 \
--fflags +genpts+nobuffer+flush_packets \
--thread_queue_size 256 \
--c:v h264_v4l2m2m -num_output_buffers 4 -f flv -i - \
--thread_queue_size 256 -f pulse -fragment_size 1024 -isync 0 -i default \
--map 0:v:0 -map 1:a:0 \
--c:v h264_v4l2m2m -num_capture_buffers 8 -num_output_buffers 4 \
--b:v 1000k -maxrate 1000k -bufsize 500k -g 25 -bf 0 -fps_mode cfr \
--c:a libfdk_aac -b:a 128k -ac 1 -afterburner 0  \
--f rtsp -rtsp_transport tcp -tcp_nodelay 1 -rtsp_flags prefer_tcp \
--muxdelay 0 -max_interleave_delta 1 -flags +low_delay -avioflags direct -pkt_size 1316 \
-rtmp://localhost:1935/live?"user=spooky&pass=password"
-```
-
-##########################################################################################################################
-
-# imx708 all rpi spezial rpi 3 zero2w
-
-```bash
-stdbuf -o0 -e0  chrt -f 50 taskset -c 3  rpicam-vid --flush   -b 1500000    --denoise cdn_off   --codec libav --libav-format mpegts \
+PIPEWIRE_LATENCY="1024/48000"  stdbuf -o0 -e0 nice -n 11   taskset -c 3  rpicam-vid --flush   -b 1500000    --denoise cdn_off   --codec libav --libav-format mpegts \
 --profile=main  --hdr=off --level 4.0 --framerate 25  --width 1536 --height 864   --av-sync=0 \
 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
 --audio-codec libopus --audio-samplerate 48000 --shutter 20000 --tuning-file /usr/share/libcamera/ipa/rpi/vc4/imx708.json  \
---audio-channels 2 --libav-audio 1 --audio-source pulse  --awb indoor -t 0 --intra 25 \
---inline  -n  -o  - | chrt -f 50 taskset -c 1  ffmpeg   -loglevel warning  -hide_banner \
--fflags nobuffer+genpts+flush_packets \
--hwaccel drm -hwaccel_output_format drm_prime -fpsprobesize 0   -f mpegts  -i -  -metadata title='lucy' -c copy -copyts -start_at_zero  \
--flags low_delay -avioflags direct -map 0:0 -map 0:1 -muxdelay 0  -f rtsp -buffer_size 4k \
--rtsp_flags filter_src   -tcp_nodelay 1  -rtsp_transport tcp -pkt_size 1316  rtsp://"MshcUBHU8P:VPxfYXKRXw"@"localhost:8557"/mystream > /dev/null 2>&1
-```
-
-
-# ov5647 camera all rpi  spezial rpi 3 zero2w
-
-```bash
-stdbuf -o0 -e0  chrt -f 50 taskset -c 3  rpicam-vid --flush   -b 1500000    --denoise cdn_off   --codec libav --libav-format mpegts \
---profile=main  --hdr=off --level 4.0 --framerate 25 --width 1296 --height 972   --av-sync=0 \
---audio-codec libopus --audio-samplerate 48000 --shutter 20000 --tuning-file  /usr/share/libcamera/ipa/rpi/vc4/ov5647.json  \
---audio-channels 2 --libav-audio 1 --audio-source pulse  --awb indoor -t 0 --intra 25 \
---inline  -n  -o  - | chrt -f 50 taskset -c 1  ffmpeg   -loglevel warning  -hide_banner \
--fflags nobuffer+genpts+flush_packets \
--hwaccel drm -hwaccel_output_format drm_prime  -fpsprobesize 0   -f mpegts  -i -  -metadata title='lucy' -c copy -copyts -start_at_zero  \
--flags low_delay -avioflags direct -map 0:0 -map 0:1 -muxdelay 0  -f rtsp -buffer_size 4k \
+--audio-channels 2 --libav-audio 1 --audio-source alsa --audio-device pipewire  --awb indoor -t 0 --intra 25  \
+--inline  -n  -o  - | nice -n 10    taskset -c 2  ffmpeg   -loglevel warning  -hide_banner \
+-fflags nobuffer+genpts+flush_packets  -isync 0  -copyts   \
+-hwaccel drm -hwaccel_output_format drm_prime -fpsprobesize 0   -f mpegts  -i -  -metadata title='lucy' -c copy  \
+-flags low_delay -avioflags direct -map 0:0 -map 0:1 -muxdelay 0.01  -f rtsp -buffer_size 512 \
 -rtsp_flags filter_src   -tcp_nodelay 1  -rtsp_transport tcp -pkt_size 1316  rtsp://
 ```
+
 
 ### rec 
 
