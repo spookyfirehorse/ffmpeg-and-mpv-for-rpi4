@@ -59,3 +59,50 @@ ls -l /usr/lib/aarch64-linux-gnu/libav* /usr/lib/aarch64-linux-gnu/libsw* /usr/l
 EOF
 
 chmod +x bin/build-ffmpeg-final-rpi-4.sh
+
+
+
+
+
+git clone --depth 1 https://github.com/mpv-player/mpv.git
+cd mpv 
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dc_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dcpp_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto -lstdc++' \
+   -Dwayland=enabled \
+  -Ddmabuf-wayland=enabled \
+  -Dvulkan=enabled \
+  -Dshaderc=disabled \
+  -Ddrm=enabled \
+  -Dgbm=enabled \
+  -Degl-wayland=enabled \
+  -Degl-drm=enabled \
+  -Dgl=enabled \
+  -Dalsa=enabled \
+  -Dpipewire=enabled \
+  -Dpulse=disabled \
+  -Dx11=disabled \
+  -Dvaapi=disabled \
+  -Dvdpau=disabled \
+  -Dvdpau-gl-x11=disabled \
+  -Damf=disabled \
+  -Dandroid-media-ndk=disabled \
+  -Dmacos-11-features=disabled \
+  -Dmacos-touchbar=disabled \
+  -Dswift-build=disabled \
+  -Dwin32-smtc=disabled \
+  -Dd3d11=disabled \
+  -Ddirect3d=disabled \
+  -Dsdl2-video=disabled \
+  -Dsdl2-audio=disabled \
+  -Dopenal=disabled \
+  -Dmanpage-build=disabled \
+  -Dhtml-build=disabled -Dlibmpv=true
+
+  meson  compile -C  build
+
+  sudo meson install -C  build
