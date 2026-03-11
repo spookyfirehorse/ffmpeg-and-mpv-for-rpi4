@@ -63,7 +63,7 @@ else
 fi
 EOF
 
-chmod +x bin/build-ffmpeg-goldmond.sh
+chmod +x ~/bin/build-ffmpeg-goldmond.sh
 
 
 
