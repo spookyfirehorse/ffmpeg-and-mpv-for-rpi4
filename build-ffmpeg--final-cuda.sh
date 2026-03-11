@@ -48,7 +48,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa --enable-alsa --enable-libjack \
 --enable-libx264 --enable-libx265 --enable-xlib --disable-sdl2 --disable-libpulse \
 --enable-indev='v4l2,alsa,jack,lavfi,fbdev,xcbgrab,kmsgrab' \
---enable-outdev='v4l2,alsa,fbdev' \
+--enable-outdev='sdl2,v4l2,alsa,fbdev' \
 --enable-protocol='async,bluray,cache,concat,crypto,data,ffrtmpcrypt,file,ftp,hls,http,https,httpproxy,icecast,md5,pipe,rtmp,rtmpe,rtmps,rtmpt,rtmpte,rtp,srtp,subfile,tcp,tls,udp,udplite,unix' \
 --enable-demuxer='aac,ac3,adpcm_ima_qt,adpcm_ima_wav,adpcm_ms,aiff,asf,avi,dash,dts,dtshd,eac3,flac,flv,h264,hevc,hls,image2,matroska,mjpeg,mov,mp3,mpegps,mpegts,mpegvideo,null,ogg,opus,pcm_alaw,pcm_f32be,pcm_f32le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,rawvideo,rm,rtp,rtsp,srt,truehd,vobsub,wav,webm_dash_manifest,dvdnav,dvdread' \
 --enable-muxer='aac,ac3,adpcm_ima_qt,adpcm_ima_wav,adpcm_ms,adts,av1,avi,dash,eac3,flac,flv,h264,hevc,hls,image2,matroska,mjpeg,mkv,mov,mp3,mp4,mpegts,null,ogg,opus,rtmp,rtp,rtsp,wav,dvdsub' \
