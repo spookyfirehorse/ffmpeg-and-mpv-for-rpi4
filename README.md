@@ -755,11 +755,11 @@ vo=gpu
 
 # vulkan  
 
-#gpu-context=waylandvk
-#gpu-api=vulkan
-#vo=gpu-next
-#wayland-configure-bounds=yes
-
+gpu-context=waylandvk
+gpu-api=vulkan
+vo=gpu-next
+wayland-configure-bounds=yes
+background=none
 hwdec=drm
 hwdec-codecs=hevc
 hwdec-image-format=drm_prime
@@ -778,8 +778,6 @@ af=lavfi=[crystalizer=i=1,bass=g=3],scaletempo2
 volume-max=150
 audio-channels=stereo
 #autofit=1910
-no-border
-no-border
 autofit=50%x50%
 background=none   #very important for vulkan fullscreen
 #geometry=1920x1080+0+0
@@ -788,11 +786,12 @@ swapchain-depth=3
 #vulkan-async-compute=no
 #vulkan-async-transfer=no
 gpu-shader-cache=yes
-wayland-app-id=mpv-fullscreen
+#wayland-app-id=mpv-fullscreen
 alang=de,deu,ger,en,eng
 slang=de,deu,ger,en,eng
 sid=1
 aid=1
+background=none
 
  ```
     
@@ -800,8 +799,6 @@ aid=1
 # hwaacel drm wayland
 
 ```bash
-gpu-dumb-mode=no
-opengl-glfinish=yes
 gpu-context=waylandvk  
 gpu-api=vulkan
 vo=gpu-next
@@ -812,8 +809,67 @@ gpu-hwdec-interop=drmprime
 drm-vrr-enabled=auto
 dither=no
 scale=bilinear
+background=none
  ```
 
+
+```bash
+nano .config/mpv/shaders/FSR.glsl
+```
+```bash
+// FidelityFX Super Resolution v1.0.2 für mpv
+// Portiert von agyild
+
+//!PARAM SHARPENING
+//!TYPE float
+//!MINIMUM 0.0
+0.2
+
+//!HOOK LUMA
+//!BIND HOOKED
+//!SAVE EASUTEX
+//!DESC FidelityFX Super Resolution v1.0.2 (EASU)
+//!WHEN OUTPUT.w OUTPUT.h * LUMA.w LUMA.h * / 1.0 >
+
+vec4 hook() {
+    return HOOKED_tex(HOOKED_pos);
+}
+
+//!HOOK CANvAS
+//!BIND HOOKED
+//!BIND EASUTEX
+//!DESC FidelityFX Super Resolution v1.0.2 (RCAS)
+
+#define FSR_RCAS_LIMIT (0.25 - 1.0/16.0)
+
+vec4 hook() {
+    vec2 pos = HOOKED_pos;
+    vec2 size = HOOKED_size;
+
+    // RCAS Implementation
+    vec4 b = EASUTEX_texOff(pos, ivec2(0, -1));
+    vec4 d = EASUTEX_texOff(pos, ivec2(-1, 0));
+    vec4 e = EASUTEX_tex(pos);
+    vec4 f = EASUTEX_texOff(pos, ivec2(1, 0));
+    vec4 h = EASUTEX_texOff(pos, ivec2(0, 1));
+
+    float bL = dot(b.rgb, vec3(0.299, 0.587, 0.114));
+    float dL = dot(d.rgb, vec3(0.299, 0.587, 0.114));
+    float eL = dot(e.rgb, vec3(0.299, 0.587, 0.114));
+    float fL = dot(f.rgb, vec3(0.299, 0.587, 0.114));
+    float hL = dot(h.rgb, vec3(0.299, 0.587, 0.114));
+
+    float mnL = min(min(min(bL, dL), min(fL, hL)), eL);
+    float mxL = max(max(max(bL, dL), max(fL, hL)), eL);
+
+    float peak = 1.0 + (-1.0 * 4.0);
+    float lobe = max(-FSR_RCAS_LIMIT, min(mxL, 1.0-mnL)) * exp2(-SHARPENING);
+
+    vec4 color = (b + d + f + h) * lobe + e;
+    return color / (4.0 * lobe + 1.0);
+}
+
+```
 
 #################################
 
