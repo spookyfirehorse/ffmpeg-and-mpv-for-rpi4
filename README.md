@@ -359,7 +359,8 @@ build-essential pkg-config git \
 libasound2-dev  libsdl2-dev \
 libfdk-aac-dev libmp3lame-dev libopus-dev libx264-dev libdav1d-dev \
 libdrm-dev libudev-dev libepoxy-dev libshaderc-dev \
-libssl-dev libvulkan-dev libatomic1  vulkan-validationlayers  vulkan-tools
+libssl-dev libvulkan-dev libatomic1  vulkan-validationlayers  vulkan-tools  wayland-scanner++ wayland-utils  waylandpp-dev
+
 
 sudo apt build-dep mpv ffmpeg
 ```
