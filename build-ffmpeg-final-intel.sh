@@ -25,7 +25,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-libvpx --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis \
 --enable-libfreetype --enable-libharfbuzz --enable-libfribidi --enable-hardcoded-tables \
 --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa --enable-alsa --enable-libjack \
---enable-libx264 --enable-libx265 --enable-xlib --disable-sdl2 --disable-libpulse \
+--enable-libx264 --enable-libx265 --enable-xlib  --disable-libpulse \
 --enable-indev='v4l2,alsa,jack,lavfi,fbdev,xcbgrab,kmsgrab' \
 --enable-outdev='sdl2,v4l2,alsa,fbdev,opengl' \
 --enable-protocol='async,bluray,cache,concat,crypto,data,ffrtmpcrypt,file,ftp,hls,http,https,httpproxy,icecast,md5,pipe,rtmp,rtmpe,rtmps,rtmpt,rtmpte,rtp,srtp,subfile,tcp,tls,udp,udplite,unix' \
