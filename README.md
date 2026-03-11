@@ -120,11 +120,13 @@ isoliert 3 cpu for rpicam-vid isolcpus=3
 ```bash
 sudo nano /etc/group
 ```
+
+```bash
 render:x:992:user
 pipewire:x:105:user
 pulse:x:106:user
 rtkit:x:117:spook
-
+```
 
 
 
