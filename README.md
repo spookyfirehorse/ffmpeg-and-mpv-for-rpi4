@@ -204,31 +204,7 @@ alsa.properties = {
     audio.format = "S16LE"
 }
 ```
-```bash
-sudo nano /etc/pipewire/pipewire-pulse.conf.d/99-rpicam-s16.conf
-```
-```bash
-pulse.rules = [
-    {
-        matches = [ { application.process.binary = "rpicam-vid" } ]
-        actions = {
-            update-props = {
-                # Erzwungenes Format
-                pulse.default.format = "S16LE"
-                pulse.fix.format     = "S16LE"
-                audio.format         = "S16LE"
 
-                # Berechnung für 256 Samples:
-                # 256 Samples * 2 Bytes (16-Bit) * 2 Kanäle (Stereo) = 1024 Bytes  meins fragsize   4096 bei quantum 1024
-                pulse.attr.fragsize = "4096"
-
-                # PipeWire Blockgröße
-                node.force-quantum = 1024
-            }
-        }
-    }
-]
-```
 
 ```bash
 sudo nano /etc/enviroment
@@ -243,26 +219,15 @@ nano .asoundrc
 
 
 ```bash
+pcm.!default {
+    type pipewire
+}
+
 ctl.!default {
     type pipewire
 }
-
-pcm.!default {
-    type plug
-    slave {
-        pcm "pwire"
-        format S16_LE
-        rate 48000
-        period_size 256
-        buffer_size 1024
-    }
-}
-
-pcm.pwire {
-    type pipewire
-    mmap_emulation 1
-}
-```
+`
+``
 
 # realtime change to this
 
@@ -276,7 +241,28 @@ context.properties = {
     default.clock.quantum       = 256
     default.clock.min-quantum   = 256
     default.clock.max-quantum   = 256
+    default.clock.allowed-rates = [ 44100 48000 88200 96000 192000 ]
+    mem.allow-mlock             = true
 }
+
+# Dies zwingt alle neuen Streams (inkl. rpicam-vid) auf S32LE
+stream.properties = {
+    audio.format = "F32LE"
+    resample.quality = 4
+}
+
+
+context.modules = [
+    { name = libpipewire-module-rt
+        args = {
+            nice.level = -15
+            rt.prio = 95
+            rt.time.soft = 200000
+            rt.time.hard = 200000
+            uclimit      = true
+        }
+    }
+]
 ```
 
 ```bash
@@ -287,28 +273,6 @@ sudo nano /etc/enviroment
 PIPEWIRE_LATENCY=256/48000
 ```
 
-```bash
-pulse.rules = [
-    {
-        matches = [ { application.process.binary = "rpicam-vid" } ]
-        actions = {
-            update-props = {
-                # Erzwungenes Format
-                pulse.default.format = "S16LE"
-                pulse.fix.format     = "S16LE"
-                audio.format         = "S16LE"
-
-                # Berechnung für 256 Samples:
-                # 256 Samples * 2 Bytes (16-Bit) * 2 Kanäle (Stereo) = 1024 Bytes  meins fragsize   4096 bei quantum 1024
-                pulse.attr.fragsize = "1024"
-
-                # PipeWire Blockgröße
-                node.force-quantum = 256
-            }
-        }
-    }
-]
-```
 #############################################
 
 
