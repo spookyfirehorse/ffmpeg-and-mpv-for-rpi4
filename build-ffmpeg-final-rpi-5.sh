@@ -17,11 +17,11 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
 ./configure --prefix=/usr \
  --libdir=/usr/lib/aarch64-linux-gnu \
  --incdir=/usr/include/aarch64-linux-gnu \
- --extra-version="ultra-pi5-ULTIMATE-VULKAN" \
+ --extra-version="ultra-pi5-ULTIMATE-VULKAN-FAST" \
  --arch=aarch64 --target-os=linux --cpu=cortex-a76 \
- --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -I/usr/include/vulkan -mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
- --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -lgbm -ldrm -latomic -Wl,-O3 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto' \
-  --extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan -lgbm -ldrm -lepoxy -lEGL -lGLESv2 -lfftw3 -lgnutls -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lz -lsrt -ldvdnav -lstdc++ -lpthread -lm -lrt -ldl' \
+ --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -I/usr/include/vulkan -mcpu=cortex-a76+crypto -Ofast -pipe -ftree-vectorize -flto -fno-semantic-interposition -falign-functions=32 -Wno-stringop-overflow' \
+ --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -lgbm -ldrm -latomic -Wl,-O3 -Ofast -flto -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed' \
+ --extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan -lgbm -ldrm -lepoxy -lEGL -lGLESv2 -lfftw3 -lgnutls -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lz -lsrt -ldvdnav -lstdc++ -lpthread -lm -lrt -ldl' \
  --disable-everything --disable-hwaccels --enable-libdvdnav --enable-libdvdread \
  --enable-ffmpeg --enable-ffprobe --disable-ffplay --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
  --enable-libxml2 --enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-libdrm --enable-epoxy --enable-libudev --enable-vout-egl --enable-vout-drm --enable-opengl --enable-vulkan --enable-libshaderc --enable-libplacebo \
@@ -41,6 +41,7 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda \
  --disable-cuda-nvcc  --disable-cuda-sdk --disable-ffnvcodec  --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal \
  --disable-indev=pulse --disable-outdev=pulse && make -j2 && sudo make install
+
 
 # Strippen für minimale Dateigröße
 sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcode*
