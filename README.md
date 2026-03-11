@@ -479,8 +479,8 @@ meson setup build \
   --buildtype=release \
   -Dc_args='-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
   -Dcpp_args='-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
-  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto' \
-  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto -lstdc++' \
    -Dwayland=enabled \
   -Ddmabuf-wayland=enabled \
   -Dvulkan=enabled \
@@ -522,8 +522,8 @@ meson setup build \
   --buildtype=release \
   -Dc_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
   -Dcpp_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
-  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto' \
-  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto -lstdc++' \
    -Dwayland=enabled \
   -Ddmabuf-wayland=enabled \
   -Dvulkan=enabled \
@@ -562,10 +562,10 @@ meson setup build \
 meson setup build \
   --prefix=/usr \
   --buildtype=release \
-  -Dc_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -fomit-frame-pointer -flto -Wno-stringop-overflow' \
-  -Dcpp_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -fomit-frame-pointer -flto -Wno-stringop-overflow' \
-  -Dc_link_args='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto' \
-  -Dcpp_link_args='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O1,--as-needed -flto -lstdc++' \
+  -Dc_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -fomit-frame-pointer -flto -Wno-stringop-overflow' \
+  -Dcpp_args='-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -fomit-frame-pointer -flto -Wno-stringop-overflow' \
+  -Dc_link_args='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O2,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/arm-linux-gnueabihf -latomic -Wl,-O2,--as-needed -flto -lstdc++' \
   -Dlibmpv=true \
   -Dwayland=enabled \
   -Ddmabuf-wayland=enabled \
