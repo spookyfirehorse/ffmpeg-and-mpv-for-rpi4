@@ -36,7 +36,7 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --enable-muxer='wavpack,aac,ac3,adts,adx,aiff,amr,apng,asf,ass,av1,avi,caf,dash,dts,dv,dvd,eac3,f4v,flac,flv,g722,gif,h264,hevc,hls,image2,ismv,matroska,matroska_audio,mjpeg,mkvtimestamp_v2,mov,mp2,mp3,mp4,mpeg1system,mpeg1vcd,mpeg1video,mpeg2dvd,mpeg2svcd,mpeg2video,mpeg2vob,mpegts,mpjpeg,null,ogg,oma,opus,pcm_alaw,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc,psp,rawvideo,rtmp,rtmpt,rtp,rtp_mpegts,rtsp,sap,segment,smoothstreaming,spdif,srt,swf,tee,truehd,tta,vc1,wav,webm,webm_chunk,webm_dash_manifest,webp,webvtt,yuv4mpegpipe' \
  --enable-parser='dvd_nav,webp,vp8,vp9,vc1,aac_latm,aac,ac3,eac3,dca,mpegaudio,mp3,vorbis,opus,flac,h264,hevc,mpegvideo,mpeg4video,mjpeg,h263,mpeg1video,av1' \
  --enable-indev='v4l2,alsa,jack,kmsgrab,lavfi' \
- --enable-outdev='v4l2,alsa,opengl,vout_drm,vout_egl' \
+ --enable-outdev='sdl2,v4l2,alsa,opengl,vout_drm,vout_egl' \
  --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages  --disable-sndio \
  --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda \
  --disable-cuda-nvcc  --disable-cuda-sdk --disable-ffnvcodec  --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal \
