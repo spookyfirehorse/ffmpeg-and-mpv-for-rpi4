@@ -34,7 +34,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O3 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--gc-sections' \
 --extra-libs='-lpthread -lm -lrt -ldl' \
 --nvcc=/usr/bin/nvcc \
---disable-everything --disable-hwaccels \
+--disable-everything --enable-hwaccels \
 --enable-ffmpeg --enable-ffplay --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
 --enable-pthreads --enable-shared --disable-static --enable-sdl2 --enable-gnutls   --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
 --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
