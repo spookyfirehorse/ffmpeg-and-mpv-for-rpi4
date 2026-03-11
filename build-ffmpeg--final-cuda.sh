@@ -36,7 +36,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --nvcc=/usr/bin/nvcc \
 --disable-everything --disable-hwaccels \
 --enable-ffmpeg --enable-ffplay --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
---enable-pthreads --enable-shared --disable-static --enable-sdl2 --enable-gnutls --enable-openssl  --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
+--enable-pthreads --enable-shared --disable-static --enable-sdl2 --enable-gnutls   --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
 --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
 --enable-cuda-nvcc --enable-libnpp --enable-ffnvcodec --enable-nvenc --enable-nvdec \
 --enable-vaapi --enable-vulkan --enable-libplacebo --enable-libshaderc --enable-opengl --enable-libdrm --enable-libjack --disable-vdpau \
