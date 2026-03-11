@@ -33,7 +33,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-muxer='aac,ac3,adpcm_ima_qt,adpcm_ima_wav,adpcm_ms,adts,av1,avi,dash,eac3,flac,flv,h264,hevc,hls,image2,matroska,mjpeg,mkv,mov,mp3,mp4,mpegts,null,ogg,opus,rtmp,rtp,rtsp,wav,dvdsub' \
 --enable-decoder='h264,hevc,vp9,av1,mjpeg,mpeg1video,mpeg2video,mpeg4,aac,mp3,flac,vorbis,opus,pcm_s16le,pcm_s16be,pcm_s24le,pcm_s24be,pcm_s32le,pcm_s32be,pcm_f32le,pcm_f32be,pcm_s64le,pcm_s64be,pcm_f64le,pcm_f64be,pcm_u8,pcm_alaw,pcm_mulaw,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,adpcm_swf,ass,srt,dvdsub,dvbsub' \
 --enable-encoder='h264_vaapi,hevc_vaapi,vp9_vaapi,mjpeg_vaapi,libfdk_aac,libmp3lame,libopus,libvorbis,libx264,libx265,ac3,eac3,flac,vorbis,pcm_s16le,pcm_s16be,pcm_s24le,pcm_s24be,pcm_s32le,pcm_s32be,pcm_f32le,pcm_f32be,pcm_s64le,pcm_s64be,pcm_f64le,pcm_f64be,pcm_u8,pcm_alaw,pcm_mulaw,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,ass,srt,dvdsub' \
---enable-filter='adelay,aecho,afifo,amix,anull,aresample,aformat,asetpts,asplit,colorspace,crystalizer,crop,drawtext,equalizer,firequalizer,format,fps,hwdownload,hwmap,hwupload,ladspa,lv2,rubberband,libplacebo,loudnorm,null,nullsrc,overlay,palettegen,paletteuse,pan,scale,scale_vaapi,setpts,transpose,volume,drawbox_vaapi,hstack_vaapi,vstack_vaapi' \
+--enable-filter='adelay,aecho,afifo,amix,anull,aresample,aformat,asetpts,asplit,colorspace,crystalizer,bass,crop,drawtext,equalizer,firequalizer,format,fps,hwdownload,hwmap,hwupload,ladspa,lv2,rubberband,libplacebo,loudnorm,null,nullsrc,overlay,palettegen,paletteuse,pan,scale,scale_vaapi,setpts,transpose,volume,drawbox_vaapi,hstack_vaapi,vstack_vaapi' \
 --enable-parser='aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis,ac3,dca,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,dvdsub,dvd_pel' \
 --enable-bsf='aac_adtstoasc,av1_metadata,extract_extradata,h264_metadata,h264_mp4toannexb,hevc_metadata,hevc_mp4toannexb,mjpeg2jpeg,mpeg4_unpack_bframes,null,opus_metadata,pcm_rechunk,vp9_metadata,vp9_superframe' \
 --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse,xv'
@@ -63,7 +63,7 @@ else
 fi
 EOF
 
-chmod +x bin/build-ffmpeg-skylake.sh
+chmod +x bin/build-ffmpeg-goldmond.sh
 
 
 
