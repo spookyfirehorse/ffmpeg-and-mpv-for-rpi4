@@ -35,7 +35,7 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
   --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
   --enable-libxml2 --enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-libdrm --enable-epoxy --enable-libudev \
   --enable-opengl --disable-vulkan --disable-libshaderc --disable-libplacebo \
-  --enable-hwaccel=hevc_v4l2request \
+  --enable-hwaccel=hevc_v4l2request --enable-sdl2 \
   --enable-libass --enable-libfdk-aac --enable-libopus --enable-libsoxr --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
   --enable-ladspa --enable-lv2 --enable-librubberband --enable-alsa --disable-libpulse --enable-libjack \
   --enable-network --enable-gnutls --enable-gcrypt --enable-asm --enable-inline-asm --enable-neon --enable-runtime-cpudetect \
@@ -48,12 +48,12 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
   --enable-muxer='yuv4mpegpipe,adts,matroska,matroska_audio,mp4,mov,avi,flac,wav,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,image2,rawvideo,null,webm_dash_manifest' \
   --enable-parser='dca,ac3,eac3,h264,hevc,mjpeg,mpegvideo,mpeg4video,mpegaudio,aac,opus,flac,vorbis,h263' \
   --enable-indev='v4l2,alsa,jack,kmsgrab,v4l2_m2m,pipe,lavfi' \
-  --enable-outdev='v4l2,alsa,jack,drm,kmsgrab,pipe,v4l2_m2m' \
+  --enable-outdev='sdl2,v4l2,alsa,jack,drm,kmsgrab,pipe,v4l2_m2m' \
   --enable-xlib \
   --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
   --disable-sdl2 --disable-sndio --disable-indev=pulse --disable-outdev=pulse,xv \
-  --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-omx --disable-omx-rpi --disable-mmal
-
+  --disable-cuda --enable-nvenc --enable-cuda-llvm --enable-nvdec --enable-cuvid  --enable-libnpp --enable-ffnvcodec --enable-cuda-nvcc --enable-libnpp --enable-ffnvcodec  \  
+   --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal --disable-amf --disable-vdpau --disable-vaapi \
 make -j2
 sudo make install
 
