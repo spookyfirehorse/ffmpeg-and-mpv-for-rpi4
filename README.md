@@ -364,15 +364,14 @@ pw-cli
 
     
 ```bash     
-sudo apt update && sudo apt install -y \
+sudo apt build-dep mpv ffmpeg && sudo apt update && sudo apt install -y \
 build-essential pkg-config git \
 libasound2-dev  libsdl2-dev libgcrypt20-dev \
 libfdk-aac*-dev libmp3lame-dev libopus-dev libx264-dev libdav1d-dev \
 libdrm-dev libudev-dev libepoxy-dev libshaderc-dev \
-libssl-dev libvulkan-dev libatomic1  vulkan-validationlayers  vulkan-tools  wayland-scanner++ wayland-utils  waylandpp-dev
+libssl-dev libvulkan-dev libatomic1  vulkan-validationlayers  vulkan-tools \
+ wayland-scanner++ wayland-utils  waylandpp-dev libgbm-dev libdrm-dev libshaderc-dev libplacebo-dev libass-dev  libmp3lame-dev libopus-dev libsoxr-dev libxml2-dev 
 
-
-sudo apt build-dep mpv ffmpeg
 ```
 
 
