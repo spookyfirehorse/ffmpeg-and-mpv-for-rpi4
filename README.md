@@ -435,7 +435,7 @@ meson setup build \
    -Dwayland=enabled \
   -Ddmabuf-wayland=enabled \
   -Dvulkan=enabled \
-  -Dshaderc=enabled \
+  -Dshaderc=disabled \
   -Ddrm=enabled \
   -Dgbm=enabled \
   -Degl-wayland=enabled \
@@ -478,7 +478,7 @@ meson setup build \
    -Dwayland=enabled \
   -Ddmabuf-wayland=enabled \
   -Dvulkan=enabled \
-  -Dshaderc=enabled \
+  -Dshaderc=disabled \
   -Ddrm=enabled \
   -Dgbm=enabled \
   -Degl-wayland=enabled \
@@ -523,7 +523,7 @@ meson setup build \
   -Dpipewire=enabled \
   -Dalsa=enabled \
   -Dvulkan=enabled \
-  -Dshaderc=enabled \
+  -Dshaderc=disabled \
   -Ddrm=enabled \
   -Dgbm=enabled \
   -Degl-drm=enabled \
