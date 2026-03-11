@@ -56,8 +56,8 @@ echo "Fertig! Installierte Größe:"
 ls -l /usr/lib/aarch64-linux-gnu/libav* /usr/lib/aarch64-linux-gnu/libsw* /usr/lib/aarch64-linux-gnu/libpostproc* | awk '{sum += $5} END {print sum / 1024 / 1024 " MB"}'
 
 
-apt source mpv
-cd mpv
+git clone --depth 1 https://github.com/mpv-player/mpv.git
+cd mpv 
 meson setup build \
   --prefix=/usr \
   --buildtype=release \
