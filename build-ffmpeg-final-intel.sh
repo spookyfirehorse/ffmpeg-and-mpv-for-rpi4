@@ -75,6 +75,7 @@ meson setup build \
 --prefix=/usr \
 --libdir=/usr/lib/x86_64-linux-gnu \
 -Dbuildtype=release \
+-Db_lto=true
 -Doptimization=3 \
 -Dlibmpv=true \
 -Dvaapi=enabled \
