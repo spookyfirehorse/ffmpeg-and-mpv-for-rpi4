@@ -50,8 +50,9 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
   --enable-indev='v4l2,alsa,jack,kmsgrab,v4l2_m2m,pipe,lavfi' \
   --enable-outdev='sdl2,v4l2,alsa,jack,drm,kmsgrab,pipe,v4l2_m2m' \
   --enable-xlib \
+    --disable-cuda --disable-nvenc --disable-cuda-llvm --disable-nvdec --disable-cuvid --disable-libnpp --disable-ffnvcodec --disable-cuda-nvcc --disable-libnpp --disable-ffnvcodec \
   --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
-  --disable-sdl2 --disable-sndio --disable-indev=pulse --disable-outdev=pulse,xv \
+  --disable-sdl2 --disable-sndio --disable-indev=pulse --disable-outdev=pulse,xv 
 
 vulkan
 
