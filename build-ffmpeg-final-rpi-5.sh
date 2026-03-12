@@ -68,6 +68,7 @@ meson setup build \
   -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto' \
   -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto -lstdc++' \
    -Dwayland=enabled \
+   -Db_lto=true
   -Ddmabuf-wayland=enabled \
   -Dvulkan=enabled \
   -Dshaderc=disabled \
