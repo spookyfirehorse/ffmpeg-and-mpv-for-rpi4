@@ -12,7 +12,6 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --extra-cflags='-march=goldmont -mtune=goldmont -O3 -pipe -fPIC -ffunction-sections -fdata-sections -fno-semantic-interposition -I/usr/include/vulkan' \
 --extra-cxxflags='-march=goldmont -mtune=goldmont -O3 -pipe -fPIC -ffunction-sections -fdata-sections' \
 --extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O3 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--gc-sections' \
---extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan -lstdc++ -lm' \
 --disable-all --enable-hwaccels --enable-vaapi \
 --enable-ffmpeg --enable-ffplay --enable-sdl2 --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
 --enable-pthreads --enable-shared --disable-static --enable-gnutls --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
@@ -20,7 +19,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --disable-cuda --disable-nvenc --disable-cuda-llvm --disable-nvdec --disable-cuvid --disable-libnpp --disable-ffnvcodec --disable-cuda-nvcc \
 --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-opengl --enable-libdrm \
 --enable-libdvdnav --enable-libdvdread \
---enable-hwaccel='av1_vaapi,h263_vaapi,h264_vaapi,hevc_vaapi,mjpeg_vaapi,mpeg2_vaapi,mpeg4_vaapi,vvc_vaapi,vc1_vaapi,vp8_vaapi,vp9_vaapi,wmv3_vaapi,h264_vulkan,hevc_vulkan,prores_vulkan,vp9_vulkan,ffv1_vulkan,av1_vulkan,prores_raw_vulkan' \
+--enable-hwaccel='av1_vaapi,h263_vaapi,h264_vaapi,hevc_vaapi,mjpeg_vaapi,mpeg2_vaapi,mpeg4_vaapi,vvc_vaapi,vc1_vaapi,vp8_vaapi,vp9_vaapi,wmv3_vaapi' \
 --enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
 --enable-libvpx --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis \
 --enable-libfreetype --enable-libharfbuzz --enable-libfribidi --enable-hardcoded-tables \
