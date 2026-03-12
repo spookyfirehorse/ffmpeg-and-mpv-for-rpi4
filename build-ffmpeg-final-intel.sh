@@ -6,19 +6,19 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 ./configure --prefix=/usr \
 --libdir=/usr/lib/x86_64-linux-gnu \
 --incdir=/usr/include/x86_64-linux-gnu \
---extra-version="ultra-goldmont-8.0.1-FINAL-C-FIXED" \
+--extra-version="ultra-goldmont-7.1.3" \
 --arch=x86_64 \
 --cpu=goldmont \
 --extra-cflags='-march=goldmont -mtune=goldmont -O3 -pipe -fPIC -ffunction-sections -fdata-sections -fno-semantic-interposition -I/usr/include/vulkan' \
 --extra-cxxflags='-march=goldmont -mtune=goldmont -O3 -pipe -fPIC -ffunction-sections -fdata-sections' \
 --extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O3 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--gc-sections' \
- --extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan' \
---disable-all  --enable-hwaccels --enable-vaapi \
+--extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan -lstdc++ -lm' \
+--disable-all --enable-hwaccels --enable-vaapi \
 --enable-ffmpeg --enable-ffplay --enable-sdl2 --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
 --enable-pthreads --enable-shared --disable-static --enable-gnutls --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
 --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
---disable-cuda --disable-nvenc --disable-cuda-llvm --disable-nvdec --disable-cuvid --disable-libnpp --disable-ffnvcodec --disable-cuda-nvcc --disable-libnpp --disable-ffnvcodec \
-  --enable-libplacebo --enable-libshaderc --enable-vulkan --enable-opengl --enable-libdrm \
+--disable-cuda --disable-nvenc --disable-cuda-llvm --disable-nvdec --disable-cuvid --disable-libnpp --disable-ffnvcodec --disable-cuda-nvcc \
+--enable-libplacebo --enable-libshaderc --enable-vulkan --enable-opengl --enable-libdrm \
 --enable-libdvdnav --enable-libdvdread \
 --enable-hwaccel='av1_vaapi,h263_vaapi,h264_vaapi,hevc_vaapi,mjpeg_vaapi,mpeg2_vaapi,mpeg4_vaapi,vvc_vaapi,vc1_vaapi,vp8_vaapi,vp9_vaapi,wmv3_vaapi,h264_vulkan,hevc_vulkan,prores_vulkan,vp9_vulkan,ffv1_vulkan,av1_vulkan,prores_raw_vulkan' \
 --enable-gnutls --enable-gmp --enable-gcrypt --enable-network \
@@ -33,11 +33,11 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-muxer='aac,ac3,adts,av1,avi,dash,eac3,flac,flv,h264,hevc,hls,image2,matroska,mjpeg,mov,mp3,mp4,mpegts,null,ogg,opus,rtmp,rtp,rtsp,wav' \
 --enable-decoder='prores,wrapped_avframe,libx264,h264,hevc,h264_vulkan,hevc_vulkan,vp9,av1,mjpeg,mpeg1video,mpeg2video,mpeg4,aac,mp3,flac,vorbis,opus,pcm_s16le,pcm_s16be,pcm_s24le,pcm_s24be,pcm_s32le,pcm_s32be,pcm_f32le,pcm_f32be,pcm_s64le,pcm_s64be,pcm_f64le,pcm_f64be,pcm_u8,pcm_alaw,pcm_mulaw,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,adpcm_swf,ass,srt,dvdsub,dvbsub' \
 --enable-encoder='prores,prores_aw,prores_ks,h264_vulkan,huffyuv,hevc_vulkan,ffv1_vulkan,prores_ks_vulkan,av1_vulkan,libx264,h264_vaapi,hevc_vaapi,vp9_vaapi,av1_vaapi,mjpeg_vaapi,mpeg2_vaapi,libx265,libfdk_aac,libmp3lame,libopus,libvorbis,ac3,eac3,flac,vorbis,pcm_s16le,pcm_s16be,pcm_s24le,pcm_s24be,pcm_s32le,pcm_s32be,pcm_f32le,pcm_f32be,pcm_s64le,pcm_s64be,pcm_f64le,pcm_f64be,pcm_u8,pcm_alaw,pcm_mulaw,rawvideo,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,ass,srt' \
---enable-filter='realtime,latency,vpp_vaapi,scale_vaapi,procamp_vaapi,sharpness_vaapi,hwmap,hwdownload,hwupload,adelay,aecho,afifo,amix,anull,aresample,aformat,asetpts,asplit,colorspace,crystalizer,bass,crop,drawtext,equalizer,firequalizer,format,fps,ladspa,lv2,rubberband,libplacebo,loudnorm,null,nullsrc,overlay,palettegen,paletteuse,pan,scale,setpts,transpose,volume,drawbox_vaapi,hstack_vaapi,vstack_vaapi' \
+--enable-filter='realtime,latency,vpp_vaapi,scale_vaapi,procamp_vaapi,sharpness_vaapi,transpose_vaapi,denoise_vaapi,tonemap_vaapi,framerates_vaapi,format_vaapi,hwmap,hwdownload,hwupload,scale_vulkan,flip_vulkan,adelay,aecho,afifo,amix,anull,aresample,aformat,asetpts,asplit,colorspace,crystalizer,bass,crop,drawtext,equalizer,firequalizer,format,fps,ladspa,lv2,rubberband,libplacebo,loudnorm,null,nullsrc,overlay,palettegen,paletteuse,pan,scale,setpts,transpose,volume,drawbox_vaapi,hstack_vaapi,vstack_vaapi' \
 --enable-parser='aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis,ac3,dca,dvdsub,dvd_nav' \
 --enable-bsf='aac_adtstoasc,av1_metadata,extract_extradata,h264_metadata,h264_mp4toannexb,hevc_metadata,hevc_mp4toannexb,mjpeg2jpeg,mpeg4_unpack_bframes,null,opus_metadata,pcm_rechunk,vp9_metadata,vp9_superframe' \
---enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse'
-
+--enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse' \
+--disable-avx --disable-avx2 --disable-avx512 --disable-fma3 --disable-fma4 --disable-xop
 
 
 if [ $? -eq 0 ]; then
