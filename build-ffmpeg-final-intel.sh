@@ -74,16 +74,36 @@ export LDFLAGS="-Wl,-O3 -Wl,--as-needed -Wl,--gc-sections"
 meson setup build \
 --prefix=/usr \
 --libdir=/usr/lib/x86_64-linux-gnu \
--Dbuildtype=release \
--Db_lto=true
--Doptimization=3 \
--Dlibmpv=true \
--Dvaapi=enabled \
--Dvulkan=enabled \
--Dshaderc=disabled \
--Dplacebo=enabled \
--Dcuda-interop=enabled \
--Dpipewire=enabled
+  -Dwayland=enabled \
+   -Db_lto=true
+  -Ddmabuf-wayland=enabled \
+  -Dvulkan=enabled \
+  -Dshaderc=disabled \
+  -Ddrm=enabled \
+  -Dgbm=enabled \
+  -Degl-wayland=enabled \
+  -Degl-drm=enabled \
+  -Dgl=enabled \
+  -Dalsa=enabled \
+  -Dpipewire=enabled \
+  -Dpulse=disabled \
+  -Dx11=disabled \
+  -Dvaapi=disabled \
+  -Dvdpau=disabled \
+  -Dvdpau-gl-x11=disabled \
+  -Damf=disabled \
+  -Dandroid-media-ndk=disabled \
+  -Dmacos-11-features=disabled \
+  -Dmacos-touchbar=disabled \
+  -Dswift-build=disabled \
+  -Dwin32-smtc=disabled \
+  -Dd3d11=disabled \
+  -Ddirect3d=disabled \
+  -Dsdl2-video=disabled \
+  -Dsdl2-audio=disabled \
+  -Dopenal=disabled \
+  -Dmanpage-build=disabled \
+  -Dhtml-build=disabled -Dlibmpv=true 
 meson compile -C build
 sudo meson install -C build
 
