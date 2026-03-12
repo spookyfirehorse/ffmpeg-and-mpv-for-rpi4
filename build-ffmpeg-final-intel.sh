@@ -69,6 +69,22 @@ chmod +x ~/bin/build-ffmpeg-goldmond.sh
 
 
 
+export CFLAGS="-march=goldmont -mtune=goldmont -O3 -pipe -fno-semantic-interposition"
+export LDFLAGS="-Wl,-O3 -Wl,--as-needed -Wl,--gc-sections"
+meson setup build \
+--prefix=/usr \
+--libdir=/usr/lib/x86_64-linux-gnu \
+-Dbuildtype=release \
+-Doptimization=3 \
+-Dlibmpv=true \
+-Dvaapi=enabled \
+-Dvulkan=enabled \
+-Dshaderc=disabled \
+-Dplacebo=enabled \
+-Dcuda-interop=enabled \
+-Dpipewire=enabled
+meson compile -C build
+sudo meson install -C build
 
 
 
