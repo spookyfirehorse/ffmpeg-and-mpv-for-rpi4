@@ -137,7 +137,6 @@ meson setup build \
   -Dvaapi=disabled \
   -Dvdpau=disabled \
   -Dvdpau-gl-x11=disabled \
-  -Damf=disabled \
   -Dandroid-media-ndk=disabled \
   -Dmacos-11-features=disabled \
   -Dmacos-touchbar=disabled \
