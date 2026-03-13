@@ -37,7 +37,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-parser='aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis,ac3,dca,dvdsub,dvd_nav' \
 --enable-bsf='aac_adtstoasc,av1_metadata,extract_extradata,h264_metadata,h264_mp4toannexb,hevc_metadata,hevc_mp4toannexb,mjpeg2jpeg,mpeg4_unpack_bframes,null,opus_metadata,pcm_rechunk,vp9_metadata,vp9_superframe' \
 --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse' \
---disable-avx --disable-avx2 --disable-avx512 --disable-fma3 --disable-fma4 --disable-xop 
+--disable-avx --disable-avx2 --disable-avx512 --disable-fma3 --disable-fma4 --disable-xop \
 
 
 if [ $? -eq 0 ]; then
