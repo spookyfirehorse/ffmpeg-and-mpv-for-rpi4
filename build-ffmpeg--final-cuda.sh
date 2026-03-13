@@ -94,11 +94,27 @@ EOF
 chmod +x bin/build-ffmpeg-skylake.sh
 
 
+###############################################################################################################
 
 
+mkdir -p bin
+cat << 'EOF' > bin/build-mpv-skylake.sh
+#!/bin/bash
+# mpv Build-Skript für Skylake (Vulkan, CUDA, Wayland - No X11/Pulse)
+
+# 1. Abhängigkeiten und Quellen laden
+sudo apt update
+sudo apt build-dep -y mpv
+apt source mpv
+
+# Ins mpv-Verzeichnis wechseln (sucht den Ordner automatisch)
+cd mpv-*/ || { echo "mpv-Quellordner nicht gefunden"; exit 1; }
+
+# 2. Optimierungen setzen
 export CFLAGS="-march=skylake -mtune=skylake -O3 -pipe -fno-semantic-interposition"
 export LDFLAGS="-Wl,-O3 -Wl,--as-needed -Wl,--gc-sections"
 
+# 3. Meson Konfiguration
 meson setup build \
   --prefix=/usr \
   --libdir=/usr/lib/x86_64-linux-gnu \
@@ -136,8 +152,14 @@ meson setup build \
   -Dhtml-build=disabled \
   -Dlibmpv=true 
 
+# 4. Kompilieren und Installieren
 meson compile -C build
 sudo meson install -C build
+sudo ldconfig
 
+echo "mpv Build erfolgreich abgeschlossen!"
+EOF
+
+chmod +x bin/build-mpv-skylake.sh
 
 grep "ffplay_deps" ffbuild/config.log
