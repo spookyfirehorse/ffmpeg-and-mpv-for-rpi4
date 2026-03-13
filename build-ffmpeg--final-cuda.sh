@@ -59,7 +59,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-filter='buffer,buffersink,abuffer,abuffersink,hwdownload,hwmap,hwupload,adelay,aecho,afifo,amix,anull,aresample,aformat,asetpts,asplit,colorspace,crystalizer,crop,drawtext,equalizer,firequalizer,format,scale_cuda,hwupload_cuda,bilateral_cuda,thumbnail_cuda,bwdif_cuda,chromakey_cuda,colorspace_cuda,overlay_cuda,pad_cuda,yadif_cuda,ladspa,libplacebo,loudnorm,lv2,null,nullsrc,overlay,palettegen,paletteuse,pan,rubberband,scale,scale_npp,setpts,transpose,volume' \
 --enable-parser='h264,hevc,vp9,av1,mjpeg,mpegvideo,mpeg4video,aac,mp3,flac,opus,vorbis,ac3,dca,adpcm_ms,adpcm_ima_wav,adpcm_ima_qt,dvdsub,dvd_pel' \
 --enable-bsf='av1_frame_merge,av1_frame_split,apv_metadata,av1_metadata,h264_metadata,hevc_metadata,mpeg2_metadata,opus_metadata,prores_metadata,vp9_metadata,vvc_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb,mjpeg2jpeg,mpeg4_unpack_bframes,null,pcm_rechunk,vp9_superframe' \
---enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect 
+--enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect \
 
 
 if [ $? -eq 0 ]; then
