@@ -71,6 +71,7 @@ meson setup build \
    -Db_lto=true
   -Dvulkan=enabled \
   -Dshaderc=disabled \
+   -Ddmabuf-wayland=enabled \
   -Ddrm=enabled \
   -Dgbm=enabled \
   -Degl-wayland=enabled \
