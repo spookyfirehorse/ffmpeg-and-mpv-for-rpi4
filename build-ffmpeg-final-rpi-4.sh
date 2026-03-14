@@ -84,11 +84,10 @@ meson setup build \
   -Dalsa=enabled \
   -Dpipewire=enabled \
   -Dpulse=disabled \
-  -Dx11=disabled \
+  -Dx11=enabled \
   -Dvaapi=disabled \
   -Dvdpau=disabled \
   -Dvdpau-gl-x11=disabled \
-  -Damf=disabled \
   -Dandroid-media-ndk=disabled \
   -Dmacos-11-features=disabled \
   -Dmacos-touchbar=disabled \
