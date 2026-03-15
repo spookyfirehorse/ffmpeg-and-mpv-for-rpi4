@@ -68,7 +68,7 @@ meson setup build \
   -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto' \
   -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto -lstdc++' \
    -Dwayland=enabled \
-   -Db_lto=true
+   -Db_lto=true \
   -Dvulkan=enabled \
   -Dshaderc=disabled \
    -Ddmabuf-wayland=enabled \
@@ -84,7 +84,6 @@ meson setup build \
   -Dvaapi=disabled \
   -Dvdpau=disabled \
   -Dvdpau-gl-x11=disabled \
-  -Damf=disabled \
   -Dandroid-media-ndk=disabled \
   -Dmacos-11-features=disabled \
   -Dmacos-touchbar=disabled \
