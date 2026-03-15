@@ -41,7 +41,7 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
   --enable-network --enable-gnutls --enable-gcrypt --enable-asm --enable-inline-asm --enable-neon --enable-runtime-cpudetect \
   --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,tls,rtmp,rtmpt,rtmpe,rtmps,ffrtmpcrypt,hls,dash,srt,unix,cache,crypto,concat' \
   --enable-bsf='mpeg2_metadata,hevc_metadata,h264_metadata,h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,opus_metadata,extract_extradata,null' \
-  --enable-filter='buffersrc,buffersink,format,null,copy,firequalizer,realtime,latency,deinterlace_v4l2m2m,scale_v4l2m2m,format,scale,fps,setdar,settb,setpts,asettb,asetpts,concat,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afade' \
+  --enable-filter='unsand,buffersrc,buffersink,format,null,copy,firequalizer,realtime,latency,deinterlace_v4l2m2m,scale_v4l2m2m,format,scale,fps,setdar,settb,setpts,asettb,asetpts,concat,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afade' \
   --enable-decoder='libfdk_aac,h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,mpeg1_v4l2m2m,mpeg2_v4l2m2m,mpeg4_v4l2m2m,hevc_v4l2request,opus,aac,ac3,eac3,mpegaudio,flac,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,adpcm_ms,adpcm_ima_wav' \
   --enable-encoder='h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,libfdk_aac,aac,libopus,flac,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo' \
   --enable-demuxer='id3v1,id3v2,matroska,matroska_audio,mpegts,mov,flac,wav,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo' \
