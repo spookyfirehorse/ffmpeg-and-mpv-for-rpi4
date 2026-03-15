@@ -43,18 +43,10 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --disable-indev=pulse --disable-outdev=pulse && make -j2 && sudo make install
 
 
-# Strippen für minimale Dateigröße
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcode*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevic*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilte*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavforma*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libpostpro*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresampl*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale*
+
 
 echo "Fertig! Installierte Größe:"
-ls -l /usr/lib/aarch64-linux-gnu/libav* /usr/lib/aarch64-linux-gnu/libsw* /usr/lib/aarch64-linux-gnu/libpostproc* | awk '{sum += $5} END {print sum / 1024 / 1024 " MB"}'
+stat -Lc %s /usr/lib/aarch64-linux-gnu/lib{avcodec,avdevice,avfilter,avformat,avutil,postproc,swresample,swscale}.so | awk '{sum += $1} END {printf "Gesamtgröße: %.2f MB\n", sum/1024/1024}'
 EOF
 
 chmod +x bin/build-ffmpeg-final-rpi-4.sh
