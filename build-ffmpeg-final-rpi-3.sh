@@ -27,7 +27,7 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
   --extra-libs='-L/usr/lib/arm-linux-gnueabihf -lpthread -Wl,-O2 -lm -lrt -ldl -lasound -lstdc++ -ljack -ldrm -lgbm -lgnutls -lgcrypt -lgpg-error -lxml2 -lfdk-aac -lFLAC -lopus -lass -lsoxr -lfreetype -lharfbuzz -lfribidi -lrubberband' \
   --disable-everything \
   --disable-hwaccels \
-  --enable-ffmpeg --enable-ffprobe --disable-ffplay \
+  --enable-ffmpeg --enable-ffprobe --enable-ffplay \
   --enable-shared --disable-static \
   --disable-debug --enable-stripping \
   --enable-hardcoded-tables --enable-pic --enable-pthreads \
@@ -36,7 +36,7 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
   --enable-libxml2 --enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-libdrm --enable-epoxy --enable-libudev \
   --enable-opengl --disable-vulkan --disable-libshaderc --disable-libplacebo \
   --enable-hwaccel=hevc_v4l2request --enable-sdl2 \
-  --enable-libass --enable-libfdk-aac --enable-libopus --enable-libsoxr --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
+  --enable-libass --enable-libfdk-aac --enable-libopus  --enable-libsoxr --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
   --enable-ladspa --enable-lv2 --enable-librubberband --enable-alsa --disable-libpulse --enable-libjack \
   --enable-network --enable-gnutls --enable-gcrypt --enable-asm --enable-inline-asm --enable-neon --enable-runtime-cpudetect \
   --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,tls,rtmp,rtmpt,rtmpe,rtmps,ffrtmpcrypt,hls,dash,srt,unix,cache,crypto,concat' \
