@@ -96,3 +96,7 @@ meson setup build \
   meson  compile -C  build
 
   sudo meson install -C  build
+
+
+
+  ffmpeg -f lavfi -i testsrc=s=1920x1080:r=30 -vf "format=yuv420p" -c:v h264_v4l2m2m -f null -
