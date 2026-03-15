@@ -48,15 +48,7 @@ make -j2 \
 
 sudo make install 
 
-# Strippen für minimale Dateigröße
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavcode*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavdevic*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavfilte*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavforma*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libavutil*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libpostpro*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresampl*
-sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale*
+
 
 echo "Fertig! Installierte Größe:"
 stat -Lc %s /usr/lib/arm-linux-gnueabihf/lib{avcodec,avdevice,avfilter,avformat,avutil,postproc,swresample,swscale}.so | awk '{sum += $1} END {printf "Gesamtgröße armhf: %.2f MB\n", sum/1024/1024}'
