@@ -118,7 +118,7 @@ meson setup build \
   -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto' \
   -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto -lstdc++' \
    -Dwayland=enabled \
-   -Db_lto=true
+   -Db_lto=true \
   -Dshaderc=disabled \
   -Ddrm=enabled \
   -Dgbm=enabled \
@@ -128,7 +128,7 @@ meson setup build \
   -Dalsa=enabled \
   -Dpipewire=enabled \
   -Dpulse=disabled \
-  -Dx11=disabled \
+  -Dx11=enabled \
   -Dvaapi=disabled \
   -Dvdpau=disabled \
   -Dvdpau-gl-x11=disabled \
@@ -148,4 +148,5 @@ meson setup build \
 
 
 
+ninja -C build -j4
 
