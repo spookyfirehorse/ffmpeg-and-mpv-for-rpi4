@@ -100,3 +100,9 @@ meson setup build \
 
 
   ffmpeg -f lavfi -i testsrc=s=1920x1080:r=30 -vf "format=yuv420p" -c:v h264_v4l2m2m -f null -
+
+
+  time ffmpeg -v verbose -init_hw_device vulkan=vk:0 -filter_complex \
+"nullsrc=s=1920x1080:r=60,libplacebo=w=1280:h=720:format=nv12" \
+-frames:v 600 -f null -
+
