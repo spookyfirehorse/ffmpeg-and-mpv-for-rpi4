@@ -150,3 +150,6 @@ meson setup build \
 
 ninja -C build -j4
 
+sudo meson install -C build
+
+
