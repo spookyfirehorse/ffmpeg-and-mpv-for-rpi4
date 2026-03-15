@@ -59,7 +59,7 @@ sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswresampl*
 sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale*
 
 echo "Fertig! Installierte Größe:"
-ls -l /usr/lib/arm-linux-gnueabihf/libav* /usr/lib/arm-linux-gnueabihf/libsw* /usr/lib/arm-linux-gnueabihf/libpostproc* | awk '{sum += $5} END {print sum / 1024 / 1024 " MB"}'
+stat -Lc %s /usr/lib/arm-linux-gnueabihf/lib{avcodec,avdevice,avfilter,avformat,avutil,postproc,swresample,swscale}.so | awk '{sum += $1} END {printf "Gesamtgröße armhf: %.2f MB\n", sum/1024/1024}'
 EOF
 
 chmod +x bin/build-ffmpeg-final-rpi-3.sh
