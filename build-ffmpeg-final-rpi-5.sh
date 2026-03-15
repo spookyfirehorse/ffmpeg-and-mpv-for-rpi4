@@ -55,6 +55,7 @@ sudo strip --strip-unneeded /usr/lib/aarch64-linux-gnu/libswscale*
 
 echo "Fertig! Installierte Größe:"
 stat -Lc %s /usr/lib/aarch64-linux-gnu/lib{avcodec,avdevice,avfilter,avformat,avutil,postproc,swresample,swscale}.so | awk '{sum += $1} END {printf "Gesamtgröße: %.2f MB\n", sum/1024/1024}'
+file /usr/lib/aarch64-linux-gnu/lib{avcodec,avdevice,avfilter,avformat,avutil,postproc,swresample,swscale}.so* | grep -v "symbolic link"
 chmod +x ~/bin/build-ffmpeg-final-rpi-5.sh
 EOF
 
