@@ -76,7 +76,6 @@ meson setup build \
 --libdir=/usr/lib/x86_64-linux-gnu \
   -Dwayland=enabled \
    -Db_lto=true
-  -Ddmabuf-wayland=enabled \
   -Dvulkan=enabled \
   -Dshaderc=disabled \
   -Ddrm=enabled \
