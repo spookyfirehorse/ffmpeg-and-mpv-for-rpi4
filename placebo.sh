@@ -5,10 +5,15 @@ or
 git clone https://github.com/haasn/libplacebo.git
 cd libplacebo
 git submodule update --init
-meson setup build
-meson configure build   -Dvulkan=enabled -Dshaderc=enabled
+
+# Hier den Prefix auf /usr setzen
+meson setup build --prefix=/usr -Dvulkan=enabled -Dshaderc=enabled
+
+# Falls das Verzeichnis 'build' schon existiert, nutze stattdessen:
+# meson configure build --prefix=/usr
+
 meson compile -C build
+
 sudo meson install -C build
 
 
-#sudo apt build-dep libplacebo && apt source libplacebo && cd libplacebo-2.72.2/ && meson build && git clone https://github.com/haasn/libplacebo.git &&   ninja -C build && sudo ninja -C build install
