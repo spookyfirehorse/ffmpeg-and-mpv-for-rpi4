@@ -39,5 +39,33 @@ meson setup build \
 # Kompilieren
 meson compile -C build
 
+
+
+git clone https://github.com/haasn/libplacebo.git
+cd libplacebo
+git submodule update --init
+
+# Lösche einen alten Build-Ordner, um sauber neu zu starten
+rm -rf build
+
+# Setup mit CPU-Optimierungen für Cortex-A76
+CFLAGS="-mcpu=cortex-a76+crypto -Ofast -pipe -ftree-vectorize" \
+CXXFLAGS="-mcpu=cortex-a76+crypto -Ofast -pipe -ftree-vectorize" \
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dvulkan=enabled \
+  -Dshaderc=enabled \
+  -Dglslang=enabled \
+  -Db_lto=true \
+  -Db_pie=true
+
+# Kompilieren
+meson compile -C build
+
+# Installieren
+sudo meson install -C build
+
+
 # Installieren
 sudo meson install -C build
