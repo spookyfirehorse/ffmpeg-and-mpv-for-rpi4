@@ -54,4 +54,49 @@ echo "Fertig! Installierte Größe:"
 stat -Lc %s /usr/lib/arm-linux-gnueabihf/lib{avcodec,avdevice,avfilter,avformat,avutil,postproc,swresample,swscale}.so | awk '{sum += $1} END {printf "Gesamtgröße armhf: %.2f MB\n", sum/1024/1024}'
 EOF
 
+
+
+
+meson setup build \
+  --prefix=/usr \
+  --buildtype=release \
+  -Dc_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dcpp_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto -lstdc++ \
+  -lplacebo -lvulkan -lgbm -ldrm -lepoxy -lEGL -lGLESv2 \
+  -Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group \
+  -lm -lpthread' \   -Dwayland=enabled \
+  -Ddmabuf-wayland=enabled \
+  -Dvulkan=enabled \
+  -Dshaderc=disabled \
+  -Ddrm=enabled \
+  -Dgbm=enabled \
+  -Degl-wayland=enabled \
+  -Degl-drm=enabled \
+  -Dgl=enabled \
+  -Dalsa=enabled \
+  -Dpipewire=enabled \
+  -Dpulse=disabled \
+  -Dx11=enabled \
+  -Dvaapi=disabled \
+  -Dvdpau=disabled \
+  -Dvdpau-gl-x11=disabled \
+  -Dandroid-media-ndk=disabled \
+  -Dmacos-11-features=disabled \
+  -Dmacos-touchbar=disabled \
+  -Dswift-build=disabled \
+  -Dwin32-smtc=disabled \
+  -Dd3d11=disabled \
+  -Ddirect3d=disabled \
+  -Dsdl2-video=disabled \
+  -Dsdl2-audio=disabled \
+  -Dopenal=disabled \
+  -Dmanpage-build=disabled \
+  -Dhtml-build=disabled -Dlibmpv=true
+
+  meson  compile -C  build
+
+  sudo meson install -C  build
+
 chmod +x bin/build-ffmpeg-final-rpi-3.sh
