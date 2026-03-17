@@ -124,7 +124,6 @@ meson setup build \
   -Db_lto=true \
   -Ddmabuf-wayland=enabled \
   -Dvulkan=enabled \
-  -Dshaderc=disabled \
   -Ddrm=enabled \
   -Dgbm=enabled \
   -Degl-wayland=enabled \
