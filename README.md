@@ -691,12 +691,9 @@ meson setup build \
   -Dgbm=enabled \
   -Degl-drm=enabled \
   -Degl-wayland=enabled \
-  -Dgles2=enabled \
-  -Drpi-mmal=disabled \
   -Dvaapi=disabled \
   -Dvdpau=disabled \
   -Dcuda-hwaccel=disabled \
-  -Dmanpages=disabled
 ```
       
 #########################
