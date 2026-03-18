@@ -60,10 +60,10 @@ EOF
 meson setup build \
   --prefix=/usr \
   --buildtype=release \
-  -Dc_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
-  -Dcpp_args='-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
-  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto' \
-  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto -lstdc++ \
+  -Dc_args='-mcpu=cortex-a53+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dcpp_args='-mcpu=cortex-a53+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O2,--as-needed -flto' \
+  -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O2,--as-needed -flto -lstdc++ \
   -lplacebo -lvulkan -lgbm -ldrm -lepoxy -lEGL -lGLESv2 \
   -Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group \
   -lm -lpthread'  -Dwayland=enabled \
