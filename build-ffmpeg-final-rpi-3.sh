@@ -66,7 +66,7 @@ meson setup build \
   -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O3,--as-needed -flto -lstdc++ \
   -lplacebo -lvulkan -lgbm -ldrm -lepoxy -lEGL -lGLESv2 \
   -Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group \
-  -lm -lpthread' \   -Dwayland=enabled \
+  -lm -lpthread'  -Dwayland=enabled \
   -Ddmabuf-wayland=enabled \
   -Dvulkan=enabled \
   -Dshaderc=disabled \
