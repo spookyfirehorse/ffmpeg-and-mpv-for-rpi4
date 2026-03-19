@@ -54,7 +54,7 @@ EOF
 sudo swapoff -a
 sudo zramctl --reset /dev/zram0 2>/dev/null
 sudo zramctl --reset /dev/zram1 2>/dev/null
-sudo systemctl restart zramswap.servicesudo tee /etc/systemd/system/zram-clean.service <<EOF
+sudo systemctl restart zramswap.services tee /etc/systemd/system/zram-clean.service <<EOF
 [Unit]
 Description=Clean 512MB Zram Swap
 After=multi-user.target
