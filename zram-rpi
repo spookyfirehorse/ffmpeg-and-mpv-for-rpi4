@@ -1,4 +1,7 @@
 # 1. Den alten Versuch stoppen
+sudo apt update
+sudo apt install --reinstall -y libavahi-common3 libavahi-core7 avahi-daemon zram-tools
+
 sudo systemctl stop zram-clean.service 2>/dev/null
 
 # 2. Den Service mit "brutalem" Aufräumen neu schreiben
