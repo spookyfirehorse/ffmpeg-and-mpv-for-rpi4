@@ -1,0 +1,31 @@
+# 1. Den alten Versuch stoppen
+sudo systemctl stop zram-clean.service 2>/dev/null
+
+# 2. Den Service mit "brutalem" Aufräumen neu schreiben
+sudo tee /etc/systemd/system/zram-clean.service <<EOF
+[Unit]
+Description=Clean 512MB Zram Swap
+After=multi-user.target
+
+[Service]
+Type=oneshot
+# Schaltet alle aktiven Zram-Swaps aus, egal wie viele es sind
+ExecStartPre=/bin/sh -c '/sbin/swapoff /dev/zram* 2>/dev/null || true'
+# Setzt alle Geräte zurück
+ExecStartPre=/bin/sh -c '/sbin/zramctl --reset /dev/zram* 2>/dev/null || true'
+# Erstellt ein frisches Gerät
+ExecStart=/sbin/zramctl --find --size 512M --algorithm lz4
+# Formatiert und aktiviert es (nimmt das erste freie, meist /dev/zram0)
+ExecStartPost=/bin/sh -c '/sbin/mkswap /dev/zram0 && /sbin/swapon /dev/zram0 -p 100'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# 3. Neu laden und starten
+sudo systemctl daemon-reload
+sudo systemctl restart zram-clean.service
+
+# 4. Finaler Check
+zramctl
