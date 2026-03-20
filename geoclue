@@ -1,0 +1,22 @@
+# 1. Verzeichnis erstellen
+mkdir -p ~/.config/systemd/user/
+
+# 2. Service-Datei mit EOF erstellen
+cat <<EOF > ~/.config/systemd/user/geoclue-agent.service
+[Unit]
+Description=GeoClue Demo Agent
+After=network.target
+
+[Service]
+ExecStart=/usr/libexec/geoclue-2.0/demos/agent
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+EOF
+
+# 3. Systemd-Konfiguration neu laden
+systemctl --user daemon-reload
+
+# 4. Den Dienst aktivieren (Autostart nach Login) und sofort starten
+systemctl --user enable --now geoclue-agent.service
