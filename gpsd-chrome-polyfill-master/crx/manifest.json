@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "GPSD Chrome Polyfill (V3 Patch)",
+  "version": "0.3.2",
+  "permissions": [
+    "geolocation",
+    "scripting",
+    "storage",
+    "tabs",
+    "alarms"
+  ],
+  "host_permissions": [
+    "http://localhost/*",
+    "<all_urls>"
+  ],
+  "action": {
+    "default_title": "GPSD Status",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["shim.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_script.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "ISOLATED"
+    }
+  ]
+}
