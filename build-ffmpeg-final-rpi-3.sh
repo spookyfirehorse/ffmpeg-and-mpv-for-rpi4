@@ -11,7 +11,7 @@ cat << 'EOF' > bin/build-ffmpeg-final-rpi-3.sh
 sudo rm -rf ~/rpi-ffmpeg
 
 # Repository klonen
-git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git ~/rpi-ffmpeg
+git clone -b test/7.1.3/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git ~/rpi-ffmpeg
 cd ~/rpi-ffmpeg || exit
 
 TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" \
