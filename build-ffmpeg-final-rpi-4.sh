@@ -10,7 +10,7 @@ cat << 'EOF' > bin/build-ffmpeg-final-rpi-4.sh
 sudo rm -rf ~/rpi-ffmpeg
 
 # Repository klonen
-git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git ~/rpi-ffmpeg
+git clone -b test/7.1.3/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git ~/rpi-ffmpeg
 cd ~/rpi-ffmpeg || exit
 
 PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
