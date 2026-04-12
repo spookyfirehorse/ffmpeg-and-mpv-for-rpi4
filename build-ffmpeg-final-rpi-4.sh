@@ -14,7 +14,7 @@ git clone -b test/7.1.3/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.
 cd ~/rpi-ffmpeg || exit
 
 PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
-./configure --prefix=/usr \,
+./configure --prefix=/usr \
  --libdir=/usr/lib/aarch64-linux-gnu \
  --incdir=/usr/include/aarch64-linux-gnu \
  --extra-version="ultra-pi4-ULTIMATE-VULKAN-FAST" \
