@@ -36,7 +36,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-filter='format,vpp_vaapi,gblur_vulkan,extrastereo,treble,framestepacopy,copy,anull,framestep,settb,anullsink,anullsrc,null,nullsink,nullsrc,realtime,latency,scale_vaapi,procamp_vaapi,sharpness_vaapi,transpose_vaapi,denoise_vaapi,tonemap_vaapi,framerates_vaapi,format_vaapi,hwmap,hwdownload,hwupload,scale_vulkan,adelay,aecho,afifo,amix,aresample,aformat,asetpts,asplit,colorspace,crystalizer,bass,crop,drawtext,equalizer,firequalizer,fps,ladspa,lv2,rubberband,libplacebo,loudnorm,overlay,palettegen,paletteuse,pan,scale,setpts,transpose,volume,drawbox_vaapi,hstack_vaapi,vstack_vaapi' \
 --enable-parser='aac_latm,jpeg2000,jpegxl,png,aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis,ac3,dca,dvdsub,dvd_nav' \
 --enable-bsf='aac_adtstoasc,av1_metadata,extract_extradata,h264_metadata,h264_mp4toannexb,hevc_metadata,hevc_mp4toannexb,mjpeg2jpeg,mpeg4_unpack_bframes,null,opus_metadata,pcm_rechunk,vp9_metadata,vp9_superframe' \
---enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse --disable-outdev='pulse' \
+--enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse,oss --disable-outdev='pulse,oss' \
 --disable-avx --disable-avx2 --disable-avx512 --disable-fma3 --disable-fma4 --disable-xop
 
 
