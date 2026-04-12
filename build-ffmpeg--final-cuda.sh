@@ -32,7 +32,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --extra-cflags='-march=skylake -O3 -pipe -fPIC -ffunction-sections -fdata-sections -fno-semantic-interposition -I/usr/include/vulkan' \
 --extra-cxxflags='-march=skylake -O3 -pipe -fPIC -ffunction-sections -fdata-sections' \
 --extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O3 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--gc-sections' \
---extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan -lgbm -ldrm -lepoxy -lEGL -lGLESv2 -lfftw3 -lgnutls -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lz -lsrt -ldvdnav -lstdc++ -lpthread -lm -lrt -ldl'--nvcc=/usr/bin/nvcc \
+--extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan -lplacebo -lvulkan  -lfftw3 -lgnutls -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lz -lsrt -ldvdnav -lstdc++ -lpthread -lm -lrt -ldl'--nvcc=/usr/bin/nvcc \
 --disable-everything \
 --enable-ffmpeg --enable-ffplay --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
 --enable-pthreads --enable-shared --disable-static --enable-sdl2 --enable-gnutls --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
