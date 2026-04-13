@@ -26,7 +26,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 ./configure --prefix=/usr \
 --libdir=/usr/lib/x86_64-linux-gnu \
 --incdir=/usr/include/x86_64-linux-gnu \
---extra-version="ultra-skylake-universal-C-support" \
+--extra-version="ultra-skylake" \
 --disable-everything \
 --arch=x86_64 \
 --cpu=skylake \
