@@ -60,7 +60,6 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-bsf='av1_frame_merge,av1_frame_split,apv_metadata,av1_metadata,h264_metadata,hevc_metadata,mpeg2_metadata,opus_metadata,prores_metadata,vp9_metadata,vvc_metadata,aac_adtstoasc,h264_mp4toannexb,hevc_mp4toannexb,mjpeg2jpeg,mpeg4_unpack_bframes,null,pcm_rechunk,vp9_superframe' \
 --enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse,oss,sndio --disable-outdev=pulse,oss,sndio--disable-libpulse \
 
-,acopy,copy,anull,framestep,settb,anullsink,anullsrc,null,nullsink,nullsrc,buffersrc,format,null,copy,buffer,buffersink,abuffer,abuffersink
 if [ $? -eq 0 ]; then
     make -j$(nproc)
     sudo make install
