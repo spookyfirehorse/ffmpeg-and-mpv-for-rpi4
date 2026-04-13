@@ -39,7 +39,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-gpl --enable-nonfree --enable-pic --enable-stripping --enable-lto \
 --enable-cuda-llvm --enable-nvenc --enable-nvdec --enable-cuvid --enable-libnpp --enable-ffnvcodec --enable-cuda-nvcc \
 --enable-vulkan --enable-libplacebo --enable-libshaderc --enable-opengl --enable-libdrm --enable-libjack --disable-vdpau --disable-vaapi \
---enable-libdvdnav --enable-libdvdread --enable-xlib \
+--enable-libdvdnav --enable-libdvdread --disable-xlib \
 --enable-avx --enable-avx2 --enable-version3 \
 --enable-hwaccels  \
 --enable-hwaccel='av1_vulkan,ffv1_vulkan,h264_vulkan,hevc_vulkan,prores_raw_vulkan,vp9_vulkan,av1_nvdec,h264_nvdec,hevc_nvdec,mjpeg_nvdec,mpeg1_nvdec,mpeg2_nvdec,mpeg4_nvdec,vc1_nvdec,vp8_nvdec,vp9_nvdec,wmv3_nvdec' \
