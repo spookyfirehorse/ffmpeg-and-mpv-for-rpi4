@@ -1,3 +1,5 @@
+sudo apt build-dep ffmpeg
+
 sudo apt install libdrm-dev libgbm-dev libepoxy-dev libudev-dev libgles2-mesa-dev libegl1-mesa-dev libass-dev libmp3lame-dev libopus-dev libsoxr-dev libfreetype6-dev libharfbuzz-dev libfribidi-dev libgnutls28-dev libxml2-dev libflac-dev libsrt-openssl-dev glslang-dev libvulkan-dev
 
 
