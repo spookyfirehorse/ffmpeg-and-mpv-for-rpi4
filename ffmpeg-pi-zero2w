@@ -32,3 +32,9 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
   --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-vdpau --disable-vaapi \
   --disable-indev=pulse,oss --disable-outdev=pulse,oss --disable-libpulse \
   --disable-avx --disable-avx2 --disable-avx512 --disable-fma3 --disable-fma4 --disable-xop
+
+
+TMPDIR=/home/spook/tmp make -j2
+
+sudo make install
+
