@@ -95,6 +95,7 @@ TMPDIR=/home/spook/tmp make -j2 \
 
 sudo make install 
 
+sudo apt remove "*-dev" "gir1.2-*" "autotools-dev" "icu-devtools" "libc-dev-bin"
 
 
 echo "Fertig! Installierte Größe:"
