@@ -1,7 +1,10 @@
 # pi 3
 mini new
 
+sudo apt build-dep ffmpeg
+
 sudo apt install libdrm-dev libgbm-dev libepoxy-dev libudev-dev libgles2-mesa-dev libegl1-mesa-dev libass-dev libmp3lame-dev libopus-dev libsoxr-dev libfreetype6-dev libharfbuzz-dev libfribidi-dev libgnutls28-dev libxml2-dev libflac-dev libsrt-openssl-dev glslang-dev libvulkan-dev
+
 
 TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" \
 ./configure \
@@ -16,6 +19,7 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
   --disable-everything --disable-hwaccels --enable-libdvdnav --enable-libdvdread \
   --enable-ffmpeg --enable-ffprobe --enable-ffplay --enable-sdl2 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --disable-nonfree --enable-lto --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
   --enable-libxml2 --enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-libdrm --enable-epoxy --enable-libudev --enable-vout-egl --enable-vout-drm --enable-opengl \
+  --disable-vulkan --disable-libshaderc --disable-libplacebo \
   --enable-hwaccel=hevc_v4l2request \
   --enable-libass --enable-libmp3lame --enable-libopus --enable-libsrt --enable-libsoxr --enable-libfreetype --enable-libharfbuzz --enable-libfribidi --enable-ladspa --enable-lv2 --enable-librubberband --enable-alsa --disable-libpulse --disable-mmal --enable-libjack --enable-network --enable-gnutls --enable-gcrypt --enable-asm --enable-inline-asm --enable-neon --enable-runtime-cpudetect \
   --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,http,https,tls,rtmp,rtmpt,rtmpe,rtmps,ffrtmpcrypt,hls,dash,libsrt,unix,cache,crypto,concat' \
