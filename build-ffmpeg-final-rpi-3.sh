@@ -14,6 +14,48 @@ sudo dpkg-reconfigure libdvd-pkg
 sudo apt purge libpulse*
 
 
+test
+
+
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib/arm-linux-gnueabihf \
+  --incdir=/usr/include/arm-linux-gnueabihf \
+  --extra-version=ultra-pi3-armhf-jc-final-small \
+  --arch=arm --target-os=linux --cpu=cortex-a53 \
+  --fatal-warnings \
+  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -mcpu=cortex-a53+crypto -Os -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  --extra-ldflags='-lgbm -ldrm -latomic -Wl,-O2 -Wl,--as-needed -flto' \
+  --disable-everything \
+  --disable-hwaccels \
+  --enable-ffmpeg --enable-ffprobe --disable-ffplay \
+  --enable-shared --disable-static \
+  --disable-debug --enable-stripping \
+  --disable-hardcoded-tables --enable-pic --enable-pthreads \
+  --enable-gpl --enable-version3 --disable-nonfree --enable-lto \
+  --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
+  --enable-libxml2 --enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-libdrm --enable-epoxy --enable-libudev \
+  --enable-opengl --disable-vulkan --disable-libshaderc --disable-libplacebo \
+  --enable-hwaccel=hevc_v4l2request \
+  --enable-libass --enable-libopus --enable-libsoxr --enable-libfreetype --enable-libharfbuzz --enable-libfribidi \
+  --enable-ladspa --enable-lv2 --enable-librubberband --enable-alsa --enable-libpulse --enable-libjack \
+  --enable-network --enable-gnutls --enable-gcrypt --enable-asm --enable-inline-asm --enable-neon --enable-runtime-cpudetect \
+  --enable-protocol='pipe,file,fd,tcp,udp,rtp,rtsp,tls,rtmp,hls,dash,srt,unix,cache,crypto,concat' \
+  --enable-bsf='mpeg2_metadata,hevc_metadata,h264_metadata,h264_mp4toannexb,hevc_mp4toannexb,mpeg4_unpack_bframes,aac_adtstoasc,opus_metadata,extract_extradata,null' \
+  --enable-filter='firequalizer,realtime,latency,deinterlace_v4l2m2m,scale_v4l2m2m,format,scale,fps,setdar,settb,setpts,asettb,asetpts,concat,aresample,aformat,volume,loudnorm,equalizer,bass,treble,crystalizer,ladspa,lv2,rubberband,afade' \
+  --enable-decoder='jpeg2000,ape,apng,mjpegb,mjpeg,png,h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,mpeg1_v4l2m2m,mpeg2_v4l2m2m,mpeg4_v4l2m2m,hevc_v4l2request,opus,aac,ac3,eac3,mpegaudio,flac,vorbis,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo,adpcm_ms,adpcm_ima_wav' \
+  --enable-encoder='jpeg2000,apng,mjpeg,png,h263_v4l2m2m,h264_v4l2m2m,hevc_v4l2m2m,aac,libopus,flac,ass,srt,pcm_s16le,pcm_s24le,pcm_s32le,rawvideo' \
+  --enable-demuxer='id3v1,id3v2,matroska,mpegts,mov,flac,wav,ogg,aac,avi,h264,hevc,rtsp,sdp,rtp,rtmp,hls,dash,mjpeg,image2,concat,rawvideo' \
+  --enable-muxer='image2,image2pipe,yuv4mpegpipe,adts,matroska,mp4,mov,flac,wav,opus,ogg,rtp,rtmp,rtsp,hls,dash,mpegts,rawvideo,null' \
+  --enable-parser='jpeg2000,png,ac3,eac3,h264,hevc,mjpeg,mpegvideo,mpeg4video,mpegaudio,aac,opus,flac,vorbis,h263' \
+  --enable-indev='v4l2,alsa,jack,lavfi' \
+  --enable-outdev='v4l2,alsa,jack,opengl' \
+  --enable-xlib \
+  --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
+  --disable-sdl2 --disable-sndio --disable-indev=pulse,oss --disable-outdev=pulse,xv,oss \
+  --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-omx --disable-omx-rpi --disable-mmal
+
+TMPDIR=/home/spook/tmp make -j2
 
 no nonfree no libfdk no libx264 no cuda no vaapi no vulkan no pulseaudio
 
