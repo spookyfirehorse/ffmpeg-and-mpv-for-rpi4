@@ -2,6 +2,8 @@
 mini new
 
 sudo apt build-dep ffmpeg
+sudo apt update
+sudo apt install libflac-dev libsrt-openssl-dev libgcrypt20-dev
 
 sudo apt install libdrm-dev libgbm-dev libepoxy-dev libudev-dev libgles2-mesa-dev libegl1-mesa-dev libass-dev libmp3lame-dev libopus-dev libsoxr-dev libfreetype6-dev libharfbuzz-dev libfribidi-dev libgnutls28-dev libxml2-dev libflac-dev libsrt-openssl-dev glslang-dev libvulkan-dev
  sudo apt install librubberband2 liblilv-0-0 libsoxr0 libsrt1.5-openssl libass9 libchromaprint1  libfdk-aac2t64
