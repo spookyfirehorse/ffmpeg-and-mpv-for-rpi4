@@ -165,7 +165,7 @@ monitor.alsa.rules = [
     actions = {
       update-props = {
         # Erzwingt S16LE für beide oben genannten Gruppen
-        audio.format = "S16LE"
+        audio.format = "S32LE"
       }
     }
   }
@@ -201,7 +201,7 @@ sudo nano /etc/pipewire/client.conf.d/99-alsa-s16.conf
 
 ```bash
 alsa.properties = {
-    audio.format = "S16LE"
+    audio.format = "S32LE"
 }
 ```
 
@@ -241,14 +241,14 @@ context.properties = {
     default.clock.quantum       = 256
     default.clock.min-quantum   = 256
     default.clock.max-quantum   = 256
-    default.clock.allowed-rates = [ 44100 48000 88200 96000 192000 ]
+    default.clock.allowed-rates = [  48000 ]
     mem.allow-mlock             = true
 }
 
 # Dies zwingt alle neuen Streams (inkl. rpicam-vid) auf S32LE
 stream.properties = {
     audio.format = "F32LE"
-    resample.quality = 4
+    resample.quality = 10
 }
 
 
