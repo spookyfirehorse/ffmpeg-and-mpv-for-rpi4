@@ -1,0 +1,24 @@
+[Unit]
+Description=GPS Pipe to Unix Socket Bridge
+After=network-online.target
+
+[Service]
+#ExecStartPre=sudo killall -9 socat
+
+ExecStartPre=/usr/bin/sudo /usr/bin/rm -f /run/gpsd-nmea.sock
+#ExecStart=/bin/sh -c '/usr/bin/gpspipe -r -B 10.0.0.32:2947 | /usr/bin/sudo /usr/bin/socat - UNIX-LISTEN:/run/gpsd-nmea.sock,fork,reuseaddr,mode=666'
+#ExecStart=websocketd --port=9999 /usr/bin/gpspipe -w -n 0 10.0.0.32:2947
+ExecStart=/bin/sh -c "/usr/bin/gpspipe -r 10.0.0.32:2947 | /usr/bin/socat - UNIX-LISTEN:%t/gpsd-nmea.sock,fork,reuseaddr,mode=666"
+
+Restart=always
+RestartSec=5s
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=default.target
+
+# # Installiere websocketd (sehr simpel)
+# Dieser Befehl macht aus dem Output von gpspipe einen WebSocket-Server auf Port 9999
+# websocketd --port=9999 /usr/bin/gpspipe -w -n 0 10.0.0.32:2947
+
+
