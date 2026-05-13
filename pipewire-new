@@ -221,11 +221,11 @@ export CXXFLAGS="$CFLAGS"
 
 # 6. Source holen, konfigurieren, kompilieren und installieren
 apt source wireplumber && cd wireplumber-*/ && \
-meson setup builddir --buildtype=release -Dprefix=/usr \
--Dexamples=disabled  -Ddocs=disabled -Dman=disabled && \
+meson setup builddir --buildtype=release -Dprefix=/usr && \
 ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
-
 # 7. Benutzer-Daemons neu laden und Dienste restarten
 systemctl --user daemon-reload
 systemctl --user restart pipewire wireplumber
+
+###############################
