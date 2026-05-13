@@ -1,421 +1,90 @@
-sudo apt build-dep libcamera rpicam-apps 
-pi 3
+
+optimum pi 3
 
 
+export PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig:$PKG_CONFIG_PATH
 export TMPDIR=/home/spook/tmp
-export CFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
-export CXXFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
-# 1. libcamera (Treiber-Ebene für Pi 3)
-git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
+
+# Bereinigung des alten Verzeichnisses für sauberen Neuaufruf
+rm -rf libcamera
+
+# 1. libcamera (Treiber-Ebene für Pi 3) mit maximaler HW-Beschleunigung
+git clone --depth 1 github.com && cd libcamera && \
 meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto'  \
+-Dc_args="-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe" \
+-Dcpp_args="-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe" \
 -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
 -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-sudo ninja -C build -j 1 && sudo ninja -C build install && cd ..
+ninja -C build -j 1 && \
+sudo ninja -C build install && cd ..
 
-# 2. rpicam-apps 
+
+export PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig:$PKG_CONFIG_PATH
 export TMPDIR=/home/spook/tmp
-export CFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
-export CXXFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
+
+# Bereinigung falls der alte Build-Ordner blockiert
+rm -rf rpicam-apps
+
+# 2. rpicam-apps mit maximaler HW-Beschleunigung für Cortex-A53
 git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
 meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
--Dcpp_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
+-Dc_args="-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe" \
+-Dcpp_args="-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe" \
 -Denable_libav=enabled \
 -Denable_drm=enabled \
 -Denable_egl=enabled \
+-Dpreview_default=drm \
 -Denable_qt=disabled \
 -Denable_opencv=disabled \
 -Denable_tflite=disabled \
 -Denable_hailo=disabled && \
-meson compile -j 1 -C build && sudo meson install -C build && sudo ldconfig
+meson compile -j 1 -C build && \
+sudo meson install -C build && \
+sudo ldconfig 
 
 
-pi 4
-
-apps
 
 export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
-
-
-git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Dcpp_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
--Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
--Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-sudo ninja -C build -j 2 && sudo ninja -C build install && cd ..
-
-
-git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Dcpp_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Denable_libav=enabled \
--Denable_drm=enabled \
--Denable_egl=enabled \
--Denable_qt=disabled \
--Denable_opencv=disabled \
--Denable_tflite=disabled \
--Denable_hailo=disabled && \
-meson compile -j 2 -C build && sudo meson install -C build && sudo ldconfig
-
-pi 5
-
-export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
-
-
-git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Dcpp_args='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
--Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
--Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-sudo ninja -C build -j 2 && sudo ninja -C build install && cd ..
-
-
-git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Dcpp_args='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Denable_libav=enabled \
--Denable_drm=enabled \
--Denable_egl=enabled \
--Denable_qt=disabled \
--Denable_opencv=disabled \
--Denable_tflite=disabled \
--Denable_hailo=disabled && \
-meson compile -j 2 -C build && sudo meson install -C build && sudo ldconfig
-
-
-sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
-
-
-
-
 export TMPDIR=/home/spook/tmp
 
-sudo apt update && sudo apt install -y \
-    libboost-dev \
-    libgnutls28-dev openssl zlib1g-dev \
-    libtiff-dev libpng-dev libjpeg-dev \
-    libexif-dev libyaml-dev \
-    python3-yaml python3-ply \
-    libglib2.0-dev libudev-dev libpcre3-dev \
-    libevent-dev \
-    libdrm-dev libgbm-dev \
-    libegl1-mesa-dev libgles2-mesa-dev libepoxy-dev \
-    libqt5gui5 qtbase5-dev qtbase5-dev-tools \
-    libcamera-dev
+# Bereinigung alter Verzeichnisse
+rm -rf libcamera rpicam-apps
 
-cd ~/libcamera && rm -rf build
-git pull # Sicherstellen, dass alles aktuell ist
+# Flag "-pipe" leitet Daten im RAM weiter statt temporäre Dateien zu schreiben
+export OPT_FLAGS="-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations"
+
+# =========================================================================
+# 1. libcamera (Nutzt Pipeline rpi/vc4 für Pi 4)
+# =========================================================================
+git clone --depth 1 github.com && cd libcamera && \
 meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' \
--Dpipelines=rpi/vc4,rpi/pisp -Dipas=rpi/vc4,rpi/pisp \
--Dv4l2=enabled -Dgstreamer=disabled \
--Dtest=false -Dlc-compliance=disabled \
--Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-ninja -C build && sudo ninja -C build install && cd ..
-
-
-cd ~/rpicam-apps && rm -rf build
-git pull
-# Wir aktivieren DRM, EGL und vor allem LIBAV (FFmpeg)
-meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' \
--Dcpp_args='-mcpu=cortex-a72 -O3 -ftree-vectorize' \
--Denable_libav=enabled \
--Denable_drm=enabled \
--Denable_egl=enabled \
--Denable_qt=disabled \
--Denable_opencv=disabled \
--Denable_tflite=disabled \
--Denable_hailo=disabled && \
-meson compile -C build && sudo meson install -C build && sudo ldconfig
-
-cd ~/rpicam-apps && rm -rf build
-git pull
-# Wir aktivieren DRM, EGL und vor allem LIBAV (FFmpeg)
-meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a72+crypto+crc+dotprod -O3 -pipe -ftree-vectorize' \
--Dcpp_args='-mcpu=cortex-a72+crypto+crc+dotprod -O3 -pipe -ftree-vectorize' \
--Denable_libav=enabled \
--Denable_drm=enabled \
--Denable_egl=enabled \
--Denable_qt=disabled \
--Denable_opencv=disabled \
--Denable_tflite=disabled \
--Denable_hailo=disabled && \
-meson compile -C build && sudo meson install -C build && sudo ldconfig
-
-
-# 1. libcamera (Treiber-Ebene für Pi 3)
-git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' ' \
+-Dc_args="$OPT_FLAGS" \
+-Dcpp_args="$OPT_FLAGS" \
 -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
 -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-sudo ninja -C build -j 1 && sudo ninja -C build install && cd ..
+ninja -C build -j 2 && \
+sudo ninja -C build install && cd ..
 
-# 2. rpicam-apps (Die App mit FFmpeg-Link zu deinem Kynesim-Build)
-git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
+# =========================================================================
+# 2. rpicam-apps
+# =========================================================================
+git clone --depth 1 github.com && cd rpicam-apps && \
 meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
--Dcpp_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
+-Dc_args="$OPT_FLAGS" \
+-Dcpp_args="$OPT_FLAGS" \
 -Denable_libav=enabled \
 -Denable_drm=enabled \
 -Denable_egl=enabled \
+-Dpreview_default=drm \
 -Denable_qt=disabled \
 -Denable_opencv=disabled \
 -Denable_tflite=disabled \
 -Denable_hailo=disabled && \
-meson compile -j 1 -C build && sudo meson install -C build && sudo ldconfig
+meson compile -j 2 -C build && \
+sudo meson install -C build && \
+sudo ldconfig && cd ..
 
 
 
-# 2. rpicam-apps (Die App mit FFmpeg-Link zu deinem Kynesim-Build)
-git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a72 -O2' \
--Dcpp_args='-mcpu=cortex-a72 -O2' \
--Denable_libav=enabled \
--Denable_drm=enabled \
--Denable_egl=enabled \
--Denable_qt=disabled \
--Denable_opencv=disabled \
--Denable_tflite=disabled \
--Denable_hailo=disabled && \
-meson compile -j 1 -C build && sudo meson install -C build && sudo ldconfig
-
-
-##########################################################################################
-
-libcamera
-
-
-git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow'\
--Dcpp_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow'' \
--Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
--Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
--Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
-
---extra-cflags='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
---extra-ldflags='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O1 -Wl,-rpath,/usr/lib/aarch64-linux-gnu -Wl,--as-needed -flto -lstdc++' \
-
-git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe' \
--Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \as=rpi/vc4 \
--Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
--Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
-
-
-git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \-Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
--Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-sudo ninja -C build -j 4 && sudo ninja -C build install && cd ..
-
-
-###################################################################
-
-
-apps
-
-git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Dcpp_args='-mcpu=cortex-a72+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Denable_libav=enabled \
--Denable_drm=enabled \
--Denable_egl=enabled \
--Denable_qt=disabled \
--Denable_opencv=disabled \
--Denable_tflite=disabled \
--Denable_hailo=disabled && \
-
-git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
-meson setup build --buildtype=release -Dprefix=/usr \
--Dc_args='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Dcpp_args='-mcpu=cortex-a76+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
--Denable_libav=enabled \
--Denable_drm=enabled \
--Denable_egl=enabled \
--Denable_qt=disabled \
--Denable_opencv=disabled \
--Denable_tflite=disabled \
--Denable_hailo=disabled && \
-meson compile -j 4 -C build && sudo meson install -C build && sudo ldconfig
-
-
-meson compile -j 4 -C build && sudo meson install -C build && sudo ldconfig
-
-
-# 1. Alten Versuch restlos entfernen
-rm -rf build
-
-# 2. Neu konfigurieren mit korrigierten Flags
-meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe' \
--Dc_args='-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe'
--Denable_libav=enabled \
--Denable_drm=enabled \
--Denable_egl=enabled \
--Denable_qt=disabled \
--Denable_opencv=disabled \
--Denable_tflite=disabled \
--Denable_hailo=disabled
-
-# 3. Bauen und Installieren
-meson compile -j 2 -C build && sudo meson install -C build && sudo ldconfig
-
-
-
-
-################################################################################################################################
-
-
-rpicam-vid -t 10000 --codec libav --libav-format mp4 --libav-video-codec h264_v4l2m2m -o test.mp4
-
-
-git clone https://github.com/PipeWire/pipewire.git
-meson setup build
-meson configure build -Dprefix=/usr
-meson compile -C build
-sudo meson install -C build                      
-
-
-systemctl --user stop pipewire.service \
-                      pipewire.socket \
-                      wireplumber.service \
-                      pipewire-pulse.service \
-                      pipewire-pulse.socket
-
-
-
-original
-
-git clone https://github.com/raspberrypi/libcamera.git
-cd libcamera
-meson setup build --buildtype=release -Dprefix=/usr -Dpipelines=rpi/vc4,rpi/pisp -Dipas=rpi/vc4,rpi/pisp -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled
-ninja -C build install
-
-#######################
-sudo nano /etc/sysctl.d/98-rpi.conf
-
-net.core.rmem_default=1000000
-
-net.core.rmem_max=1000000
-
-###########################################
-
-
-###  rpi 4 10 h test sync
-
- nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
- --denoise cdn_off   --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0    --profile=high --hdr=off --libav-video-codec h264_v4l2m2m \
- --level 4.2 --framerate 24  --width 1536 --height 864   --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=0  \
- --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=96kbps  \
- -t 0  -n --inline -o  - | ffmpeg -ss 20  -hide_banner -fflags nobuffer+genpts  -flags low_delay \
- -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy' \
- -vcodec h264_v4l2m2m -b:v 1M \
- -acodec libfdk_aac libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k -threads $(nproc) -fps_mode:v cfr  -copytb 1   \
- -f rtsp -rtsp_transport udp
-
-
-## rpi 3 10 h test sync
-
-nice -n -11  rpicam-vid  --low-latency 1  -b 1000000    --denoise cdn_off   --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0  \
---profile=high --hdr=off --libav-video-codec h264_v4l2m2m  --level 4.2 --framerate 24  --width 1536 --height 864 \
---audio-device==alsa_input.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.mono-fallback  --av-sync=0 \
---audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps --libav-video-codec-opts bf=0 --intra 0    \
-  -t 0  -n --inline -o  - | ffmpeg -ss 20 -r 23.97602398  -hide_banner -fflags nobuffer+genpts  -flags low_delay  \
-  -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='kali' \
-  -vcodec copy \
-  -acodec libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k -copytb 1  \
-   -f rtsp -rtsp_transport udp  
-
-
-######################################################
-test mpv
-
-nice -n 19  rpicam-vid --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --denoise cdn_off \
- --codec=libav --libav-format=flv --libav-video-codec h264_v4l2m2m  --brightness 0.1 --contrast 1.0 \
- --profile=high --hdr=off    --sharpness   1.0  --level 4.2 --framerate 24  --width 1280 --height 720 \
- --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo   --audio-bitrate=96kbps --audio-samplerate=48000   \
- --audio-codec libfdk_aac  --audio-channels 1 --libav-audio 1 --audio-source pulse  \
-  -t 0  -n --inline  -o  - | mpv -  --profile=stream 
-
-
-
-[stream]
-
-hwdec=drm
-hwdec-codecs=hevc
-hwdec-image-format=drm_prime
-gpu-hwdec-interop=drmprime
-hwdec-extra-frames=2
-ovc=h264_v4l2m2m
-ovcopts=preset=profile:v=high,level=4.2
-ovcopts=bf=0,b=1M,fps_mode:v=cfr
-oac=libfdk_aac
-oacopts=b=64k,has_b_frames=0,copytb=1,eld_v2=1
-cache=no
-framedrop=decoder+vo
-demuxer-lavf-o-add=fflags=+nobuffer+genpts+discardcorrupt,flags=low_delay
-#+igndts
-#,use_wallclock_as_timestamp=1
-of=rtsp
-volume=100
-rtsp-transport=udp
-oset-metadata=title="Lucy",comment="stream"
-audio-format=s16
-audio-samplerate=48000
-#vo-null-fps=24
-hr-seek-framedrop=no
-video-sync=audio
-#pulse-latency-hacks=yes
-#video-latency-hacks=yes
-audio-demuxer=lavf
-demuxer=lavf
-#speed=0.995
-#demuxer=mkv
-stream-buffer-size=4k
-pipewire-buffer=10
-start=20
-
-nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5   --denoise cdn_off --libav-video-codec-opts bf=0 --intra 0  \
-  --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0    --profile=high --hdr=off --libav-video-codec h264_v4l2m2m   --level 4.2 --framerate 24  --width 1536 --height 864 \
-  --audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=0  \
-  --audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps  \
-  -t 0  -n --inline -o  - | ffmpeg -ss 20  -hide_banner -fflags nobuffer+genpts  -flags low_delay \
-  -hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy' \
-  -c:v  h264_v4l2m2m  -b:v 1500k  -filter:v  fps=fps=source_fps:round=near   -threads $(nproc) \
-  -c:a  libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k  -fps_mode:v cfr  \
-   -f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
-
-
-# -filter:v  fps=fps=source_fps:round=near or -filter:v  fps=fps=film:round=near 
-
-##  -af "rubberband=tempo=0.9999"
-
-nice -n -11  rpicam-vid  --low-latency 1  -b 1000000 --autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5  \
---denoise cdn_off --libav-video-codec-opts bf=0 --intra 0    --codec libav --libav-format flv  --brightness 0.1 --contrast 1.0 --sharpness   1.0  \
---profile=high --hdr=off --libav-video-codec h264_v4l2m2m   --level 4.2 --framerate 24  --width 1536 --height 864  \
---audio-device=alsa_input.usb-Creative_Technology_Ltd_Sound_Blaster_Play__3_00229929-00.analog-stereo --av-sync=0 \
---audio-codec libfdk_aac  --audio-channels 2 --libav-audio 1 --audio-source pulse --audio-samplerate=48000  --audio-bitrate=128kbps \
--t 0  -n --inline -o  - | ffmpeg -ss 20  -hide_banner -fflags nobuffer+genpts  -flags low_delay \
--hwaccel drm -hwaccel_output_format drm_prime -i -  -metadata title='Lucy' \
--c:v  h264_v4l2m2m  -b:v 1500k   -threads $(nproc) \
--c:a  libfdk_aac -eld_sbr 1  -vbr 0  -b:a 64k   -fps_mode:v cfr  \
--f rtsp -rtsp_transport udp rtsp://localhost:8554"/mystream
