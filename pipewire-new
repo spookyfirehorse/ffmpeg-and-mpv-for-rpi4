@@ -1,0 +1,63 @@
+# Pfade und RAM-Optimierung setzen
+export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+mkdir -p /home/spook/tmp
+export TMPDIR=/home/spook/tmp
+
+# Bereinigung alter Verzeichnisse
+rm -rf pipewire
+
+# Compiler-Flags für Raspberry Pi 4 (Cortex-A72)
+export OPT_FLAGS="-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations"
+
+# Klonen, Konfigurieren mit RT, FFmpeg & libcamera, Kompilieren und Installieren
+apt source pipewire && cd pipewire-1.4.2/ && \
+meson setup builddir --buildtype=release -Dprefix=/usr \
+-Dc_args="$OPT_FLAGS" \
+-Dcpp_args="$OPT_FLAGS" \
+-Dexamples=disabled -Dtests=disabled -Ddocs=disabled -Dman=disabled \
+-Drlimits-install=true \
+-Drlimits-match='@pipewire' \
+-Drtprio-server=88 \
+-Drtprio-client=83 \
+-Drlimits-rtprio=95 \
+-Drlimits-memlock='4194304' \
+-Drlimits-nice=-19 \
+-Dffmpeg=enabled \
+-Dpw-cat-ffmpeg=enabled \
+-Dlibcamera=enabled && \
+ninja -C builddir -j 2 && \
+sudo ninja -C builddir install && cd ..
+
+
+# Pfade und RAM-Optimierung setzen
+export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+mkdir -p /home/spook/tmp
+export TMPDIR=/home/spook/tmp
+
+# Bereinigung alter Verzeichnisse
+rm -rf pipewire
+
+
+
+#############################################################
+# Compiler-Flags für Raspberry Pi 4 (Cortex-A76)
+export OPT_FLAGS="-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations"
+
+# Klonen, Konfigurieren mit RT, FFmpeg & libcamera, Kompilieren und Installieren
+apt source pipewire && cd pipewire-1.4.2/ && \
+meson setup builddir --buildtype=release -Dprefix=/usr \
+-Dc_args="$OPT_FLAGS" \
+-Dcpp_args="$OPT_FLAGS" \
+-Dexamples=disabled -Dtests=disabled -Ddocs=disabled -Dman=disabled \
+-Drlimits-install=true \
+-Drlimits-match='@pipewire' \
+-Drtprio-server=88 \
+-Drtprio-client=83 \
+-Drlimits-rtprio=95 \
+-Drlimits-memlock='4194304' \
+-Drlimits-nice=-19 \
+-Dffmpeg=enabled \
+-Dpw-cat-ffmpeg=enabled \
+-Dlibcamera=enabled && \
+ninja -C builddir -j 2 && \
+sudo ninja -C builddir install && cd ..
