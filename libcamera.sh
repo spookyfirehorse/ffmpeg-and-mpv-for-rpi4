@@ -34,7 +34,6 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Denable_libav=enabled \
 -Denable_drm=enabled \
 -Denable_egl=enabled \
--Dpreview_default=drm \
 -Denable_qt=disabled \
 -Denable_opencv=disabled \
 -Denable_tflite=disabled \
@@ -87,7 +86,6 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Denable_libav=enabled \
 -Denable_drm=enabled \
 -Denable_egl=enabled \
--Dpreview_default=drm \
 -Denable_qt=disabled \
 -Denable_opencv=disabled \
 -Denable_tflite=disabled \
