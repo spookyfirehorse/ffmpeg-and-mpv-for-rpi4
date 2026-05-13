@@ -1,4 +1,4 @@
-# System-Abhängigkeiten holen
+# System-Abhängigkeiten holen Raspberry Pi 5
 sudo apt build-dep pipewire wireplumber -y
 # Pfade und RAM-Optimierung setzen
 export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
@@ -48,7 +48,7 @@ sudo ninja -C builddir install && cd ..
 
 
 #############################################
-# System-Abhängigkeiten holen
+# System-Abhängigkeiten holen Raspberry Pi 4
 sudo apt build-dep pipewire wireplumber -y
 # Pfade und RAM-Optimierung setzen
 export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
@@ -96,7 +96,7 @@ ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 ###############################################################
 
-# System-Abhängigkeiten holen
+# System-Abhängigkeiten holen Raspberry Pi 3
 sudo apt build-dep pipewire wireplumber -y
 
 # 32-Bit Pfade und RAM-Optimierung setzen
