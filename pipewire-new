@@ -38,7 +38,7 @@ export TMPDIR=/home/spook/tmp
 export OPT_FLAGS="-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations"
 
 # Konfigurieren (jetzt mit -Dtests=false), Kompilieren und Installieren
-meson setup builddir --buildtype=release -Dprefix=/usr \
+meson setup builddir --buildtype=release -Dprefix=/usr -Dintrospection=disabled \
 -Dc_args="$OPT_FLAGS" \
 -Dcpp_args="$OPT_FLAGS" \
 -Dintrospection=disabled -Ddoc=disabled -Dtests=false && \
@@ -88,7 +88,7 @@ export TMPDIR=/home/spook/tmp
 export OPT_FLAGS="-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations"
 
 # Konfigurieren (jetzt mit -Dtests=false), Kompilieren und Installieren
-meson setup builddir --buildtype=release -Dprefix=/usr \
+meson setup builddir --buildtype=release -Dprefix=/usr -Dintrospection=disabled \
 -Dc_args="$OPT_FLAGS" \
 -Dcpp_args="$OPT_FLAGS" \
 -Dintrospection=disabled -Ddoc=disabled -Dtests=false && \
