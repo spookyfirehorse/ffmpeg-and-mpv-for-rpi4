@@ -1,11 +1,10 @@
 sudo apt build-dep libcamera rpicam-apps 
 pi 3
 
-export PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig:$PKG_CONFIG_PATH
 
 export TMPDIR=/home/spook/tmp
-
-
+export CFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
+export CXXFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
 # 1. libcamera (Treiber-Ebene für Pi 3)
 git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
 meson setup build --buildtype=release -Dprefix=/usr \
@@ -16,6 +15,9 @@ meson setup build --buildtype=release -Dprefix=/usr \
 sudo ninja -C build -j 1 && sudo ninja -C build install && cd ..
 
 # 2. rpicam-apps (Die App mit FFmpeg-Link zu deinem Kynesim-Build)
+export TMPDIR=/home/spook/tmp
+export CFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
+export CXXFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
 git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
 meson setup build --buildtype=release -Dprefix=/usr \
 -Dc_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' \
