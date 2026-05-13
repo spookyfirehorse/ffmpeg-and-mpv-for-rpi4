@@ -145,7 +145,6 @@ EOF
 chmod +x /home/spook/bin/gcc /home/spook/bin/g++
 
 # 5. Korrigierte Compiler-Flags für Raspberry Pi 3 (Cortex-A53 32-Bit)
-# Hinweis: LTO wurde deaktiviert (-Db_lto=false unten), um RAM-Abstürze bei Lua/WirePlumber zu verhindern
 export CFLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
 export CXXFLAGS="$CFLAGS"
 
