@@ -222,7 +222,7 @@ export CXXFLAGS="$CFLAGS"
 # 6. Source holen, konfigurieren, kompilieren und installieren
 apt source wireplumber && cd wireplumber-*/ && \
 meson setup builddir --buildtype=release -Dprefix=/usr \
--Dexamples=disabled -Dtests=disabled -Ddocs=disabled -Dman=disabled && \
+-Dexamples=disabled  -Ddocs=disabled -Dman=disabled && \
 ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 
