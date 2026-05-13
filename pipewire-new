@@ -1,4 +1,5 @@
-
+# System-Abhängigkeiten holen
+sudo apt build-dep pipewire wireplumber -y
 # Pfade und RAM-Optimierung setzen
 export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 mkdir -p /home/spook/tmp
@@ -7,7 +8,7 @@ export TMPDIR=/home/spook/tmp
 # Bereinigung alter Verzeichnisse
 rm -rf pipewire
 
-# Compiler-Flags für Raspberry Pi 4 (Cortex-A76)
+# Compiler-Flags für Raspberry Pi 5 (Cortex-A76)
 export OPT_FLAGS="-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations"
 
 # Klonen, Konfigurieren mit RT, FFmpeg & libcamera, Kompilieren und Installieren
@@ -47,7 +48,8 @@ sudo ninja -C builddir install && cd ..
 
 
 #############################################
-
+# System-Abhängigkeiten holen
+sudo apt build-dep pipewire wireplumber -y
 # Pfade und RAM-Optimierung setzen
 export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 mkdir -p /home/spook/tmp
@@ -95,7 +97,7 @@ sudo ninja -C builddir install && cd ..
 ###############################################################
 
 # System-Abhängigkeiten holen
-sudo apt build-dep pipewire -y
+sudo apt build-dep pipewire wireplumber -y
 
 # 32-Bit Pfade und RAM-Optimierung setzen
 export PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig:$PKG_CONFIG_PATH
@@ -106,7 +108,7 @@ export TMPDIR=/home/spook/tmp
 rm -rf pipewire*
 
 # Korrigierte Compiler-Flags für Raspberry Pi 3 (Cortex-A53 32-Bit)
-export OPT_FLAGS="-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
+export OPT_FLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
 
 # Source holen, konfigurieren, kompilieren und installieren
 apt source pipewire && cd pipewire-*/ && \
@@ -139,7 +141,7 @@ export TMPDIR=/home/spook/tmp
 rm -rf wireplumber*
 
 # Compiler-Flags für Raspberry Pi 3 (Cortex-A53 32-Bit)
-export OPT_FLAGS="-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
+export OPT_FLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
 
 # Source holen, konfigurieren, kompilieren und installieren
 apt source wireplumber &&  cd wireplumber-0.5.8
