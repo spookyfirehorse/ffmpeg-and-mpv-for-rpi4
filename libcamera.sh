@@ -14,7 +14,7 @@ meson setup build --buildtype=release -Dprefix=/usr \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
 sudo ninja -C build -j 1 && sudo ninja -C build install && cd ..
 
-# 2. rpicam-apps (Die App mit FFmpeg-Link zu deinem Kynesim-Build)
+# 2. rpicam-apps 
 export TMPDIR=/home/spook/tmp
 export CFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
 export CXXFLAGS="-mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard"
