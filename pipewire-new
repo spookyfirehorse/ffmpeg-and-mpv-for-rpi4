@@ -60,3 +60,21 @@ meson setup builddir --buildtype=release -Dprefix=/usr \
 -Dlibcamera=enabled && \
 ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
+
+wirepluber
+
+export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+export TMPDIR=/home/spook/tmp
+export OPT_FLAGS="-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations"
+
+# Konfigurieren (jetzt mit -Dtests=false), Kompilieren und Installieren
+meson setup builddir --buildtype=release -Dprefix=/usr \
+-Dc_args="$OPT_FLAGS" \
+-Dcpp_args="$OPT_FLAGS" \
+-Dintrospection=disabled -Ddoc=disabled -Dtests=false && \
+ninja -C builddir -j 2 && \
+sudo ninja -C builddir install && cd ..
+
+# Dienst neu starten
+systemctl --user daemon-reload
+systemctl --user restart wireplumber
