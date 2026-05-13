@@ -108,7 +108,9 @@ export TMPDIR=/home/spook/tmp
 rm -rf pipewire*
 
 # Korrigierte Compiler-Flags für Raspberry Pi 3 (Cortex-A53 32-Bit)
-export OPT_FLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
+export CFLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
+export CXXFLAGS="$CFLAGS"
+export LDFLAGS="-flto"
 
 # Source holen, konfigurieren, kompilieren und installieren
 apt source pipewire && cd pipewire-*/ && \
@@ -141,7 +143,9 @@ export TMPDIR=/home/spook/tmp
 rm -rf wireplumber*
 
 # Compiler-Flags für Raspberry Pi 3 (Cortex-A53 32-Bit)
-export OPT_FLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
+export CFLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
+export CXXFLAGS="$CFLAGS"
+export LDFLAGS="-flto"
 
 # Source holen, konfigurieren, kompilieren und installieren
 apt source wireplumber &&  cd wireplumber-0.5.8
