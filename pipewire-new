@@ -96,27 +96,63 @@ ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 ###############################################################
 
-# System-Abhängigkeiten holen Raspberry Pi 3
+
+                           ###  RPI3 pipewire
+
+
+
+#!/bin/bash
+
+# 1. System-Abhängigkeiten holen
 sudo apt build-dep pipewire wireplumber -y
 
-# 32-Bit Pfade und RAM-Optimierung setzen
+# 2. 32-Bit Pfade und RAM-Optimierung setzen
 export PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig:$PKG_CONFIG_PATH
 mkdir -p /home/spook/tmp
 export TMPDIR=/home/spook/tmp
 
-# Bereinigung alter Verzeichnisse
+# 3. Bereinigung alter Verzeichnisse
 rm -rf pipewire*
 
-# Korrigierte Compiler-Flags für Raspberry Pi 3 (Cortex-A53 32-Bit)
-export CFLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
-export CXXFLAGS="$CFLAGS"
-export LDFLAGS="-flto"
+# 4. Compiler-Filter einrichten (Deaktiviert armv6-Injektion des Systems)
+mkdir -p /home/spook/bin
+export PATH=/home/spook/bin:$PATH
 
-# Source holen, konfigurieren, kompilieren und installieren
+cat << 'EOF' > /home/spook/bin/gcc
+#!/bin/bash
+args=("$@")
+new_args=()
+for arg in "${args[@]}"; do
+    if [[ "$arg" != "-march=armv6+fp" ]]; then
+        new_args+=("$arg")
+    fi
+done
+exec /usr/bin/gcc "${new_args[@]}"
+EOF
+
+cat << 'EOF' > /home/spook/bin/g++
+#!/bin/bash
+args=("$@")
+new_args=()
+for arg in "${args[@]}"; do
+    if [[ "$arg" != "-march=armv6+fp" ]]; then
+        new_args+=("$arg")
+    fi
+done
+exec /usr/bin/g++ "${new_args[@]}"
+EOF
+
+chmod +x /home/spook/bin/gcc /home/spook/bin/g++
+
+# 5. Korrigierte Compiler-Flags für Raspberry Pi 3 (Cortex-A53 32-Bit)
+# Hinweis: LTO wurde deaktiviert (-Db_lto=false unten), um RAM-Abstürze bei Lua/WirePlumber zu verhindern
+export CFLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
+export CXXFLAGS="$CFLAGS"
+
+# 6. Source holen, konfigurieren, kompilieren und installieren
 apt source pipewire && cd pipewire-*/ && \
 meson setup builddir --buildtype=release -Dprefix=/usr \
--Dc_args="$OPT_FLAGS" \
--Dcpp_args="$OPT_FLAGS" \
+-Db_lto=false \
 -Dexamples=disabled -Dtests=disabled -Ddocs=disabled -Dman=disabled \
 -Drlimits-install=true \
 -Drlimits-match='@pipewire' \
@@ -131,30 +167,68 @@ meson setup builddir --buildtype=release -Dprefix=/usr \
 ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 
-# System-Abhängigkeiten holen
+
+
+############################################################################
+
+                               ### RPI 3 wireplumber
+
+
+#!/bin/bash
+
+# 1. System-Abhängigkeiten holen
 sudo apt build-dep wireplumber -y
 
-# 32-Bit Pfade und RAM-Optimierung setzen
+# 2. 32-Bit Pfade und RAM-Optimierung setzen
 export PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig:$PKG_CONFIG_PATH
 mkdir -p /home/spook/tmp
 export TMPDIR=/home/spook/tmp
 
-# Bereinigung alter Verzeichnisse
+# 3. Bereinigung alter Verzeichnisse
 rm -rf wireplumber*
 
-# Compiler-Flags für Raspberry Pi 3 (Cortex-A53 32-Bit)
-export CFLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
-export CXXFLAGS="$CFLAGS"
-export LDFLAGS="-flto"
+# 4. Compiler-Filter einrichten (Deaktiviert armv6-Injektion des Systems)
+mkdir -p /home/spook/bin
+export PATH=/home/spook/bin:$PATH
 
-# Source holen, konfigurieren, kompilieren und installieren
-apt source wireplumber &&  cd wireplumber-0.5.8
+cat << 'EOF' > /home/spook/bin/gcc
+#!/bin/bash
+args=("$@")
+new_args=()
+for arg in "${args[@]}"; do
+    if [[ "$arg" != "-march=armv6+fp" ]]; then
+        new_args+=("$arg")
+    fi
+done
+exec /usr/bin/gcc "${new_args[@]}"
+EOF
+
+cat << 'EOF' > /home/spook/bin/g++
+#!/bin/bash
+args=("$@")
+new_args=()
+for arg in "${args[@]}"; do
+    if [[ "$arg" != "-march=armv6+fp" ]]; then
+        new_args+=("$arg")
+    fi
+done
+exec /usr/bin/g++ "${new_args[@]}"
+EOF
+
+chmod +x /home/spook/bin/gcc /home/spook/bin/g++
+
+# 5. Korrigierte Compiler-Flags für Raspberry Pi 3 (Cortex-A53 32-Bit)
+export CFLAGS="-march=armv8-a+crc+crypto -mcpu=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations -pipe"
+export CXXFLAGS="$CFLAGS"
+
+# 6. Source holen, konfigurieren, kompilieren und installieren
+apt source wireplumber && cd wireplumber-*/ && \
 meson setup builddir --buildtype=release -Dprefix=/usr \
--Dc_args="$OPT_FLAGS" \
--Dcpp_args="$OPT_FLAGS" \
+-Db_lto=false \
 -Dintrospection=disabled -Ddoc=disabled -Dtests=false && \
 ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
-# Benutzer-Daemons neu laden und Dienste restarten
+
+# 7. Benutzer-Daemons neu laden und Dienste restarten
 systemctl --user daemon-reload
 systemctl --user restart pipewire wireplumber
