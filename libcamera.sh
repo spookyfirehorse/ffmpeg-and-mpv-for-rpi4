@@ -9,7 +9,7 @@ export TMPDIR=/home/spook/tmp
 # 1. libcamera (Treiber-Ebene für Pi 3)
 git clone --depth 1 https://github.com/raspberrypi/libcamera.git && cd libcamera && \
 meson setup build --buildtype=release -Dprefix=/usr \
--Dcpp_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto' ' \
+-Dcpp_args='-mcpu=cortex-a53  -mfpu=neon-fp-armv8 -mfloat-abi=hard -O2 -pipe -ftree-vectorize -flto'  \
 -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 \
 -Dv4l2=enabled -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled \
 -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
