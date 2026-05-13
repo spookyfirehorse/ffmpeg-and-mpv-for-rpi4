@@ -29,6 +29,8 @@ ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 
 
+###############################################################
+
 # Pfade und RAM-Optimierung setzen
 export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 mkdir -p /home/spook/tmp
@@ -37,9 +39,6 @@ export TMPDIR=/home/spook/tmp
 # Bereinigung alter Verzeichnisse
 rm -rf pipewire
 
-
-
-#############################################################
 # Compiler-Flags für Raspberry Pi 4 (Cortex-A76)
 export OPT_FLAGS="-mcpu=cortex-a76+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations"
 
