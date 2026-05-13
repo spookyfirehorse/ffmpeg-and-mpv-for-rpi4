@@ -9,7 +9,7 @@ export TMPDIR=/home/spook/tmp
 rm -rf libcamera
 
 # 1. libcamera (Treiber-Ebene für Pi 3) mit maximaler HW-Beschleunigung
-git clone --depth 1 github.com && cd libcamera && \
+git clone --depth 1 https://github.com/raspberrypi/libcamera.git &&   cd libcamera && \
 meson setup build --buildtype=release -Dprefix=/usr \
 -Dc_args="-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe" \
 -Dcpp_args="-mcpu=cortex-a53+crypto -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -ftree-vectorize -ffast-math -funsafe-math-optimizations -pipe" \
@@ -45,6 +45,9 @@ sudo ldconfig
 
 
 
+# =========================================================================
+# 1. libcamera (Nutzt Pipeline rpi/vc4 für Pi 4)
+# =========================================================================
 export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 export TMPDIR=/home/spook/tmp
 
@@ -54,10 +57,8 @@ rm -rf libcamera rpicam-apps
 # Flag "-pipe" leitet Daten im RAM weiter statt temporäre Dateien zu schreiben
 export OPT_FLAGS="-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations"
 
-# =========================================================================
-# 1. libcamera (Nutzt Pipeline rpi/vc4 für Pi 4)
-# =========================================================================
-git clone --depth 1 github.com && cd libcamera && \
+
+git clone --depth 1 https://github.com/raspberrypi/libcamera.git &&  cd libcamera && \
 meson setup build --buildtype=release -Dprefix=/usr \
 -Dc_args="$OPT_FLAGS" \
 -Dcpp_args="$OPT_FLAGS" \
@@ -70,7 +71,16 @@ sudo ninja -C build install && cd ..
 # =========================================================================
 # 2. rpicam-apps
 # =========================================================================
-git clone --depth 1 github.com && cd rpicam-apps && \
+export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+export TMPDIR=/home/spook/tmp
+
+# Bereinigung alter Verzeichnisse
+rm -rf libcamera rpicam-apps
+
+# Flag "-pipe" leitet Daten im RAM weiter statt temporäre Dateien zu schreiben
+export OPT_FLAGS="-mcpu=cortex-a72+crypto -O3 -pipe -ftree-vectorize -flto -Wno-stringop-overflow -ffast-math -funsafe-math-optimizations"
+
+git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git && cd rpicam-apps && \
 meson setup build --buildtype=release -Dprefix=/usr \
 -Dc_args="$OPT_FLAGS" \
 -Dcpp_args="$OPT_FLAGS" \
