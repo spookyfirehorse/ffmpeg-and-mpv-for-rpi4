@@ -1,0 +1,22 @@
+[Service]
+# Lockerung für Realtime-Zugriff (analog zu pipewire.service)
+LockPersonality=no
+MemoryDenyWriteExecute=yes
+NoNewPrivileges=no
+RestrictNamespaces=no
+SystemCallArchitectures=native
+# SystemCallFilter darf SCHED_FIFO nicht blockieren
+
+Type=simple
+ExecStart=/usr/bin/pipewire-pulse
+Restart=on-failure
+Slice=session.slice
+
+# Realtime-Priorität erzwingen
+CPUSchedulingPolicy=fifo
+CPUSchedulingPriority=95
+LimitRTPRIO=95
+LimitRTTIME=infinity
+Nice=-19
+
+

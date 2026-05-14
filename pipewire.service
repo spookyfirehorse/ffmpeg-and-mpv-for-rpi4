@@ -1,0 +1,29 @@
+[Unit]
+Description=PipeWire Multimedia Service
+Requires=pipewire.socket dbus.service
+ConditionUser=!root
+
+[Service]
+# Lockerung für Realtime-Zugriff
+LockPersonality=no
+MemoryDenyWriteExecute=yes
+NoNewPrivileges=no
+RestrictNamespaces=no
+SystemCallArchitectures=native
+# SystemCallFilter deaktiviert für SCHED_FIFO
+
+Type=simple
+# Direktstart, systemd setzt die Prio via CPUSchedulingPolicy
+ExecStart=/usr/bin/pipewire
+Restart=on-failure
+Slice=session.slice
+
+# Realtime-Priorität erzwingen
+CPUSchedulingPolicy=fifo
+CPUSchedulingPriority=95
+LimitRTPRIO=95
+LimitRTTIME=infinity
+Nice=-19
+[Install]
+Also=pipewire.socket
+WantedBy=default.target

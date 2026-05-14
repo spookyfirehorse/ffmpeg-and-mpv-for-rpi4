@@ -1,0 +1,29 @@
+[Unit]
+Description=Multimedia Service Session Manager
+Requires=pipewire.service
+After=pipewire.service
+ConditionUser=!root
+
+[Service]
+# Lockerung für Realtime-Zugriff (wie bei PipeWire)
+LockPersonality=no
+MemoryDenyWriteExecute=yes
+NoNewPrivileges=no
+RestrictNamespaces=no
+SystemCallArchitectures=native
+
+Type=simple
+ExecStart=/usr/bin/wireplumber
+Restart=on-failure
+Slice=session.slice
+
+# Realtime-Priorität erzwingen
+CPUSchedulingPolicy=fifo
+CPUSchedulingPriority=95
+LimitRTPRIO=95
+LimitRTTIME=infinity
+Nice=-19
+
+[Install]
+WantedBy=default.target
+
