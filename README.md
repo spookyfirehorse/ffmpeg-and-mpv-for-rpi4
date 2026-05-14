@@ -1,22 +1,11 @@
-```bash
-ffmpeg -init_hw_device vulkan=vk -i INPUT.mp4 \
--filter_hw_device vk -vf "hwupload,libplacebo=w=1280:h=720,hwdownload,format=yuv420p" \
--c:v h264_v4l2m2m -b:v 4M OUTPUT.mp4
-```
-```bash
-ffmpeg -init_hw_device vulkan=vk:0 -v debug -f null -
-```
 
-```bash
-ffmpeg -sources pulse
-```
+
 
 sorry for my bad english !!!
 
 first make a copy of your trixie os
 
-```bash
-```
+
 ```bash
 XAUTHORITY=/home/spook/.Xauthority sudo dbus-launch piclone
 ```
