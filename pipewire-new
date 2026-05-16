@@ -26,7 +26,7 @@ meson setup builddir --buildtype=release -Dprefix=/usr \
 -Drlimits-nice=-19 \
 -Dffmpeg=enabled \
 -Dpw-cat-ffmpeg=enabled \
--Dlibcamera=enabled && \
+-Dlibcamera=enabled -Dsoxr=enabled && \
 ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 
@@ -76,7 +76,7 @@ meson setup builddir --buildtype=release -Dprefix=/usr \
 -Drlimits-nice=-19 \
 -Dffmpeg=enabled \
 -Dpw-cat-ffmpeg=enabled \
--Dlibcamera=enabled && \
+-Dlibcamera=enabled -Dsoxr=enabled && \
 ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 
@@ -161,7 +161,7 @@ meson setup builddir --buildtype=release -Dprefix=/usr \
 -Drlimits-nice=-19 \
 -Dffmpeg=enabled \
 -Dpw-cat-ffmpeg=enabled \
--Dlibcamera=enabled && \
+-Dlibcamera=enabled -Dsoxr=enabled && \
 ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 
