@@ -26,7 +26,7 @@ meson setup builddir --buildtype=release -Dprefix=/usr \
 -Drlimits-nice=-19 \
 -Dffmpeg=enabled \
 -Dpw-cat-ffmpeg=enabled \
--Dlibcamera=enabled -Dauto_features=enabled -Dbluez5-codec-lc3plus=disabled -Dsystemd=enabled -Delogind=disabled && \
+-Dlibcamera=enabled -Dauto_features=enabled -Dbluez5-codec-lc3plus=disabled -Dsession-managers=libsystemd && \
 ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 
@@ -76,8 +76,7 @@ meson setup builddir --buildtype=release -Dprefix=/usr \
 -Drlimits-nice=-19 \
 -Dffmpeg=enabled \
 -Dpw-cat-ffmpeg=enabled \
--Dlibcamera=enabled -Dauto_features=enabled && \
-ninja -C builddir -j 2 && \
+-Dlibcamera=enabled -Dauto_features=enabled -Dbluez5-codec-lc3plus=disabled -Dsession-managers=libsystemd && \ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 
 wirepluber
@@ -161,8 +160,7 @@ meson setup builddir --buildtype=release -Dprefix=/usr \
 -Drlimits-nice=-19 \
 -Dffmpeg=enabled \
 -Dpw-cat-ffmpeg=enabled \
--Dlibcamera=enabled -Dauto_features=enabled && \
-ninja -C builddir -j 2 && \
+-Dlibcamera=enabled -Dauto_features=enabled -Dbluez5-codec-lc3plus=disabled -Dsession-managers=libsystemd && \ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 
 
