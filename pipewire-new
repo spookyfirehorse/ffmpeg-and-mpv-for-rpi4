@@ -79,7 +79,6 @@ meson setup builddir --buildtype=release -Dprefix=/usr \
 -Dlibcamera=enabled -Dauto_features=enabled -Dbluez5-codec-lc3plus=disabled -Dsession-managers=libsystemd && \ninja -C builddir -j 2 && \
 sudo ninja -C builddir install && cd ..
 
-wirepluber
 sudo apt build-dep wireplumber 
 apt source wireplumber &&  cd wireplumber-0.5.8
 export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
