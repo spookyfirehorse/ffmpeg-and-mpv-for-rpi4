@@ -968,22 +968,6 @@ demuxer-readahead-secs=0
 
      PIPEWIRE_LATENCY="1024/48000" change PULSE_LATENCY_MSEC=21
 
-# imx708 all rpi 
-
-    PIPEWIRE_LATENCY="1024/48000" 
-
-```bash
-PIPEWIRE_LATENCY="1024/48000"  stdbuf -o0 -e0 nice -n 11   taskset -c 3  rpicam-vid --flush   -b 1500000    --denoise cdn_off   --codec libav --libav-format mpegts \
---profile=main  --hdr=off --level 4.0 --framerate 25  --width 1536 --height 864   --av-sync=0 \
---autofocus-mode manual --autofocus-range normal --autofocus-window  0.25,0.25,0.5,0.5 \
---audio-codec libopus --audio-samplerate 48000 --shutter 20000 --tuning-file /usr/share/libcamera/ipa/rpi/vc4/imx708.json  \
---audio-channels 2 --libav-audio 1 --audio-source alsa --audio-device pipewire  --awb indoor -t 0 --intra 25  \
---inline  -n  -o  - | nice -n 10    taskset -c 2  ffmpeg   -loglevel warning  -hide_banner \
--fflags nobuffer+genpts+flush_packets  -isync 0  -copyts   \
--hwaccel drm -hwaccel_output_format drm_prime -fpsprobesize 0   -f mpegts  -i -  -metadata title='lucy' -c copy  \
--flags low_delay -avioflags direct -map 0:0 -map 0:1 -muxdelay 0.01  -f rtsp -buffer_size 512 \
--rtsp_flags filter_src   -tcp_nodelay 1  -rtsp_transport tcp -pkt_size 1316  rtsp://
-```
 
 
 ### rec 
