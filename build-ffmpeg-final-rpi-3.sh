@@ -11,12 +11,19 @@ sudo apt install libdrm-dev libgbm-dev libepoxy-dev libudev-dev libgles2-mesa-de
  sudo apt install chrony dnsutils pipewire-audio
 sudo apt install libdvd-pkg
 sudo dpkg-reconfigure libdvd-pkg
-sudo apt purge libpulse*
+sudo apt install libgcrypt20-dev
 
+cat << 'EOF' > bin/build-ffmpeg-final-rpi-4.sh
+#!/bin/bash
+# FFmpeg Build-Skript für RPi4 (Ultra-Minimal / Vulkan & V4L2)
 
-test
---extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -mcpu=cortex-a53+crypto -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -funsafe-math-optimizations -Wno-stringop-overflow'
---extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -mcpu=cortex-a53+crypto -Os -pipe -ftree-vectorize -flto -Wno-stringop-overflow'
+# Alte Quellen entfernen
+sudo rm -rf ~/rpi-ffmpeg
+
+# Repository klonen
+git clone -b test/7.1.3/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git ~/rpi-ffmpeg
+cd ~/rpi-ffmpeg || exit
+
 
 ./configure \
   --prefix=/usr \
