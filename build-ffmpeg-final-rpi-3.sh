@@ -25,8 +25,8 @@ test
   --extra-version=ultra-pi3-armhf-jc-final-small \
   --arch=arm --target-os=linux --cpu=cortex-a53 \
   --fatal-warnings \
-  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -mcpu=cortex-a53+crypto -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize -flto -funsafe-math-optimizations -Wno-stringop-overflow' \
-  --extra-ldflags='-lgbm -ldrm  -Wl,-O2 -Wl,--as-needed -flto -latomic' \
+  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -mcpu=cortex-a53 -mtune=cortex-a53 -mfpu=neon-fp-armv8 -mfloat-abi=hard -O3 -pipe -ftree-vectorize  -funsafe-math-optimizations -Wno-stringop-overflow' \
+  --extra-ldflags='-lgbm -ldrm  -Wl,-O2 -Wl,--as-needed -latomic' \
   --disable-everything \
   --disable-hwaccels \
   --enable-ffmpeg --enable-ffprobe --disable-ffplay \
