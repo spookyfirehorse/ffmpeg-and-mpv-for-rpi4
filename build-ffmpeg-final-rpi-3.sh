@@ -89,8 +89,8 @@ TMPDIR=/home/spook/tmp PKG_CONFIG_PATH="/usr/lib/arm-linux-gnueabihf/pkgconfig" 
   --incdir=/usr/include/arm-linux-gnueabihf \
   --extra-version=ultra-pi3-armhf-jc-final-minimal \
   --arch=arm --target-os=linux --cpu=cortex-a53 \
- --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -I/usr/include/vulkan -mcpu=cortex-a53+crypto -Ofast -pipe -ftree-vectorize -flto -fno-semantic-interposition -falign-functions=32 -Wno-stringop-overflow' \
- --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -lgbm -ldrm -latomic -Wl,-O2 -Ofast -flto -Wl,-rpath,/usr/lib/arm-linux-gnueabihf -Wl,--as-needed' \
+ --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -I/usr/include/vulkan -mcpu=cortex-a53+crypto -Ofast -pipe -ftree-vectorize  -fno-semantic-interposition -falign-functions=32 -Wno-stringop-overflow' \
+ --extra-ldflags='-L/usr/lib/arm-linux-gnueabihf -lgbm -ldrm -latomic -Wl,-O2 -Ofast  -Wl,-rpath,/usr/lib/arm-linux-gnueabihf -Wl,--as-needed' \
  --extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan -lgbm -ldrm -lepoxy -lEGL -lGLESv2 -lfftw3 -lgnutls -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lz -lsrt -ldvdnav -lstdc++ -lpthread -lm -lrt -ldl' \
 --disable-everything --disable-hwaccels --enable-libdvdnav --enable-libdvdread \
  --enable-ffmpeg --enable-ffprobe --enable-ffplay --enable-sdl2 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
