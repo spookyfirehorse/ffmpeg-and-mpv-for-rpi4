@@ -13,13 +13,14 @@ sudo rm -rf ~/rpi-ffmpeg
 git clone -b test/7.1.3/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git ~/rpi-ffmpeg
 cd ~/rpi-ffmpeg || exit
 
-./configure \
+
+ ./configure \
   --prefix=/usr \
   --libdir=/usr/lib/aarch64-linux-gnu \
   --incdir=/usr/include/aarch64-linux-gnu \
   --extra-version=ultra-pi4-ULTIMATE-VULKAN-FAST \
   --arch=aarch64 --target-os=linux --cpu=cortex-a72 \
-  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -I/usr/include/vulkan -mcpu=cortex-a72+crypto -Ofast -fomit-frame-pointer -falign-functions=32 -falign-loops=32 -mlow-precision-div -pipe -ftree-vectorize -flto -fno-semantic-interposition -Wno-stringop-overflow' \
+  --extra-cflags='-I/usr/include/libdrm -I/usr/include/gbm -I/usr/include/vulkan -mcpu=cortex-a72 -Ofast -fomit-frame-pointer -falign-functions=32 -falign-loops=32 -mlow-precision-div -pipe -ftree-vectorize -flto -fno-semantic-interposition -Wno-stringop-overflow' \
   --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -lgbm -ldrm -Wl,-O3 -Wl,--hash-style=gnu -Wl,--as-needed -Ofast -flto -latomic  ' \
   --extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan -lgbm -ldrm -lepoxy -lEGL -lGLESv2 -lfftw3 -lgnutls -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lz -lsrt -ldvdnav -lstdc++ -lpthread -lm -lrt -ldl' \
   --disable-everything --disable-hwaccels --enable-libdvdnav --enable-libdvdread \
