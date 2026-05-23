@@ -1,6 +1,6 @@
 Gratulation zum Fix! Hier ist die Zusammenfassung der Einstellungen in Firefox (about:config), die den Durchbruch ermöglicht haben, damit dein Wiener GPS-Signal (10. Bezirk) im Browser ankommt:
 1. Die Verbindungs-Brücke
-geo.provider.network.url: http://localhost:8888
+geo.provider.network.url: http://localhost:9999
 
 (Das sagt Firefox: „Frag nicht Google, sondern mein lokales Python-Skript nach dem Standort“.)
 geo.provider.use_geoclue: false
