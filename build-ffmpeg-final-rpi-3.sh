@@ -60,7 +60,7 @@ cd ~/rpi-ffmpeg || exit
   --enable-outdev='v4l2,alsa,jack,opengl' \
   --enable-xlib \
   --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
-  --disable-sdl2 --disable-sndio --disable-indev=pulse,oss --disable-outdev=pulse,xv,oss \
+  --disable-sdl2 --disable-sndio --disable-indev=pulse,oss --disable-outdev=sdl,pulse,xv,oss \
   --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-omx --disable-omx-rpi --disable-mmal
 
 TMPDIR=/home/spook/tmp make -j2
