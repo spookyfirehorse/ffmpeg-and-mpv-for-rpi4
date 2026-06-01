@@ -58,7 +58,7 @@ cd ~/rpi-ffmpeg || exit
   --enable-parser='jpeg2000,png,ac3,eac3,h264,hevc,mjpeg,mpegvideo,mpeg4video,mpegaudio,aac,opus,flac,vorbis,h263' \
   --enable-indev='v4l2,alsa,jack,lavfi' \
   --enable-outdev='v4l2,alsa,jack,opengl' \
-  --enable-xlib \
+  --enable-xlib --disable-sdl2 \
   --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages \
   --disable-sdl2 --disable-sndio --disable-indev=pulse,oss --disable-outdev=sdl,pulse,xv,oss \
   --disable-amf --disable-vdpau --disable-vaapi --disable-cuda-llvm --disable-ffnvcodec --disable-cuvid --disable-nvenc --disable-nvdec --disable-libnpp --disable-cuda --disable-cuda-nvcc --disable-omx --disable-omx-rpi --disable-mmal
