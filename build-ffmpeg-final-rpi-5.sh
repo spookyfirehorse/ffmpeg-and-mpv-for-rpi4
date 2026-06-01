@@ -10,7 +10,7 @@ cat << 'EOF' > bin/build-ffmpeg-final-rpi-5.sh
 sudo rm -rf ~/rpi-ffmpeg
 
 # Repository klonen
-git clone -b test/7.1.2/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git ~/rpi-ffmpeg
+git clone -b test/7.1.3/main --depth 1 https://github.com/jc-kynesim/rpi-ffmpeg.git ~/rpi-ffmpeg
 cd ~/rpi-ffmpeg || exit
 
 PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
@@ -24,7 +24,7 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
   --extra-ldflags='-L/usr/lib/aarch64-linux-gnu -lgbm -ldrm -Wl,-O3 -Wl,--hash-style=gnu -Wl,--as-needed -Ofast -latomic ' \
   --extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan -lgbm -ldrm -lepoxy -lEGL -lGLESv2 -lfftw3 -lgnutls -lxml2 -lfdk-aac -lmp3lame -lFLAC -lopus -lass -lsoxr -lz -lsrt -ldvdnav -lstdc++ -lpthread -lm -lrt -ldl' \
   --disable-everything --disable-hwaccels --enable-libdvdnav --enable-libdvdread \
- --enable-ffmpeg --enable-ffprobe --enable-ffplay --enable-sdl2 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
+ --enable-ffmpeg --enable-ffprobe --enable-ffplay --disable-sdl2 --enable-shared --disable-static --disable-debug --enable-stripping --enable-hardcoded-tables --enable-pic --enable-pthreads --enable-gpl --enable-version3 --enable-nonfree --enable-lto --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale --enable-avdevice \
  --enable-libxml2 --enable-v4l2-m2m --enable-v4l2-request --enable-sand --enable-libdrm --enable-epoxy --enable-libudev --enable-vout-egl --enable-vout-drm --enable-opengl --enable-vulkan --enable-libshaderc --enable-libplacebo \
  --enable-hwaccel=hevc_v4l2request  \
  --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libsrt --enable-libsoxr --enable-libfreetype --enable-libharfbuzz --enable-libfribidi --enable-ladspa --enable-lv2 --enable-librubberband --enable-alsa --disable-libpulse --enable-libjack --enable-network --enable-gnutls --enable-gcrypt --enable-asm --enable-inline-asm --enable-neon --enable-runtime-cpudetect \
@@ -37,11 +37,11 @@ PKG_CONFIG_PATH="/usr/lib/aarch64-linux-gnu/pkgconfig" \
  --enable-muxer='wavpack,aac,ac3,adts,adx,aiff,amr,apng,asf,ass,av1,avi,caf,dash,dts,dv,dvd,eac3,f4v,flac,flv,g722,gif,h264,hevc,hls,image2,ismv,matroska,matroska_audio,mjpeg,mkvtimestamp_v2,mov,mp2,mp3,mp4,mpeg1system,mpeg1vcd,mpeg1video,mpeg2dvd,mpeg2svcd,mpeg2video,mpeg2vob,mpegts,mpjpeg,null,ogg,oma,opus,pcm_alaw,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8,pcm_vidc,psp,rawvideo,rtmp,rtmpt,rtp,rtp_mpegts,rtsp,sap,segment,smoothstreaming,spdif,srt,swf,tee,truehd,tta,vc1,wav,webm,webm_chunk,webm_dash_manifest,webp,webvtt,yuv4mpegpipe' \
  --enable-parser='flac,jpeg2000,jpegxl,png,dvd_nav,webp,vp8,vp9,vc1,aac_latm,aac,ac3,eac3,dca,mpegaudio,mp3,vorbis,opus,flac,h264,hevc,mpegvideo,mpeg4video,mjpeg,h263,mpeg1video,av1' \
  --enable-indev='v4l2,alsa,jack,kmsgrab,lavfi' \
- --enable-outdev='sdl2,v4l2,alsa,opengl,vout_drm,vout_egl' \
+ --enable-outdev='v4l2,alsa,opengl,vout_drm,vout_egl' \
  --enable-xlib --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages  --disable-sndio \
   --disable-cuda --disable-nvenc --disable-cuda-llvm --disable-nvdec --disable-cuvid --disable-libnpp --disable-ffnvcodec --disable-cuda-nvcc --disable-libnpp --disable-ffnvcodec \
   --disable-libx264 --disable-libx265 --disable-omx --disable-omx-rpi --disable-mmal --disable-avx --disable-avx2 --disable-avx512 --disable-fma3 --disable-fma4 --disable-xop --disable-fma4  --disable-vdpau --disable-vaapi \
- --disable-indev=pulse,oss --disable-outdev=pulse,oss --disable-libpulse && make -j2 && sudo make install
+ --disable-indev=pulse,oss --disable-outdev=sdl,pulse,oss --disable-libpulse && make -j2 && sudo make install
 
 
 
