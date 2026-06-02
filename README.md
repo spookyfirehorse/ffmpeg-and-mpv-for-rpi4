@@ -1237,10 +1237,10 @@ wget -O build_kernel.zip  https://forums.raspberrypi.com/download/file.php?id=74
               unzip  build_kernel.zip
 
 
-              sudo ./build-kernel -b default --branch rpi-6.12.y -c 7 -j 6 -u -d  rpi 5
+              sudo ./build-kernel -b default  -c 7 -j 6 -u -d  # rpi 5
 
 
-              sudo ./build-kernel -b default --branch rpi-6.18.y -c 6 -j 6 -u -d  rpi 4
+              sudo ./build-kernel -b default --branch rpi-6.18.y -c 6 -j 6 -u -d  # rpi 4
 
               
 
