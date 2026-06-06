@@ -14,7 +14,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --extra-ldflags='-L/usr/lib/x86_64-linux-gnu -Wl,-O3 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--gc-sections' \
 --extra-libs='-Wl,--start-group -lshaderc_combined -lglslang -lMachineIndependent -lGenericCodeGen -lSPIRV -lSPIRV-Tools-opt -lSPIRV-Tools -Wl,--end-group -lplacebo -lvulkan -lstdc++ -lm' \
 --disable-all --enable-hwaccels --enable-vaapi \
---enable-ffmpeg --enable-ffplay --enable-sdl2 --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
+--enable-ffmpeg --enable-ffplay --disable-sdl2 --enable-ffprobe --enable-avdevice --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
 --enable-pthreads --enable-shared --disable-static --enable-gnutls --disable-debug --disable-doc --enable-libbluray --enable-libxml2 \
 --enable-gpl --enable-version3 --enable-nonfree --enable-pic --enable-stripping --enable-lto \
 --disable-cuda --disable-nvenc --disable-cuda-llvm --disable-nvdec --disable-cuvid --disable-libnpp --disable-ffnvcodec --disable-cuda-nvcc \
@@ -27,7 +27,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-ladspa --enable-lv2 --enable-librubberband --enable-libsoxr --enable-libbs2b --enable-libmysofa --enable-alsa --enable-libjack \
 --enable-libx264 --enable-libx265 --enable-xlib --disable-libpulse \
 --enable-indev='v4l2,alsa,jack,lavfi,fbdev,xcbgrab,kmsgrab' \
---enable-outdev='sdl2,v4l2,alsa,fbdev,opengl' \
+--enable-outdev='v4l2,alsa,fbdev,opengl' \
 --enable-protocol='fd,async,bluray,cache,concat,crypto,data,ffrtmpcrypt,file,ftp,hls,http,https,httpproxy,icecast,md5,pipe,rtmp,rtmpe,rtmps,rtmpt,rtmpte,rtp,srtp,subfile,tcp,tls,udp,udplite,unix' \
 --enable-demuxer='aac,ac3,adpcm_ima_qt,adpcm_ima_wav,adpcm_ms,aiff,ape,asf,avi,dash,dts,dtshd,eac3,flac,flv,h264,hevc,hls,image2,image2pipe,image_bmp_pipe,image_jpeg_pipe,image_png_pipe,image_tiff_pipe,matroska,mjpeg,mov,mp3,mpegps,mpegts,mpegvideo,null,ogg,opus,pcm_alaw,pcm_f32be,pcm_f32le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,rawvideo,rm,rtp,rtsp,srt,truehd,tta,vobsub,wav,webm_dash_manifest,dvdnav,dvdread,wv' \
 --enable-muxer='aac,ac3,adts,ape,av1,avi,dash,eac3,flac,flv,h264,hevc,hls,image2,image2pipe,image_bmp_pipe,image_jpeg_pipe,image_png_pipe,image_tiff_pipe,matroska,mjpeg,mov,mp3,mp4,mpegts,null,ogg,opus,rtmp,rtp,rtsp,tta,wav,wv' \
@@ -36,7 +36,7 @@ PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH" \
 --enable-filter='format,vpp_vaapi,gblur_vulkan,extrastereo,treble,framestepacopy,copy,anull,framestep,settb,anullsink,anullsrc,null,nullsink,nullsrc,realtime,latency,scale_vaapi,procamp_vaapi,sharpness_vaapi,transpose_vaapi,denoise_vaapi,tonemap_vaapi,framerates_vaapi,format_vaapi,hwmap,hwdownload,hwupload,scale_vulkan,adelay,aecho,afifo,amix,aresample,aformat,asetpts,asplit,colorspace,crystalizer,bass,crop,drawtext,equalizer,firequalizer,fps,ladspa,lv2,rubberband,libplacebo,loudnorm,overlay,palettegen,paletteuse,pan,scale,setpts,transpose,volume,drawbox_vaapi,hstack_vaapi,vstack_vaapi' \
 --enable-parser='aac_latm,jpeg2000,jpegxl,png,aac,flac,h263,h264,hevc,mjpeg,mp3,mpegaudio,mpegvideo,mpeg4video,opus,vorbis,ac3,dca,dvdsub,dvd_nav' \
 --enable-bsf='aac_adtstoasc,av1_metadata,extract_extradata,h264_metadata,h264_mp4toannexb,hevc_metadata,hevc_mp4toannexb,mjpeg2jpeg,mpeg4_unpack_bframes,null,opus_metadata,pcm_rechunk,vp9_metadata,vp9_superframe' \
---enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse,oss --disable-outdev='pulse,oss' \
+--enable-asm --enable-x86asm --enable-inline-asm --enable-runtime-cpudetect --disable-indev=pulse,oss --disable-outdev='sdl,pulse,oss' \
 --disable-avx --disable-avx2 --disable-avx512 --disable-fma3 --disable-fma4 --disable-xop --disable-libpulse
 
 
