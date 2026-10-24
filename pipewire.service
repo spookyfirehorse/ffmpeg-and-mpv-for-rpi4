@@ -27,3 +27,14 @@ Nice=-19
 [Install]
 Also=pipewire.socket
 WantedBy=default.target
+
+
+
+
+##############
+
+
+test
+
+ps -mLo pid,tid,class,rtprio,ni,comm -C pipewire
+
