@@ -36,5 +36,5 @@ WantedBy=default.target
 
 test
 
-ps -mLo pid,tid,class,rtprio,ni,comm -C pipewire
+ps -To pid,tid,class,rtprio,ni,comm -p $(pgrep pipewire | head -n 1)
 
