@@ -1285,7 +1285,8 @@ sudo nano /boot/firmware/cmdline.txt
 isolcpus=3  ## 3te cpu only for ffmpeg
 ```            
 
-              
+         sudo ./build-kernel -b default --branch rpi-6.18.y -c 7 -j 6 -u -d  rpi 5
+             
 
 
                      
