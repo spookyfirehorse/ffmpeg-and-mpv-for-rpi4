@@ -128,7 +128,7 @@ EOF
 meson setup build \
   --prefix=/usr \
   --buildtype=release \
-  -Dc_args='-mcpu=cortex-a53+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
+  -Dc_args='-mcpu=cortex-a53 -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
   -Dcpp_args='-mcpu=cortex-a53+crypto -O2 -pipe -ftree-vectorize -flto -Wno-stringop-overflow' \
   -Dc_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O2,--as-needed -flto' \
   -Dcpp_link_args='-L/usr/lib/aarch64-linux-gnu -latomic -Wl,-O2,--as-needed -flto -lstdc++ \
